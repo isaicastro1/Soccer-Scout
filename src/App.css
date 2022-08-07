@@ -9,6 +9,14 @@ body {
 
 /* NAV BAR */
 
+.open {
+    height: 300px;
+    max-width: 100vw;
+    border: 2px solid red;
+    transition: 1s;
+    overflow: hidden;
+}
+
 .nav-wrapper {
     display: flex;
     justify-content: flex-end;
@@ -68,10 +76,11 @@ li:hover {
         position: relative;
         right: 0;
         display: inline-flex;
-        align-items: center;
+        align-items: top;
         justify-content: center;
         padding: 20px;
         cursor: pointer;
+        margin: 10px 20px 0 0;
     }
 
     .dropdown {
@@ -129,10 +138,6 @@ li:hover {
     #checkbox:checked~ .line-split::after {
         transform: translateX(20px);
         opacity: 0;
-    }
-
-    #checkbox:checked~ .dropdwon {
-        display: flex;
     }
 }
 
