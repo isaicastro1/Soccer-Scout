@@ -1,0 +1,21 @@
+.league-table {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 30px;
+}
+
+.standings {
+  background-color: #154586;
+  color: white;
+  border: 2px solid white;
+}
+
+tbody a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.team-name:hover {
+  outline: 1px solid white;
+}
