@@ -1,7 +1,7 @@
 import NavBar from "./Components/NavBar/NavBar";
-import "./App.css";
 import ScoreTableLaLiga from "./Components/ScoreTableLaLiga/ScoreTableLaLiga";
 import ScoreTablePrem from "./Components/ScoreTablePrem/ScoreTablePrem";
+import "./App.css";
 
 function App() {
   return (
