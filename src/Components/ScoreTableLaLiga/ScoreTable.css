@@ -1,8 +1,15 @@
-.league-table {
+.prem,
+.la-liga {
   display: flex;
   justify-content: center;
   width: 100%;
   margin-top: 30px;
+  color: white;
+}
+
+.league-table {
+  display: flex;
+  flex-direction: column;
 }
 
 .standings {
@@ -14,6 +21,10 @@
 tbody a {
   text-decoration: none;
   color: inherit;
+}
+
+.team-name {
+  text-align: center;
 }
 
 .team-name:hover {

@@ -1,12 +1,14 @@
 import NavBar from "./Components/NavBar/NavBar";
 import "./App.css";
-import ScoreTable from "./Components/ScoreTable/ScoreTable";
+import ScoreTableLaLiga from "./Components/ScoreTableLaLiga/ScoreTableLaLiga";
+import ScoreTablePrem from "./Components/ScoreTablePrem/ScoreTablePrem";
 
 function App() {
   return (
     <div>
       <NavBar />;
-      <ScoreTable />
+      <ScoreTableLaLiga />
+      <ScoreTablePrem />
     </div>
   );
 }
