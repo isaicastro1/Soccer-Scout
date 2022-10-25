@@ -1,9 +1,9 @@
-import "./Home.css";
+import "./Home.scss";
 
 const Home = () => {
   return (
-    <div>
-      <h2>I am the home page</h2>
+    <div className="home-container">
+      <h2>Find your favorite team's standings!</h2>
     </div>
   );
 };

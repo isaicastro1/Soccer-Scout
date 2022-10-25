@@ -1,3 +1,5 @@
+import "../ScoreTableLaLiga/ScoreTable.scss";
+
 const ScoreTablePrem = () => {
   return (
     <div className="prem">

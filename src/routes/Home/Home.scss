@@ -1,6 +1,10 @@
-h2 {
-  color: white;
+.home-container {
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100vh;
+
+  h2 {
+    color: white;
+  }
 }

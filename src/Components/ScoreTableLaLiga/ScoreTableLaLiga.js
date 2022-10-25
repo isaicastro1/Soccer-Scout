@@ -1,4 +1,4 @@
-import "./ScoreTable.css";
+import "./ScoreTable.scss";
 const ScoreTable = () => {
   return (
     <div className="la-liga">

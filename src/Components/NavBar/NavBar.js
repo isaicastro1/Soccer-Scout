@@ -1,16 +1,20 @@
-import { Outlet } from "react-router-dom";
-import "./NavBar.css";
+import { Outlet, Link } from "react-router-dom";
+import "./NavBar.scss";
 
 function NavBar() {
   return (
     <>
       <div className="nav">
-        <div>
+        <Link className="link" to="/">
           <h2 className="page-title">Soccer Scores</h2>
-        </div>
+        </Link>
         <ul className="nav-ul no-select">
-          <li>La Liga</li>
-          <li>Premier League</li>
+          <Link className="link" to="laliga">
+            <li>La Liga</li>
+          </Link>
+          <Link className="link" to="premier">
+            <li>Premier League</li>
+          </Link>
           <li>Champions League</li>
         </ul>
       </div>
