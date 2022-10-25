@@ -1,4 +1,4 @@
-function ScoreTablePrem() {
+const ScoreTablePrem = () => {
   return (
     <div className="prem">
       <div className="league-table">
@@ -33,12 +33,8 @@ function ScoreTablePrem() {
           </thead>
           <tbody>
             <tr className="">
-              <td>
-                <a
-                  href="/soccer/club/_/id/359/arsenal"
-                  name="&amp;lpos=soccer:teamclubhouse:standings:team"
-                  data-clubhouse-uid="null"
-                >
+              <td className="team-name">
+                <a href="https://www.espn.com/soccer/league/_/name/eng.1">
                   Arsenal
                 </a>
               </td>
@@ -50,9 +46,9 @@ function ScoreTablePrem() {
               <td className="right">15</td>
             </tr>
             <tr className="">
-              <td>
+              <td className="team-name">
                 <a
-                  href="/soccer/club/_/id/382/manchester-city"
+                  href="https://www.espn.com/soccer/league/_/name/eng.1"
                   name="&amp;lpos=soccer:teamclubhouse:standings:team"
                   data-clubhouse-uid="null"
                 >
@@ -67,9 +63,9 @@ function ScoreTablePrem() {
               <td className="right">14</td>
             </tr>
             <tr className="">
-              <td>
+              <td className="team-name">
                 <a
-                  href="/soccer/club/_/id/367/tottenham-hotspur"
+                  href="https://www.espn.com/soccer/league/_/name/eng.1"
                   name="&amp;lpos=soccer:teamclubhouse:standings:team"
                   data-clubhouse-uid="null"
                 >
@@ -84,9 +80,9 @@ function ScoreTablePrem() {
               <td className="right">14</td>
             </tr>
             <tr className="">
-              <td>
+              <td className="team-name">
                 <a
-                  href="/soccer/club/_/id/331/brighton-hove-albion"
+                  href="https://www.espn.com/soccer/league/_/name/eng.1"
                   name="&amp;lpos=soccer:teamclubhouse:standings:team"
                   data-clubhouse-uid="null"
                 >
@@ -101,9 +97,9 @@ function ScoreTablePrem() {
               <td className="right">13</td>
             </tr>
             <tr className="">
-              <td>
+              <td className="team-name">
                 <a
-                  href="/soccer/club/_/id/360/manchester-united"
+                  href="https://www.espn.com/soccer/league/_/name/eng.1"
                   name="&amp;lpos=soccer:teamclubhouse:standings:team"
                   data-clubhouse-uid="null"
                 >
@@ -118,9 +114,9 @@ function ScoreTablePrem() {
               <td className="right">12</td>
             </tr>
             <tr className="">
-              <td>
+              <td className="team-name">
                 <a
-                  href="/soccer/club/_/id/363/chelsea"
+                  href="https://www.espn.com/soccer/league/_/name/eng.1"
                   name="&amp;lpos=soccer:teamclubhouse:standings:team"
                   data-clubhouse-uid="null"
                 >
@@ -135,9 +131,9 @@ function ScoreTablePrem() {
               <td className="right">10</td>
             </tr>
             <tr className="">
-              <td>
+              <td className="team-name">
                 <a
-                  href="/soccer/club/_/id/364/liverpool"
+                  href="https://www.espn.com/soccer/league/_/name/eng.1"
                   name="&amp;lpos=soccer:teamclubhouse:standings:team"
                   data-clubhouse-uid="null"
                 >
@@ -152,9 +148,9 @@ function ScoreTablePrem() {
               <td className="right">9</td>
             </tr>
             <tr className="">
-              <td>
+              <td className="team-name">
                 <a
-                  href="/soccer/club/_/id/337/brentford"
+                  href="https://www.espn.com/soccer/league/_/name/eng.1"
                   name="&amp;lpos=soccer:teamclubhouse:standings:team"
                   data-clubhouse-uid="null"
                 >
@@ -169,9 +165,9 @@ function ScoreTablePrem() {
               <td className="right">9</td>
             </tr>
             <tr className="">
-              <td>
+              <td className="team-name">
                 <a
-                  href="/soccer/club/_/id/357/leeds-united"
+                  href="https://www.espn.com/soccer/league/_/name/eng.1"
                   name="&amp;lpos=soccer:teamclubhouse:standings:team"
                   data-clubhouse-uid="null"
                 >
@@ -186,9 +182,9 @@ function ScoreTablePrem() {
               <td className="right">8</td>
             </tr>
             <tr className="">
-              <td>
+              <td className="team-name">
                 <a
-                  href="/soccer/club/_/id/370/fulham"
+                  href="https://www.espn.com/soccer/league/_/name/eng.1"
                   name="&amp;lpos=soccer:teamclubhouse:standings:team"
                   data-clubhouse-uid="null"
                 >
@@ -203,9 +199,9 @@ function ScoreTablePrem() {
               <td className="right">8</td>
             </tr>
             <tr className="">
-              <td>
+              <td className="team-name">
                 <a
-                  href="/soccer/club/_/id/361/newcastle-united"
+                  href="https://www.espn.com/soccer/league/_/name/eng.1"
                   name="&amp;lpos=soccer:teamclubhouse:standings:team"
                   data-clubhouse-uid="null"
                 >
@@ -220,9 +216,9 @@ function ScoreTablePrem() {
               <td className="right">7</td>
             </tr>
             <tr className="">
-              <td>
+              <td className="team-name">
                 <a
-                  href="/soccer/club/_/id/376/southampton"
+                  href="https://www.espn.com/soccer/league/_/name/eng.1"
                   name="&amp;lpos=soccer:teamclubhouse:standings:team"
                   data-clubhouse-uid="null"
                 >
@@ -237,9 +233,9 @@ function ScoreTablePrem() {
               <td className="right">7</td>
             </tr>
             <tr className="">
-              <td>
+              <td className="team-name">
                 <a
-                  href="/soccer/club/_/id/349/afc-bournemouth"
+                  href="https://www.espn.com/soccer/league/_/name/eng.1"
                   name="&amp;lpos=soccer:teamclubhouse:standings:team"
                   data-clubhouse-uid="null"
                 >
@@ -254,9 +250,9 @@ function ScoreTablePrem() {
               <td className="right">7</td>
             </tr>
             <tr className="">
-              <td>
+              <td className="team-name">
                 <a
-                  href="/soccer/club/_/id/380/wolverhampton-wanderers"
+                  href="https://www.espn.com/soccer/league/_/name/eng.1"
                   name="&amp;lpos=soccer:teamclubhouse:standings:team"
                   data-clubhouse-uid="null"
                 >
@@ -271,9 +267,9 @@ function ScoreTablePrem() {
               <td className="right">6</td>
             </tr>
             <tr className="">
-              <td>
+              <td className="team-name">
                 <a
-                  href="/soccer/club/_/id/384/crystal-palace"
+                  href="https://www.espn.com/soccer/league/_/name/eng.1"
                   name="&amp;lpos=soccer:teamclubhouse:standings:team"
                   data-clubhouse-uid="null"
                 >
@@ -288,9 +284,9 @@ function ScoreTablePrem() {
               <td className="right">6</td>
             </tr>
             <tr className="">
-              <td>
+              <td className="team-name">
                 <a
-                  href="/soccer/club/_/id/368/everton"
+                  href="https://www.espn.com/soccer/league/_/name/eng.1"
                   name="&amp;lpos=soccer:teamclubhouse:standings:team"
                   data-clubhouse-uid="null"
                 >
@@ -305,9 +301,9 @@ function ScoreTablePrem() {
               <td className="right">4</td>
             </tr>
             <tr className="">
-              <td>
+              <td className="team-name">
                 <a
-                  href="/soccer/club/_/id/362/aston-villa"
+                  href="https://www.espn.com/soccer/league/_/name/eng.1"
                   name="&amp;lpos=soccer:teamclubhouse:standings:team"
                   data-clubhouse-uid="null"
                 >
@@ -322,9 +318,9 @@ function ScoreTablePrem() {
               <td className="right">4</td>
             </tr>
             <tr className="">
-              <td>
+              <td className="team-name">
                 <a
-                  href="/soccer/club/_/id/371/west-ham-united"
+                  href="https://www.espn.com/soccer/league/_/name/eng.1"
                   name="&amp;lpos=soccer:teamclubhouse:standings:team"
                   data-clubhouse-uid="null"
                 >
@@ -339,9 +335,9 @@ function ScoreTablePrem() {
               <td className="right">4</td>
             </tr>
             <tr className="">
-              <td>
+              <td className="team-name">
                 <a
-                  href="/soccer/club/_/id/393/nottingham-forest"
+                  href="https://www.espn.com/soccer/league/_/name/eng.1"
                   name="&amp;lpos=soccer:teamclubhouse:standings:team"
                   data-clubhouse-uid="null"
                 >
@@ -356,9 +352,9 @@ function ScoreTablePrem() {
               <td className="right">4</td>
             </tr>
             <tr className="">
-              <td>
+              <td className="team-name">
                 <a
-                  href="/soccer/club/_/id/375/leicester-city"
+                  href="https://www.espn.com/soccer/league/_/name/eng.1"
                   name="&amp;lpos=soccer:teamclubhouse:standings:team"
                   data-clubhouse-uid="null"
                 >
@@ -377,6 +373,6 @@ function ScoreTablePrem() {
       </div>
     </div>
   );
-}
+};
 
 export default ScoreTablePrem;

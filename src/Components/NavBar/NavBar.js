@@ -1,8 +1,9 @@
+import { Outlet } from "react-router-dom";
 import "./NavBar.css";
 
 function NavBar() {
   return (
-    <div>
+    <>
       <div className="nav">
         <div>
           <h2 className="page-title">Soccer Scores</h2>
@@ -13,7 +14,8 @@ function NavBar() {
           <li>Champions League</li>
         </ul>
       </div>
-    </div>
+      <Outlet />
+    </>
   );
 }
 

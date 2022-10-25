@@ -1,5 +1,5 @@
 import "./ScoreTable.css";
-function ScoreTable() {
+const ScoreTable = () => {
   return (
     <div className="la-liga">
       <div className="league-table">
@@ -35,7 +35,10 @@ function ScoreTable() {
           <tbody>
             <tr className="">
               <td className="team-name">
-                <a href="#" name="">
+                <a
+                  href="https://www.espn.com/soccer/league/_/name/esp.1"
+                  name=""
+                >
                   Real Madrid
                 </a>
               </td>
@@ -48,7 +51,10 @@ function ScoreTable() {
             </tr>
             <tr className="">
               <td className="team-name">
-                <a href="#" name="">
+                <a
+                  href="https://www.espn.com/soccer/league/_/name/esp.1"
+                  name=""
+                >
                   Barcelona
                 </a>
               </td>
@@ -61,7 +67,10 @@ function ScoreTable() {
             </tr>
             <tr className="">
               <td className="team-name">
-                <a href="#" name="">
+                <a
+                  href="https://www.espn.com/soccer/league/_/name/esp.1"
+                  name=""
+                >
                   Villarreal
                 </a>
               </td>
@@ -74,7 +83,10 @@ function ScoreTable() {
             </tr>
             <tr className="">
               <td className="team-name">
-                <a href="#" name="">
+                <a
+                  href="https://www.espn.com/soccer/league/_/name/esp.1"
+                  name=""
+                >
                   Real Betis
                 </a>
               </td>
@@ -87,7 +99,10 @@ function ScoreTable() {
             </tr>
             <tr className="">
               <td className="team-name">
-                <a href="#" name="">
+                <a
+                  href="https://www.espn.com/soccer/league/_/name/esp.1"
+                  name=""
+                >
                   Osasuna
                 </a>
               </td>
@@ -100,7 +115,10 @@ function ScoreTable() {
             </tr>
             <tr className="">
               <td className="team-name">
-                <a href="#" name="">
+                <a
+                  href="https://www.espn.com/soccer/league/_/name/esp.1"
+                  name=""
+                >
                   Athletic Club
                 </a>
               </td>
@@ -113,7 +131,10 @@ function ScoreTable() {
             </tr>
             <tr className="">
               <td className="team-name">
-                <a href="#" name="">
+                <a
+                  href="https://www.espn.com/soccer/league/_/name/esp.1"
+                  name=""
+                >
                   Atletico Madrid
                 </a>
               </td>
@@ -126,7 +147,10 @@ function ScoreTable() {
             </tr>
             <tr className="">
               <td className="team-name">
-                <a href="#" name="">
+                <a
+                  href="https://www.espn.com/soccer/league/_/name/esp.1"
+                  name=""
+                >
                   Celta Vigo
                 </a>
               </td>
@@ -139,7 +163,10 @@ function ScoreTable() {
             </tr>
             <tr className="">
               <td className="team-name">
-                <a href="#" name="">
+                <a
+                  href="https://www.espn.com/soccer/league/_/name/esp.1"
+                  name=""
+                >
                   Real Sociedad
                 </a>
               </td>
@@ -152,7 +179,10 @@ function ScoreTable() {
             </tr>
             <tr className="">
               <td className="team-name">
-                <a href="#" name="">
+                <a
+                  href="https://www.espn.com/soccer/league/_/name/esp.1"
+                  name=""
+                >
                   Valencia
                 </a>
               </td>
@@ -165,7 +195,10 @@ function ScoreTable() {
             </tr>
             <tr className="">
               <td className="team-name">
-                <a href="#" name="">
+                <a
+                  href="https://www.espn.com/soccer/league/_/name/esp.1"
+                  name=""
+                >
                   Mallorca
                 </a>
               </td>
@@ -178,7 +211,10 @@ function ScoreTable() {
             </tr>
             <tr className="">
               <td className="team-name">
-                <a href="#" name="">
+                <a
+                  href="https://www.espn.com/soccer/league/_/name/esp.1"
+                  name=""
+                >
                   Girona
                 </a>
               </td>
@@ -191,7 +227,10 @@ function ScoreTable() {
             </tr>
             <tr className="">
               <td className="team-name">
-                <a href="#" name="">
+                <a
+                  href="https://www.espn.com/soccer/league/_/name/esp.1"
+                  name=""
+                >
                   Almería
                 </a>
               </td>
@@ -204,7 +243,10 @@ function ScoreTable() {
             </tr>
             <tr className="">
               <td className="team-name">
-                <a href="#" name="">
+                <a
+                  href="https://www.espn.com/soccer/league/_/name/esp.1"
+                  name=""
+                >
                   Rayo Vallecano
                 </a>
               </td>
@@ -217,7 +259,10 @@ function ScoreTable() {
             </tr>
             <tr className="">
               <td className="team-name">
-                <a href="#" name="">
+                <a
+                  href="https://www.espn.com/soccer/league/_/name/esp.1"
+                  name=""
+                >
                   Espanyol
                 </a>
               </td>
@@ -230,7 +275,10 @@ function ScoreTable() {
             </tr>
             <tr className="">
               <td className="team-name">
-                <a href="#" name="">
+                <a
+                  href="https://www.espn.com/soccer/league/_/name/esp.1"
+                  name=""
+                >
                   Real Valladolid
                 </a>
               </td>
@@ -243,7 +291,10 @@ function ScoreTable() {
             </tr>
             <tr className="">
               <td className="team-name">
-                <a href="#" name="">
+                <a
+                  href="https://www.espn.com/soccer/league/_/name/esp.1"
+                  name=""
+                >
                   Sevilla
                 </a>
               </td>
@@ -256,7 +307,10 @@ function ScoreTable() {
             </tr>
             <tr className="">
               <td className="team-name">
-                <a href="#" name="">
+                <a
+                  href="https://www.espn.com/soccer/league/_/name/esp.1"
+                  name=""
+                >
                   Elche
                 </a>
               </td>
@@ -269,7 +323,10 @@ function ScoreTable() {
             </tr>
             <tr className="">
               <td className="team-name">
-                <a href="#" name="">
+                <a
+                  href="https://www.espn.com/soccer/league/_/name/esp.1"
+                  name=""
+                >
                   Getafe
                 </a>
               </td>
@@ -282,7 +339,10 @@ function ScoreTable() {
             </tr>
             <tr className="">
               <td className="team-name">
-                <a href="#" name="">
+                <a
+                  href="https://www.espn.com/soccer/league/_/name/esp.1"
+                  name=""
+                >
                   Cádiz
                 </a>
               </td>
@@ -298,6 +358,6 @@ function ScoreTable() {
       </div>
     </div>
   );
-}
+};
 
 export default ScoreTable;
