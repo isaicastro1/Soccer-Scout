@@ -11,6 +11,36 @@
 
   .options {
     display: flex;
-    gap: 30px;
+    align-items: center;
+    flex-direction: column;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #fff;
+
+    label {
+      padding: 20px;
+    }
+
+    select {
+      display: flex;
+      margin: 10px;
+    }
+
+    .button-submit {
+      width: 100px;
+      height: 35px;
+      font-size: 0.9rem;
+      font-weight: 400;
+      background-color: #405cf5;
+      color: white;
+      border: none;
+      border-radius: 15px;
+      transition: 0.1s ease-in-out;
+
+      &:hover {
+        cursor: pointer;
+        transform: scale(1.05);
+      }
+    }
   }
 }
