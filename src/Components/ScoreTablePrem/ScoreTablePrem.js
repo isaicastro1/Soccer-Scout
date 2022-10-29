@@ -5,7 +5,7 @@ const ScoreTablePrem = () => {
     <div className="prem">
       <div className="league-table">
         <header>
-          <h1>Premiere League Standings</h1>
+          <h1>Premiere League</h1>
         </header>
         <table className="standings">
           <thead>

@@ -4,7 +4,7 @@ const ScoreTable = () => {
     <div className="la-liga">
       <div className="league-table">
         <header>
-          <h1>La Liga Standings</h1>
+          <h1>La Liga</h1>
         </header>
         <table className="standings">
           <thead>

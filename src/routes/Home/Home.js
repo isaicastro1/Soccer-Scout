@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 import "./Home.scss";
 
@@ -19,28 +20,57 @@ const allLeagues = {
 const Home = () => {
   const [league, setLeague] = useState(140);
   const [year, setYear] = useState(2022);
+  const [leagueName, setleagueName] = useState("laliga");
 
-  const fetchData = async () => {
+  console.log("Link", leagueName);
+  console.log("League", league);
+
+  const fetchTeamData = async () => {
     const response = await fetch(
       `https://v3.football.api-sports.io/standings?season=${year}&league=${league}`,
       options
     );
     const data = await response.json();
     const allData = data.response[0].league.standings[0];
-    return allData.map((item) => {
-      console.log(item.team.name);
+    const teamData = [];
+    allData.map((item) => {
+      return teamData.push({
+        rank: item.rank,
+        name: item.team.name,
+        logo: item.team.logo,
+        played: item.all.played,
+        wins: item.all.win,
+        draws: item.all.draw,
+        losses: item.all.lose,
+        goalsDiff: item.goalsDiff,
+        points: item.points,
+      });
     });
+    console.log(teamData);
   };
+
+  /*
+
+  rank - data.response[0].league.standings[0][0].rank
+  name - data.response[0].league.standings[0][0].team.name
+  logo - data.response[0].league.standings[0][0].team.logo
+  games played - data.response[0].league.standings[0][0].all.played
+  wins - data.response[0].league.standings[0][0].all.win
+  draws - data.response[0].league.standings[0][0].all.draw
+  losses - data.response[0].league.standings[0][0].all.lose
+  goal diff - data.response[0].league.standings[0][0].goalsDiff
+  points - data.response[0].league.standings[0][0].points
+
+  */
 
   const handleLeagueChange = (event) => {
     setLeague(allLeagues[event.target.value]);
+    setleagueName(event.target.value);
   };
 
   const handleYearChange = (event) => {
     setYear(event.target.value);
   };
-
-  console.log(fetchData());
 
   return (
     <div className="home-container">
@@ -69,9 +99,11 @@ const Home = () => {
           <option value="2010">2010</option>
         </select>
         <br />
-        <button className="button-submit" onClick={fetchData}>
-          Search
-        </button>
+        <Link to={`${leagueName}`}>
+          <button className="button-submit" onClick={fetchTeamData}>
+            Search
+          </button>
+        </Link>
       </div>
     </div>
   );
