@@ -1,6 +1,34 @@
+import { useContext } from "react";
+import { TeamDataContext } from "../../contexts/teamData.context";
+
 import "../ScoreTableLaLiga/ScoreTable.scss";
 
+const teamId = {
+  Arsenal: 359,
+  "Manchester City": 382,
+  "Tottenham Hotspur": 367,
+  "NewCastle United": 361,
+  "Manchester United": 360,
+  Chelsea: 363,
+  Fulham: 370,
+  "Brighton Hove Albion": 331,
+  Liverpool: 364,
+  "Crystal Palace": 384,
+  Brentford: 337,
+  Everton: 368,
+  "West Ham United": 371,
+  "AFC Bournemouth": 349,
+  "Leeds United": 357,
+  "Aston Villa": 362,
+  Southampton: 376,
+  "Leicester City": 375,
+  "Wolverhampton Wanderers": 380,
+  "Nottingham Forest": 393,
+};
+
 const ScoreTablePrem = () => {
+  const { allTeamData } = useContext(TeamDataContext);
+
   return (
     <div className="prem">
       <div className="league-table">
@@ -34,342 +62,50 @@ const ScoreTablePrem = () => {
             </tr>
           </thead>
           <tbody>
-            <tr className="">
-              <td className="team-name">
-                <a href="https://www.espn.com/soccer/league/_/name/eng.1">
-                  Arsenal
-                </a>
-              </td>
-              <td className="right">6</td>
-              <td className="right">5</td>
-              <td className="right">0</td>
-              <td className="right">1</td>
-              <td className="right">+7</td>
-              <td className="right">15</td>
-            </tr>
-            <tr className="">
-              <td className="team-name">
-                <a
-                  href="https://www.espn.com/soccer/league/_/name/eng.1"
-                  name="&amp;lpos=soccer:teamclubhouse:standings:team"
-                  data-clubhouse-uid="null"
-                >
-                  Manchester City
-                </a>
-              </td>
-              <td className="right">6</td>
-              <td className="right">4</td>
-              <td className="right">2</td>
-              <td className="right">0</td>
-              <td className="right">+14</td>
-              <td className="right">14</td>
-            </tr>
-            <tr className="">
-              <td className="team-name">
-                <a
-                  href="https://www.espn.com/soccer/league/_/name/eng.1"
-                  name="&amp;lpos=soccer:teamclubhouse:standings:team"
-                  data-clubhouse-uid="null"
-                >
-                  Tottenham Hotspur
-                </a>
-              </td>
-              <td className="right">6</td>
-              <td className="right">4</td>
-              <td className="right">2</td>
-              <td className="right">0</td>
-              <td className="right">+7</td>
-              <td className="right">14</td>
-            </tr>
-            <tr className="">
-              <td className="team-name">
-                <a
-                  href="https://www.espn.com/soccer/league/_/name/eng.1"
-                  name="&amp;lpos=soccer:teamclubhouse:standings:team"
-                  data-clubhouse-uid="null"
-                >
-                  Brighton &amp; Hove Albion
-                </a>
-              </td>
-              <td className="right">6</td>
-              <td className="right">4</td>
-              <td className="right">1</td>
-              <td className="right">1</td>
-              <td className="right">+6</td>
-              <td className="right">13</td>
-            </tr>
-            <tr className="">
-              <td className="team-name">
-                <a
-                  href="https://www.espn.com/soccer/league/_/name/eng.1"
-                  name="&amp;lpos=soccer:teamclubhouse:standings:team"
-                  data-clubhouse-uid="null"
-                >
-                  Manchester United
-                </a>
-              </td>
-              <td className="right">6</td>
-              <td className="right">4</td>
-              <td className="right">0</td>
-              <td className="right">2</td>
-              <td className="right">0</td>
-              <td className="right">12</td>
-            </tr>
-            <tr className="">
-              <td className="team-name">
-                <a
-                  href="https://www.espn.com/soccer/league/_/name/eng.1"
-                  name="&amp;lpos=soccer:teamclubhouse:standings:team"
-                  data-clubhouse-uid="null"
-                >
-                  Chelsea
-                </a>
-              </td>
-              <td className="right">6</td>
-              <td className="right">3</td>
-              <td className="right">1</td>
-              <td className="right">2</td>
-              <td className="right">-1</td>
-              <td className="right">10</td>
-            </tr>
-            <tr className="">
-              <td className="team-name">
-                <a
-                  href="https://www.espn.com/soccer/league/_/name/eng.1"
-                  name="&amp;lpos=soccer:teamclubhouse:standings:team"
-                  data-clubhouse-uid="null"
-                >
-                  Liverpool
-                </a>
-              </td>
-              <td className="right">6</td>
-              <td className="right">2</td>
-              <td className="right">3</td>
-              <td className="right">1</td>
-              <td className="right">+9</td>
-              <td className="right">9</td>
-            </tr>
-            <tr className="">
-              <td className="team-name">
-                <a
-                  href="https://www.espn.com/soccer/league/_/name/eng.1"
-                  name="&amp;lpos=soccer:teamclubhouse:standings:team"
-                  data-clubhouse-uid="null"
-                >
-                  Brentford
-                </a>
-              </td>
-              <td className="right">6</td>
-              <td className="right">2</td>
-              <td className="right">3</td>
-              <td className="right">1</td>
-              <td className="right">+6</td>
-              <td className="right">9</td>
-            </tr>
-            <tr className="">
-              <td className="team-name">
-                <a
-                  href="https://www.espn.com/soccer/league/_/name/eng.1"
-                  name="&amp;lpos=soccer:teamclubhouse:standings:team"
-                  data-clubhouse-uid="null"
-                >
-                  Leeds United
-                </a>
-              </td>
-              <td className="right">6</td>
-              <td className="right">2</td>
-              <td className="right">2</td>
-              <td className="right">2</td>
-              <td className="right">0</td>
-              <td className="right">8</td>
-            </tr>
-            <tr className="">
-              <td className="team-name">
-                <a
-                  href="https://www.espn.com/soccer/league/_/name/eng.1"
-                  name="&amp;lpos=soccer:teamclubhouse:standings:team"
-                  data-clubhouse-uid="null"
-                >
-                  Fulham
-                </a>
-              </td>
-              <td className="right">6</td>
-              <td className="right">2</td>
-              <td className="right">2</td>
-              <td className="right">2</td>
-              <td className="right">0</td>
-              <td className="right">8</td>
-            </tr>
-            <tr className="">
-              <td className="team-name">
-                <a
-                  href="https://www.espn.com/soccer/league/_/name/eng.1"
-                  name="&amp;lpos=soccer:teamclubhouse:standings:team"
-                  data-clubhouse-uid="null"
-                >
-                  Newcastle United
-                </a>
-              </td>
-              <td className="right">6</td>
-              <td className="right">1</td>
-              <td className="right">4</td>
-              <td className="right">1</td>
-              <td className="right">+1</td>
-              <td className="right">7</td>
-            </tr>
-            <tr className="">
-              <td className="team-name">
-                <a
-                  href="https://www.espn.com/soccer/league/_/name/eng.1"
-                  name="&amp;lpos=soccer:teamclubhouse:standings:team"
-                  data-clubhouse-uid="null"
-                >
-                  Southampton
-                </a>
-              </td>
-              <td className="right">6</td>
-              <td className="right">2</td>
-              <td className="right">1</td>
-              <td className="right">3</td>
-              <td className="right">-3</td>
-              <td className="right">7</td>
-            </tr>
-            <tr className="">
-              <td className="team-name">
-                <a
-                  href="https://www.espn.com/soccer/league/_/name/eng.1"
-                  name="&amp;lpos=soccer:teamclubhouse:standings:team"
-                  data-clubhouse-uid="null"
-                >
-                  AFC Bournemouth
-                </a>
-              </td>
-              <td className="right">6</td>
-              <td className="right">2</td>
-              <td className="right">1</td>
-              <td className="right">3</td>
-              <td className="right">-13</td>
-              <td className="right">7</td>
-            </tr>
-            <tr className="">
-              <td className="team-name">
-                <a
-                  href="https://www.espn.com/soccer/league/_/name/eng.1"
-                  name="&amp;lpos=soccer:teamclubhouse:standings:team"
-                  data-clubhouse-uid="null"
-                >
-                  Wolverhampton Wanderers
-                </a>
-              </td>
-              <td className="right">6</td>
-              <td className="right">1</td>
-              <td className="right">3</td>
-              <td className="right">2</td>
-              <td className="right">-1</td>
-              <td className="right">6</td>
-            </tr>
-            <tr className="">
-              <td className="team-name">
-                <a
-                  href="https://www.espn.com/soccer/league/_/name/eng.1"
-                  name="&amp;lpos=soccer:teamclubhouse:standings:team"
-                  data-clubhouse-uid="null"
-                >
-                  Crystal Palace
-                </a>
-              </td>
-              <td className="right">6</td>
-              <td className="right">1</td>
-              <td className="right">3</td>
-              <td className="right">2</td>
-              <td className="right">-2</td>
-              <td className="right">6</td>
-            </tr>
-            <tr className="">
-              <td className="team-name">
-                <a
-                  href="https://www.espn.com/soccer/league/_/name/eng.1"
-                  name="&amp;lpos=soccer:teamclubhouse:standings:team"
-                  data-clubhouse-uid="null"
-                >
-                  Everton
-                </a>
-              </td>
-              <td className="right">6</td>
-              <td className="right">0</td>
-              <td className="right">4</td>
-              <td className="right">2</td>
-              <td className="right">-2</td>
-              <td className="right">4</td>
-            </tr>
-            <tr className="">
-              <td className="team-name">
-                <a
-                  href="https://www.espn.com/soccer/league/_/name/eng.1"
-                  name="&amp;lpos=soccer:teamclubhouse:standings:team"
-                  data-clubhouse-uid="null"
-                >
-                  Aston Villa
-                </a>
-              </td>
-              <td className="right">6</td>
-              <td className="right">1</td>
-              <td className="right">1</td>
-              <td className="right">4</td>
-              <td className="right">-5</td>
-              <td className="right">4</td>
-            </tr>
-            <tr className="">
-              <td className="team-name">
-                <a
-                  href="https://www.espn.com/soccer/league/_/name/eng.1"
-                  name="&amp;lpos=soccer:teamclubhouse:standings:team"
-                  data-clubhouse-uid="null"
-                >
-                  West Ham United
-                </a>
-              </td>
-              <td className="right">6</td>
-              <td className="right">1</td>
-              <td className="right">1</td>
-              <td className="right">4</td>
-              <td className="right">-5</td>
-              <td className="right">4</td>
-            </tr>
-            <tr className="">
-              <td className="team-name">
-                <a
-                  href="https://www.espn.com/soccer/league/_/name/eng.1"
-                  name="&amp;lpos=soccer:teamclubhouse:standings:team"
-                  data-clubhouse-uid="null"
-                >
-                  Nottingham Forest
-                </a>
-              </td>
-              <td className="right">6</td>
-              <td className="right">1</td>
-              <td className="right">1</td>
-              <td className="right">4</td>
-              <td className="right">-10</td>
-              <td className="right">4</td>
-            </tr>
-            <tr className="">
-              <td className="team-name">
-                <a
-                  href="https://www.espn.com/soccer/league/_/name/eng.1"
-                  name="&amp;lpos=soccer:teamclubhouse:standings:team"
-                  data-clubhouse-uid="null"
-                >
-                  Leicester City
-                </a>
-              </td>
-              <td className="right">6</td>
-              <td className="right">0</td>
-              <td className="right">1</td>
-              <td className="right">5</td>
-              <td className="right">-8</td>
-              <td className="right">1</td>
-            </tr>
+            {allTeamData.map((item) => {
+              const {
+                id,
+                rank,
+                name,
+                logo,
+                played,
+                wins,
+                draws,
+                losses,
+                goalsDiff,
+                points,
+              } = item;
+
+              return (
+                <tr className="" key={id}>
+                  <td className="team-name">
+                    <img src={logo} style={{ height: 20, width: 20 }} />
+                    <a
+                      href={`https://www.espn.com/soccer/team/_/id/${
+                        teamId[name]
+                      }/${
+                        name.includes(" ")
+                          ? name.replace(" ", "-").toLowerCase()
+                          : name.toLowerCase()
+                      }`}
+                      name=""
+                    >
+                      {name}
+                    </a>
+                  </td>
+                  <td className="right">{played}</td>
+                  <td className="right">{wins}</td>
+                  <td className="right">{draws}</td>
+                  <td className="right">{losses}</td>
+                  <td className="right">
+                    {goalsDiff.toString().includes("-")
+                      ? goalsDiff
+                      : `+${goalsDiff}`}
+                  </td>
+                  <td className="right">{points}</td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>

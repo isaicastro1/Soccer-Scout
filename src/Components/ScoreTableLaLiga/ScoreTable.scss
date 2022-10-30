@@ -52,7 +52,10 @@
     border-color: inherit;
 
     .team-name {
+      display: flex;
+      align-items: center;
       text-align: left;
+      gap: 10px;
 
       &:hover {
         outline: 1px solid white;

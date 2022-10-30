@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
+import { useContext } from "react";
+
+import { TeamDataContext } from "../../contexts/teamData.context";
+
 import "./Home.scss";
 
 const options = {
@@ -22,8 +26,9 @@ const Home = () => {
   const [year, setYear] = useState(2022);
   const [leagueName, setleagueName] = useState("laliga");
 
-  console.log("Link", leagueName);
-  console.log("League", league);
+  const { setAllTeamData } = useContext(TeamDataContext);
+
+  const teamData = [];
 
   const fetchTeamData = async () => {
     const response = await fetch(
@@ -32,9 +37,9 @@ const Home = () => {
     );
     const data = await response.json();
     const allData = data.response[0].league.standings[0];
-    const teamData = [];
     allData.map((item) => {
-      return teamData.push({
+      teamData.push({
+        id: item.team.id,
         rank: item.rank,
         name: item.team.name,
         logo: item.team.logo,
@@ -46,22 +51,8 @@ const Home = () => {
         points: item.points,
       });
     });
-    console.log(teamData);
+    setAllTeamData(teamData);
   };
-
-  /*
-
-  rank - data.response[0].league.standings[0][0].rank
-  name - data.response[0].league.standings[0][0].team.name
-  logo - data.response[0].league.standings[0][0].team.logo
-  games played - data.response[0].league.standings[0][0].all.played
-  wins - data.response[0].league.standings[0][0].all.win
-  draws - data.response[0].league.standings[0][0].all.draw
-  losses - data.response[0].league.standings[0][0].all.lose
-  goal diff - data.response[0].league.standings[0][0].goalsDiff
-  points - data.response[0].league.standings[0][0].points
-
-  */
 
   const handleLeagueChange = (event) => {
     setLeague(allLeagues[event.target.value]);

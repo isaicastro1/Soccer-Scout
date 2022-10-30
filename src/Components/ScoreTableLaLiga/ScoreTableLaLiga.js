@@ -1,5 +1,35 @@
+import { useContext } from "react";
+
+import { TeamDataContext } from "../../contexts/teamData.context";
+
 import "./ScoreTable.scss";
+
+const teamId = {
+  "Real Madrid": 86,
+  Barcelona: 83,
+  "Athletico Madrid": 1068,
+  "Real Sociedad": 89,
+  "Athletic Club": 93,
+  "Real Betis": 244,
+  Osasuna: 97,
+  Villareal: 102,
+  "Rayo Vallecano": 101,
+  Valencia: 94,
+  "Real Valladolid": 95,
+  Mallorca: 84,
+  Almeria: 102,
+  Espanyol: 88,
+  "Celta Vigo": 85,
+  Girona: 9812,
+  Getafe: 2922,
+  Sevilla: 243,
+  Cadiz: 3842,
+  Elche: 3751,
+};
+
 const ScoreTable = () => {
+  const { allTeamData } = useContext(TeamDataContext);
+
   return (
     <div className="la-liga">
       <div className="league-table">
@@ -33,326 +63,50 @@ const ScoreTable = () => {
             </tr>
           </thead>
           <tbody>
-            <tr className="">
-              <td className="team-name">
-                <a
-                  href="https://www.espn.com/soccer/league/_/name/esp.1"
-                  name=""
-                >
-                  Real Madrid
-                </a>
-              </td>
-              <td className="right">4</td>
-              <td className="right">4</td>
-              <td className="right">0</td>
-              <td className="right">0</td>
-              <td className="right">+7</td>
-              <td className="right">12</td>
-            </tr>
-            <tr className="">
-              <td className="team-name">
-                <a
-                  href="https://www.espn.com/soccer/league/_/name/esp.1"
-                  name=""
-                >
-                  Barcelona
-                </a>
-              </td>
-              <td className="right">4</td>
-              <td className="right">3</td>
-              <td className="right">1</td>
-              <td className="right">0</td>
-              <td className="right">+10</td>
-              <td className="right">10</td>
-            </tr>
-            <tr className="">
-              <td className="team-name">
-                <a
-                  href="https://www.espn.com/soccer/league/_/name/esp.1"
-                  name=""
-                >
-                  Villarreal
-                </a>
-              </td>
-              <td className="right">4</td>
-              <td className="right">3</td>
-              <td className="right">1</td>
-              <td className="right">0</td>
-              <td className="right">+9</td>
-              <td className="right">10</td>
-            </tr>
-            <tr className="">
-              <td className="team-name">
-                <a
-                  href="https://www.espn.com/soccer/league/_/name/esp.1"
-                  name=""
-                >
-                  Real Betis
-                </a>
-              </td>
-              <td className="right">4</td>
-              <td className="right">3</td>
-              <td className="right">0</td>
-              <td className="right">1</td>
-              <td className="right">+4</td>
-              <td className="right">9</td>
-            </tr>
-            <tr className="">
-              <td className="team-name">
-                <a
-                  href="https://www.espn.com/soccer/league/_/name/esp.1"
-                  name=""
-                >
-                  Osasuna
-                </a>
-              </td>
-              <td className="right">4</td>
-              <td className="right">3</td>
-              <td className="right">0</td>
-              <td className="right">1</td>
-              <td className="right">+3</td>
-              <td className="right">9</td>
-            </tr>
-            <tr className="">
-              <td className="team-name">
-                <a
-                  href="https://www.espn.com/soccer/league/_/name/esp.1"
-                  name=""
-                >
-                  Athletic Club
-                </a>
-              </td>
-              <td className="right">4</td>
-              <td className="right">2</td>
-              <td className="right">1</td>
-              <td className="right">1</td>
-              <td className="right">+4</td>
-              <td className="right">7</td>
-            </tr>
-            <tr className="">
-              <td className="team-name">
-                <a
-                  href="https://www.espn.com/soccer/league/_/name/esp.1"
-                  name=""
-                >
-                  Atletico Madrid
-                </a>
-              </td>
-              <td className="right">4</td>
-              <td className="right">2</td>
-              <td className="right">1</td>
-              <td className="right">1</td>
-              <td className="right">+2</td>
-              <td className="right">7</td>
-            </tr>
-            <tr className="">
-              <td className="team-name">
-                <a
-                  href="https://www.espn.com/soccer/league/_/name/esp.1"
-                  name=""
-                >
-                  Celta Vigo
-                </a>
-              </td>
-              <td className="right">4</td>
-              <td className="right">2</td>
-              <td className="right">1</td>
-              <td className="right">1</td>
-              <td className="right">+1</td>
-              <td className="right">7</td>
-            </tr>
-            <tr className="">
-              <td className="team-name">
-                <a
-                  href="https://www.espn.com/soccer/league/_/name/esp.1"
-                  name=""
-                >
-                  Real Sociedad
-                </a>
-              </td>
-              <td className="right">4</td>
-              <td className="right">2</td>
-              <td className="right">1</td>
-              <td className="right">1</td>
-              <td className="right">-1</td>
-              <td className="right">7</td>
-            </tr>
-            <tr className="">
-              <td className="team-name">
-                <a
-                  href="https://www.espn.com/soccer/league/_/name/esp.1"
-                  name=""
-                >
-                  Valencia
-                </a>
-              </td>
-              <td className="right">4</td>
-              <td className="right">2</td>
-              <td className="right">0</td>
-              <td className="right">2</td>
-              <td className="right">+3</td>
-              <td className="right">6</td>
-            </tr>
-            <tr className="">
-              <td className="team-name">
-                <a
-                  href="https://www.espn.com/soccer/league/_/name/esp.1"
-                  name=""
-                >
-                  Mallorca
-                </a>
-              </td>
-              <td className="right">4</td>
-              <td className="right">1</td>
-              <td className="right">2</td>
-              <td className="right">1</td>
-              <td className="right">+1</td>
-              <td className="right">5</td>
-            </tr>
-            <tr className="">
-              <td className="team-name">
-                <a
-                  href="https://www.espn.com/soccer/league/_/name/esp.1"
-                  name=""
-                >
-                  Girona
-                </a>
-              </td>
-              <td className="right">4</td>
-              <td className="right">1</td>
-              <td className="right">1</td>
-              <td className="right">2</td>
-              <td className="right">0</td>
-              <td className="right">4</td>
-            </tr>
-            <tr className="">
-              <td className="team-name">
-                <a
-                  href="https://www.espn.com/soccer/league/_/name/esp.1"
-                  name=""
-                >
-                  Almería
-                </a>
-              </td>
-              <td className="right">4</td>
-              <td className="right">1</td>
-              <td className="right">1</td>
-              <td className="right">2</td>
-              <td className="right">-1</td>
-              <td className="right">4</td>
-            </tr>
-            <tr className="">
-              <td className="team-name">
-                <a
-                  href="https://www.espn.com/soccer/league/_/name/esp.1"
-                  name=""
-                >
-                  Rayo Vallecano
-                </a>
-              </td>
-              <td className="right">4</td>
-              <td className="right">1</td>
-              <td className="right">1</td>
-              <td className="right">2</td>
-              <td className="right">-1</td>
-              <td className="right">4</td>
-            </tr>
-            <tr className="">
-              <td className="team-name">
-                <a
-                  href="https://www.espn.com/soccer/league/_/name/esp.1"
-                  name=""
-                >
-                  Espanyol
-                </a>
-              </td>
-              <td className="right">4</td>
-              <td className="right">1</td>
-              <td className="right">1</td>
-              <td className="right">2</td>
-              <td className="right">-3</td>
-              <td className="right">4</td>
-            </tr>
-            <tr className="">
-              <td className="team-name">
-                <a
-                  href="https://www.espn.com/soccer/league/_/name/esp.1"
-                  name=""
-                >
-                  Real Valladolid
-                </a>
-              </td>
-              <td className="right">4</td>
-              <td className="right">1</td>
-              <td className="right">1</td>
-              <td className="right">2</td>
-              <td className="right">-6</td>
-              <td className="right">4</td>
-            </tr>
-            <tr className="">
-              <td className="team-name">
-                <a
-                  href="https://www.espn.com/soccer/league/_/name/esp.1"
-                  name=""
-                >
-                  Sevilla
-                </a>
-              </td>
-              <td className="right">4</td>
-              <td className="right">0</td>
-              <td className="right">1</td>
-              <td className="right">3</td>
-              <td className="right">-5</td>
-              <td className="right">1</td>
-            </tr>
-            <tr className="">
-              <td className="team-name">
-                <a
-                  href="https://www.espn.com/soccer/league/_/name/esp.1"
-                  name=""
-                >
-                  Elche
-                </a>
-              </td>
-              <td className="right">4</td>
-              <td className="right">0</td>
-              <td className="right">1</td>
-              <td className="right">3</td>
-              <td className="right">-8</td>
-              <td className="right">1</td>
-            </tr>
-            <tr className="">
-              <td className="team-name">
-                <a
-                  href="https://www.espn.com/soccer/league/_/name/esp.1"
-                  name=""
-                >
-                  Getafe
-                </a>
-              </td>
-              <td className="right">4</td>
-              <td className="right">0</td>
-              <td className="right">1</td>
-              <td className="right">3</td>
-              <td className="right">-9</td>
-              <td className="right">1</td>
-            </tr>
-            <tr className="">
-              <td className="team-name">
-                <a
-                  href="https://www.espn.com/soccer/league/_/name/esp.1"
-                  name=""
-                >
-                  Cádiz
-                </a>
-              </td>
-              <td className="right">4</td>
-              <td className="right">0</td>
-              <td className="right">0</td>
-              <td className="right">4</td>
-              <td className="right">-10</td>
-              <td className="right">0</td>
-            </tr>
+            {allTeamData.map((item) => {
+              const {
+                id,
+                rank,
+                name,
+                logo,
+                played,
+                wins,
+                draws,
+                losses,
+                goalsDiff,
+                points,
+              } = item;
+
+              return (
+                <tr className="" key={id}>
+                  <td className="team-name">
+                    <img src={logo} style={{ height: 20, width: 20 }} />
+                    <a
+                      href={`https://www.espn.com/soccer/team/_/id/${
+                        teamId[name]
+                      }/${
+                        name.includes(" ")
+                          ? name.replace(" ", "-").toLowerCase()
+                          : name.toLowerCase()
+                      }`}
+                      name=""
+                    >
+                      {name}
+                    </a>
+                  </td>
+                  <td className="right">{played}</td>
+                  <td className="right">{wins}</td>
+                  <td className="right">{draws}</td>
+                  <td className="right">{losses}</td>
+                  <td className="right">
+                    {goalsDiff.toString().includes("-")
+                      ? goalsDiff
+                      : `+${goalsDiff}`}
+                  </td>
+                  <td className="right">{points}</td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>
