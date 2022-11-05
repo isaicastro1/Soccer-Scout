@@ -41,72 +41,74 @@ const teamId = {
   "Nottingham Forest": 393,
 };
 
-const Table = ({ allTeamData, uclData }) => {
-  uclData &&
-    uclData.map((array) => {
-      console.log("array of ucl data", array);
-      return (
-        <h2 style={{ color: "white" }}>{array[0].rank}</h2>
+const Table = ({ array }) => {
+  return (
+    <table className="standings">
+      <thead>
+        <tr>
+          <th scope="col" className="left" title="team">
+            {}
+          </th>
+          <th scope="col" className="right" title="GP">
+            GP
+          </th>
+          <th scope="col" className="right" title="W">
+            W
+          </th>
+          <th scope="col" className="right" title="D">
+            D
+          </th>
+          <th scope="col" className="right" title="L">
+            L
+          </th>
+          <th scope="col" className="right" title="GD">
+            GD
+          </th>
+          <th scope="col" className="right" title="P">
+            P
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {array &&
+          array.forEach((item) => {
+            <tr className="" key={item.team.id}>
+              <td className="team-name">
+                <img
+                  src={item.team.logo}
+                  style={{ height: 20, width: 20 }}
+                  alt={item.team.name}
+                />
+                <a href="">{item.team.name}</a>
+              </td>
+              <td className="right">{item.all.played}</td>
+              <td className="right">{item.all.win}</td>
+              <td className="right">{item.all.draw}</td>
+              <td className="right">{item.all.lose}</td>
+              <td className="right">{item.goalsDiff}</td>
+              <td className="right">{item.points}</td>
+            </tr>;
+          })}
+      </tbody>
+    </table>
+  );
 
-        // <table className="standings">
-        //   <thead>
-        //     <tr>
-        //       <th scope="col" className="left" title="team">
-        //         {array[0].rank}
-        //       </th>
-        //       <th scope="col" className="right" title="GP">
-        //         GP
-        //       </th>
-        //       <th scope="col" className="right" title="W">
-        //         W
-        //       </th>
-        //       <th scope="col" className="right" title="D">
-        //         D
-        //       </th>
-        //       <th scope="col" className="right" title="L">
-        //         L
-        //       </th>
-        //       <th scope="col" className="right" title="GD">
-        //         GD
-        //       </th>
-        //       <th scope="col" className="right" title="P">
-        //         P
-        //       </th>
-        //     </tr>
-        //   </thead>
-        //   <tbody>
-        //     <tr className="">
-        //       <td className="team-name">
-        //         <img src="" style={{ height: 20, width: 20 }} />
-        //         <a href=""></a>
-        //       </td>
-        //       <td className="right"></td>
-        //       <td className="right"></td>
-        //       <td className="right"></td>
-        //       <td className="right"></td>
-        //       <td className="right"></td>
-        //       <td className="right"></td>
-        //     </tr>
-        //   </tbody>
-        // </table>
-      );
+  //   console.log("array", array);
+  //   array.forEach((item) => {
+  //     console.log({
+  //       id: item.team.id,
+  //       rank: item.rank,
+  //       name: item.team.name,
+  //       logo: item.team.logo,
+  //       played: item.all.played,
+  //       wins: item.all.win,
+  //       draws: item.all.draw,
+  //       losses: item.all.lose,
+  //       goalsDiff: item.goalsDiff,
+  //       points: item.points,
+  //     });
+  //   });
 
-      console.log("array", array);
-      array.forEach((item) => {
-        console.log({
-          id: item.team.id,
-          rank: item.rank,
-          name: item.team.name,
-          logo: item.team.logo,
-          played: item.all.played,
-          wins: item.all.win,
-          draws: item.all.draw,
-          losses: item.all.lose,
-          goalsDiff: item.goalsDiff,
-          points: item.points,
-        });
-      });
-    });
   //   return (
   //     <table className="standings">
   //       <thead>

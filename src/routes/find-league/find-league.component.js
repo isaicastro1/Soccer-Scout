@@ -24,11 +24,10 @@ const allLeagues = {
 const FindLeague = () => {
   const [league, setLeague] = useState(140);
   const [year, setYear] = useState(2022);
-  // const [leagueName, setleagueName] = useState("laliga");
   const [leagueCalled, setLeagueCalled] = useState(false);
   const [nameOfLeague, setNameOfLeague] = useState("");
 
-  const { allTeamData, setAllTeamData, leagueName, setLeagueName, setUclData } =
+  const { setAllTeamData, leagueName, setLeagueName, setUclData } =
     useContext(TeamDataContext);
 
   const teamData = [];

@@ -1,8 +1,6 @@
 .league {
-  // display: flex;
-  // justify-content: center;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  justify-content: center;
   width: 100%;
   height: calc(100vh - 70px);
   color: white;
