@@ -4,14 +4,13 @@
   gap: 30px;
   width: 100%;
   max-width: 1600px;
-  margin-right: 80px;
   align-items: center;
   color: white;
   position: fixed;
 
   .link {
     text-decoration: none;
-    color: #fff;
+    color: white;
   }
   .page-title {
     margin-left: 20px;
@@ -33,6 +32,45 @@
     &:hover {
       cursor: pointer;
       text-decoration: underline;
+    }
+  }
+  .right-nav-container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 15vw;
+    min-width: 150px;
+
+    .search {
+      padding-top: 4px;
+    }
+    .search {
+      font-size: 1.3rem;
+      cursor: pointer;
+      transition: 0.1s ease-in-out;
+
+      &:hover {
+        transform: scale(1.15);
+      }
+    }
+
+    .bell {
+      font-size: 1.3rem;
+      cursor: pointer;
+      transition: 0.1s ease-in-out;
+
+      &:hover {
+        transform: scale(1.15);
+      }
+    }
+
+    img {
+      border-radius: 50%;
+      cursor: pointer;
+
+      &:hover {
+        opacity: 0.8;
+      }
     }
   }
 }
