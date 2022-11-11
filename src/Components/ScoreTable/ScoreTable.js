@@ -50,6 +50,8 @@ const teamId = {
 const ScoreTable = ({ nameOfLeague }) => {
   const { allTeamData } = useContext(TeamDataContext);
 
+  console.log(allTeamData);
+
   return (
     <div className="league">
       <div className="league-table">

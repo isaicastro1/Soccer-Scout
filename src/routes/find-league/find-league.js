@@ -1,9 +1,10 @@
 import { useState } from "react";
-import ScoreTable from "../../Components/ScoreTable/ScoreTable";
 
 import { useContext } from "react";
 
 import { TeamDataContext } from "../../contexts/teamData.context";
+
+import Table from "../../Components/table/table";
 
 import "./find-league.styles.scss";
 
@@ -27,11 +28,10 @@ const FindLeague = () => {
   const [leagueCalled, setLeagueCalled] = useState(false);
   const [nameOfLeague, setNameOfLeague] = useState("");
 
-  const { setAllTeamData, leagueName, setLeagueName, setUclData } =
+  const { setAllTeamData, setLeagueName, setUclData } =
     useContext(TeamDataContext);
 
   const teamData = [];
-  const championsTeamData = [];
 
   const fetchTeamData = async () => {
     setLeagueCalled(true);
@@ -41,50 +41,25 @@ const FindLeague = () => {
     );
     const data = await response.json();
     setNameOfLeague(data.response[0].league.name);
-    // console.log("data", data);
     const uclData = await data.response[0].league.standings;
     const allData = await data.response[0].league.standings[0];
-
     setUclData(uclData);
-    // console.log("ucl data component", uclData);
 
-    leagueName === "champions"
-      ? uclData.map((array) => {
-          // console.log("array", array);
-          array.forEach((item) => {
-            // console.log("item", item);
-            return championsTeamData.push({
-              id: item.team.id,
-              rank: item.rank,
-              name: item.team.name,
-              logo: item.team.logo,
-              played: item.all.played,
-              wins: item.all.win,
-              draws: item.all.draw,
-              losses: item.all.lose,
-              goalsDiff: item.goalsDiff,
-              points: item.points,
-            });
-          });
-          setAllTeamData(championsTeamData);
-          // console.log("champions data", championsTeamData);
-          // console.log("all team data", allTeamData);
-        })
-      : allData.map((item) => {
-          return teamData.push({
-            id: item.team.id,
-            rank: item.rank,
-            name: item.team.name,
-            logo: item.team.logo,
-            played: item.all.played,
-            wins: item.all.win,
-            draws: item.all.draw,
-            losses: item.all.lose,
-            goalsDiff: item.goalsDiff,
-            points: item.points,
-          });
-        });
-    setAllTeamData(teamData);
+    allData.map((item) => {
+      return teamData.push({
+        id: item.team.id,
+        rank: item.rank,
+        name: item.team.name,
+        logo: item.team.logo,
+        played: item.all.played,
+        wins: item.all.win,
+        draws: item.all.draw,
+        losses: item.all.lose,
+        goalsDiff: item.goalsDiff,
+        points: item.points,
+      });
+    });
+    return setAllTeamData(teamData);
   };
 
   const handleLeagueChange = (event) => {
@@ -99,7 +74,7 @@ const FindLeague = () => {
   return (
     <>
       {leagueCalled ? (
-        <ScoreTable nameOfLeague={nameOfLeague} />
+        <Table nameOfLeague={nameOfLeague} />
       ) : (
         <div className="find-league-container">
           <h2>Find your favorite team's standings!</h2>

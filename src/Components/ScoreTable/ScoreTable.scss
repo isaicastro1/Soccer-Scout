@@ -1,14 +1,17 @@
 .league {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   width: 100%;
   height: calc(100vh - 70px);
   color: white;
   align-items: center;
 
-  .league-table {
-    display: flex;
-    flex-direction: column;
+  .UEFA-Champions-League {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 15px;
+    column-gap: 20px;
   }
 
   header {
@@ -22,7 +25,7 @@
 
   .standings {
     max-height: 500px;
-    width: 30vw;
+    width: 40vw;
     background-color: #154586;
     color: white;
     border: 2px solid white;
