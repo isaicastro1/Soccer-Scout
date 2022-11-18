@@ -11,10 +11,13 @@ function NavBar() {
         <Link className="link" to="/">
           <h2 className="page-title">Soccer Scores</h2>
         </Link>
+        <Link className="link" to="find-league">
+          <h2 className="page-title">Tables</h2>
+        </Link>
         <div className="right-nav-container">
           <TfiSearch className="search" />
           <TfiBell className="bell" />
-          <img src="https://source.unsplash.com/featured/25x25" alt="picture" />
+          <img src="https://source.unsplash.com/featured/25x25" alt="logo" />
         </div>
       </div>
       <Outlet />

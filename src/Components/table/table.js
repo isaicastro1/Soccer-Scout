@@ -8,6 +8,8 @@ let i = 0;
 const Table = ({ nameOfLeague }) => {
   const { uclData, teamId } = useContext(TeamDataContext);
 
+  console.log("ucl", uclData);
+
   return (
     <div className="league">
       <header>
@@ -48,7 +50,6 @@ const Table = ({ nameOfLeague }) => {
                   {array &&
                     array.map((item) => {
                       const id = item.team.id;
-                      // const rank = item.rank;
                       const name = item.team.name;
                       const logo = item.team.logo;
                       const played = item.all.played;

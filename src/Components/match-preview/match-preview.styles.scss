@@ -1,0 +1,53 @@
+.match-preview-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 300px;
+  background-color: white;
+  color: black;
+
+  .match-game {
+    font-size: 10px;
+    text-align: center;
+  }
+
+  .team-logos {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+
+    .team-logo-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .team-logo {
+      max-height: 60px;
+      max-width: 60px;
+      padding: 5px;
+    }
+
+    .vs {
+      display: flex;
+      align-items: flex-end;
+      padding-bottom: 10px;
+    }
+  }
+  .team-names {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    gap: 5px;
+
+    .team-1,
+    .team-2 {
+      display: flex;
+      justify-content: space-between;
+
+      h4 {
+        margin: 0;
+      }
+    }
+  }
+}
