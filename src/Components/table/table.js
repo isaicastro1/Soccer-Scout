@@ -55,7 +55,7 @@ const Table = ({ nameOfLeague }) => {
                       const points = item.points;
 
                       return (
-                        <tr className="" key={id}>
+                        <tr className="team-row" key={id}>
                           <td className="team-name">
                             <img
                               src={logo}
