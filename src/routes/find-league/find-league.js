@@ -28,10 +28,7 @@ const FindLeague = () => {
   const [leagueCalled, setLeagueCalled] = useState(false);
   const [nameOfLeague, setNameOfLeague] = useState("");
 
-  const { setAllTeamData, setLeagueName, setUclData } =
-    useContext(TeamDataContext);
-
-  const teamData = [];
+  const { setAllTeamData, setLeagueName } = useContext(TeamDataContext);
 
   const fetchTeamData = async () => {
     setLeagueCalled(true);
@@ -41,25 +38,8 @@ const FindLeague = () => {
     );
     const data = await response.json();
     setNameOfLeague(data.response[0].league.name);
-    const uclData = await data.response[0].league.standings;
-    const allData = await data.response[0].league.standings[0];
-    setUclData(uclData);
-
-    allData.map((item) => {
-      return teamData.push({
-        id: item.team.id,
-        rank: item.rank,
-        name: item.team.name,
-        logo: item.team.logo,
-        played: item.all.played,
-        wins: item.all.win,
-        draws: item.all.draw,
-        losses: item.all.lose,
-        goalsDiff: item.goalsDiff,
-        points: item.points,
-      });
-    });
-    return setAllTeamData(teamData);
+    const teamData = await data.response[0].league.standings;
+    setAllTeamData(teamData);
   };
 
   const handleLeagueChange = (event) => {

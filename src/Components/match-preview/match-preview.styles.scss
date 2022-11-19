@@ -5,6 +5,15 @@
   max-width: 300px;
   background-color: white;
   color: black;
+  padding: 10px;
+  margin: 20px 0;
+  border-radius: 10px;
+  transition: transform 0.2s ease-in-out;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.1);
+  }
 
   .match-game {
     font-size: 10px;
@@ -23,8 +32,8 @@
     }
 
     .team-logo {
-      max-height: 60px;
-      max-width: 60px;
+      max-height: 70px;
+      max-width: 70px;
       padding: 5px;
     }
 

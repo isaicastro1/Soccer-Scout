@@ -5,8 +5,6 @@ export const TeamDataContext = createContext({
   setAllTeamData: () => {},
   leagueName: "",
   setLeagueName: () => {},
-  uclData: [],
-  setUclData: () => {},
   teamId: {},
   setTeamId: () => {},
 });
@@ -57,7 +55,6 @@ const allId = {
 export const TeamDataProvider = ({ children }) => {
   const [allTeamData, setAllTeamData] = useState([]);
   const [leagueName, setLeagueName] = useState("");
-  const [uclData, setUclData] = useState("");
   const [teamId, setTeamId] = useState(allId);
 
   const value = {
@@ -65,8 +62,6 @@ export const TeamDataProvider = ({ children }) => {
     setAllTeamData,
     leagueName,
     setLeagueName,
-    uclData,
-    setUclData,
     teamId,
     setTeamId,
   };

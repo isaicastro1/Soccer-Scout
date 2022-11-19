@@ -1,0 +1,14 @@
+h2 {
+  text-align: center;
+  margin: 0 30px 10px 30px;
+  width: 160px;
+}
+
+.news-container {
+  display: flex;
+  align-items: center;
+  width: 100vw;
+  height: 350px;
+  color: white;
+  overflow-x: scroll;
+}

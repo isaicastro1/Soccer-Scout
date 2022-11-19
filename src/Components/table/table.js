@@ -1,14 +1,10 @@
 import { useContext } from "react";
 import { TeamDataContext } from "../../contexts/teamData.context";
 
-import "../ScoreTable/ScoreTable.scss";
-
-let i = 0;
+import "./table.scss";
 
 const Table = ({ nameOfLeague }) => {
-  const { uclData, teamId } = useContext(TeamDataContext);
-
-  console.log("ucl", uclData);
+  const { allTeamData, teamId } = useContext(TeamDataContext);
 
   return (
     <div className="league">
@@ -16,11 +12,10 @@ const Table = ({ nameOfLeague }) => {
         <h1>{nameOfLeague}</h1>
       </header>
       <div className={`${nameOfLeague.replaceAll(" ", "-")}`}>
-        {uclData &&
-          uclData.map((array) => {
-            i++;
+        {allTeamData &&
+          allTeamData.map((array) => {
             return (
-              <table className="standings" key={i}>
+              <table className="standings" key={array[0].team.name}>
                 <thead>
                   <tr>
                     <th scope="col" className="left" title="team">

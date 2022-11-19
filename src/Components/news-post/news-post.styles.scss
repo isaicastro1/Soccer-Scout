@@ -1,0 +1,42 @@
+.news-posts {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: 10px 0 0 30px;
+  border: 1px solid white;
+  cursor: pointer;
+  transition: transform ease-in-out 0.2s;
+
+  &:hover {
+    transform: scale(1.03);
+  }
+
+  .post-profile-image {
+    border-radius: 50%;
+  }
+
+  .post-info {
+    display: flex;
+    width: 400px;
+    padding: 0 10px;
+    align-items: center;
+
+    .post-image {
+      width: 50px;
+      height: 50px;
+      margin: 0 10px;
+      border-radius: 50%;
+    }
+
+    .post-info-text {
+      padding-left: 10px;
+    }
+  }
+}
+
+.post-image-container {
+  .post-image {
+    border-radius: 40px;
+    padding: 10px 0 10px 30px;
+  }
+}
