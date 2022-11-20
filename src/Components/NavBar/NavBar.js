@@ -4,17 +4,19 @@ import { TfiBell, TfiSearch } from "react-icons/tfi";
 
 import { AiOutlineTable } from "react-icons/ai";
 
+import SoccerLogo from "../../Assets/soccer-logo.png";
+
 import "./NavBar.scss";
 
 function NavBar() {
   return (
-    <>
+    <div className="nav-container">
       <div className="nav">
         <Link className="link" to="/">
-          <h2 className="page-title">Soccer Scores</h2>
+          <img className="soccer-logo" src={SoccerLogo} alt="soccer-logo" />
         </Link>
         <div className="right-nav-container">
-          <Link to="find-league">
+          <Link reloadDocument to="find-league">
             <AiOutlineTable className="table-nav" />
           </Link>
           <TfiSearch className="search" />
@@ -23,7 +25,7 @@ function NavBar() {
         </div>
       </div>
       <Outlet />
-    </>
+    </div>
   );
 }
 

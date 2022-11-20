@@ -10,13 +10,11 @@ h2 {
   align-items: center;
   flex-wrap: wrap;
   width: 100vw;
-  position: relative;
   max-height: max-content;
   min-height: 300px;
-  color: white;
   overflow-x: scroll;
+}
 
-  .post {
-    position: absolute;
-  }
+::-webkit-scrollbar {
+  display: none;
 }
