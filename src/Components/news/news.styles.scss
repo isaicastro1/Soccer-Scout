@@ -6,9 +6,17 @@ h2 {
 
 .news-container {
   display: flex;
+  justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
   width: 100vw;
-  height: 350px;
+  position: relative;
+  max-height: max-content;
+  min-height: 300px;
   color: white;
   overflow-x: scroll;
+
+  .post {
+    position: absolute;
+  }
 }

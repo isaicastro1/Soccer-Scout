@@ -12,8 +12,11 @@
     text-decoration: none;
     color: white;
   }
+
   .page-title {
-    margin-left: 20px;
+    width: max-content;
+    margin: 15px 0 0 20px;
+    cursor: pointer;
   }
 
   .nav-ul {
@@ -41,6 +44,18 @@
     width: 15vw;
     min-width: 150px;
 
+    .table-nav {
+      font-size: 1.5rem;
+      padding-top: 4px;
+      cursor: pointer;
+      transition: 0.1s ease-in-out;
+      color: white;
+
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+
     .search {
       padding-top: 4px;
     }
@@ -50,7 +65,7 @@
       transition: 0.1s ease-in-out;
 
       &:hover {
-        transform: scale(1.15);
+        transform: scale(1.1);
       }
     }
 
@@ -60,7 +75,7 @@
       transition: 0.1s ease-in-out;
 
       &:hover {
-        transform: scale(1.15);
+        transform: scale(1.1);
       }
     }
 

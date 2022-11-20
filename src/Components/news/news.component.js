@@ -7,9 +7,9 @@ const News = () => {
     <>
       <h2>News</h2>
       <div className="news-container">
-        <NewsPost />
-        <NewsPost />
-        <NewsPost />
+        <NewsPost className="post" />
+        <NewsPost className="post" />
+        <NewsPost className="post" />
       </div>
     </>
   );

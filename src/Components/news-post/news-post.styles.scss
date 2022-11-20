@@ -2,13 +2,14 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  margin: 10px 0 0 30px;
+  margin-right: 20px;
   border: 1px solid white;
+  max-width: 400px;
+  max-height: 320px;
   cursor: pointer;
-  transition: transform ease-in-out 0.2s;
 
   &:hover {
-    transform: scale(1.03);
+    opacity: 0.8;
   }
 
   .post-profile-image {
@@ -35,8 +36,11 @@
 }
 
 .post-image-container {
+  display: flex;
+  justify-content: center;
+
   .post-image {
-    border-radius: 40px;
-    padding: 10px 0 10px 30px;
+    border-radius: 15%;
+    margin: 10px 0;
   }
 }

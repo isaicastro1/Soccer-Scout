@@ -10,6 +10,7 @@ const LiveScores = () => {
         <MatchPreview />
         <MatchPreview />
         <MatchPreview />
+        <MatchPreview />
       </div>
     </div>
   );

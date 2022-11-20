@@ -17,7 +17,7 @@ const NewsPost = () => {
       <div className="post-image-container">
         <img
           className="post-image"
-          src="https://source.unsplash.com/featured/300x189"
+          src="https://source.unsplash.com/featured/250x140"
           alt="post"
         />
       </div>
