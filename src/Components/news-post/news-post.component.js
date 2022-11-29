@@ -6,7 +6,7 @@ const NewsPost = () => {
       <div className="post-info">
         <img
           className="post-image"
-          src="https://source.unsplash.com/featured/30x30"
+          src="https://picsum.photos/40/40"
           alt="profile"
         />
         <div className="post-info-text">
@@ -17,7 +17,7 @@ const NewsPost = () => {
       <div className="post-image-container">
         <img
           className="post-image"
-          src="https://source.unsplash.com/featured/250x140"
+          src="https://picsum.photos/210/130"
           alt="post"
         />
       </div>

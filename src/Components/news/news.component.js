@@ -4,14 +4,13 @@ import "./news.styles.scss";
 
 const News = () => {
   return (
-    <>
+    <div className="news-container">
       <h2>News</h2>
-      <div className="news-container">
-        <NewsPost className="post" />
+      <div className="news-wrapper">
         <NewsPost className="post" />
         <NewsPost className="post" />
       </div>
-    </>
+    </div>
   );
 };
 

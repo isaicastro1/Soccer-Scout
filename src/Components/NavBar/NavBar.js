@@ -21,7 +21,7 @@ function NavBar() {
           </Link>
           <TfiSearch className="search" />
           <TfiBell className="bell" />
-          <img src="https://source.unsplash.com/featured/25x25" alt="logo" />
+          <img src="https://picsum.photos/25/25" alt="logo" />
         </div>
       </div>
       <Outlet />

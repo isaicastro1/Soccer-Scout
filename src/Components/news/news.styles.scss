@@ -1,18 +1,26 @@
 h2 {
   text-align: center;
-  margin: 0 30px 10px 30px;
   width: 160px;
 }
 
 .news-container {
   display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  top: 100px;
+}
+
+.news-wrapper {
+  display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  width: 100vw;
   max-height: max-content;
   min-height: 300px;
   overflow-x: scroll;
+  gap: 15px;
 }
 
 ::-webkit-scrollbar {
