@@ -1,25 +1,12 @@
 import { useState, useContext } from "react";
 
 import { TeamDataContext } from "../../contexts/teamData.context";
-import { getDate } from "../../utils/date";
+import { options } from "../../utils/options";
+import { allLeagues } from "../../utils/all-leagues";
 
 import Table from "../../Components/table/table";
 
 import "./find-league.styles.scss";
-
-const options = {
-  method: "GET",
-  headers: {
-    "x-rapidapi-host": "v3.football.api-sports.io",
-    "x-rapidapi-key": "a71347195c0d1cc14a27dbf7d1343c89",
-  },
-};
-
-const allLeagues = {
-  premier: 39,
-  laliga: 140,
-  champions: 2,
-};
 
 const FindLeague = () => {
   const [league, setLeague] = useState(140);
@@ -27,30 +14,13 @@ const FindLeague = () => {
   const [leagueCalled, setLeagueCalled] = useState(false);
   const [nameOfLeague, setNameOfLeague] = useState("");
 
-  const { setAllTeamData, setLeagueName, nextMatches, setNextMatches } =
-    useContext(TeamDataContext);
+  const { setAllTeamData, setLeagueName } = useContext(TeamDataContext);
 
   const fetchTeamData = async () => {
     setLeagueCalled(true);
     const response = await fetch(
       `https://v3.football.api-sports.io/standings?season=${year}&league=${league}`,
       options
-    );
-    const response2 = await fetch(
-      `https://v3.football.api-sports.io/fixtures?season=2022&league=2&from=${getDate()}&to=2023-06-30`,
-      options
-    );
-    const data2 = await response2.json();
-    // setNextMatches()
-    console.log("data", data2.response);
-    console.log(
-      "matches",
-      data2.response.forEach((item) => {
-        console.log({
-          home: item.teams.home,
-          away: item.teams.away,
-        });
-      })
     );
     const data = await response.json();
     setNameOfLeague(data.response[0].league.name);

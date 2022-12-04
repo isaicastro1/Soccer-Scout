@@ -19,6 +19,9 @@ function NavBar() {
           <Link reloadDocument to="find-league">
             <AiOutlineTable className="table-nav" />
           </Link>
+          <Link reloadDocument to="next-matches">
+            <AiOutlineTable className="table-nav" />
+          </Link>
           <TfiSearch className="search" />
           <TfiBell className="bell" />
           <img src="https://picsum.photos/25/25" alt="logo" />
