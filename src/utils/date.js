@@ -5,3 +5,15 @@ export const getDate = () => {
   let year = today.getFullYear();
   return (today = year + "-" + mm + "-" + dd);
 };
+
+export const modifyDate = (date) => {
+  if (!date) return;
+  return (
+    date.replaceAll("-", "/").slice(0, 10).substr(6) + "/" + date.substr(0, 4)
+  );
+};
+
+export const modifyTime = (time) => {
+  if (!time) return;
+  return time.split("").slice(11, -9).join("");
+};
