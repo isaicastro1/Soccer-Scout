@@ -3,7 +3,7 @@ import { useEffect, useContext } from "react";
 import { TeamDataContext } from "../../contexts/teamData.context";
 import MatchPreview from "../../Components/match-preview/match-preview.component";
 import { options } from "../../utils/options";
-import { getDate } from "../../utils/date";
+import { getDate, modifyDate } from "../../utils/date";
 
 import "./nextMatches.styles.scss";
 
@@ -22,6 +22,29 @@ const NextMatches = () => {
     };
     getNextMatches();
   }, [setNextMatches]);
+
+  const seperateMatchesByDate = (arrayOfMatches) => {
+    if (!arrayOfMatches) return;
+
+    let fixtureDates = {};
+
+    // add matches with same dates to obj
+    arrayOfMatches.map((match) => {
+      let date = modifyDate(match.fixture.date);
+      if (fixtureDates[date]) {
+        fixtureDates[date].push(match);
+      } else {
+        fixtureDates[date] = [match];
+      }
+
+      return fixtureDates;
+    });
+
+    console.log("fixtureDates", fixtureDates);
+    console.log("values", Object.entries(fixtureDates));
+  };
+
+  seperateMatchesByDate(nextMatches);
 
   console.log("next matches", nextMatches);
 
