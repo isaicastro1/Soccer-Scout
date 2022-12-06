@@ -39,6 +39,11 @@
 
       .team-name {
         width: 80px;
+
+        .team-one-name,
+        .team-two-name {
+          text-align: center;
+        }
       }
     }
 
@@ -50,9 +55,16 @@
 
     .time {
       display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
       align-items: center;
-      padding: 10px;
-      max-width: 60px;
+      padding: 5px;
+      min-width: 60px;
+
+      .match-date {
+        display: flex;
+        font-size: 10px;
+      }
     }
   }
 

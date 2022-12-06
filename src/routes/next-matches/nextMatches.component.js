@@ -12,13 +12,13 @@ const NextMatches = () => {
 
   useEffect(() => {
     const getNextMatches = async () => {
-      const response2 = await fetch(
+      const response = await fetch(
         `https://v3.football.api-sports.io/fixtures?season=2022&league=2&from=${getDate()}&to=2023-06-30`,
         options
       );
-      const data2 = await response2.json();
-      setNextMatches(data2.response);
-      console.log("data", data2);
+      const data = await response.json();
+      setNextMatches(data.response);
+      console.log("data", data);
     };
     getNextMatches();
   }, [setNextMatches]);
@@ -37,6 +37,7 @@ const NextMatches = () => {
               teamTwoName={match.teams.away.name}
               teamTwoLogo={match.teams.away.logo}
               round={match.league.round}
+              date={match.fixture.date}
               time={match.fixture.date}
             />
           );
