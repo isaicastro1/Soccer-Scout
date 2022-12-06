@@ -1,3 +1,5 @@
+import { modifyDate, modifyTime } from "../../utils/date";
+
 import "./match-preview.styles.scss";
 
 const MatchPreview = ({
@@ -9,9 +11,6 @@ const MatchPreview = ({
   time,
   date,
 }) => {
-  time = time.split("").slice(11, -9).join("");
-  date = date.slice(0, 10).replaceAll("-", "/");
-
   return (
     <div className="match-preview-container">
       <h3 className="match-game">{round}</h3>
@@ -23,8 +22,8 @@ const MatchPreview = ({
           <img className="team-logo" src={teamOneLogo} alt="logo" />
         </div>
         <div className="time">
-          <div className="match-date">{date}</div>
-          <div className="match-time">{time}</div>
+          <div className="match-date">{modifyDate(date)}</div>
+          <div className="match-time">{modifyTime(time)}</div>
         </div>
         <div className="team-logo-container">
           <img className="team-logo" src={teamTwoLogo} alt="logo" />
