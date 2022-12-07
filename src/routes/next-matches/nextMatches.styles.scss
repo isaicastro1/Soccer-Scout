@@ -1,13 +1,43 @@
 .matches-container {
-  display: grid;
-  grid-template-columns: repeat(2, 400px);
-  place-content: center;
-  gap: 20px;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  flex-direction: column;
   width: 100vw;
   height: max-content;
   top: 83px;
   position: relative;
   z-index: 0;
-  justify-items: center;
   background-color: #f1f3f8;
+
+  .same-day-match {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: max-content;
+    width: 100vw;
+    gap: 20px;
+    padding: 10px;
+    margin-top: 20px;
+
+    .match-date-title {
+      width: 100%;
+      height: max-content;
+
+      h2 {
+        margin: 0 0 0 140px;
+        font-size: 19px;
+        font-weight: 600;
+        letter-spacing: 3px;
+        color: #152e96;
+      }
+    }
+
+    .match {
+      display: flex;
+      gap: 30px;
+      padding: 10px;
+    }
+  }
 }

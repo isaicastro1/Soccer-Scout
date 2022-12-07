@@ -1,4 +1,4 @@
-export const teamId = {
+export const teamsId = {
   "Real Madrid": 86,
   Barcelona: 83,
   "Athletico Madrid": 1068,
