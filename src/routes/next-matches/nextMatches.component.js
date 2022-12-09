@@ -33,7 +33,7 @@ const NextMatches = () => {
 
     // add matches with same dates to obj
     arrayOfMatches.forEach((match) => {
-      let date = modifyDate(match.fixture.date);
+      let date = new Date(match.fixture.date);
       if (fixtureDates[date]) {
         fixtureDates[date].push(match);
       } else {
