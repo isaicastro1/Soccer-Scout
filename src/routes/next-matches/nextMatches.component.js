@@ -17,6 +17,10 @@ const NextMatches = () => {
         options
       );
       const data = await response.json();
+      if (!data.response.length) {
+        alert("Sorry, Could not fetch data from API");
+        throw new Error("Could not fetch data");
+      }
       setNextMatches(data.response);
     };
     getNextMatches();
@@ -36,7 +40,7 @@ const NextMatches = () => {
         fixtureDates[date] = [match];
       }
     });
-    return Object.entries(fixtureDates);
+    return Object.entries(fixtureDates).sort();
   };
 
   const newMatches = seperateMatchesByDate(nextMatches);
@@ -60,7 +64,6 @@ const NextMatches = () => {
                       teamTwoName={game.teams.away.name}
                       teamTwoLogo={game.teams.away.logo}
                       round={game.league.round}
-                      date={game.fixture.date}
                       time={game.fixture.date}
                     />
                   );

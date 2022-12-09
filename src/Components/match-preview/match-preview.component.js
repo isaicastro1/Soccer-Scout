@@ -1,4 +1,4 @@
-import { modifyDate, modifyTime } from "../../utils/date";
+import { modifyTime } from "../../utils/date";
 
 import "./match-preview.styles.scss";
 
@@ -9,7 +9,6 @@ const MatchPreview = ({
   teamTwoLogo,
   round,
   time,
-  date,
 }) => {
   return (
     <div className="match-preview-container">
@@ -22,7 +21,6 @@ const MatchPreview = ({
           <img className="team-logo" src={teamOneLogo} alt="logo" />
         </div>
         <div className="time">
-          <div className="match-date">{modifyDate(date)}</div>
           <div className="match-time">{modifyTime(time)}</div>
         </div>
         <div className="team-logo-container">
