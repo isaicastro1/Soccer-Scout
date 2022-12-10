@@ -51,9 +51,11 @@ const NextMatches = () => {
     <div className="matches-container">
       {newMatches &&
         newMatches.map((match) => {
-          console.log(match[0]);
+          let time = match[0].replace(
+            "GMT-0700 (Mountain Standard Time)",
+            "MST"
+          );
           let date = match[0].slice(0, 15);
-          console.log(date);
           return (
             <div key={match[1][1].fixture.id} className="same-day-match">
               <div className="match-date-title">
@@ -61,7 +63,6 @@ const NextMatches = () => {
               </div>
               <div className="match">
                 {match[1].map((game) => {
-                  // console.log(game);
                   return (
                     <MatchPreview
                       key={game.fixture.id}
@@ -70,7 +71,7 @@ const NextMatches = () => {
                       teamTwoName={game.teams.away.name}
                       teamTwoLogo={game.teams.away.logo}
                       round={game.league.round}
-                      time={match[0].slice(15, -1)}
+                      time={time.split("").splice(16, 12).join("")}
                     />
                   );
                 })}

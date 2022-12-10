@@ -52,42 +52,19 @@
       display: flex;
       justify-content: space-evenly;
       align-items: center;
-      width: 15vw;
+      width: 35vw;
       max-width: 300px;
       min-width: 150px;
 
       .table-nav {
-        font-size: 1.5rem;
-        padding-top: 4px;
+        font-size: 1rem;
         cursor: pointer;
         transition: 0.1s ease-in-out;
         color: white;
-
-        &:hover {
-          transform: scale(1.1);
-        }
-      }
-
-      .search {
-        padding-top: 4px;
-      }
-      .search {
-        font-size: 1.3rem;
-        cursor: pointer;
         transition: 0.1s ease-in-out;
 
         &:hover {
-          transform: scale(1.1);
-        }
-      }
-
-      .bell {
-        font-size: 1.3rem;
-        cursor: pointer;
-        transition: 0.1s ease-in-out;
-
-        &:hover {
-          transform: scale(1.1);
+          transform: scale(1.05);
         }
       }
 
