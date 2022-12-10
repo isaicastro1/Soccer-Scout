@@ -21,7 +21,7 @@ const MatchPreview = ({
           <img className="team-logo" src={teamOneLogo} alt="logo" />
         </div>
         <div className="time">
-          <div className="match-time">{modifyTime(time)}</div>
+          <div className="match-time">{time}</div>
         </div>
         <div className="team-logo-container">
           <img className="team-logo" src={teamTwoLogo} alt="logo" />

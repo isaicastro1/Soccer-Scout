@@ -20,13 +20,16 @@
     gap: 20px;
     padding: 10px;
     margin-top: 20px;
+    position: relative;
 
     .match-date-title {
       width: 100%;
       height: max-content;
+      display: flex;
+      justify-content: center;
 
       h2 {
-        margin: 0 0 0 140px;
+        width: max-content;
         font-size: 19px;
         font-weight: 600;
         letter-spacing: 3px;
@@ -36,7 +39,7 @@
 
     .match {
       display: flex;
-      gap: 30px;
+      gap: 80px;
       padding: 10px;
     }
   }
