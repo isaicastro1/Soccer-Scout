@@ -33,7 +33,9 @@ const NextMatches = () => {
 
     // add matches with same dates to obj
     arrayOfMatches.forEach((match) => {
+      // sets date to only show
       let date = new Date(match.fixture.date);
+      // console.log(date);
       if (fixtureDates[date]) {
         fixtureDates[date].push(match);
       } else {
@@ -49,13 +51,17 @@ const NextMatches = () => {
     <div className="matches-container">
       {newMatches &&
         newMatches.map((match) => {
+          console.log(match[0]);
+          let date = match[0].slice(0, 15);
+          console.log(date);
           return (
             <div key={match[1][1].fixture.id} className="same-day-match">
               <div className="match-date-title">
-                <h2>{match[0]}</h2>
+                <h2>{date}</h2>
               </div>
               <div className="match">
                 {match[1].map((game) => {
+                  // console.log(game);
                   return (
                     <MatchPreview
                       key={game.fixture.id}
@@ -64,7 +70,7 @@ const NextMatches = () => {
                       teamTwoName={game.teams.away.name}
                       teamTwoLogo={game.teams.away.logo}
                       round={game.league.round}
-                      time={game.fixture.date}
+                      time={match[0].slice(15, -1)}
                     />
                   );
                 })}
