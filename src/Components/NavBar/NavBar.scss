@@ -61,10 +61,11 @@
         cursor: pointer;
         transition: 0.1s ease-in-out;
         color: white;
-        transition: 0.1s ease-in-out;
+        margin: 0;
+        text-decoration: none;
 
         &:hover {
-          transform: scale(1.05);
+          opacity: 0.8;
         }
       }
 
