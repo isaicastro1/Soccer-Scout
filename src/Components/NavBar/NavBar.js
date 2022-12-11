@@ -18,7 +18,7 @@ function NavBar() {
           <Link reloadDocument to="next-matches">
             <p className="table-nav">FIXTURES</p>
           </Link>
-          <Link reloadDocument to="auth">
+          <Link reloadDocument to="sign-in">
             <p className="table-nav">SIGN IN</p>
           </Link>
           <img src="https://picsum.photos/25/25" alt="logo" />

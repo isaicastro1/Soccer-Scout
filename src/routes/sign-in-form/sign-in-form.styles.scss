@@ -1,0 +1,52 @@
+.sign-in-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+
+  .login-form {
+    min-width: 250px;
+
+    .sign-in-title {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+      padding: 5px;
+
+      h3 {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+    }
+
+    .sign-in-buttons {
+      display: flex;
+      justify-content: flex-start;
+      width: 100%;
+
+      .sign-in-button {
+        font-size: 13px;
+        font-weight: 600;
+        padding: 0 15px;
+        margin: 10px 10px 10px 0;
+      }
+
+      .sign-with-google-button {
+        font-size: 13px;
+        padding: 0 10px;
+        margin: 10px;
+        font-weight: 600;
+      }
+    }
+  }
+
+  .register-button-container {
+    display: flex;
+    justify-content: flex-start;
+
+    .register-button-link {
+      padding: 0 9px;
+    }
+  }
+}
