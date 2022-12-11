@@ -1,23 +1,43 @@
-import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import { Button, Checkbox, Form, Input } from "antd";
 import { useState } from "react";
 
+import { LockOutlined, UserOutlined } from "@ant-design/icons";
+import { Button, Checkbox, Form, Input } from "antd";
+
 import {
-  signInWithGoogle,
+  signInUserWithGoogle,
   signInUserWithEmailAndPassword,
 } from "../../utils/firebase/firebase";
 
 import "./sign-in-form.styles.scss";
 
-const App = () => {
-  const [userEmail, setUserEmail] = useState("");
-  const [userPassword, setUserPassword] = useState("");
+const defaultFormFields = {
+  email: "",
+  password: "",
+};
 
-  const setEmail = (event) => setUserEmail(event.target.value);
-  const setPassword = (event) => setUserPassword(event.target.value);
+const SignInForm = () => {
+  const [formFields, setFormFields] = useState(defaultFormFields);
+  const { email, password } = formFields;
 
-  const signInUser = () =>
-    signInUserWithEmailAndPassword(userEmail, userPassword);
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormFields({ ...formFields, [name]: value });
+  };
+
+  const resetFormFields = () => setFormFields(defaultFormFields);
+
+  const signInWithEmailAndPassword = async () => {
+    try {
+      await signInUserWithEmailAndPassword(email, password);
+      resetFormFields();
+    } catch (error) {
+      alert(error);
+    }
+  };
+
+  const signInWithGoogle = () => {
+    signInUserWithGoogle();
+  };
 
   return (
     <Form
@@ -42,8 +62,9 @@ const App = () => {
       >
         <Input
           prefix={<UserOutlined className="site-form-item-icon" />}
+          name="email"
           placeholder="Email"
-          onChange={setEmail}
+          onChange={handleChange}
         />
       </Form.Item>
       <Form.Item
@@ -57,9 +78,10 @@ const App = () => {
       >
         <Input
           prefix={<LockOutlined className="site-form-item-icon" />}
+          name="password"
           type="password"
           placeholder="Password"
-          onChange={setPassword}
+          onChange={handleChange}
         />
       </Form.Item>
       <Form.Item>
@@ -73,7 +95,7 @@ const App = () => {
           type="primary"
           htmlType="submit"
           className="sign-in-button"
-          onClick={signInUser}
+          onClick={signInWithEmailAndPassword}
         >
           SIGN IN
         </Button>
@@ -88,4 +110,4 @@ const App = () => {
     </Form>
   );
 };
-export default App;
+export default SignInForm;
