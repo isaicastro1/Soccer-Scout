@@ -1,8 +1,11 @@
-.authentication-container {
+.sign-up-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
   height: 100vh;
   width: 100vw;
+
+  h3 {
+    text-align: center;
+  }
 }
