@@ -9,13 +9,16 @@ import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 
 import { TeamDataProvider } from "./contexts/teamData.context";
+import { UserProvider } from "./contexts/user.context";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   // <React.StrictMode>
   <BrowserRouter>
     <TeamDataProvider>
-      <App />
+      <UserProvider>
+        <App />
+      </UserProvider>
     </TeamDataProvider>
   </BrowserRouter>
   //* </React.StrictMode> */

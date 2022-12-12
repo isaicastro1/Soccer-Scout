@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Checkbox, Form, Input } from "antd";
@@ -21,6 +21,8 @@ const SignInForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
 
+  const navigate = useNavigate();
+
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormFields({ ...formFields, [name]: value });
@@ -29,16 +31,21 @@ const SignInForm = () => {
   const resetFormFields = () => setFormFields(defaultFormFields);
 
   const signInWithEmailAndPassword = async () => {
+    if (!email || !password) return;
+
     try {
       await signInUserWithEmailAndPassword(email, password);
       resetFormFields();
+      navigate("/");
     } catch (error) {
       alert(error);
     }
   };
 
-  const signInWithGoogle = () => {
-    signInUserWithGoogle();
+  const signInWithGoogle = async () => {
+    const result = await signInUserWithGoogle();
+    if (!result) return;
+    navigate("/");
   };
 
   return (
@@ -113,7 +120,7 @@ const SignInForm = () => {
         <Form.Item className="register-button-container">
           <Form.Item name="register" noStyle>
             <Link to="/sign-up">
-              <Button className="register-button-link">REGISTER</Button>
+              <span className="register-button-link">REGISTER</span>
             </Link>
           </Form.Item>
         </Form.Item>

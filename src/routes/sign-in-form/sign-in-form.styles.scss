@@ -6,6 +6,9 @@
   width: 100vw;
 
   .login-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     min-width: 250px;
 
     .sign-in-title {
@@ -24,6 +27,7 @@
       display: flex;
       justify-content: flex-start;
       width: 100%;
+      margin: 0;
 
       .sign-in-button {
         font-size: 13px;
@@ -46,7 +50,8 @@
     justify-content: flex-start;
 
     .register-button-link {
-      padding: 0 9px;
+      padding: 0 5px;
+      font-weight: 500;
     }
   }
 }
