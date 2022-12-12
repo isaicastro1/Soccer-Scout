@@ -1,10 +1,17 @@
+import { useContext } from "react";
 import { Outlet, Link } from "react-router-dom";
+
+import { signOutUser } from "../../utils/firebase/firebase";
+
+import { UserContext } from "../../contexts/user.context";
 
 import SoccerLogo from "../../Assets/soccer-logo.png";
 
 import "./NavBar.scss";
 
 function NavBar() {
+  const { currentUser } = useContext(UserContext);
+
   return (
     <div className="nav-container">
       <div className="nav">
@@ -18,9 +25,16 @@ function NavBar() {
           <Link reloadDocument to="next-matches">
             <p className="table-nav">FIXTURES</p>
           </Link>
-          <Link reloadDocument to="sign-in">
-            <p className="table-nav">SIGN IN</p>
-          </Link>
+          {currentUser ? (
+            <span className="table-nav" onClick={signOutUser}>
+              SIGN OUT
+            </span>
+          ) : (
+            <Link className="table-nav" to="/sign-in">
+              SIGN IN
+            </Link>
+          )}
+
           <img src="https://picsum.photos/25/25" alt="logo" />
         </div>
       </div>

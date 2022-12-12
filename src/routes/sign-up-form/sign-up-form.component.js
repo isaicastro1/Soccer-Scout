@@ -47,10 +47,18 @@ const SignUpForm = () => {
       await createUserDocumentFromAuth(user, { displayName });
       resetFormFields();
     } catch (error) {
-      if (error.code === "auth/email-already-in-use") {
-        alert("User could not be created, email already in use");
-      } else {
-        console.log("user creation failed", error);
+      console.log(error);
+      switch (error.code) {
+        case "auth/email-already-in-use":
+          alert("email is already taken");
+          break;
+        case "auth/weak-password":
+          alert("password is too weak");
+          break;
+
+        default:
+          alert("There has been an error, please try again");
+          break;
       }
     }
   };
@@ -69,7 +77,7 @@ const SignUpForm = () => {
         </Form.Item>
 
         <Form.Item
-          name="name"
+          name="displayName"
           rules={[
             {
               required: true,
@@ -77,7 +85,11 @@ const SignUpForm = () => {
             },
           ]}
         >
-          <Input name="name" placeholder="Name" onChange={handleChange} />
+          <Input
+            name="displayName"
+            placeholder="Name"
+            onChange={handleChange}
+          />
         </Form.Item>
         <Form.Item
           name="email"
@@ -112,7 +124,7 @@ const SignUpForm = () => {
           />
         </Form.Item>
         <Form.Item
-          name="confirm-password"
+          name="confirmPassword"
           hasFeedback
           rules={[
             {
@@ -131,7 +143,7 @@ const SignUpForm = () => {
         >
           <Input.Password
             prefix={<LockOutlined className="site-form-item-icon" />}
-            name="confirm-password"
+            name="confirmPassword"
             type="password"
             placeholder="Confirm Password"
             onChange={handleChange}

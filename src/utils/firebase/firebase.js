@@ -5,11 +5,12 @@ import {
   signInWithPopup,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut,
 } from "firebase/auth";
 
 import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
 
-// Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyBZt4Oye_v_HPoHvmjRgJO7z6W8iqGJFSI",
   authDomain: "soccer-scores-b00ac.firebaseapp.com",
@@ -30,14 +31,13 @@ provider.setCustomParameters({
 
 const auth = getAuth();
 
-export const signInUserWithGoogle = () =>
-  signInWithPopup(auth, provider)
-    .then((result) => {
-      console.log(result);
-    })
-    .catch((error) => {
-      alert(error);
-    });
+export const signInUserWithGoogle = async () => {
+  try {
+    await signInWithPopup(auth, provider);
+  } catch (error) {
+    alert(error);
+  }
+};
 
 export const signInUserWithEmailAndPassword = async (email, password) => {
   if (!email || !password) return;
@@ -57,7 +57,7 @@ export const createUserDocumentFromAuth = async (userAuth, additionalInfo) => {
   const userSnapshot = await getDoc(userDocRef);
 
   if (!userSnapshot.exists()) {
-    const { displayName, email } = userAuth;
+    const { displayName, email, photoURL } = userAuth;
     const createdAt = new Date();
 
     try {
@@ -65,10 +65,18 @@ export const createUserDocumentFromAuth = async (userAuth, additionalInfo) => {
         displayName,
         email,
         createdAt,
+        photoURL,
         ...additionalInfo,
       });
     } catch (error) {
-      console.log("Error creating user", error);
+      alert("Error creating user", error);
     }
   }
+};
+
+export const onAuthStateChangedListener = (callback) =>
+  onAuthStateChanged(auth, callback);
+
+export const signOutUser = async () => {
+  await signOut(auth);
 };
