@@ -1,6 +1,10 @@
 import "./news-post.styles.scss";
 
-const NewsPost = () => {
+const NewsPost = ({ newsData }) => {
+  if (newsData) {
+    console.log("post", newsData);
+  }
+
   return (
     <div className="news-posts">
       <div className="post-info">
