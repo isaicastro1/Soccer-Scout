@@ -9,7 +9,9 @@ h2 {
   align-items: center;
   flex-direction: column;
   position: relative;
-  top: 100px;
+  top: 80px;
+  width: max-content;
+  height: max-content;
 }
 
 .news-wrapper {
@@ -19,9 +21,7 @@ h2 {
   flex-wrap: wrap;
   max-height: max-content;
   min-height: 300px;
-  overflow-x: scroll;
-  gap: 15px;
-  background-color: white;
+  gap: 25px;
 }
 
 ::-webkit-scrollbar {

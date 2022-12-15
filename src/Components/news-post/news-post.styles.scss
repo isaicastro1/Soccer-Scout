@@ -1,15 +1,14 @@
 .news-posts {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  border: 1px solid white;
+  justify-content: space-around;
   max-width: 300px;
-  max-height: 280px;
-  cursor: pointer;
-
-  &:hover {
-    opacity: 0.8;
-  }
+  height: 350px;
+  overflow: hidden;
+  background-color: white;
+  box-shadow: 6px 4px 14px -5px rgba(33, 32, 32, 0.79);
+  -webkit-box-shadow: 6px 4px 14px -5px rgba(33, 32, 32, 0.79);
+  -moz-box-shadow: 6px 4px 14px -5px rgba(33, 32, 32, 0.79);
 
   .post-profile-image {
     border-radius: 50%;
@@ -17,27 +16,67 @@
     width: 40px;
   }
 
-  .post-info {
-    display: flex;
-    width: 300px;
-    padding: 0 10px;
-    align-items: center;
+  .post-profile-image {
+    margin: 0 10px;
+    border-radius: 50%;
+    height: auto;
+    max-width: 150px;
+  }
 
-    .post-image {
-      margin: 0 10px;
-      border-radius: 50%;
+  .post-info-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 15px;
+    padding: 5px;
+    height: 100%;
+
+    .details {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      margin-top: -10px;
+
+      .details-btn {
+        background-color: #1877f2;
+        border: none;
+        border-radius: 10px;
+        color: #fff;
+        text-align: center;
+        font-family: SFProText-Regular, Helvetica, Arial, sans-serif;
+        font-size: 11px;
+        height: 20px;
+        line-height: 20px;
+        margin-left: 8px;
+        margin-right: 6px;
+        width: 70px;
+        padding: 0 10px 0 10px;
+        transition: 0.3s;
+        cursor: pointer;
+
+        &:hover {
+          background-color: #e4e6eb;
+          color: #050505;
+          transition: 0.3s;
+        }
+      }
     }
 
-    .post-info-text {
-      padding-left: 10px;
+    .post-title {
+      margin: 5px;
+      font-size: 15px;
+      max-height: 55px;
+      min-height: 55px;
+    }
 
-      .post-title {
-        margin: 5px;
-      }
-
-      .post-p {
-        margin: 10px;
-      }
+    .post-p {
+      display: flex;
+      align-items: center;
+      margin: 0;
+      font-size: 13px;
+      max-height: 80px;
+      min-height: 70px;
     }
   }
 }
@@ -47,8 +86,16 @@
   justify-content: center;
   max-height: max-content;
   margin-bottom: 10px;
+  max-height: 170px;
+  position: relative;
 
   .post-image {
-    border-radius: 10px;
+    position: absolute;
+    bottom: -10px;
+    min-width: 100%;
+    height: 100%;
+    min-height: 165px;
+    background-position: center;
+    object-fit: cover;
   }
 }
