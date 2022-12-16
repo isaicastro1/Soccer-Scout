@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import NewsPost from "../news-post/news-post.component";
 
-import { hasLetters, isGerman } from "../../utils/checkWords";
+import { hasLetters, isGerman, isGreek } from "../../utils/checkWords";
 
 import "./news.styles.scss";
 
@@ -41,8 +41,11 @@ const News = () => {
     });
 
     const isEnglish = allNews.filter((item) => {
-      if (!item) return;
-      return hasLetters(item.description) && !isGerman(item.description);
+      if (!item.description) return;
+      return (
+        (hasLetters(item.description) && !isGerman(item.description)) ||
+        !isGreek(item.description)
+      );
     });
 
     while (isEnglish.length > 5) {

@@ -6,6 +6,7 @@
   height: 350px;
   overflow: hidden;
   background-color: white;
+  border-radius: 10px;
   box-shadow: 6px 4px 14px -5px rgba(33, 32, 32, 0.79);
   -webkit-box-shadow: 6px 4px 14px -5px rgba(33, 32, 32, 0.79);
   -moz-box-shadow: 6px 4px 14px -5px rgba(33, 32, 32, 0.79);
@@ -72,7 +73,7 @@
 
     .post-p {
       display: flex;
-      align-items: center;
+      justify-content: center;
       margin: 0;
       font-size: 13px;
       max-height: 80px;
