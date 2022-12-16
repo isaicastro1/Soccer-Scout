@@ -3,8 +3,8 @@ import "./news-post.styles.scss";
 const NewsPost = ({ newsData }) => {
   const { title, description, image, source, details } = newsData;
 
-  console.log("source", source);
-  console.log("details", details);
+  // console.log("source", source);
+  // console.log("details", details);
 
   return (
     <div className="news-posts">

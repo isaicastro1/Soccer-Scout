@@ -44,8 +44,11 @@ const SignInForm = () => {
 
   const signInWithGoogle = async () => {
     const result = await signInUserWithGoogle();
-    if (!result) return;
-    navigate("/");
+    if (!result) {
+      return;
+    } else {
+      navigate("/");
+    }
   };
 
   return (

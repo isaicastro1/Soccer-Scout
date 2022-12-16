@@ -4,6 +4,7 @@ import Home from "./routes/home/home";
 import NextMatches from "./routes/next-matches/nextMatches.component";
 import SignInForm from "./routes/sign-in-form/sign-in-form.component";
 import SignUpForm from "./routes/sign-up-form/sign-up-form.component";
+import Profile from "./routes/profile/profile.component";
 
 import { Route, Routes } from "react-router-dom";
 
@@ -19,6 +20,7 @@ const App = () => {
           <Route path="next-matches" element={<NextMatches />} />
           <Route path="sign-in" element={<SignInForm />} />
           <Route path="sign-up" element={<SignUpForm />} />
+          <Route path="profile" element={<Profile />} />
         </Route>
       </Routes>
     </div>

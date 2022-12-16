@@ -1,0 +1,17 @@
+.profile-container {
+  .gradient-custom {
+    background: #4a5ad3;
+
+    background: -webkit-linear-gradient(
+      to right bottom,
+      rgb(93, 153, 227),
+      rgb(32, 79, 187)
+    );
+
+    background: linear-gradient(
+      to right bottom,
+      rgb(93, 153, 227),
+      rgb(32, 79, 187)
+    );
+  }
+}

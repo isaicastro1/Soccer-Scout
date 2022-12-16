@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { LockOutlined } from "@ant-design/icons";
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, Select } from "antd";
 
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 
@@ -11,24 +11,39 @@ import {
 } from "../../utils/firebase/firebase";
 
 import "./sign-up-form.styles.scss";
+import { useNavigate } from "react-router-dom";
 
 const SignUpForm = () => {
   const defaultFormFields = {
     displayName: "",
     email: "",
+    phoneNumber: undefined,
+    profileImage: "",
     password: "",
     confirmPassword: "",
   };
 
   const [formFields, setFormFields] = useState(defaultFormFields);
-  const { displayName, email, password, confirmPassword } = formFields;
+  const {
+    displayName,
+    email,
+    phoneNumber,
+    password,
+    confirmPassword,
+    profileImage,
+  } = formFields;
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormFields({ ...formFields, [name]: value });
+  const handleChange = (event, url) => {
+    if (!url) {
+      const { name, value } = event.target;
+      setFormFields({ ...formFields, [name]: value });
+    } else {
+      const { name } = event.target;
+      setFormFields({ ...formFields, [name]: url });
+    }
   };
 
-  const resetFormFields = () => setFormFields(defaultFormFields);
+  const navigate = useNavigate();
 
   const handleSubmit = async () => {
     if (password !== confirmPassword) {
@@ -42,10 +57,12 @@ const SignUpForm = () => {
         password
       );
 
-      console.log(user);
-
-      await createUserDocumentFromAuth(user, { displayName });
-      resetFormFields();
+      await createUserDocumentFromAuth(user, {
+        displayName,
+        phoneNumber,
+        profileImage,
+      });
+      navigate("/");
     } catch (error) {
       console.log(error);
       switch (error.code) {
@@ -63,11 +80,50 @@ const SignUpForm = () => {
     }
   };
 
+  const { Option } = Select;
+
+  const prefixSelector = (
+    <Form.Item name="prefix" noStyle>
+      <Select
+        style={{
+          width: 70,
+        }}
+      >
+        <Option value="1">+1</Option>
+      </Select>
+    </Form.Item>
+  );
+
+  const formItemLayout = {
+    labelCol: {
+      xs: {
+        span: 20,
+      },
+      sm: {
+        span: 8,
+      },
+    },
+    wrapperCol: {
+      xs: {
+        span: 20,
+      },
+      sm: {
+        span: 15,
+      },
+    },
+  };
+
+  const handleImageChange = (info) => {
+    const url = URL.createObjectURL(info.target.files[0]);
+    handleChange(info, url);
+  };
+
   return (
     <div className="sign-up-container">
       <Form
         name="register_login"
         className="register-form"
+        {...formItemLayout}
         initialValues={{
           remember: true,
         }}
@@ -76,8 +132,27 @@ const SignUpForm = () => {
           <h3>REGISTER</h3>
         </Form.Item>
 
+        <div className="upload-image">
+          <input
+            className="avatar"
+            type="file"
+            id="avatar"
+            name="profileImage"
+            accept="image/png, image/jpeg"
+            onChange={(e) => handleImageChange(e)}
+          />
+          {formFields.profileImage ? (
+            <img
+              alt="profile"
+              className="uploaded-image"
+              src={formFields.profileImage}
+            />
+          ) : null}
+        </div>
+
         <Form.Item
           name="displayName"
+          label="Name"
           rules={[
             {
               required: true,
@@ -93,6 +168,7 @@ const SignUpForm = () => {
         </Form.Item>
         <Form.Item
           name="email"
+          label="Email"
           rules={[
             {
               required: true,
@@ -102,9 +178,31 @@ const SignUpForm = () => {
         >
           <Input name="email" placeholder="Email" onChange={handleChange} />
         </Form.Item>
+
+        <Form.Item
+          name="phoneNumber"
+          label="Phone Number"
+          rules={[
+            {
+              required: false,
+              message: "Please input your phone number!",
+            },
+          ]}
+        >
+          <Input
+            name="phoneNumber"
+            addonBefore={prefixSelector}
+            style={{
+              width: "100%",
+            }}
+            onChange={handleChange}
+          />
+        </Form.Item>
+
         <Form.Item
           name="password"
           hasFeedback
+          label="Password"
           rules={[
             {
               required: true,
@@ -125,6 +223,7 @@ const SignUpForm = () => {
         </Form.Item>
         <Form.Item
           name="confirmPassword"
+          label="Confirm Password"
           hasFeedback
           rules={[
             {

@@ -33,7 +33,7 @@ const auth = getAuth();
 
 export const signInUserWithGoogle = async () => {
   try {
-    await signInWithPopup(auth, provider);
+    return await signInWithPopup(auth, provider);
   } catch (error) {
     alert(error);
   }
@@ -52,12 +52,12 @@ export const createAuthUserWithEmailAndPassword = async (email, password) => {
 };
 
 export const createUserDocumentFromAuth = async (userAuth, additionalInfo) => {
-  const userDocRef = await doc(db, "users", userAuth.uid);
+  const userDocRef = doc(db, "users", userAuth.uid);
 
   const userSnapshot = await getDoc(userDocRef);
 
   if (!userSnapshot.exists()) {
-    const { displayName, email, photoURL } = userAuth;
+    const { displayName, email, phoneNumber } = userAuth;
     const createdAt = new Date();
 
     try {
@@ -65,7 +65,7 @@ export const createUserDocumentFromAuth = async (userAuth, additionalInfo) => {
         displayName,
         email,
         createdAt,
-        photoURL,
+        phoneNumber,
         ...additionalInfo,
       });
     } catch (error) {
