@@ -2,9 +2,7 @@ import { useContext } from "react";
 import { Outlet, Link } from "react-router-dom";
 
 import { signOutUser } from "../../utils/firebase/firebase";
-
 import { UserContext } from "../../contexts/user.context";
-
 import SoccerLogo from "../../Assets/soccer-logo.png";
 
 import "./NavBar.scss";
@@ -34,8 +32,7 @@ function NavBar() {
               SIGN IN
             </Link>
           )}
-
-          <img src="https://picsum.photos/25/25" alt="logo" />
+          <Link to="profile">Profile</Link>
         </div>
       </div>
       <Outlet />

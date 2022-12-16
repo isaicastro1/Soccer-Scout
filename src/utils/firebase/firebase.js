@@ -52,12 +52,14 @@ export const createAuthUserWithEmailAndPassword = async (email, password) => {
 };
 
 export const createUserDocumentFromAuth = async (userAuth, additionalInfo) => {
-  const userDocRef = await doc(db, "users", userAuth.uid);
+  const userDocRef = doc(db, "users", userAuth.uid);
 
   const userSnapshot = await getDoc(userDocRef);
 
+  console.log("additionalInfo", additionalInfo);
+
   if (!userSnapshot.exists()) {
-    const { displayName, email, photoURL } = userAuth;
+    const { displayName, email, photoURL, phoneNumber } = userAuth;
     const createdAt = new Date();
 
     try {
@@ -66,6 +68,7 @@ export const createUserDocumentFromAuth = async (userAuth, additionalInfo) => {
         email,
         createdAt,
         photoURL,
+        phoneNumber,
         ...additionalInfo,
       });
     } catch (error) {

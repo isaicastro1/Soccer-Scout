@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { LockOutlined } from "@ant-design/icons";
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, Select } from "antd";
 
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 
@@ -16,25 +16,31 @@ const SignUpForm = () => {
   const defaultFormFields = {
     displayName: "",
     email: "",
+    phoneNumber: undefined,
     password: "",
     confirmPassword: "",
   };
 
   const [formFields, setFormFields] = useState(defaultFormFields);
-  const { displayName, email, password, confirmPassword } = formFields;
+  const { displayName, email, phoneNumber, password, confirmPassword } =
+    formFields;
+
+  useEffect(() => {
+    console.log(formFields);
+  }, [formFields]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormFields({ ...formFields, [name]: value });
   };
 
-  const resetFormFields = () => setFormFields(defaultFormFields);
-
   const handleSubmit = async () => {
     if (password !== confirmPassword) {
       alert("Passwords do not match");
       return;
     }
+
+    const resetFormFields = () => setFormFields(defaultFormFields);
 
     try {
       const { user } = await createAuthUserWithEmailAndPassword(
@@ -44,7 +50,7 @@ const SignUpForm = () => {
 
       console.log(user);
 
-      await createUserDocumentFromAuth(user, { displayName });
+      await createUserDocumentFromAuth(user, { displayName, phoneNumber });
       resetFormFields();
     } catch (error) {
       console.log(error);
@@ -63,11 +69,45 @@ const SignUpForm = () => {
     }
   };
 
+  const { Option } = Select;
+
+  const prefixSelector = (
+    <Form.Item name="prefix" noStyle>
+      <Select
+        style={{
+          width: 70,
+        }}
+      >
+        <Option value="1">+1</Option>
+      </Select>
+    </Form.Item>
+  );
+
+  const formItemLayout = {
+    labelCol: {
+      xs: {
+        span: 20,
+      },
+      sm: {
+        span: 8,
+      },
+    },
+    wrapperCol: {
+      xs: {
+        span: 20,
+      },
+      sm: {
+        span: 15,
+      },
+    },
+  };
+
   return (
     <div className="sign-up-container">
       <Form
         name="register_login"
         className="register-form"
+        {...formItemLayout}
         initialValues={{
           remember: true,
         }}
@@ -78,6 +118,7 @@ const SignUpForm = () => {
 
         <Form.Item
           name="displayName"
+          label="Name"
           rules={[
             {
               required: true,
@@ -93,6 +134,7 @@ const SignUpForm = () => {
         </Form.Item>
         <Form.Item
           name="email"
+          label="Email"
           rules={[
             {
               required: true,
@@ -102,9 +144,31 @@ const SignUpForm = () => {
         >
           <Input name="email" placeholder="Email" onChange={handleChange} />
         </Form.Item>
+
+        <Form.Item
+          name="phoneNumber"
+          label="Phone Number"
+          rules={[
+            {
+              required: false,
+              message: "Please input your phone number!",
+            },
+          ]}
+        >
+          <Input
+            name="phoneNumber"
+            addonBefore={prefixSelector}
+            style={{
+              width: "100%",
+            }}
+            onChange={handleChange}
+          />
+        </Form.Item>
+
         <Form.Item
           name="password"
           hasFeedback
+          label="Password"
           rules={[
             {
               required: true,
@@ -125,6 +189,7 @@ const SignUpForm = () => {
         </Form.Item>
         <Form.Item
           name="confirmPassword"
+          label="Confirm Password"
           hasFeedback
           rules={[
             {
