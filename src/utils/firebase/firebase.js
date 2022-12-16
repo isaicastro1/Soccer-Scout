@@ -33,7 +33,7 @@ const auth = getAuth();
 
 export const signInUserWithGoogle = async () => {
   try {
-    await signInWithPopup(auth, provider);
+    return await signInWithPopup(auth, provider);
   } catch (error) {
     alert(error);
   }
@@ -56,10 +56,8 @@ export const createUserDocumentFromAuth = async (userAuth, additionalInfo) => {
 
   const userSnapshot = await getDoc(userDocRef);
 
-  console.log("additionalInfo", additionalInfo);
-
   if (!userSnapshot.exists()) {
-    const { displayName, email, photoURL, phoneNumber } = userAuth;
+    const { displayName, email, phoneNumber } = userAuth;
     const createdAt = new Date();
 
     try {
@@ -67,7 +65,6 @@ export const createUserDocumentFromAuth = async (userAuth, additionalInfo) => {
         displayName,
         email,
         createdAt,
-        photoURL,
         phoneNumber,
         ...additionalInfo,
       });
