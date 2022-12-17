@@ -9,12 +9,10 @@ import Avatar from "@mui/material/Avatar";
 
 import { UserContext } from "../../contexts/user.context";
 
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
-  storage,
+  uploadImageToFirebase,
 } from "../../utils/firebase/firebase";
 
 import "./sign-up-form.styles.scss";
@@ -61,21 +59,12 @@ const SignUpForm = () => {
       return;
     }
 
-    try {
-      //uploads image to firestore storage and gets download link
-      const imageRef = ref(storage, `images/${email}`);
-      uploadBytes(imageRef, profileImage)
-        .then(() => {
-          getDownloadURL(imageRef)
-            .then((url) => {
-              setImageUrl(url);
-              setUserImage(url);
-              localStorage.setItem("profile-image", url);
-            })
-            .catch((err) => console.log(err));
-        })
-        .catch((err) => console.log("Error getting image url", err));
+    const image = await uploadImageToFirebase(email, profileImage);
+    setImageUrl(image);
+    setUserImage(image);
+    localStorage.setItem("profile-image", image);
 
+    try {
       const { user } = await createAuthUserWithEmailAndPassword(
         email,
         password
@@ -150,7 +139,7 @@ const SignUpForm = () => {
           {formFields.profileImage ? (
             <Avatar
               className="avatar-image"
-              alt="Remy Sharp"
+              alt="Guest"
               src={imageUrl}
               sx={{ width: 56, height: 56 }}
             />
