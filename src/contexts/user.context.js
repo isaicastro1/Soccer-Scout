@@ -8,11 +8,14 @@ import {
 export const UserContext = createContext({
   currentUser: null,
   setCurrentUser: () => null,
+  userImage: null,
+  setUserImage: () => null,
 });
 
 export const UserProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
-  const value = { currentUser, setCurrentUser };
+  const [userImage, setUserImage] = useState(null);
+  const value = { currentUser, setCurrentUser, userImage, setUserImage };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChangedListener((user) => {

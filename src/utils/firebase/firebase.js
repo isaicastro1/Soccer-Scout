@@ -8,7 +8,7 @@ import {
   onAuthStateChanged,
   signOut,
 } from "firebase/auth";
-
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -21,6 +21,7 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+export const storage = getStorage(app);
 
 const provider = new GoogleAuthProvider();
 const db = getFirestore(app);
@@ -49,6 +50,13 @@ export const createAuthUserWithEmailAndPassword = async (email, password) => {
   if (!email || !password) return;
 
   return await createUserWithEmailAndPassword(auth, email, password);
+};
+
+export const uploadImageToFirebase = async (email, image) => {
+  const imageRef = ref(storage, `images/${email}`);
+  await uploadBytes(imageRef, image);
+  const url = await getDownloadURL(imageRef);
+  return url;
 };
 
 export const createUserDocumentFromAuth = async (userAuth, additionalInfo) => {
