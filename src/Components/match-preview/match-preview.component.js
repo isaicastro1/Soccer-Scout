@@ -1,5 +1,3 @@
-import { modifyTime } from "../../utils/date";
-
 import "./match-preview.styles.scss";
 
 const MatchPreview = ({

@@ -8,7 +8,7 @@ import {
   onAuthStateChanged,
   signOut,
 } from "firebase/auth";
-
+import { getStorage } from "firebase/storage";
 import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -21,6 +21,7 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+export const storage = getStorage(app);
 
 const provider = new GoogleAuthProvider();
 const db = getFirestore(app);

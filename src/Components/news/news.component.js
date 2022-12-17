@@ -41,11 +41,13 @@ const News = () => {
     });
 
     const isEnglish = allNews.filter((item) => {
-      if (!item.description) return;
-      return (
-        (hasLetters(item.description) && !isGerman(item.description)) ||
-        !isGreek(item.description)
-      );
+      if (item.description) {
+        return (
+          (hasLetters(item.description) && !isGerman(item.description)) ||
+          !isGreek(item.description)
+        );
+      }
+      return null;
     });
 
     while (isEnglish.length > 5) {

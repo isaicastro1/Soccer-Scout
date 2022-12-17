@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { Outlet, Link } from "react-router-dom";
+import Avatar from "@mui/material/Avatar";
 
 import { signOutUser } from "../../utils/firebase/firebase";
 import { UserContext } from "../../contexts/user.context";
@@ -8,7 +9,7 @@ import SoccerLogo from "../../Assets/soccer-logo.png";
 import "./NavBar.scss";
 
 function NavBar() {
-  const { currentUser } = useContext(UserContext);
+  const { currentUser, userImage } = useContext(UserContext);
 
   return (
     <div className="nav-container">
@@ -32,7 +33,13 @@ function NavBar() {
               SIGN IN
             </Link>
           )}
-          <Link to="profile">Profile</Link>
+          <Link to="profile">
+            <Avatar
+              src={userImage}
+              className="nav-profile-image"
+              alt="profile"
+            />
+          </Link>
         </div>
       </div>
       <Outlet />

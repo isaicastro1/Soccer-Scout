@@ -1,17 +1,23 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { LockOutlined } from "@ant-design/icons";
 import { Button, Form, Input, Select } from "antd";
-
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
+
+import Avatar from "@mui/material/Avatar";
+
+import { UserContext } from "../../contexts/user.context";
+
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
+  storage,
 } from "../../utils/firebase/firebase";
 
 import "./sign-up-form.styles.scss";
-import { useNavigate } from "react-router-dom";
 
 const SignUpForm = () => {
   const defaultFormFields = {
@@ -24,6 +30,7 @@ const SignUpForm = () => {
   };
 
   const [formFields, setFormFields] = useState(defaultFormFields);
+  const [imageUrl, setImageUrl] = useState(null);
   const {
     displayName,
     email,
@@ -33,17 +40,20 @@ const SignUpForm = () => {
     profileImage,
   } = formFields;
 
-  const handleChange = (event, url) => {
-    if (!url) {
-      const { name, value } = event.target;
-      setFormFields({ ...formFields, [name]: value });
-    } else {
-      const { name } = event.target;
-      setFormFields({ ...formFields, [name]: url });
-    }
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormFields({ ...formFields, [name]: value });
   };
 
   const navigate = useNavigate();
+
+  const handleImageChange = (e) => {
+    if (e.target.files[0]) {
+      setFormFields({ ...formFields, profileImage: e.target.files[0] });
+    }
+  };
+
+  const { setUserImage } = useContext(UserContext);
 
   const handleSubmit = async () => {
     if (password !== confirmPassword) {
@@ -52,6 +62,19 @@ const SignUpForm = () => {
     }
 
     try {
+      //uploads image to firestore storage and gets download link
+      const imageRef = ref(storage, `images/${email}`);
+      uploadBytes(imageRef, profileImage)
+        .then(() => {
+          getDownloadURL(imageRef)
+            .then((url) => {
+              setImageUrl(url);
+              setUserImage(url);
+            })
+            .catch((err) => console.log(err));
+        })
+        .catch((err) => console.log("Error getting image url", err));
+
       const { user } = await createAuthUserWithEmailAndPassword(
         email,
         password
@@ -60,8 +83,9 @@ const SignUpForm = () => {
       await createUserDocumentFromAuth(user, {
         displayName,
         phoneNumber,
-        profileImage,
+        imageUrl,
       });
+
       navigate("/");
     } catch (error) {
       console.log(error);
@@ -113,11 +137,6 @@ const SignUpForm = () => {
     },
   };
 
-  const handleImageChange = (info) => {
-    const url = URL.createObjectURL(info.target.files[0]);
-    handleChange(info, url);
-  };
-
   return (
     <div className="sign-up-container">
       <Form
@@ -139,13 +158,13 @@ const SignUpForm = () => {
             id="avatar"
             name="profileImage"
             accept="image/png, image/jpeg"
-            onChange={(e) => handleImageChange(e)}
+            onChange={handleImageChange}
           />
           {formFields.profileImage ? (
-            <img
-              alt="profile"
-              className="uploaded-image"
-              src={formFields.profileImage}
+            <Avatar
+              alt="Remy Sharp"
+              src={imageUrl}
+              sx={{ width: 56, height: 56 }}
             />
           ) : null}
         </div>
