@@ -17,9 +17,18 @@
     .upload-image {
       display: flex;
       align-items: center;
-      justify-content: center;
-      width: 100%;
-      margin-bottom: 10px;
+      justify-content: flex-end;
+      width: 95%;
+      margin: 0 0 20px 0;
+
+      .avatar {
+        width: 55%;
+      }
+
+      .avatar-image {
+        width: 40px;
+        height: 40px;
+      }
 
       .uploaded-image {
         width: 50px;

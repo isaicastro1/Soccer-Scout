@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { LockOutlined } from "@ant-design/icons";
-import { Button, Form, Input, Select } from "antd";
+import { Button, Form, Input } from "antd";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 
 import Avatar from "@mui/material/Avatar";
@@ -70,6 +70,7 @@ const SignUpForm = () => {
             .then((url) => {
               setImageUrl(url);
               setUserImage(url);
+              localStorage.setItem("profile-image", url);
             })
             .catch((err) => console.log(err));
         })
@@ -103,20 +104,6 @@ const SignUpForm = () => {
       }
     }
   };
-
-  const { Option } = Select;
-
-  const prefixSelector = (
-    <Form.Item name="prefix" noStyle>
-      <Select
-        style={{
-          width: 70,
-        }}
-      >
-        <Option value="1">+1</Option>
-      </Select>
-    </Form.Item>
-  );
 
   const formItemLayout = {
     labelCol: {
@@ -162,6 +149,7 @@ const SignUpForm = () => {
           />
           {formFields.profileImage ? (
             <Avatar
+              className="avatar-image"
               alt="Remy Sharp"
               src={imageUrl}
               sx={{ width: 56, height: 56 }}
@@ -210,7 +198,6 @@ const SignUpForm = () => {
         >
           <Input
             name="phoneNumber"
-            addonBefore={prefixSelector}
             style={{
               width: "100%",
             }}

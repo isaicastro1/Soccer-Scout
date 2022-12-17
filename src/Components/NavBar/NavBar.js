@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Outlet, Link } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 
@@ -8,8 +8,18 @@ import SoccerLogo from "../../Assets/soccer-logo.png";
 
 import "./NavBar.scss";
 
-function NavBar() {
-  const { currentUser, userImage } = useContext(UserContext);
+const NavBar = () => {
+  const { currentUser, userImage, setUserImage } = useContext(UserContext);
+  const [profileImage, setProfileImage] = useState(
+    localStorage.getItem("profile-image")
+  );
+
+  const onSignOutHandler = () => {
+    setProfileImage("");
+    setUserImage("");
+    localStorage.removeItem("profile-image");
+    signOutUser();
+  };
 
   return (
     <div className="nav-container">
@@ -25,7 +35,7 @@ function NavBar() {
             <p className="table-nav">FIXTURES</p>
           </Link>
           {currentUser ? (
-            <span className="table-nav" onClick={signOutUser}>
+            <span className="table-nav" onClick={onSignOutHandler}>
               SIGN OUT
             </span>
           ) : (
@@ -35,9 +45,9 @@ function NavBar() {
           )}
           <Link to="profile">
             <Avatar
-              src={userImage}
+              src={userImage || profileImage}
               className="nav-profile-image"
-              alt="profile"
+              alt="Guest"
             />
           </Link>
         </div>
@@ -45,6 +55,6 @@ function NavBar() {
       <Outlet />
     </div>
   );
-}
+};
 
 export default NavBar;
