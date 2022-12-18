@@ -59,12 +59,12 @@ const SignUpForm = () => {
       return;
     }
 
-    const image = await uploadImageToFirebase(email, profileImage);
-    setImageUrl(image);
-    setUserImage(image);
-    localStorage.setItem("profile-image", image);
-
     try {
+      const profilePicture = await uploadImageToFirebase(email, profileImage);
+      setImageUrl(profilePicture);
+      setUserImage(profilePicture);
+      localStorage.setItem("profile-image", profilePicture);
+
       const { user } = await createAuthUserWithEmailAndPassword(
         email,
         password
@@ -73,7 +73,7 @@ const SignUpForm = () => {
       await createUserDocumentFromAuth(user, {
         displayName,
         phoneNumber,
-        imageUrl,
+        profilePicture,
       });
 
       navigate("/");

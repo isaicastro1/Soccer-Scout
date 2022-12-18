@@ -59,6 +59,12 @@ export const uploadImageToFirebase = async (email, image) => {
   return url;
 };
 
+export const getImageOnSignIn = async (email) => {
+  const imageRef = ref(storage, `images/${email}`);
+  const result = await getDownloadURL(imageRef);
+  return result;
+};
+
 export const createUserDocumentFromAuth = async (userAuth, additionalInfo) => {
   const userDocRef = doc(db, "users", userAuth.uid);
 
