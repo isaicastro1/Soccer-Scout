@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, Link, useNavigate } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 
 import { signOutUser } from "../../utils/firebase/firebase";
@@ -14,11 +14,14 @@ const NavBar = () => {
     localStorage.getItem("profile-image")
   );
 
+  const navigate = useNavigate();
+
   const onSignOutHandler = () => {
     setProfileImage("");
     setUserImage("");
     localStorage.removeItem("profile-image");
     signOutUser();
+    navigate("/sign-in");
   };
 
   return (
@@ -35,21 +38,23 @@ const NavBar = () => {
             <p className="table-nav">FIXTURES</p>
           </Link>
           {currentUser ? (
-            <span className="table-nav" onClick={onSignOutHandler}>
-              SIGN OUT
-            </span>
+            <>
+              <span className="table-nav" onClick={onSignOutHandler}>
+                SIGN OUT
+              </span>
+              <Link to="profile">
+                <Avatar
+                  src={userImage || profileImage}
+                  className="nav-profile-image"
+                  alt="Guest"
+                />
+              </Link>
+            </>
           ) : (
             <Link className="table-nav" to="/sign-in">
               SIGN IN
             </Link>
           )}
-          <Link to="profile">
-            <Avatar
-              src={userImage || profileImage}
-              className="nav-profile-image"
-              alt="Guest"
-            />
-          </Link>
         </div>
       </div>
       <Outlet />

@@ -1,9 +1,9 @@
 .news-posts {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  // justify-content: flex-start;
   max-width: 300px;
-  height: 350px;
+  height: 360px;
   overflow: hidden;
   background-color: white;
   border-radius: 10px;
@@ -27,17 +27,17 @@
   .post-info-text {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    gap: 15px;
+    justify-content: space-around;
+    gap: 10px;
     padding: 5px;
-    height: 100%;
+    height: calc(100% - 165px);
 
     .details {
       display: flex;
       justify-content: space-between;
       align-items: center;
       font-size: 12px;
-      margin-top: -10px;
+      margin-top: 10px;
 
       .details-btn {
         background-color: #1877f2;
@@ -89,6 +89,7 @@
   margin-bottom: 10px;
   max-height: 170px;
   position: relative;
+  bottom: -44%;
 
   .post-image {
     position: absolute;
