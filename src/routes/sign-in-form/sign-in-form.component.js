@@ -1,13 +1,16 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 
 import { Link, useNavigate } from "react-router-dom";
 
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Checkbox, Form, Input } from "antd";
 
+import { UserContext } from "../../contexts/user.context";
+
 import {
   signInUserWithGoogle,
   signInUserWithEmailAndPassword,
+  getImageOnSignIn,
 } from "../../utils/firebase/firebase";
 
 import "./sign-in-form.styles.scss";
@@ -22,6 +25,7 @@ const SignInForm = () => {
   const { email, password } = formFields;
 
   const navigate = useNavigate();
+  const { setUserImage } = useContext(UserContext);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -32,6 +36,8 @@ const SignInForm = () => {
 
   const signInWithEmailAndPassword = async () => {
     if (!email || !password) return;
+
+    setUserImage(await getImageOnSignIn(email));
 
     try {
       await signInUserWithEmailAndPassword(email, password);
