@@ -65,6 +65,12 @@ export const getImageOnSignIn = async (email) => {
   return result;
 };
 
+export const getUserDataFromFirebase = async (userAuth) => {
+  const docRef = doc(db, "users", userAuth.uid);
+  const docSnapshot = await getDoc(docRef);
+  return docSnapshot.data();
+};
+
 export const createUserDocumentFromAuth = async (userAuth, additionalInfo) => {
   const userDocRef = doc(db, "users", userAuth.uid);
 

@@ -14,7 +14,7 @@ const News = () => {
     try {
       const getNewsData = async () => {
         const response = await fetch(
-          "https://newsapi.org/v2/top-headlines?category=sports&pageSize=10&apiKey=9dc3d33ecf3e4e2aa1888ed5bdc14520"
+          "https://newsapi.org/v2/top-headlines?sources=espn&pageSize=10&apiKey=9dc3d33ecf3e4e2aa1888ed5bdc14520"
         ).then((data) => data.json());
 
         setNewsData(response.articles);
