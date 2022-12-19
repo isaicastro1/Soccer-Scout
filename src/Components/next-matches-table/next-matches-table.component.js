@@ -3,8 +3,8 @@ import { useState } from "react";
 import MatchPreview from "../../Components/match-preview/match-preview.component";
 
 import { options } from "../../utils/options";
-import { getDate } from "../../utils/date";
-import { allLeagues } from "../../utils/all-leagues";
+import { getDate, leagueDates } from "../../utils/date";
+import { allLeagues, allLeaguesLogos } from "../../utils/all-leagues";
 
 import "./next-matches-table.styles.scss";
 
@@ -12,12 +12,14 @@ const NextMatchesTable = () => {
   const [nextMatches, setNextMatches] = useState([]);
   const [league, setLeague] = useState(140);
   const [leagueCalled, setLeagueCalled] = useState(false);
-  const [nameOfLeague, setNameOfLeague] = useState("");
+  const [nameOfLeague, setNameOfLeague] = useState("laliga");
+
+  const upcomingMatchesDate = leagueDates[`${nameOfLeague}`];
 
   const getNextMatches = async () => {
     setLeagueCalled(true);
     const response = await fetch(
-      `https://v3.football.api-sports.io/fixtures?season=2022&league=${league}&from=${getDate()}&to=2023-01-30`,
+      `https://v3.football.api-sports.io/fixtures?season=2022&league=${league}&from=${getDate()}&to=${upcomingMatchesDate}`,
       options
     );
     const data = await response.json();
@@ -26,7 +28,6 @@ const NextMatchesTable = () => {
       throw new Error("Could not fetch data");
     }
     setNextMatches(data.response);
-    setNameOfLeague(data.response[0].league.name);
   };
 
   const handleLeagueChange = (event) => {
@@ -53,13 +54,20 @@ const NextMatchesTable = () => {
   };
 
   const newMatches = separateMatchesByDate(nextMatches);
-  console.log("newMatches", newMatches);
 
   return (
     <>
       {leagueCalled ? (
         <div className="matches-container">
-          <h2>{nameOfLeague}</h2>
+          <img
+            src={
+              allLeaguesLogos[
+                nameOfLeague.toString().toLowerCase().replace(" ", "")
+              ]
+            }
+            style={{ width: "100px", height: "100px" }}
+            alt="logo"
+          />
           {newMatches &&
             newMatches.map((match) => {
               let date = new Date(match[0]).toString();

@@ -17,3 +17,9 @@ export const modifyTime = (time) => {
   if (!time) return;
   return time.split("").slice(11, -9).join("");
 };
+
+export const leagueDates = {
+  champions: "2023-04-30",
+  laliga: "2023-01-30",
+  premier: "2023-01-30",
+};
