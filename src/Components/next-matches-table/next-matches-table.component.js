@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import MatchPreview from "../../Components/match-preview/match-preview.component";
+import Spinner from "../spinner/spinner.component";
 
 import { options } from "../../utils/options";
 import { getDate, leagueDates } from "../../utils/date";
@@ -11,12 +12,14 @@ import "./next-matches-table.styles.scss";
 const NextMatchesTable = () => {
   const [nextMatches, setNextMatches] = useState([]);
   const [league, setLeague] = useState(140);
+  const [isLoading, setIsLoading] = useState(false);
   const [leagueCalled, setLeagueCalled] = useState(false);
   const [nameOfLeague, setNameOfLeague] = useState("laliga");
 
   const upcomingMatchesDate = leagueDates[`${nameOfLeague}`];
 
   const getNextMatches = async () => {
+    setIsLoading(true);
     setLeagueCalled(true);
     const response = await fetch(
       `https://v3.football.api-sports.io/fixtures?season=2022&league=${league}&from=${getDate()}&to=${upcomingMatchesDate}`,
@@ -28,6 +31,7 @@ const NextMatchesTable = () => {
       throw new Error("Could not fetch data");
     }
     setNextMatches(data.response);
+    setIsLoading(false);
   };
 
   const handleLeagueChange = (event) => {
@@ -50,6 +54,7 @@ const NextMatchesTable = () => {
         fixtureDates[date] = [match];
       }
     });
+
     return Object.entries(fixtureDates).sort();
   };
 
@@ -57,7 +62,9 @@ const NextMatchesTable = () => {
 
   return (
     <>
-      {leagueCalled ? (
+      {isLoading ? (
+        <Spinner />
+      ) : leagueCalled ? (
         <div className="matches-container">
           <img
             src={
