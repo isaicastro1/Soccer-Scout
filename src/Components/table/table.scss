@@ -17,12 +17,14 @@
   }
 
   header {
-    width: 30vw;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    width: 100vw;
 
     h1 {
       color: black;
       margin-top: 0;
+      width: max-content;
     }
   }
 
