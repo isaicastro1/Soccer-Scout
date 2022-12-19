@@ -5,11 +5,13 @@ import { options } from "../../utils/options";
 import { allLeagues } from "../../utils/all-leagues";
 
 import Table from "../../Components/table/table";
+import Spinner from "../../Components/spinner/spinner.component";
 
 import "./find-league.styles.scss";
 
 const FindLeague = () => {
   const [league, setLeague] = useState(140);
+  const [isLoading, setIsLoading] = useState(false);
   const [year, setYear] = useState(2022);
   const [leagueCalled, setLeagueCalled] = useState(false);
   const [nameOfLeague, setNameOfLeague] = useState("");
@@ -17,6 +19,7 @@ const FindLeague = () => {
   const { setAllTeamData, setLeagueName } = useContext(TeamDataContext);
 
   const fetchTeamData = async () => {
+    setIsLoading(true);
     setLeagueCalled(true);
     const response = await fetch(
       `https://v3.football.api-sports.io/standings?season=${year}&league=${league}`,
@@ -26,6 +29,7 @@ const FindLeague = () => {
     setNameOfLeague(data.response[0].league.name);
     const teamData = await data.response[0].league.standings;
     setAllTeamData(teamData);
+    setIsLoading(false);
   };
 
   const handleLeagueChange = (event) => {
@@ -39,7 +43,9 @@ const FindLeague = () => {
 
   return (
     <>
-      {leagueCalled ? (
+      {isLoading ? (
+        <Spinner />
+      ) : leagueCalled ? (
         <Table nameOfLeague={nameOfLeague} />
       ) : (
         <div className="find-league-container">
