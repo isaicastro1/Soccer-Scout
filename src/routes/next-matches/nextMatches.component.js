@@ -1,6 +1,5 @@
-import { useEffect, useContext } from "react";
+import { useEffect, useState } from "react";
 
-import { TeamDataContext } from "../../contexts/teamData.context";
 import MatchPreview from "../../Components/match-preview/match-preview.component";
 import { options } from "../../utils/options";
 import { getDate } from "../../utils/date";
@@ -8,7 +7,7 @@ import { getDate } from "../../utils/date";
 import "./nextMatches.styles.scss";
 
 const NextMatches = () => {
-  const { nextMatches, setNextMatches } = useContext(TeamDataContext);
+  const [nextMatches, setNextMatches] = useState([]);
 
   useEffect(() => {
     const getNextMatches = async () => {

@@ -1,6 +1,7 @@
 h2 {
   text-align: center;
-  width: 160px;
+  min-width: 200px;
+  margin: 20px;
 }
 
 .news-container {
@@ -10,7 +11,7 @@ h2 {
   flex-direction: column;
   position: relative;
   top: 80px;
-  width: max-content;
+  width: 100vw;
   height: max-content;
 }
 
