@@ -1,9 +1,8 @@
 .news-posts {
   display: flex;
   flex-direction: column;
-  // justify-content: flex-start;
   max-width: 300px;
-  height: 360px;
+  height: 380px;
   overflow: hidden;
   background-color: white;
   border-radius: 10px;
@@ -27,10 +26,10 @@
   .post-info-text {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-between;
     gap: 10px;
     padding: 5px;
-    height: calc(100% - 165px);
+    height: 55%;
 
     .details {
       display: flex;
@@ -75,7 +74,7 @@
       display: flex;
       justify-content: center;
       margin: 0;
-      font-size: 13px;
+      font-size: 12px;
       max-height: 80px;
       min-height: 70px;
     }

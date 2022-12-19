@@ -50,7 +50,7 @@ const News = () => {
       return null;
     });
 
-    while (isEnglish.length > 5) {
+    while (isEnglish.length > 4) {
       isEnglish.pop();
     }
 
