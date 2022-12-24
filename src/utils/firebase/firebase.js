@@ -8,7 +8,14 @@ import {
   onAuthStateChanged,
   signOut,
 } from "firebase/auth";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import {
+  getStorage,
+  ref,
+  uploadBytes,
+  getDownloadURL,
+  uploadString,
+} from "firebase/storage";
+
 import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -57,6 +64,18 @@ export const uploadImageToFirebase = async (email, image) => {
   await uploadBytes(imageRef, image);
   const url = await getDownloadURL(imageRef);
   return url;
+};
+
+export const uploadFavoritesToFirebase = async (email, ...userFavorites) => {
+  const teamRef = ref(storage, `favorites/${email}`);
+  const data = userFavorites.toString();
+  uploadString(teamRef, data).then((snapshot) => {
+    console.log("Uploaded a raw string!");
+  });
+  //     await uploadBytes(teamRef, userFavorites);
+  //   const url = await getDownloadURL(teamRef);
+  //   console.log(url);
+  //   return url;
 };
 
 export const getImageOnSignIn = async (email) => {

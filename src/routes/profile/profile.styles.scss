@@ -1,4 +1,12 @@
 .profile-container {
+  .add-favorites {
+    border: none;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
   .gradient-custom {
     background: #4a5ad3;
 
