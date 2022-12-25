@@ -41,7 +41,14 @@ const Profile = () => {
                       borderBottomLeftRadius: ".5rem",
                     }}
                   >
-                    {userImage ? (
+                    {userData.profilePicture ? (
+                      <img
+                        src={userData.profilePicture}
+                        alt="Avatar"
+                        className="img-fluid my-5"
+                        style={{ width: "80px" }}
+                      />
+                    ) : userImage ? (
                       <img
                         src={userImage}
                         alt="Avatar"
