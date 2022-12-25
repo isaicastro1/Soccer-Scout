@@ -9,10 +9,13 @@ import "./profile.styles.scss";
 
 const Profile = () => {
   const [userData, setUserData] = useState(null);
+  const [openFavorites, setOpenFavorites] = useState(false);
+
   const { currentUser, userImage } = useContext(UserContext);
 
   useEffect(() => {
     const getUserData = async () => {
+      if (!currentUser) return;
       const data = await getUserDataFromFirebase(currentUser);
       setUserData(data);
     };
@@ -77,7 +80,12 @@ const Profile = () => {
                       <hr className="mt-0 mb-4" />
                       <div className="row pt-1">
                         <div className="col-6 mb-3 favorites">
-                          <button className="add-favorites">
+                          <button
+                            className="add-favorites"
+                            onClick={() => {
+                              setOpenFavorites(!openFavorites);
+                            }}
+                          >
                             Add new favorites
                           </button>
                         </div>
@@ -100,10 +108,11 @@ const Profile = () => {
             </div>
           </div>
         </section>
+      ) : openFavorites ? (
+        <Favorites currentUser={currentUser} />
       ) : (
         <h2>Loading...</h2>
       )}
-      <Favorites currentUser={currentUser} />
     </>
   );
 };
