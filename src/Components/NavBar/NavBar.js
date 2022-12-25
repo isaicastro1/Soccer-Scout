@@ -1,8 +1,11 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { Outlet, Link, useNavigate } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 
-import { signOutUser } from "../../utils/firebase/firebase";
+import {
+  getUserDataFromFirebase,
+  signOutUser,
+} from "../../utils/firebase/firebase";
 import { UserContext } from "../../contexts/user.context";
 import SoccerLogo from "../../Assets/soccer-logo.png";
 
@@ -13,6 +16,17 @@ const NavBar = () => {
   const [profileImage, setProfileImage] = useState(
     localStorage.getItem("profile-image")
   );
+  const [userData, setUserData] = useState(null);
+
+  useEffect(() => {
+    const getUserData = async () => {
+      if (!currentUser) return;
+      const data = await getUserDataFromFirebase(currentUser);
+      setUserData(data);
+    };
+
+    getUserData();
+  }, [currentUser]);
 
   const navigate = useNavigate();
 
@@ -43,11 +57,19 @@ const NavBar = () => {
                 SIGN OUT
               </span>
               <Link to="profile">
-                <Avatar
-                  src={userImage || profileImage}
-                  className="nav-profile-image"
-                  alt="Guest"
-                />
+                {userData ? (
+                  <Avatar
+                    src={userData.profilePicture}
+                    className="nav-profile-image"
+                    alt="Guest"
+                  />
+                ) : (
+                  <Avatar
+                    src={userImage || profileImage}
+                    className="nav-profile-image"
+                    alt="Guest"
+                  />
+                )}
               </Link>
             </>
           ) : (
