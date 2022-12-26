@@ -4,14 +4,15 @@ import { UserContext } from "../../contexts/user.context";
 
 import { getUserDataFromFirebase } from "../../utils/firebase/firebase";
 import Favorites from "../../Components/favorites/favorites.component";
+import Spinner from "../../Components/spinner/spinner.component";
 
 import "./profile.styles.scss";
 
 const Profile = () => {
   const [userData, setUserData] = useState(null);
-  const [openFavorites, setOpenFavorites] = useState(false);
 
-  const { currentUser, userImage } = useContext(UserContext);
+  const { currentUser, userImage, setOpenFavorites, openFavorites } =
+    useContext(UserContext);
 
   useEffect(() => {
     const getUserData = async () => {
@@ -115,11 +116,10 @@ const Profile = () => {
             </div>
           </div>
         </section>
-      ) : openFavorites ? (
-        <Favorites currentUser={currentUser} />
       ) : (
-        <h2>Loading...</h2>
+        <Spinner />
       )}
+      {openFavorites ? <Favorites currentUser={currentUser} /> : <></>}
     </>
   );
 };

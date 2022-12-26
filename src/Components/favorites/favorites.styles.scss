@@ -31,19 +31,18 @@
 }
 
 .submit-button {
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  z-index: 0;
+  //   display: flex;
+  //   justify-content: flex-end;
+  //   align-items: flex-end;
+  //   position: relative;
+  //   width: 100vw;
+  //   height: 100vh;
+  //   z-index: 0;
 
   .check-button {
-    height: 100px;
     width: 100px;
     border: 3px solid green;
-    color: green;
-    background-color: white;
+    background-color: green;
+    color: white;
   }
 }

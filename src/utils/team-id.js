@@ -154,9 +154,4 @@ export const teamsInfo = [
     "https://media-6.api-sports.io/football/teams/4195.png",
     64,
   ],
-  [
-    "America",
-    "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/227.png&h=200&w=200",
-    65,
-  ],
 ];

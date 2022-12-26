@@ -67,9 +67,11 @@ export const uploadImageToFirebase = async (email, image) => {
 };
 
 export const uploadFavoritesToFirebase = async (email, ...userFavorites) => {
+  if (!userFavorites.length) return;
   const teamRef = ref(storage, `favorites/${email}`);
   const data = userFavorites.toString();
   uploadString(teamRef, data).then((snapshot) => {
+    alert("Favorites updated!");
     console.log("Uploaded a raw string!");
   });
   //     await uploadBytes(teamRef, userFavorites);
