@@ -10,12 +10,22 @@ export const UserContext = createContext({
   setCurrentUser: () => null,
   userImage: null,
   setUserImage: () => null,
+  openFavorites: false,
+  setOpenFavorites: () => null,
 });
 
 export const UserProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [userImage, setUserImage] = useState(null);
-  const value = { currentUser, setCurrentUser, userImage, setUserImage };
+  const [openFavorites, setOpenFavorites] = useState(false);
+  const value = {
+    currentUser,
+    setCurrentUser,
+    userImage,
+    setUserImage,
+    openFavorites,
+    setOpenFavorites,
+  };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChangedListener((user) => {
