@@ -66,23 +66,22 @@ export const uploadImageToFirebase = async (email, image) => {
   return url;
 };
 
+export const getImageOnSignIn = async (email) => {
+  const imageRef = ref(storage, `images/${email}`);
+  const result = await getDownloadURL(imageRef);
+  return result;
+};
+
 export const uploadFavoritesToFirebase = async (email, ...userFavorites) => {
   if (!userFavorites.length) return;
   const teamRef = ref(storage, `favorites/${email}`);
   const data = userFavorites.toString();
-  uploadString(teamRef, data).then((snapshot) => {
-    alert("Favorites updated!");
-    console.log("Uploaded a raw string!");
-  });
-  //     await uploadBytes(teamRef, userFavorites);
-  //   const url = await getDownloadURL(teamRef);
-  //   console.log(url);
-  //   return url;
+  uploadString(teamRef, data).then((snapshot) => {});
 };
 
-export const getImageOnSignIn = async (email) => {
-  const imageRef = ref(storage, `images/${email}`);
-  const result = await getDownloadURL(imageRef);
+export const getFavoritesFromFirebase = async (email) => {
+  const favoritesRef = ref(storage, `favorites/${email}`);
+  const result = await getDownloadURL(favoritesRef);
   return result;
 };
 

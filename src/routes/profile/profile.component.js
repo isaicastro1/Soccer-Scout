@@ -2,17 +2,27 @@ import { useContext, useEffect, useState } from "react";
 
 import { UserContext } from "../../contexts/user.context";
 
-import { getUserDataFromFirebase } from "../../utils/firebase/firebase";
+import {
+  getUserDataFromFirebase,
+  getFavoritesFromFirebase,
+} from "../../utils/firebase/firebase";
 import Favorites from "../../Components/favorites/favorites.component";
 import Spinner from "../../Components/spinner/spinner.component";
+import { teamsLogo } from "../../utils/team-id";
 
 import "./profile.styles.scss";
 
 const Profile = () => {
   const [userData, setUserData] = useState(null);
+  const [allUserFavorites, setAllUserFavorites] = useState(null);
 
-  const { currentUser, userImage, setOpenFavorites, openFavorites } =
-    useContext(UserContext);
+  const {
+    currentUser,
+    userImage,
+    setOpenFavorites,
+    openFavorites,
+    userFavorites,
+  } = useContext(UserContext);
 
   useEffect(() => {
     const getUserData = async () => {
@@ -22,7 +32,23 @@ const Profile = () => {
     };
 
     getUserData();
-  }, [currentUser]);
+  }, [currentUser, userFavorites]);
+
+  useEffect(() => {
+    const getUserFavorites = async () => {
+      if (!currentUser || !currentUser.email) return;
+      const favorites = await getFavoritesFromFirebase(currentUser.email);
+      const xhr = new XMLHttpRequest();
+      xhr.responseType = "text";
+      xhr.onload = () => {
+        let favoritesArray = xhr.response.split(",");
+        setAllUserFavorites(favoritesArray);
+      };
+      xhr.open("GET", favorites);
+      xhr.send();
+    };
+    getUserFavorites();
+  }, [currentUser, userFavorites]);
 
   return (
     <>
@@ -85,29 +111,34 @@ const Profile = () => {
                         </div>
                       </div>
                       <h6>Favorites</h6>
-                      <hr className="mt-0 mb-4" />
-                      <div className="row pt-1">
-                        <div className="col-6 mb-3 favorites">
+                      <hr className="mt-0" />
+                      <div className="profile-favorites">
+                        <div className="favorite-teams">
+                          {allUserFavorites ? (
+                            allUserFavorites.map((item) => {
+                              return (
+                                <img
+                                  className="favorite-image"
+                                  src={teamsLogo[item]}
+                                  key={item}
+                                  alt="logo"
+                                />
+                              );
+                            })
+                          ) : (
+                            <></>
+                          )}
+                        </div>
+                        <div className="pt-1 favorites-button-container">
                           <button
                             className="add-favorites"
                             onClick={() => {
                               setOpenFavorites(!openFavorites);
                             }}
                           >
-                            Add new favorites
+                            update
                           </button>
                         </div>
-                      </div>
-                      <div className="d-flex justify-content-start">
-                        <a href="#!">
-                          <i className="fab fa-facebook-f fa-lg me-3"></i>
-                        </a>
-                        <a href="#!">
-                          <i className="fab fa-twitter fa-lg me-3"></i>
-                        </a>
-                        <a href="#!">
-                          <i className="fab fa-instagram fa-lg"></i>
-                        </a>
                       </div>
                     </div>
                   </div>
