@@ -1,9 +1,40 @@
 .profile-container {
+  .profile-favorites {
+    display: flex;
+    align-items: center;
+    min-height: 80px;
+
+    .favorite-teams {
+      display: flex;
+      justify-content: space-evenly;
+      flex-wrap: wrap;
+      gap: 5px;
+      width: 100%;
+      min-height: 100%;
+
+      .favorite-image {
+        height: 40px;
+        width: 40px;
+      }
+    }
+
+    .favorites-button-container {
+      max-width: max-content;
+    }
+  }
+
   .add-favorites {
+    width: 70px;
+    height: 30px;
+    font-size: 11px;
+    text-transform: uppercase;
     border: none;
+    border-radius: 10px;
+    transition: 0.15s ease-in-out;
 
     &:hover {
-      opacity: 0.8;
+      background-color: gray;
+      color: #fff;
     }
   }
 

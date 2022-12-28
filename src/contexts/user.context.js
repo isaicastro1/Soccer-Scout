@@ -12,12 +12,16 @@ export const UserContext = createContext({
   setUserImage: () => null,
   openFavorites: false,
   setOpenFavorites: () => null,
+  userFavorites: null,
+  setUserFavorites: () => null,
 });
 
 export const UserProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [userImage, setUserImage] = useState(null);
   const [openFavorites, setOpenFavorites] = useState(false);
+  const [userFavorites, setUserFavorites] = useState(null);
+
   const value = {
     currentUser,
     setCurrentUser,
@@ -25,6 +29,8 @@ export const UserProvider = ({ children }) => {
     setUserImage,
     openFavorites,
     setOpenFavorites,
+    userFavorites,
+    setUserFavorites,
   };
 
   useEffect(() => {

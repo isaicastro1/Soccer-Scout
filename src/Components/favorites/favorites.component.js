@@ -17,7 +17,8 @@ const Favorites = ({ currentUser }) => {
   const [selected, setSelected] = useState(false);
   const [favorites, setFavorites] = useState([]);
 
-  const { setOpenFavorites, openFavorites } = useContext(UserContext);
+  const { setOpenFavorites, openFavorites, setUserFavorites } =
+    useContext(UserContext);
 
   const element = document.querySelectorAll(".chosen");
 
@@ -31,14 +32,17 @@ const Favorites = ({ currentUser }) => {
 
     const allFavorites = getFavorites();
     setFavorites(allFavorites);
-  }, [selected]);
+    setUserFavorites(allFavorites);
+  }, [selected, setUserFavorites]);
 
-  const uploadFavorites = () => {
-    if (!currentUser || !currentUser.email || !favorites.length) return;
-    uploadFavoritesToFirebase(currentUser.email, favorites);
-  };
+  useEffect(() => {
+    const uploadFavorites = () => {
+      if (!currentUser || !currentUser.email || !favorites.length) return;
+      uploadFavoritesToFirebase(currentUser.email, favorites);
+    };
 
-  uploadFavorites();
+    uploadFavorites();
+  }, [favorites, currentUser]);
 
   const myRef = useRef();
 
@@ -47,8 +51,6 @@ const Favorites = ({ currentUser }) => {
       setOpenFavorites(!openFavorites);
     }
   };
-
-  const handleClickInside = () => null;
 
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
@@ -65,11 +67,7 @@ const Favorites = ({ currentUser }) => {
         <></>
       ) : (
         <>
-          <div
-            className="favorites-container"
-            ref={myRef}
-            onClick={handleClickInside}
-          >
+          <div className="favorites-container" ref={myRef}>
             {teamsInfo.map((team) => {
               return (
                 <div
