@@ -31,6 +31,7 @@ const NextMatchesTable = () => {
       throw new Error("Could not fetch data");
     }
     setNextMatches(data.response);
+    // console.log(data.response);
     setIsLoading(false);
   };
 
@@ -48,6 +49,7 @@ const NextMatchesTable = () => {
     arrayOfMatches.forEach((match) => {
       let date = match.fixture.date;
       date = date.slice(0, 10);
+      // console.log("date fn", date);
       if (fixtureDates[date]) {
         fixtureDates[date].push(match);
       } else {
@@ -59,6 +61,19 @@ const NextMatchesTable = () => {
   };
 
   const newMatches = separateMatchesByDate(nextMatches);
+
+  // const matches = newMatches.map((match) => {
+  //   match[1].sort((a, b) => {
+  //     return (
+  //       a.fixture.date.toString().slice(16, 24) -
+  //       b.fixture.date.toString().slice(16, 24)
+  //     );
+  //   });
+  // });
+
+  // console.log("matches", matches);
+
+  // console.log("newMatches", newMatches);
 
   return (
     <>
@@ -77,18 +92,21 @@ const NextMatchesTable = () => {
           />
           {newMatches &&
             newMatches.map((match) => {
-              let date = new Date(match[0]).toString();
-              let time = date.replace(
-                "GMT-0700 (Mountain Standard Time)",
-                "MST"
-              );
+              let date = new Date(match[0]).toGMTString().slice(0, 11);
               return (
-                <div key={match[1][0].fixture.id} className="same-day-match">
+                <div key={match[0]} className="same-day-match">
                   <div className="match-date-title">
-                    <h2>{date.toString().slice(0, 15)}</h2>
+                    <h2>{date}</h2>
                   </div>
                   <div className="match">
                     {match[1].map((game) => {
+                      let time = new Date(game.fixture.date)
+                        .toLocaleString()
+                        .split("")
+                        .splice(10, 12)
+                        .join("")
+                        .replace(":00", "");
+                      // console.log("time", time);
                       return (
                         <MatchPreview
                           key={game.fixture.id}
@@ -97,13 +115,47 @@ const NextMatchesTable = () => {
                           teamTwoName={game.teams.away.name}
                           teamTwoLogo={game.teams.away.logo}
                           round={game.league.round}
-                          time={time.split("").splice(16, 12).join("")}
+                          time={time}
                         />
                       );
                     })}
                   </div>
                 </div>
               );
+              // console.log("new match date", date);
+              // let time = date
+              //   .split("")
+              //   .splice(10, 12)
+              //   .join("")
+              //   .replace(":00", "");
+              // console.log("match", match);
+              // console.log("date", date);
+              // console.log("time", time);
+              // let newDate = date.split("").splice(10, 12).splice(5, 3);
+              // const date2 = newDate.splice(5, 3);
+              // console.log(newDate);
+              // return (
+              //   <div key={match[1][0].fixture.id} className="same-day-match">
+              //     <div className="match-date-title">
+              //       <h2>{date.toString().slice(0, 9)}</h2>
+              //     </div>
+              //     <div className="match">
+              //       {match[1].map((game) => {
+              //         return (
+              //           <MatchPreview
+              //             key={game.fixture.id}
+              //             teamOneName={game.teams.home.name}
+              //             teamOneLogo={game.teams.home.logo}
+              //             teamTwoName={game.teams.away.name}
+              //             teamTwoLogo={game.teams.away.logo}
+              //             round={game.league.round}
+              //             time={time}
+              //           />
+              //         );
+              //       })}
+              //     </div>
+              //   </div>
+              // );
             })}
         </div>
       ) : (
