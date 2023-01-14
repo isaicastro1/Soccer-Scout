@@ -78,7 +78,6 @@ const SignUpForm = () => {
 
       navigate("/");
     } catch (error) {
-      console.log(error);
       switch (error.code) {
         case "auth/email-already-in-use":
           alert("email is already taken");
