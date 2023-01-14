@@ -7,6 +7,7 @@ const MatchPreview = ({
   teamTwoLogo,
   round,
   time,
+  live,
 }) => {
   return (
     <div className="match-preview-container">

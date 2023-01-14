@@ -5,7 +5,7 @@ export const allLeagues = {
 };
 
 export const allLeaguesLogos = {
-  premier: "https://media-4.api-sports.io/football/leagues/39.png",
-  laliga: "https://media-5.api-sports.io/football/leagues/140.png",
-  champions: "https://media-4.api-sports.io/football/leagues/2.png",
+  premier: "https://media-1.api-sports.io/football/leagues/39.png",
+  laliga: "https://media-1.api-sports.io/football/leagues/140.png",
+  champions: "https://media-3.api-sports.io/football/leagues/2.png",
 };

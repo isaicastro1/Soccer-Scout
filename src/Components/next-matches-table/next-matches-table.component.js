@@ -31,6 +31,7 @@ const NextMatchesTable = () => {
       throw new Error("Could not fetch data");
     }
     setNextMatches(data.response);
+    // console.log(data.response);
     setIsLoading(false);
   };
 
@@ -48,6 +49,7 @@ const NextMatchesTable = () => {
     arrayOfMatches.forEach((match) => {
       let date = match.fixture.date;
       date = date.slice(0, 10);
+      // console.log("date fn", date);
       if (fixtureDates[date]) {
         fixtureDates[date].push(match);
       } else {
@@ -59,6 +61,16 @@ const NextMatchesTable = () => {
   };
 
   const newMatches = separateMatchesByDate(nextMatches);
+
+  newMatches.map((match) => {
+    return match[1].sort((a, b) => {
+      let hourA = new Date(a.fixture.date).getUTCHours();
+      let hourB = new Date(b.fixture.date).getUTCHours();
+      return hourA - hourB;
+    });
+  });
+
+  console.log(newMatches);
 
   return (
     <>
@@ -77,18 +89,22 @@ const NextMatchesTable = () => {
           />
           {newMatches &&
             newMatches.map((match) => {
-              let date = new Date(match[0]).toString();
-              let time = date.replace(
-                "GMT-0700 (Mountain Standard Time)",
-                "MST"
-              );
+              let date = new Date(match[0]).toGMTString().slice(0, 11);
               return (
-                <div key={match[1][0].fixture.id} className="same-day-match">
+                <div key={match[0]} className="same-day-match">
                   <div className="match-date-title">
-                    <h2>{date.toString().slice(0, 15)}</h2>
+                    <h2>{date}</h2>
                   </div>
                   <div className="match">
                     {match[1].map((game) => {
+                      console.log("game", game);
+                      let live = game.fixture.status.long;
+                      let time = new Date(game.fixture.date)
+                        .toLocaleString()
+                        .split("")
+                        .splice(10, 12)
+                        .join("")
+                        .replace(":00", "");
                       return (
                         <MatchPreview
                           key={game.fixture.id}
@@ -97,7 +113,8 @@ const NextMatchesTable = () => {
                           teamTwoName={game.teams.away.name}
                           teamTwoLogo={game.teams.away.logo}
                           round={game.league.round}
-                          time={time.split("").splice(16, 12).join("")}
+                          time={time}
+                          live={live}
                         />
                       );
                     })}
