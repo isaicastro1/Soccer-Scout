@@ -8,6 +8,8 @@ const MatchPreview = ({
   round,
   time,
   live,
+  homeGoals,
+  awayGoals,
 }) => {
   return (
     <div className="match-preview-container">
@@ -20,8 +22,24 @@ const MatchPreview = ({
           <img className="team-logo" src={teamOneLogo} alt="logo" />
         </div>
         <div className="time">
-          <div className="match-time">{time}</div>
-          <div className="match-time">{live}</div>
+          {live === "Not Started" ? (
+            <div className="match-time">{time}</div>
+          ) : (
+            (live = "Match Finished" ? (
+              <>
+                <div className="match-result">
+                  <div className="home-goals">{homeGoals}</div>
+                  <span style={{ display: "flex", alignItems: "center" }}>
+                    -
+                  </span>
+                  <div className="away-goals">{awayGoals}</div>
+                </div>
+                <div className="match-time">FT</div>
+              </>
+            ) : (
+              <></>
+            ))
+          )}
         </div>
         <div className="team-logo-container">
           <img className="team-logo" src={teamTwoLogo} alt="logo" />
