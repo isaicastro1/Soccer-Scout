@@ -62,18 +62,15 @@ const NextMatchesTable = () => {
 
   const newMatches = separateMatchesByDate(nextMatches);
 
-  // const matches = newMatches.map((match) => {
-  //   match[1].sort((a, b) => {
-  //     return (
-  //       a.fixture.date.toString().slice(16, 24) -
-  //       b.fixture.date.toString().slice(16, 24)
-  //     );
-  //   });
-  // });
+  newMatches.map((match) => {
+    return match[1].sort((a, b) => {
+      let hourA = new Date(a.fixture.date).getUTCHours();
+      let hourB = new Date(b.fixture.date).getUTCHours();
+      return hourA - hourB;
+    });
+  });
 
-  // console.log("matches", matches);
-
-  // console.log("newMatches", newMatches);
+  console.log(newMatches);
 
   return (
     <>
@@ -100,13 +97,14 @@ const NextMatchesTable = () => {
                   </div>
                   <div className="match">
                     {match[1].map((game) => {
+                      console.log("game", game);
+                      let live = game.fixture.status.long;
                       let time = new Date(game.fixture.date)
                         .toLocaleString()
                         .split("")
                         .splice(10, 12)
                         .join("")
                         .replace(":00", "");
-                      // console.log("time", time);
                       return (
                         <MatchPreview
                           key={game.fixture.id}
@@ -116,46 +114,13 @@ const NextMatchesTable = () => {
                           teamTwoLogo={game.teams.away.logo}
                           round={game.league.round}
                           time={time}
+                          live={live}
                         />
                       );
                     })}
                   </div>
                 </div>
               );
-              // console.log("new match date", date);
-              // let time = date
-              //   .split("")
-              //   .splice(10, 12)
-              //   .join("")
-              //   .replace(":00", "");
-              // console.log("match", match);
-              // console.log("date", date);
-              // console.log("time", time);
-              // let newDate = date.split("").splice(10, 12).splice(5, 3);
-              // const date2 = newDate.splice(5, 3);
-              // console.log(newDate);
-              // return (
-              //   <div key={match[1][0].fixture.id} className="same-day-match">
-              //     <div className="match-date-title">
-              //       <h2>{date.toString().slice(0, 9)}</h2>
-              //     </div>
-              //     <div className="match">
-              //       {match[1].map((game) => {
-              //         return (
-              //           <MatchPreview
-              //             key={game.fixture.id}
-              //             teamOneName={game.teams.home.name}
-              //             teamOneLogo={game.teams.home.logo}
-              //             teamTwoName={game.teams.away.name}
-              //             teamTwoLogo={game.teams.away.logo}
-              //             round={game.league.round}
-              //             time={time}
-              //           />
-              //         );
-              //       })}
-              //     </div>
-              //   </div>
-              // );
             })}
         </div>
       ) : (
