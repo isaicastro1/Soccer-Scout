@@ -70,8 +70,6 @@ const NextMatchesTable = () => {
     });
   });
 
-  console.log(newMatches);
-
   return (
     <>
       {isLoading ? (
@@ -97,7 +95,6 @@ const NextMatchesTable = () => {
                   </div>
                   <div className="match">
                     {match[1].map((game) => {
-                      console.log("game", game);
                       let live = game.fixture.status.long;
                       let time = new Date(game.fixture.date)
                         .toLocaleString()

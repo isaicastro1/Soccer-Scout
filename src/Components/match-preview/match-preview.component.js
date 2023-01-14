@@ -21,6 +21,7 @@ const MatchPreview = ({
         </div>
         <div className="time">
           <div className="match-time">{time}</div>
+          <div className="match-time">{live}</div>
         </div>
         <div className="team-logo-container">
           <img className="team-logo" src={teamTwoLogo} alt="logo" />
