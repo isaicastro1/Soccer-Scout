@@ -16,16 +16,21 @@ const MatchPreview = ({
   awayGoals,
   minutes,
 }) => {
-  const [homeWon, setHomeWon] = useState(false);
+  const [teamWon, setteamWon] = useState("tie");
   const [matchEnded, setMatchEnded] = useState(false);
 
   useEffect(() => {
     const homeWin = () => {
       if (homeGoals === null) return;
+
       if (live === "Match Finished") {
         setMatchEnded(true);
       }
-      setHomeWon(homeGoals > awayGoals);
+
+      const homeWins = homeGoals > awayGoals;
+      const tie = homeGoals === awayGoals;
+
+      homeWins ? setteamWon("home") : !tie ? setteamWon("away") : <></>;
     };
 
     homeWin();
@@ -36,7 +41,7 @@ const MatchPreview = ({
       <h3 className="match-game">{round}</h3>
       <div className="team-logos">
         <div className="team-logo-container">
-          {homeWon && matchEnded ? (
+          {teamWon === "home" && matchEnded ? (
             <div>
               <img src={Trophy} style={{ height: "40px" }} alt="trophy" />
             </div>
@@ -73,7 +78,7 @@ const MatchPreview = ({
           <div className="team-name">
             <h5 className="team-two-name">{teamTwoName}</h5>
           </div>
-          {!homeWon && matchEnded ? (
+          {teamWon === "away" && matchEnded ? (
             <div>
               <img src={Trophy} style={{ height: "40px" }} alt="trophy" />
             </div>
