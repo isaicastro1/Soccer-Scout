@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 
 import { TeamDataContext } from "../../contexts/teamData.context";
-import { options } from "../../utils/options";
+import { options } from "../../secret/options";
 import { allLeagues } from "../../utils/all-leagues";
 
 import Table from "../../Components/table/table";
