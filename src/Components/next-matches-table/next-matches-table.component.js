@@ -93,9 +93,6 @@ const NextMatchesTable = () => {
                   </div>
                   <div className="match">
                     {match[1].map((game) => {
-                      let homeGoals = game.goals.home;
-                      let awayGoals = game.goals.away;
-                      let live = game.fixture.status.long;
                       let time = new Date(game.fixture.date)
                         .toLocaleString()
                         .split("")
@@ -111,9 +108,10 @@ const NextMatchesTable = () => {
                           teamTwoLogo={game.teams.away.logo}
                           round={game.league.round}
                           time={time}
-                          live={live}
-                          homeGoals={homeGoals}
-                          awayGoals={awayGoals}
+                          minutes={game.fixture.status.elapsed}
+                          live={game.fixture.status.long}
+                          homeGoals={game.goals.home}
+                          awayGoals={game.goals.away}
                         />
                       );
                     })}
