@@ -3,7 +3,7 @@ import { useState } from "react";
 import MatchPreview from "../../Components/match-preview/match-preview.component";
 import Spinner from "../spinner/spinner.component";
 
-import { options } from "../../secret/options";
+import { options } from "../../utils/options";
 import { getDate, leagueDates } from "../../utils/date";
 import { allLeagues, allLeaguesLogos } from "../../utils/all-leagues";
 
