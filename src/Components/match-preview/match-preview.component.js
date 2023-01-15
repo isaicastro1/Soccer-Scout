@@ -14,6 +14,7 @@ const MatchPreview = ({
   live,
   homeGoals,
   awayGoals,
+  minutes,
 }) => {
   const [homeWon, setHomeWon] = useState(false);
   const [matchEnded, setMatchEnded] = useState(false);
@@ -54,7 +55,7 @@ const MatchPreview = ({
             <div className="match-time">FT</div>
           ) : (
             <div className="match-time">
-              <span className="live-dot">LIVE</span>
+              <span className="live-dot">{minutes}'</span>
             </div>
           )}
           <div className="match-result">
