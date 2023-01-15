@@ -24,22 +24,20 @@ const MatchPreview = ({
         <div className="time">
           {live === "Not Started" ? (
             <div className="match-time">{time}</div>
+          ) : live === "Match Finished" ? (
+            <div className="match-time">FT</div>
           ) : (
-            (live = "Match Finished" ? (
-              <>
-                <div className="match-result">
-                  <div className="home-goals">{homeGoals}</div>
-                  <span style={{ display: "flex", alignItems: "center" }}>
-                    -
-                  </span>
-                  <div className="away-goals">{awayGoals}</div>
-                </div>
-                <div className="match-time">FT</div>
-              </>
+            <div className="match-time">LIVE</div>
+          )}
+          <div className="match-result">
+            <div className="home-goals">{homeGoals}</div>
+            {homeGoals || awayGoals ? (
+              <span style={{ display: "flex", alignItems: "center" }}>-</span>
             ) : (
               <></>
-            ))
-          )}
+            )}
+            <div className="away-goals">{awayGoals}</div>
+          </div>
         </div>
         <div className="team-logo-container">
           <img className="team-logo" src={teamTwoLogo} alt="logo" />
