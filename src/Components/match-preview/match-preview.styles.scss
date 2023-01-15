@@ -78,6 +78,25 @@
       .match-time {
         display: flex;
         font-size: 13px;
+        position: relative;
+
+        .live-dot {
+          display: flex;
+          justify-content: center;
+          width: 50px;
+
+          &::before {
+            content: "";
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            top: 8px;
+            left: 0;
+            border-radius: 50%;
+            background-color: red;
+            animation: grow infinite 2s;
+          }
+        }
       }
 
       .match-result {
@@ -119,5 +138,17 @@
       background-color: rgb(88, 88, 246);
       color: white;
     }
+  }
+}
+
+@keyframes grow {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
   }
 }
