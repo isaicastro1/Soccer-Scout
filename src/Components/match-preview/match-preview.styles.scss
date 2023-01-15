@@ -106,17 +106,17 @@
     justify-content: center;
     text-align: center;
     text-transform: uppercase;
-    width: 30%;
+    width: 20%;
     height: 20px;
     border-radius: 15px;
     font-size: 12px;
     font-weight: bolder;
-    color: blue;
+    color: rgb(88, 88, 246);
     transition: 0.3s;
     cursor: pointer;
 
     &:hover {
-      background-color: blue;
+      background-color: rgb(88, 88, 246);
       color: white;
     }
   }
