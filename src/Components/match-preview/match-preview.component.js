@@ -21,23 +21,21 @@ const MatchPreview = ({
   useEffect(() => {
     const homeWin = () => {
       if (homeGoals === null) return;
+      if (live === "Match Finished") {
+        setMatchEnded(true);
+      }
       setHomeWon(homeGoals > awayGoals);
-      setMatchEnded(true);
     };
 
     homeWin();
-  }, [awayGoals, homeGoals]);
-
-  useEffect(() => {
-    "effect render";
-  }, [homeWon]);
+  }, [awayGoals, homeGoals, live]);
 
   return (
     <div className="match-preview-container">
       <h3 className="match-game">{round}</h3>
       <div className="team-logos">
         <div className="team-logo-container">
-          {homeWon ? (
+          {homeWon && matchEnded ? (
             <div>
               <img src={Trophy} style={{ height: "40px" }} alt="trophy" />
             </div>
@@ -55,11 +53,13 @@ const MatchPreview = ({
           ) : live === "Match Finished" ? (
             <div className="match-time">FT</div>
           ) : (
-            <div className="match-time">LIVE</div>
+            <div className="match-time">
+              <span className="live-dot">LIVE</span>
+            </div>
           )}
           <div className="match-result">
             <div className="home-goals">{homeGoals}</div>
-            {homeGoals || awayGoals ? (
+            {homeGoals !== null || awayGoals !== null ? (
               <span style={{ display: "flex", alignItems: "center" }}>-</span>
             ) : (
               <></>

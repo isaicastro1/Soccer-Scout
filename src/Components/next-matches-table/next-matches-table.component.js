@@ -31,7 +31,6 @@ const NextMatchesTable = () => {
       throw new Error("Could not fetch data");
     }
     setNextMatches(data.response);
-    // console.log(data.response);
     setIsLoading(false);
   };
 
@@ -49,7 +48,6 @@ const NextMatchesTable = () => {
     arrayOfMatches.forEach((match) => {
       let date = match.fixture.date;
       date = date.slice(0, 10);
-      // console.log("date fn", date);
       if (fixtureDates[date]) {
         fixtureDates[date].push(match);
       } else {
