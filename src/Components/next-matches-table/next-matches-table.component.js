@@ -2,8 +2,6 @@ import { useState } from "react";
 
 import MatchPreview from "../../Components/match-preview/match-preview.component";
 import Spinner from "../spinner/spinner.component";
-
-import { options } from "../../utils/options";
 import { getDate, leagueDates } from "../../utils/date";
 import { allLeagues, allLeaguesLogos } from "../../utils/all-leagues";
 
@@ -21,10 +19,22 @@ const NextMatchesTable = () => {
   const getNextMatches = async () => {
     setIsLoading(true);
     setLeagueCalled(true);
-    const response = await fetch(
-      `https://v3.football.api-sports.io/fixtures?season=2022&league=${league}&from=${getDate()}&to=${upcomingMatchesDate}`,
-      options
-    );
+
+    const date = getDate();
+
+    const response = await fetch("http://localhost:3001/matches", {
+      method: "post",
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        league: league,
+        date: date,
+        upcomingMatchesDate: upcomingMatchesDate,
+      }),
+    });
+
     const data = await response.json();
     if (!data.response.length) {
       alert("Sorry, Could not fetch data from API");

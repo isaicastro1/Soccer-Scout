@@ -1,7 +1,6 @@
 import { useState, useContext } from "react";
 
 import { TeamDataContext } from "../../contexts/teamData.context";
-import { options } from "../../utils/options";
 import { allLeagues } from "../../utils/all-leagues";
 
 import Table from "../../Components/table/table";
@@ -21,10 +20,18 @@ const FindLeague = () => {
   const fetchTeamData = async () => {
     setIsLoading(true);
     setLeagueCalled(true);
-    const response = await fetch(
-      `https://v3.football.api-sports.io/standings?season=${year}&league=${league}`,
-      options
-    );
+
+    const response = await fetch("http://localhost:3001/tables", {
+      method: "post",
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        year: year,
+        league: league,
+      }),
+    });
     const data = await response.json();
     setNameOfLeague(data.response[0].league.name);
     const teamData = await data.response[0].league.standings;
