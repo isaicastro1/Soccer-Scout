@@ -1,9 +1,5 @@
 import { useEffect, useState } from "react";
-
-import { LazyLoadImage } from "react-lazy-load-image-component";
-
 import Trophy from "../../Assets/trophy.png";
-import Shield from "../../Assets/shield.svg";
 
 import "./match-preview.styles.scss";
 
@@ -54,11 +50,9 @@ const MatchPreview = ({
           <div className="team-name">
             <h5 className="team-one-name">{teamOneName}</h5>
           </div>
-          <LazyLoadImage
+          <img
             className="team-logo"
             src={teamOneLogo}
-            // src={Shield}
-            placeholderSrc={Shield}
             alt="logo"
             style={{ height: "40px", width: "40px" }}
           />
@@ -84,11 +78,9 @@ const MatchPreview = ({
           </div>
         </div>
         <div className="team-logo-container">
-          <LazyLoadImage
+          <img
             className="team-logo"
             src={teamTwoLogo}
-            placeholderSrc={Shield}
-            // src={Shield}
             alt="logo"
             style={{ height: "40px", width: "40px" }}
           />

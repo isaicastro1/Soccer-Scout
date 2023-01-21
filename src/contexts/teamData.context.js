@@ -17,7 +17,7 @@ export const TeamDataContext = createContext({
 
 export const TeamDataProvider = ({ children }) => {
   const [allTeamData, setAllTeamData] = useState([]);
-  const [leagueName, setLeagueName] = useState("");
+  const [leagueName, setLeagueName] = useState("laliga");
   const [teamId, setTeamId] = useState(teamsId);
   const [date, setDate] = useState("");
   const [nextMatches, setNextMatches] = useState("");
