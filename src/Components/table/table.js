@@ -3,15 +3,15 @@ import { TeamDataContext } from "../../contexts/teamData.context";
 
 import "./table.scss";
 
-const Table = ({ nameOfLeague }) => {
+const Table = ({ leagueLogo, leagueName }) => {
   const { allTeamData, teamId } = useContext(TeamDataContext);
 
   return (
     <div className="league">
-      <header>
-        <h1>{nameOfLeague}</h1>
+      <header className={`${leagueName}-container`}>
+        <img src={leagueLogo} style={{ width: "70px" }} alt="team-logo" />
       </header>
-      <div className={`${nameOfLeague.replaceAll(" ", "-")}`}>
+      <div className={leagueName}>
         {allTeamData &&
           allTeamData.map((array) => {
             return (

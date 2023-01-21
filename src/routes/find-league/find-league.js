@@ -13,9 +13,10 @@ const FindLeague = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [year, setYear] = useState(2022);
   const [leagueCalled, setLeagueCalled] = useState(false);
-  const [nameOfLeague, setNameOfLeague] = useState("");
+  const [leagueLogo, setLeagueLogo] = useState("");
 
-  const { setAllTeamData, setLeagueName } = useContext(TeamDataContext);
+  const { setAllTeamData, setLeagueName, leagueName } =
+    useContext(TeamDataContext);
 
   const fetchTeamData = async () => {
     setIsLoading(true);
@@ -33,7 +34,7 @@ const FindLeague = () => {
       }),
     });
     const data = await response.json();
-    setNameOfLeague(data.response[0].league.name);
+    setLeagueLogo(data.response[0].league.logo);
     const teamData = await data.response[0].league.standings;
     setAllTeamData(teamData);
     setIsLoading(false);
@@ -53,7 +54,7 @@ const FindLeague = () => {
       {isLoading ? (
         <Spinner />
       ) : leagueCalled ? (
-        <Table nameOfLeague={nameOfLeague} />
+        <Table leagueName={leagueName} leagueLogo={leagueLogo} />
       ) : (
         <div className="find-league-container">
           <h2>Find your favorite team's standings!</h2>
