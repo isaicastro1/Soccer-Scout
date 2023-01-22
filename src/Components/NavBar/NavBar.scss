@@ -7,9 +7,9 @@
   .nav {
     display: flex;
     justify-content: space-between;
-    gap: 30px;
     width: 100%;
     min-width: 100vw;
+    max-height: 80px;
     align-items: center;
     color: white;
     background-color: rgb(0, 0, 0, 1);
@@ -27,6 +27,8 @@
 
     .soccer-logo {
       max-width: 80px;
+      min-width: 70px;
+      width: 30vw;
       cursor: pointer;
     }
 
@@ -48,13 +50,14 @@
         text-decoration: underline;
       }
     }
+
     .right-nav-container {
       display: flex;
-      justify-content: space-evenly;
+      justify-content: center;
       align-items: center;
       width: 35vw;
       max-width: 300px;
-      min-width: 150px;
+      min-width: 50px;
 
       .table-nav {
         font-size: 1rem;
@@ -63,6 +66,7 @@
         color: white;
         margin: 0;
         text-decoration: none;
+        width: max-content;
 
         &:hover {
           opacity: 0.8;
@@ -83,5 +87,76 @@
         height: 30px;
       }
     }
+  }
+}
+
+.hamburger-menu {
+  display: none;
+  cursor: pointer;
+
+  .bar {
+    width: 20px;
+    height: 2px;
+    margin: 4px 0;
+    transition: 0.4s;
+    background-color: white;
+  }
+
+  &.open {
+    .bar:nth-of-type(1) {
+      transform: rotate(-45deg) translate(-5px, 3px);
+    }
+    .bar:nth-of-type(2) {
+      opacity: 0;
+    }
+    .bar:nth-of-type(3) {
+      transform: rotate(45deg) translate(-5px, -4px);
+    }
+  }
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  list-style: none;
+  gap: 10px;
+
+  a,
+  span {
+    text-decoration: none;
+    color: #000;
+    font-size: 1.2rem;
+    padding: 5px;
+    transition: 0.2s;
+
+    &:hover {
+      color: #ccc;
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .nav-links {
+    display: none;
+  }
+
+  .nav-container .nav .right-nav-container {
+    justify-content: flex-end;
+    margin-right: 20px;
+  }
+
+  .hamburger-menu {
+    display: block;
+  }
+
+  .hamburger-menu.open .nav-links {
+    display: block;
+  }
+}
+
+@media screen and (min-width: 500px) and (max-width: 800px) {
+  .nav-container .nav .right-nav-container {
+    margin-right: 50px;
   }
 }

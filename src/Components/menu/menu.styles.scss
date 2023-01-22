@@ -1,0 +1,38 @@
+.menu-container {
+  position: absolute;
+  top: 80px;
+  left: 0;
+  height: 300px;
+  width: 100vw;
+  background-color: #fff;
+  border: 3px solid #1332a2;
+
+  .menu-nav-links {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 100%;
+
+    a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 50px;
+      width: 150px;
+      color: #fff;
+      background-color: #1332a2;
+      font-weight: 600;
+      font-family: "Courier New", Courier, monospace;
+      transition: all 0.1s ease-in-out;
+
+      p {
+        margin: 0;
+      }
+
+      &:hover {
+        background-color: #3d8eff;
+      }
+    }
+  }
+}
