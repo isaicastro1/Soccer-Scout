@@ -42,9 +42,9 @@ export const teamsId = {
 };
 
 export const teamsInfo = [
-  ["Real Madrid", "https://media-5.api-sports.io/football/teams/541.png", 1],
-  ["Barcelona", "https://media-5.api-sports.io/football/teams/529.png", 2],
-  ["Real Sociedad", "https://media-4.api-sports.io/football/teams/548.png", 3],
+  ["Real Madrid", "https://media-3.api-sports.io/football/teams/541.png", 1],
+  ["Barcelona", "https://media.api-sports.io/football/teams/529.png", 2],
+  ["Real Sociedad", "https://media-3.api-sports.io/football/teams/548.png", 3],
   ["Athletic Club", "https://media-5.api-sports.io/football/teams/531.png", 4],
   ["Sevilla", "https://media-4.api-sports.io/football/teams/536.png", 18],
   ["Arsenal", "https://media-5.api-sports.io/football/teams/42.png", 21],
