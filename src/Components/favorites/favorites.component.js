@@ -69,6 +69,7 @@ const Favorites = ({ currentUser }) => {
         <>
           <div className="favorites-container" ref={myRef}>
             {teamsInfo.map((team) => {
+              console.log(team);
               return (
                 <div
                   className="team"

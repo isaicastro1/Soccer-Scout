@@ -33,7 +33,7 @@
       height: 35px;
       font-size: 0.9rem;
       font-weight: 400;
-      background-color: #405cf5;
+      background-color: #1332a2;
       color: white;
       border: none;
       border-radius: 15px;
@@ -42,6 +42,7 @@
       &:hover {
         cursor: pointer;
         transform: scale(1.05);
+        background-color: #3d8eff;
       }
     }
   }
