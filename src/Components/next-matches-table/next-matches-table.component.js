@@ -29,9 +29,9 @@ const NextMatchesTable = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        league: league,
-        date: date,
-        upcomingMatchesDate: upcomingMatchesDate,
+        league,
+        date,
+        upcomingMatchesDate,
       }),
     });
 
