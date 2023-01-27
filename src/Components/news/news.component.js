@@ -13,10 +13,13 @@ const News = () => {
     try {
       setIsLoading(true);
       const getNewsData = async () => {
-        const response = await fetch(
-          "https://soccer-api.herokuapp.com/news"
-        ).then((data) => data.json());
-
+        const response = await fetch("https://soccer-api.herokuapp.com/news", {
+          method: "get",
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Content-Type": "application/json",
+          },
+        }).then((data) => data.json());
         setNewsData(response);
         setIsLoading(false);
       };
