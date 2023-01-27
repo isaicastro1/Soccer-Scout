@@ -14,7 +14,7 @@ const News = () => {
       setIsLoading(true);
       const getNewsData = async () => {
         const response = await fetch(
-          "https://soccer-news-api.onrender.com"
+          "https://soccer-api.herokuapp.com/news"
         ).then((data) => data.json());
 
         setNewsData(response);
