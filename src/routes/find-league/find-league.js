@@ -22,7 +22,7 @@ const FindLeague = () => {
     setIsLoading(true);
     setLeagueCalled(true);
 
-    const response = await fetch("http://localhost:3001/tables", {
+    const response = await fetch("https://soccer-api.herokuapp.com/tables", {
       method: "post",
       headers: {
         "Access-Control-Allow-Origin": "*",
@@ -33,6 +33,7 @@ const FindLeague = () => {
         league: league,
       }),
     });
+
     const data = await response.json();
     setLeagueLogo(data.response[0].league.logo);
     const teamData = await data.response[0].league.standings;

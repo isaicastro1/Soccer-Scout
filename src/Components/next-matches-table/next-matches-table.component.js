@@ -22,7 +22,7 @@ const NextMatchesTable = () => {
 
     const date = getDate();
 
-    const response = await fetch("http://localhost:3001/matches", {
+    const response = await fetch("https://soccer-api.herokuapp.com/matches", {
       method: "post",
       headers: {
         "Access-Control-Allow-Origin": "*",
