@@ -4,16 +4,40 @@
   justify-content: center;
   width: 100%;
   height: calc(100vh - 70px);
+  max-height: fit-content;
   color: white;
   align-items: center;
   position: relative;
   top: 85px;
 
-  .champions {
+  h2 {
+    color: black;
+    margin: 5px;
+  }
+
+  .champions-container,
+  .europaLeague-container {
+    position: relative;
+    top: 120px;
+  }
+
+  .champions,
+  .europaLeague {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     row-gap: 15px;
     column-gap: 20px;
+    position: relative;
+    top: 120px;
+  }
+
+  .ligaMx,
+  .mls {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    position: relative;
   }
 
   header {
@@ -83,5 +107,12 @@
       text-decoration: none;
       color: inherit;
     }
+  }
+}
+
+@media screen and (max-width: 580px) {
+  .league .ligaMx,
+  .mls {
+    top: 250px;
   }
 }
