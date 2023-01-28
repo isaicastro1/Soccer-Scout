@@ -1,7 +1,20 @@
 export const allLeagues = {
   premier: 39,
-  laliga: 140,
+  laLiga: 140,
   champions: 2,
+  ligue1: 61,
+  bundesliga: 78,
+  serieA: 135,
+  ligaMx: 262,
+  mls: 253,
+  europaLeague: 3,
+  copaDelRey: 143,
+  faCup: 45,
+  euro: 4,
+  copaAmerica: 9,
+  clubWC: 15,
+  goldCup: 22,
+  proLeague: 307,
 };
 
 export const allLeaguesLogos = {

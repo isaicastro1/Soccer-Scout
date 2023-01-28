@@ -3,7 +3,7 @@ import { useState } from "react";
 import MatchPreview from "../../Components/match-preview/match-preview.component";
 import Spinner from "../spinner/spinner.component";
 import { getDate, leagueDates } from "../../utils/date";
-import { allLeagues, allLeaguesLogos } from "../../utils/all-leagues";
+import { allLeagues } from "../../utils/all-leagues";
 
 import "./next-matches-table.styles.scss";
 
@@ -14,7 +14,7 @@ const NextMatchesTable = () => {
   const [leagueCalled, setLeagueCalled] = useState(false);
   const [nameOfLeague, setNameOfLeague] = useState("laliga");
 
-  const upcomingMatchesDate = leagueDates[`${nameOfLeague}`];
+  const upcomingMatchesDate = leagueDates[`${nameOfLeague}`] || "2023-02-28";
 
   const getNextMatches = async () => {
     setIsLoading(true);
@@ -85,17 +85,15 @@ const NextMatchesTable = () => {
       ) : leagueCalled ? (
         <div className="matches-container">
           <img
-            src={
-              allLeaguesLogos[
-                nameOfLeague.toString().toLowerCase().replace(" ", "")
-              ]
-            }
-            style={{ width: "100px", height: "100px" }}
+            src={nextMatches[0].league.logo}
+            style={{ width: "100px" }}
             alt="logo"
           />
           {newMatches &&
             newMatches.map((match) => {
-              let date = new Date(match[0]).toGMTString().slice(0, 11);
+              let date = new Date(match[1][0].fixture.date)
+                .toString()
+                .slice(0, 11);
               return (
                 <div key={match[0]} className="same-day-match">
                   <div className="match-date-title">
@@ -139,6 +137,19 @@ const NextMatchesTable = () => {
               <option value="laliga">La Liga</option>
               <option value="premier">Premier League</option>
               <option value="champions">Champions League</option>
+              <option value="ligue1">Ligue 1</option>
+              <option value="bundesliga">Bundesliga</option>
+              <option value="serieA">Serie A</option>
+              <option value="ligaMx">Liga MX</option>
+              <option value="mls">MLS</option>
+              <option value="europaLeague">Europa League</option>
+              <option value="copaDelRey">Copa del Rey</option>
+              <option value="faCup">FA Cup</option>
+              <option value="euro">Euro Championship</option>
+              <option value="copaAmerica">Copa America</option>
+              <option value="clubWC">Club World Cup</option>
+              <option value="goldCup">Gold Cup</option>
+              <option value="proLeague">Pro League</option>
             </select>
             <br />
             <button className="button-submit" onClick={getNextMatches}>

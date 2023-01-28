@@ -21,7 +21,6 @@ const FindLeague = () => {
   const fetchTeamData = async () => {
     setIsLoading(true);
     setLeagueCalled(true);
-
     const response = await fetch("https://soccer-api.herokuapp.com/tables", {
       method: "post",
       headers: {
@@ -62,9 +61,22 @@ const FindLeague = () => {
           <div className="options">
             <label htmlFor="season">Choose a League:</label>
             <select name="league" id="league" onChange={handleLeagueChange}>
-              <option value="laliga">La Liga</option>
+              <option value="laLiga">La Liga</option>
               <option value="premier">Premier League</option>
               <option value="champions">Champions League</option>
+              <option value="ligue1">Ligue 1</option>
+              <option value="bundesliga">Bundesliga</option>
+              <option value="serieA">Serie A</option>
+              <option value="ligaMx">Liga MX</option>
+              <option value="mls">MLS</option>
+              <option value="europaLeague">Europa League</option>
+              <option value="copaDelRey">Copa del Rey</option>
+              <option value="faCup">FA Cup</option>
+              <option value="euro">Euro Championship</option>
+              <option value="copaAmerica">Copa America</option>
+              <option value="clubWC">Club World Cup</option>
+              <option value="goldCup">Gold Cup</option>
+              <option value="proLeague">Pro League</option>
             </select>
             <label htmlFor="year">Choose a Year:</label>
             <select name="year" id="year" onChange={handleYearChange}>
