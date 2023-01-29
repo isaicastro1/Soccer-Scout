@@ -40,14 +40,14 @@ const MatchPreview = ({
       <h3 className="match-game">{round}</h3>
       <div className="team-logos">
         <div className="team-logo-container">
-          {teamWon === "home" && matchEnded ? (
-            <div>
-              <img src={Trophy} style={{ height: "40px" }} alt="trophy" />
-            </div>
-          ) : (
-            <></>
-          )}
           <div className="team-name">
+            {teamWon === "home" && matchEnded ? (
+              <div className="winner">
+                <img src={Trophy} style={{ height: "30px" }} alt="trophy" />
+              </div>
+            ) : (
+              <></>
+            )}
             <h5 className="team-one-name">{teamOneName}</h5>
           </div>
           <img
@@ -85,18 +85,20 @@ const MatchPreview = ({
             style={{ height: "40px", width: "40px" }}
           />
           <div className="team-name">
+            {teamWon === "away" && matchEnded ? (
+              <div className="winner">
+                <img src={Trophy} style={{ height: "30px" }} alt="trophy" />
+              </div>
+            ) : (
+              <></>
+            )}
             <h5 className="team-two-name">{teamTwoName}</h5>
           </div>
-          {teamWon === "away" && matchEnded ? (
-            <div>
-              <img src={Trophy} style={{ height: "40px" }} alt="trophy" />
-            </div>
-          ) : (
-            <></>
-          )}
         </div>
       </div>
-      <div className="see-more">see more</div>
+      <div className="see-more" id="see-more">
+        see more
+      </div>
     </div>
   );
 };

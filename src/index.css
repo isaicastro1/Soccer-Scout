@@ -18,3 +18,13 @@ code {
   box-sizing: border-box;
   text-decoration: none;
 }
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.container {
+  padding: 0;
+  margin: 0;
+  max-width: 100vw;
+}
