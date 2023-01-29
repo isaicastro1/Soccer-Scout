@@ -21,23 +21,28 @@ const FindLeague = () => {
   const fetchTeamData = async () => {
     setIsLoading(true);
     setLeagueCalled(true);
-    const response = await fetch("https://soccer-api.herokuapp.com/tables", {
-      method: "post",
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        year: year,
-        league: league,
-      }),
-    });
+    try {
+      const response = await fetch("https://soccer-api.herokuapp.com/tables", {
+        method: "post",
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          year: year,
+          league: league,
+        }),
+      });
 
-    const data = await response.json();
-    setLeagueLogo(data.response[0].league.logo);
-    const teamData = await data.response[0].league.standings;
-    setAllTeamData(teamData);
-    setIsLoading(false);
+      const data = await response.json();
+      const teamData = await data.response[0].league.standings;
+      setLeagueLogo(data.response[0].league.logo);
+      setAllTeamData(teamData);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleLeagueChange = (event) => {
