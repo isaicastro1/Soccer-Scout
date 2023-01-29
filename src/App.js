@@ -12,7 +12,7 @@ import "./App.css";
 
 const App = () => {
   return (
-    <div>
+    <div className="container">
       <Routes>
         <Route path="/" element={<NavBar />}>
           <Route index element={<Home />} />
