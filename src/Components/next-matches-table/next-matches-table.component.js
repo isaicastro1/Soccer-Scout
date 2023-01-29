@@ -36,6 +36,7 @@ const NextMatchesTable = () => {
     });
 
     const data = await response.json();
+
     if (!data.response.length) {
       alert("Sorry, Could not fetch data from API");
       throw new Error("Could not fetch data");
@@ -70,6 +71,7 @@ const NextMatchesTable = () => {
 
   const newMatches = separateMatchesByDate(nextMatches);
 
+  //sorts matches by date
   newMatches.map((match) => {
     return match[1].sort((a, b) => {
       let hourA = new Date(a.fixture.date).getUTCHours();
@@ -101,27 +103,7 @@ const NextMatchesTable = () => {
                   </div>
                   <div className="match">
                     {match[1].map((game) => {
-                      let time = new Date(game.fixture.date)
-                        .toLocaleString()
-                        .split("")
-                        .splice(10, 12)
-                        .join("")
-                        .replace(":00", "");
-                      return (
-                        <MatchPreview
-                          key={game.fixture.id}
-                          teamOneName={game.teams.home.name}
-                          teamOneLogo={game.teams.home.logo}
-                          teamTwoName={game.teams.away.name}
-                          teamTwoLogo={game.teams.away.logo}
-                          round={game.league.round}
-                          time={time}
-                          minutes={game.fixture.status.elapsed}
-                          live={game.fixture.status.long}
-                          homeGoals={game.goals.home}
-                          awayGoals={game.goals.away}
-                        />
-                      );
+                      return <MatchPreview game={game} />;
                     })}
                   </div>
                 </div>

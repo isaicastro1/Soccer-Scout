@@ -3,40 +3,51 @@ import Trophy from "../../Assets/trophy.png";
 
 import "./match-preview.styles.scss";
 
-const MatchPreview = ({
-  teamOneName,
-  teamOneLogo,
-  teamTwoName,
-  teamTwoLogo,
-  round,
-  time,
-  live,
-  homeGoals,
-  awayGoals,
-  minutes,
-}) => {
-  const [teamWon, setteamWon] = useState("tie");
+const MatchPreview = ({ game }) => {
+  const [teamWon, setTeamWon] = useState("tie");
   const [matchEnded, setMatchEnded] = useState(false);
 
-  useEffect(() => {
-    const homeWin = () => {
-      if (homeGoals === null) return;
+  const {
+    fixture: {
+      id,
+      date,
+      status: { elapsed: minutes, long: live },
+    },
+    league: { round },
+    teams: {
+      home: { name: teamOneName, logo: teamOneLogo },
+      away: { name: teamTwoName, logo: teamTwoLogo },
+    },
+    goals: { home: homeGoals, away: awayGoals },
+  } = game;
 
+  let time = new Date(date)
+    .toLocaleString()
+    .split("")
+    .splice(10, 12)
+    .join("")
+    .replace(":00", "");
+
+  useEffect(() => {
+    const determineWinner = (homeGoals, awayGoals) => {
       if (live === "Match Finished") {
         setMatchEnded(true);
       }
 
-      const homeWins = homeGoals > awayGoals;
-      const tie = homeGoals === awayGoals;
-
-      homeWins ? setteamWon("home") : !tie ? setteamWon("away") : <></>;
+      if (homeGoals > awayGoals) {
+        setTeamWon("home");
+      } else if (homeGoals < awayGoals) {
+        setTeamWon("away");
+      } else {
+        return "tie";
+      }
     };
 
-    homeWin();
-  }, [awayGoals, homeGoals, live]);
+    determineWinner(homeGoals, awayGoals);
+  }, [homeGoals, awayGoals, live]);
 
   return (
-    <div className="match-preview-container">
+    <div className="match-preview-container" key={id}>
       <h3 className="match-game">{round}</h3>
       <div className="team-logos">
         <div className="team-logo-container">
@@ -59,14 +70,15 @@ const MatchPreview = ({
         </div>
         <div className="time">
           {live === "Not Started" ? (
-            <div className="match-time">{time}</div>
+            <span className="match-time">{time}</span>
           ) : live === "Match Finished" ? (
-            <div className="match-time">FT</div>
+            <span className="match-time">FT</span>
           ) : (
             <div className="match-time">
               <span className="live-dot">{minutes}'</span>
             </div>
           )}
+
           <div className="match-result">
             <div className="home-goals">{homeGoals}</div>
             {homeGoals !== null || awayGoals !== null ? (
