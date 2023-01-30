@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 
 import { TeamDataContext } from "../../contexts/teamData.context";
 import { allLeagues } from "../../utils/all-leagues";
@@ -9,7 +9,7 @@ import Spinner from "../../Components/spinner/spinner.component";
 import "./find-league.styles.scss";
 
 const FindLeague = () => {
-  const [league, setLeague] = useState(140);
+  const [league, setLeague] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [year, setYear] = useState(2022);
   const [leagueCalled, setLeagueCalled] = useState(false);
@@ -19,6 +19,8 @@ const FindLeague = () => {
     useContext(TeamDataContext);
 
   const fetchTeamData = async () => {
+    if (!league) return;
+
     setIsLoading(true);
     setLeagueCalled(true);
     try {
@@ -45,9 +47,15 @@ const FindLeague = () => {
     }
   };
 
+  useEffect(() => {
+    if (!league) return;
+
+    fetchTeamData();
+  }, [league]);
+
   const handleLeagueChange = (event) => {
-    setLeague(allLeagues[event.target.value]);
-    setLeagueName(event.target.value);
+    setLeagueName(event.target.getAttribute("value"));
+    setLeague(allLeagues[event.target.getAttribute("value")]);
   };
 
   const handleYearChange = (event) => {
@@ -62,28 +70,119 @@ const FindLeague = () => {
         <Table leagueName={leagueName} leagueLogo={leagueLogo} />
       ) : (
         <div className="find-league-container">
-          <h2>Find your favorite team's standings!</h2>
           <div className="options">
-            <label htmlFor="season">Choose a League:</label>
-            <select name="league" id="league" onChange={handleLeagueChange}>
-              <option value="laLiga">La Liga</option>
-              <option value="premier">Premier League</option>
-              <option value="champions">Champions League</option>
-              <option value="ligue1">Ligue 1</option>
-              <option value="bundesliga">Bundesliga</option>
-              <option value="serieA">Serie A</option>
-              <option value="ligaMx">Liga MX</option>
-              <option value="mls">MLS</option>
-              <option value="europaLeague">Europa League</option>
-              <option value="copaDelRey">Copa del Rey</option>
-              <option value="faCup">FA Cup</option>
-              <option value="euro">Euro Championship</option>
-              <option value="copaAmerica">Copa America</option>
-              <option value="clubWC">Club World Cup</option>
-              <option value="goldCup">Gold Cup</option>
-              <option value="proLeague">Pro League</option>
-            </select>
-            <label htmlFor="year">Choose a Year:</label>
+            <div
+              className="image-container"
+              value="laLiga"
+              onClick={handleLeagueChange}
+            >
+              <img
+                alt="logo"
+                value="laLiga"
+                src="https://media-3.api-sports.io/football/leagues/140.png"
+              />
+            </div>
+            <div
+              className="image-container"
+              value="premier"
+              onClick={handleLeagueChange}
+            >
+              <img
+                alt="logo"
+                value="premier"
+                src="https://media-3.api-sports.io/football/leagues/39.png"
+              />
+            </div>
+            <div
+              className="image-container"
+              value="champions"
+              onClick={handleLeagueChange}
+            >
+              <img
+                alt="logo"
+                value="champions"
+                src="https://media-3.api-sports.io/football/leagues/2.png"
+              />
+            </div>
+            <div
+              className="image-container"
+              value="ligue1"
+              onClick={handleLeagueChange}
+            >
+              <img
+                alt="logo"
+                value="ligue1"
+                src="https://media.api-sports.io/football/leagues/61.png"
+              />
+            </div>
+            <div
+              className="image-container"
+              value="bundesliga"
+              onClick={handleLeagueChange}
+            >
+              <img
+                alt="logo"
+                value="bundesliga"
+                src="https://media-3.api-sports.io/football/leagues/78.png"
+              />
+            </div>
+            <div
+              className="image-container"
+              value="serieA"
+              onClick={handleLeagueChange}
+            >
+              <img
+                alt="logo"
+                value="serieA"
+                src="https://media.api-sports.io/football/leagues/135.png"
+              />
+            </div>
+            <div
+              className="image-container"
+              value="ligaMx"
+              onClick={handleLeagueChange}
+            >
+              <img
+                alt="logo"
+                value="ligaMx"
+                src="https://media.api-sports.io/football/leagues/262.png"
+              />
+            </div>
+            <div
+              className="image-container"
+              value="mls"
+              onClick={handleLeagueChange}
+            >
+              <img
+                alt="logo"
+                value="mls"
+                src="https://media-3.api-sports.io/football/leagues/253.png"
+              />
+            </div>
+            <div
+              className="image-container"
+              value="europaLeague"
+              onClick={handleLeagueChange}
+            >
+              <img
+                alt="logo"
+                value="europaLeague"
+                src="https://media-3.api-sports.io/football/leagues/3.png"
+              />
+            </div>
+            <div
+              className="image-container"
+              value="proLeague"
+              onClick={handleLeagueChange}
+            >
+              <img
+                alt="logo"
+                value="proLeague"
+                src="https://media-3.api-sports.io/football/leagues/307.png"
+              />
+            </div>
+          </div>
+          <div className="choose-league">
             <select name="year" id="year" onChange={handleYearChange}>
               <option value="2022">2022</option>
               <option value="2021">2021</option>
@@ -99,10 +198,6 @@ const FindLeague = () => {
               <option value="2011">2011</option>
               <option value="2010">2010</option>
             </select>
-            <br />
-            <button className="button-submit" onClick={fetchTeamData}>
-              Search
-            </button>
           </div>
         </div>
       )}

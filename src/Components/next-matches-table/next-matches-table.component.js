@@ -103,7 +103,7 @@ const NextMatchesTable = () => {
                   </div>
                   <div className="match">
                     {match[1].map((game) => {
-                      return <MatchPreview game={game} />;
+                      return <MatchPreview game={game} key={game.fixture.id} />;
                     })}
                   </div>
                 </div>
