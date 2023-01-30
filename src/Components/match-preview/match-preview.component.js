@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+
 import Trophy from "../../Assets/trophy.png";
 
 import "./match-preview.styles.scss";
@@ -78,15 +79,16 @@ const MatchPreview = ({ game }) => {
               <span className="live-dot">{minutes}'</span>
             </div>
           )}
-
           <div className="match-result">
-            <div className="home-goals">{homeGoals}</div>
             {homeGoals !== null || awayGoals !== null ? (
-              <span style={{ display: "flex", alignItems: "center" }}>-</span>
+              <>
+                <div className="home-goals">{homeGoals}</div>
+                <span>-</span>
+                <div className="away-goals">{awayGoals}</div>
+              </>
             ) : (
               <></>
             )}
-            <div className="away-goals">{awayGoals}</div>
           </div>
         </div>
         <div className="team-logo-container">
