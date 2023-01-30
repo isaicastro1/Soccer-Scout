@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect, useCallback } from "react";
 
 import { TeamDataContext } from "../../contexts/teamData.context";
 import { allLeagues } from "../../utils/all-leagues";
@@ -18,7 +18,7 @@ const FindLeague = () => {
   const { setAllTeamData, setLeagueName, leagueName } =
     useContext(TeamDataContext);
 
-  const fetchTeamData = async () => {
+  const fetchTeamData = useCallback(async () => {
     if (!league) return;
 
     setIsLoading(true);
@@ -45,13 +45,11 @@ const FindLeague = () => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [league, year, setAllTeamData]);
 
   useEffect(() => {
-    if (!league) return;
-
     fetchTeamData();
-  }, [league]);
+  }, [fetchTeamData, setAllTeamData, setLeagueLogo]);
 
   const handleLeagueChange = (event) => {
     setLeagueName(event.target.getAttribute("value"));
