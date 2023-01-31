@@ -19,10 +19,14 @@
     margin-top: 90px;
   }
 
-  .champions-container,
+  .champions-container {
+    position: relative;
+    top: 160px;
+  }
+
   .europaLeague-container {
     position: relative;
-    top: 140px;
+    top: 170px;
   }
 
   .champions,
@@ -32,7 +36,7 @@
     row-gap: 15px;
     column-gap: 20px;
     position: relative;
-    top: 120px;
+    top: 150px;
   }
 
   .ligaMx,
@@ -48,7 +52,7 @@
     display: flex;
     justify-content: center;
     width: 100vw;
-    margin-top: 50px;
+    // margin-top: 30px;
 
     img {
       margin-top: 20px;
@@ -132,17 +136,26 @@
     position: relative;
     top: 340px;
 
-    .champions,
+    .champions {
+      grid-template-columns: repeat(1, 1fr);
+      position: relative;
+      top: 400px;
+    }
+
     .europaLeague {
       grid-template-columns: repeat(1, 1fr);
       position: relative;
-      top: 390px;
+      top: 420px;
     }
 
-    .champions-container,
+    .champions-container {
+      position: relative;
+      top: 380px;
+    }
+
     .europaLeague-container {
       position: relative;
-      top: 370px;
+      top: 400px;
     }
   }
 }
