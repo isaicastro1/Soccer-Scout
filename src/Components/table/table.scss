@@ -12,7 +12,7 @@
 
   h2 {
     color: black;
-    margin: 5px;
+    margin-top: 5px;
   }
 
   .premier-container {
@@ -22,7 +22,7 @@
   .champions-container,
   .europaLeague-container {
     position: relative;
-    top: 120px;
+    top: 140px;
   }
 
   .champions,
@@ -127,7 +127,8 @@
 }
 
 @media screen and (max-width: 600px) {
-  .league {
+  .league-champions,
+  .league-europaLeague {
     position: relative;
     top: 340px;
 
@@ -135,13 +136,13 @@
     .europaLeague {
       grid-template-columns: repeat(1, 1fr);
       position: relative;
-      top: 340px;
+      top: 390px;
     }
 
     .champions-container,
     .europaLeague-container {
       position: relative;
-      top: 320px;
+      top: 370px;
     }
   }
 }
