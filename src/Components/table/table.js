@@ -7,7 +7,7 @@ const Table = ({ leagueLogo, leagueName }) => {
   const { allTeamData, teamId } = useContext(TeamDataContext);
 
   return (
-    <div className="league">
+    <div className={`league ${"league-" + leagueName}`}>
       <header className={`${leagueName}-container`}>
         <img src={leagueLogo} style={{ width: "70px" }} alt="team-logo" />
       </header>
