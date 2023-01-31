@@ -125,3 +125,23 @@
     top: 250px;
   }
 }
+
+@media screen and (max-width: 600px) {
+  .league {
+    position: relative;
+    top: 340px;
+
+    .champions,
+    .europaLeague {
+      grid-template-columns: repeat(1, 1fr);
+      position: relative;
+      top: 340px;
+    }
+
+    .champions-container,
+    .europaLeague-container {
+      position: relative;
+      top: 320px;
+    }
+  }
+}
