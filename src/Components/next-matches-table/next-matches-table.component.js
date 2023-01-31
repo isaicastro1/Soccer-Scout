@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 
 import MatchPreview from "../../Components/match-preview/match-preview.component";
 import Spinner from "../spinner/spinner.component";
@@ -9,45 +9,56 @@ import "./next-matches-table.styles.scss";
 
 const NextMatchesTable = () => {
   const [nextMatches, setNextMatches] = useState([]);
-  const [league, setLeague] = useState(140);
+  const [league, setLeague] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [leagueCalled, setLeagueCalled] = useState(false);
   const [nameOfLeague, setNameOfLeague] = useState("laliga");
 
   const upcomingMatchesDate = leagueDates[`${nameOfLeague}`] || "2023-02-28";
 
-  const getNextMatches = async () => {
+  const getNextMatches = useCallback(async () => {
+    if (!league) return;
+
     setIsLoading(true);
     setLeagueCalled(true);
 
     const date = getDate();
 
-    const response = await fetch("https://soccer-api.herokuapp.com/matches", {
-      method: "post",
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        league,
-        date,
-        upcomingMatchesDate,
-      }),
-    });
+    try {
+      const response = await fetch("https://soccer-api.herokuapp.com/matches", {
+        method: "post",
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          league,
+          date,
+          upcomingMatchesDate,
+        }),
+      });
 
-    const data = await response.json();
+      const data = await response.json();
 
-    if (!data.response.length) {
-      alert("Sorry, Could not fetch data from API");
-      throw new Error("Could not fetch data");
+      if (!data.response.length) {
+        alert("Sorry, Could not fetch data from API");
+        throw new Error("Could not fetch data");
+      }
+      setNextMatches(data.response);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
     }
-    setNextMatches(data.response);
-    setIsLoading(false);
-  };
+  }, [league, upcomingMatchesDate]);
+
+  useEffect(() => {
+    getNextMatches();
+  }, [getNextMatches, setNextMatches, setIsLoading]);
 
   const handleLeagueChange = (event) => {
-    setLeague(allLeagues[event.target.value]);
-    setNameOfLeague(event.target.value);
+    setLeague(allLeagues[event.target.getAttribute("value")]);
+    setNameOfLeague(event.target.getAttribute("value"));
   };
 
   const separateMatchesByDate = (arrayOfMatches) => {
@@ -112,31 +123,117 @@ const NextMatchesTable = () => {
         </div>
       ) : (
         <div className="find-league-container">
-          <h2>Find your favorite league's upcoming matches!</h2>
           <div className="options">
-            <label htmlFor="season">Choose a League:</label>
-            <select name="league" id="league" onChange={handleLeagueChange}>
-              <option value="laliga">La Liga</option>
-              <option value="premier">Premier League</option>
-              <option value="champions">Champions League</option>
-              <option value="ligue1">Ligue 1</option>
-              <option value="bundesliga">Bundesliga</option>
-              <option value="serieA">Serie A</option>
-              <option value="ligaMx">Liga MX</option>
-              <option value="mls">MLS</option>
-              <option value="europaLeague">Europa League</option>
-              <option value="copaDelRey">Copa del Rey</option>
-              <option value="faCup">FA Cup</option>
-              <option value="euro">Euro Championship</option>
-              <option value="copaAmerica">Copa America</option>
-              <option value="clubWC">Club World Cup</option>
-              <option value="goldCup">Gold Cup</option>
-              <option value="proLeague">Pro League</option>
-            </select>
-            <br />
-            <button className="button-submit" onClick={getNextMatches}>
-              Search
-            </button>
+            <div
+              className="image-container"
+              value="laLiga"
+              onClick={handleLeagueChange}
+            >
+              <img
+                alt="logo"
+                value="laLiga"
+                src="https://media-3.api-sports.io/football/leagues/140.png"
+              />
+            </div>
+            <div
+              className="image-container"
+              value="premier"
+              onClick={handleLeagueChange}
+            >
+              <img
+                alt="logo"
+                value="premier"
+                src="https://media-3.api-sports.io/football/leagues/39.png"
+              />
+            </div>
+            <div
+              className="image-container"
+              value="champions"
+              onClick={handleLeagueChange}
+            >
+              <img
+                alt="logo"
+                value="champions"
+                src="https://media-3.api-sports.io/football/leagues/2.png"
+              />
+            </div>
+            <div
+              className="image-container"
+              value="ligue1"
+              onClick={handleLeagueChange}
+            >
+              <img
+                alt="logo"
+                value="ligue1"
+                src="https://media.api-sports.io/football/leagues/61.png"
+              />
+            </div>
+            <div
+              className="image-container"
+              value="bundesliga"
+              onClick={handleLeagueChange}
+            >
+              <img
+                alt="logo"
+                value="bundesliga"
+                src="https://media-3.api-sports.io/football/leagues/78.png"
+              />
+            </div>
+            <div
+              className="image-container"
+              value="serieA"
+              onClick={handleLeagueChange}
+            >
+              <img
+                alt="logo"
+                value="serieA"
+                src="https://media.api-sports.io/football/leagues/135.png"
+              />
+            </div>
+            <div
+              className="image-container"
+              value="ligaMx"
+              onClick={handleLeagueChange}
+            >
+              <img
+                alt="logo"
+                value="ligaMx"
+                src="https://media.api-sports.io/football/leagues/262.png"
+              />
+            </div>
+            <div
+              className="image-container"
+              value="mls"
+              onClick={handleLeagueChange}
+            >
+              <img
+                alt="logo"
+                value="mls"
+                src="https://media-3.api-sports.io/football/leagues/253.png"
+              />
+            </div>
+            <div
+              className="image-container"
+              value="europaLeague"
+              onClick={handleLeagueChange}
+            >
+              <img
+                alt="logo"
+                value="europaLeague"
+                src="https://media-3.api-sports.io/football/leagues/3.png"
+              />
+            </div>
+            <div
+              className="image-container"
+              value="proLeague"
+              onClick={handleLeagueChange}
+            >
+              <img
+                alt="logo"
+                value="proLeague"
+                src="https://media-3.api-sports.io/football/leagues/307.png"
+              />
+            </div>
           </div>
         </div>
       )}

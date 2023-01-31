@@ -70,7 +70,7 @@ const MatchPreview = ({ game }) => {
           />
         </div>
         <div className="time">
-          {live === "Not Started" ? (
+          {live === "Not Started" || live === "Time to be defined" ? (
             <span className="match-time">{time}</span>
           ) : live === "Match Finished" ? (
             <span className="match-time">FT</span>
