@@ -122,117 +122,120 @@ const NextMatchesTable = () => {
             })}
         </div>
       ) : (
-        <div className="find-league-container">
-          <div className="options">
-            <div
-              className="image-container"
-              value="laLiga"
-              onClick={handleLeagueChange}
-            >
-              <img
-                alt="logo"
+        <div className="upcoming-matches-container">
+          <h2>UPCOMING MATCHES</h2>
+          <div className="find-league-container">
+            <div className="options">
+              <div
+                className="image-container"
                 value="laLiga"
-                src="https://media-3.api-sports.io/football/leagues/140.png"
-              />
-            </div>
-            <div
-              className="image-container"
-              value="premier"
-              onClick={handleLeagueChange}
-            >
-              <img
-                alt="logo"
+                onClick={handleLeagueChange}
+              >
+                <img
+                  alt="logo"
+                  value="laLiga"
+                  src="https://media-3.api-sports.io/football/leagues/140.png"
+                />
+              </div>
+              <div
+                className="image-container"
                 value="premier"
-                src="https://media-3.api-sports.io/football/leagues/39.png"
-              />
-            </div>
-            <div
-              className="image-container"
-              value="champions"
-              onClick={handleLeagueChange}
-            >
-              <img
-                alt="logo"
+                onClick={handleLeagueChange}
+              >
+                <img
+                  alt="logo"
+                  value="premier"
+                  src="https://media-3.api-sports.io/football/leagues/39.png"
+                />
+              </div>
+              <div
+                className="image-container"
                 value="champions"
-                src="https://media-3.api-sports.io/football/leagues/2.png"
-              />
-            </div>
-            <div
-              className="image-container"
-              value="ligue1"
-              onClick={handleLeagueChange}
-            >
-              <img
-                alt="logo"
+                onClick={handleLeagueChange}
+              >
+                <img
+                  alt="logo"
+                  value="champions"
+                  src="https://media-3.api-sports.io/football/leagues/2.png"
+                />
+              </div>
+              <div
+                className="image-container"
                 value="ligue1"
-                src="https://media.api-sports.io/football/leagues/61.png"
-              />
-            </div>
-            <div
-              className="image-container"
-              value="bundesliga"
-              onClick={handleLeagueChange}
-            >
-              <img
-                alt="logo"
+                onClick={handleLeagueChange}
+              >
+                <img
+                  alt="logo"
+                  value="ligue1"
+                  src="https://media.api-sports.io/football/leagues/61.png"
+                />
+              </div>
+              <div
+                className="image-container"
                 value="bundesliga"
-                src="https://media-3.api-sports.io/football/leagues/78.png"
-              />
-            </div>
-            <div
-              className="image-container"
-              value="serieA"
-              onClick={handleLeagueChange}
-            >
-              <img
-                alt="logo"
+                onClick={handleLeagueChange}
+              >
+                <img
+                  alt="logo"
+                  value="bundesliga"
+                  src="https://media-3.api-sports.io/football/leagues/78.png"
+                />
+              </div>
+              <div
+                className="image-container"
                 value="serieA"
-                src="https://media.api-sports.io/football/leagues/135.png"
-              />
-            </div>
-            <div
-              className="image-container"
-              value="ligaMx"
-              onClick={handleLeagueChange}
-            >
-              <img
-                alt="logo"
+                onClick={handleLeagueChange}
+              >
+                <img
+                  alt="logo"
+                  value="serieA"
+                  src="https://media.api-sports.io/football/leagues/135.png"
+                />
+              </div>
+              <div
+                className="image-container"
                 value="ligaMx"
-                src="https://media.api-sports.io/football/leagues/262.png"
-              />
-            </div>
-            <div
-              className="image-container"
-              value="mls"
-              onClick={handleLeagueChange}
-            >
-              <img
-                alt="logo"
+                onClick={handleLeagueChange}
+              >
+                <img
+                  alt="logo"
+                  value="ligaMx"
+                  src="https://media.api-sports.io/football/leagues/262.png"
+                />
+              </div>
+              <div
+                className="image-container"
                 value="mls"
-                src="https://media-3.api-sports.io/football/leagues/253.png"
-              />
-            </div>
-            <div
-              className="image-container"
-              value="europaLeague"
-              onClick={handleLeagueChange}
-            >
-              <img
-                alt="logo"
+                onClick={handleLeagueChange}
+              >
+                <img
+                  alt="logo"
+                  value="mls"
+                  src="https://media-3.api-sports.io/football/leagues/253.png"
+                />
+              </div>
+              <div
+                className="image-container"
                 value="europaLeague"
-                src="https://media-3.api-sports.io/football/leagues/3.png"
-              />
-            </div>
-            <div
-              className="image-container"
-              value="proLeague"
-              onClick={handleLeagueChange}
-            >
-              <img
-                alt="logo"
+                onClick={handleLeagueChange}
+              >
+                <img
+                  alt="logo"
+                  value="europaLeague"
+                  src="https://media-3.api-sports.io/football/leagues/3.png"
+                />
+              </div>
+              <div
+                className="image-container"
                 value="proLeague"
-                src="https://media-3.api-sports.io/football/leagues/307.png"
-              />
+                onClick={handleLeagueChange}
+              >
+                <img
+                  alt="logo"
+                  value="proLeague"
+                  src="https://media-3.api-sports.io/football/leagues/307.png"
+                />
+              </div>
             </div>
           </div>
         </div>

@@ -1,17 +1,24 @@
+.upcoming-matches-container {
+  position: relative;
+  top: 80px;
+}
+
+.find-league-wrapper {
+  position: relative;
+  top: 80px;
+}
+
+h2 {
+  color: black;
+}
+
 .find-league-container {
   display: flex;
   justify-content: center;
-  align-items: center;
-  position: relative;
+  align-items: flex-start;
   gap: 40px;
-  height: 100vh;
   background-color: #f1f3f8;
   color: black;
-
-  h2 {
-    color: black;
-    margin: 0;
-  }
 
   .options {
     display: grid;
@@ -55,7 +62,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    gap: 20px;
+    height: 70vh;
 
     select {
       width: 80px;
@@ -75,7 +82,17 @@
 
 @media screen and (min-width: 900px) {
   .find-league-container .options {
+    height: 60vh;
     grid-template-columns: repeat(5, 1fr);
-    gap: 40px;
+    column-gap: 40px;
+    row-gap: 20px;
+
+    .image-container {
+      align-items: center;
+    }
+  }
+
+  .find-league-container .choose-league {
+    height: 60vh;
   }
 }
