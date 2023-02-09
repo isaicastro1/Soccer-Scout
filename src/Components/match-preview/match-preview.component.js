@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 
 import Trophy from "../../Assets/trophy.png";
+import Shield from "../../Assets/shield.png";
 
 import "./match-preview.styles.scss";
 
 const MatchPreview = ({ game }) => {
   const [teamWon, setTeamWon] = useState("tie");
   const [matchEnded, setMatchEnded] = useState(false);
+  const [homeTeamLogo, setHomeTeamLogo] = useState(Shield);
+  const [awayTeamLogo, setAwayTeamLogo] = useState(Shield);
 
   const {
     fixture: {
@@ -64,9 +67,10 @@ const MatchPreview = ({ game }) => {
           </div>
           <img
             className="team-logo"
-            src={teamOneLogo}
+            src={homeTeamLogo}
             alt="logo"
             style={{ height: "40px", width: "40px" }}
+            onLoad={() => setHomeTeamLogo(teamOneLogo)}
           />
         </div>
         <div className="time">
@@ -94,9 +98,10 @@ const MatchPreview = ({ game }) => {
         <div className="team-logo-container">
           <img
             className="team-logo"
-            src={teamTwoLogo}
+            src={awayTeamLogo}
             alt="logo"
             style={{ height: "40px", width: "40px" }}
+            onLoad={() => setAwayTeamLogo(teamTwoLogo)}
           />
           <div className="team-name">
             {teamWon === "away" && matchEnded ? (

@@ -5,6 +5,8 @@ import Spinner from "../spinner/spinner.component";
 import { getDate, leagueDates } from "../../utils/date";
 import { allLeagues } from "../../utils/all-leagues";
 
+import Shield from "../../Assets/shield.png";
+
 import "./next-matches-table.styles.scss";
 
 const NextMatchesTable = () => {
@@ -13,6 +15,7 @@ const NextMatchesTable = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [leagueCalled, setLeagueCalled] = useState(false);
   const [nameOfLeague, setNameOfLeague] = useState("laliga");
+  const [logoPlaceholder, setLogoPlaceholder] = useState(Shield);
 
   const upcomingMatchesDate = leagueDates[`${nameOfLeague}`] || "2023-02-28";
 
@@ -98,9 +101,11 @@ const NextMatchesTable = () => {
       ) : leagueCalled ? (
         <div className="matches-container">
           <img
-            src={nextMatches[0].league.logo}
+            // src={nextMatches[0].league.logo}
+            src={logoPlaceholder}
             style={{ width: "100px" }}
             alt="logo"
+            onLoad={() => setLogoPlaceholder(nextMatches[0].league.logo)}
           />
           {newMatches &&
             newMatches.map((match) => {
