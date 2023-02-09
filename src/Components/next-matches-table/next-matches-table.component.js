@@ -101,7 +101,6 @@ const NextMatchesTable = () => {
       ) : leagueCalled ? (
         <div className="matches-container">
           <img
-            // src={nextMatches[0].league.logo}
             src={logoPlaceholder}
             style={{ width: "100px" }}
             alt="logo"
