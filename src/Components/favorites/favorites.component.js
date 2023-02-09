@@ -69,21 +69,20 @@ const Favorites = ({ currentUser }) => {
         <>
           <div className="favorites-container" ref={myRef}>
             {teamsInfo.map((team) => {
-              console.log(team);
               return (
                 <div
                   className="team"
-                  name={team[0]}
-                  value={team[0]}
+                  name={team["name"]}
+                  value={team["name"]}
                   onClick={(e) => {
                     handleClick(e);
                   }}
-                  key={team[2]}
+                  key={team["id"]}
                 >
-                  <h3 style={{ fontSize: "11px" }}>{team[0]}</h3>
+                  <h3 style={{ fontSize: "11px" }}>{team["name"]}</h3>
                   <img
                     style={{ height: "20px", width: "20px" }}
-                    src={team[1]}
+                    src={team["logo"]}
                     alt="logo"
                   />
                 </div>

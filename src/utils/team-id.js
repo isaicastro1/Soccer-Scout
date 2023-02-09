@@ -42,182 +42,152 @@ export const teamsId = {
 };
 
 export const teamsInfo = [
-  ["Real Madrid", "https://media-3.api-sports.io/football/teams/541.png", 1],
-  ["Barcelona", "https://media.api-sports.io/football/teams/529.png", 2],
-  ["Real Sociedad", "https://media-3.api-sports.io/football/teams/548.png", 3],
-  ["Athletic Club", "https://media-5.api-sports.io/football/teams/531.png", 4],
-  ["Sevilla", "https://media-4.api-sports.io/football/teams/536.png", 18],
-  ["Arsenal", "https://media-5.api-sports.io/football/teams/42.png", 21],
-  [
-    "Atletico Madrid",
-    "https://media-4.api-sports.io/football/teams/530.png",
-    5,
-  ],
-  ["Bayern Munich", "https://media-5.api-sports.io/football/teams/157.png", 47],
-  [
-    "Manchester United",
-    "https://media-5.api-sports.io/football/teams/33.png",
-    25,
-  ],
-  [
-    "Manchester City",
-    "https://media-4.api-sports.io/football/teams/50.png",
-    22,
-  ],
-  ["Chelsea", "https://media-6.api-sports.io/football/teams/49.png", 28],
-  ["Tottenham", "https://media-6.api-sports.io/football/teams/47.png", 24],
-  ["Liverpool", "https://media-4.api-sports.io/football/teams/40.png", 26],
-  ["Juventus", "https://media-6.api-sports.io/football/teams/496.png", 63],
-  [
-    "Borussia Dortmund",
-    "https://media-4.api-sports.io/football/teams/165.png",
-    59,
-  ],
-  [
-    "Paris Saint Germain",
-    "https://media-5.api-sports.io/football/teams/85.png",
-    62,
-  ],
-  ["Real Betis", "https://media-5.api-sports.io/football/teams/543.png", 6],
-  ["Osasuna", "https://media-4.api-sports.io/football/teams/727.png", 7],
-  ["Rayo Vallecano", "https://media-5.api-sports.io/football/teams/728.png", 8],
-  ["Villarreal", "https://media-6.api-sports.io/football/teams/533.png", 9],
-  ["Valencia", "https://media-5.api-sports.io/football/teams/532.png", 10],
-  ["Mallorca", "https://media-5.api-sports.io/football/teams/798.png", 11],
-  ["Valladolid", "https://media-6.api-sports.io/football/teams/720.png", 12],
-  ["Girona", "https://media-5.api-sports.io/football/teams/547.png", 13],
-  ["Almeria", "https://media-4.api-sports.io/football/teams/723.png", 14],
-  ["Getafe", "https://media-4.api-sports.io/football/teams/546.png", 15],
-  ["Espanyol", "https://media-5.api-sports.io/football/teams/540.png", 16],
-  ["Celta Vigo", "https://media-4.api-sports.io/football/teams/538.png", 17],
-  ["Cadiz", "https://media-4.api-sports.io/football/teams/724.png", 19],
-  ["Elche", "https://media-5.api-sports.io/football/teams/797.png", 20],
-  ["Newcastle", "https://media-4.api-sports.io/football/teams/34.png", 23],
-  ["Napoli", "https://media-5.api-sports.io/football/teams/492.png", 41],
-  ["Brighton", "https://media-6.api-sports.io/football/teams/51.png", 27],
-  ["Fulham", "https://media-4.api-sports.io/football/teams/36.png", 29],
-  ["Brentford", "https://media-5.api-sports.io/football/teams/55.png", 30],
-  ["Crystal Palace", "https://media-4.api-sports.io/football/teams/52.png", 31],
-  ["Aston Villa", "https://media-6.api-sports.io/football/teams/66.png", 32],
-  ["Leicester", "https://media-4.api-sports.io/football/teams/46.png", 33],
-  ["Bournemouth", "https://media-5.api-sports.io/football/teams/35.png", 34],
-  ["Leeds", "https://media-6.api-sports.io/football/teams/63.png", 35],
-  ["West Ham", "https://media-6.api-sports.io/football/teams/48.png", 36],
-  ["Everton", "https://media-5.api-sports.io/football/teams/45.png", 37],
-  [
-    "Nottingham Forest",
-    "https://media-6.api-sports.io/football/teams/65.png",
-    38,
-  ],
-  ["Southampton", "https://media-4.api-sports.io/football/teams/41.png", 39],
-  ["Wolves", "https://media-4.api-sports.io/football/teams/39.png", 40],
-  ["Ajax", "https://media-5.api-sports.io/football/teams/194.png", 42],
-  ["Rangers", "https://media-6.api-sports.io/football/teams/257.png", 43],
-  ["FC Porto", "https://media-5.api-sports.io/football/teams/212.png", 44],
-  [
-    "Club Brugge KV",
-    "https://media-4.api-sports.io/football/teams/569.png",
-    45,
-  ],
-  [
-    "Bayer Leverkusen",
-    "https://media-4.api-sports.io/football/teams/168.png",
-    46,
-  ],
-  ["Inter", "https://media-5.api-sports.io/football/teams/505.png", 48],
-  ["Plzen", "https://media-5.api-sports.io/football/teams/567.png", 49],
-  [
-    "Eintracht Frankfurt",
-    "https://media-6.api-sports.io/football/teams/169.png",
-    50,
-  ],
-  ["Sporting CP", "https://media-5.api-sports.io/football/teams/228.png", 51],
-  ["Marseille", "https://media-4.api-sports.io/football/teams/81.png", 52],
-  ["AC Milan", "https://media-5.api-sports.io/football/teams/489.png", 53],
-  [
-    "Red Bull Salzburg",
-    "https://media-4.api-sports.io/football/teams/571.png",
-    54,
-  ],
-  ["Dinamo Zagreb", "https://media-6.api-sports.io/football/teams/620.png", 55],
-  ["RB Leipzig", "https://media-5.api-sports.io/football/teams/173.png", 56],
-  [
-    "Shakhtar Donetsk",
-    "https://media-5.api-sports.io/football/teams/550.png",
-    57,
-  ],
-  ["Celtic", "https://media-5.api-sports.io/football/teams/247.png", 58],
-  ["FC Copenhagen", "https://media-5.api-sports.io/football/teams/400.png", 60],
-  ["Benfica", "https://media-6.api-sports.io/football/teams/211.png", 61],
-  [
-    "Maccabi Haifa",
-    "https://media-6.api-sports.io/football/teams/4195.png",
-    64,
-  ],
+  {
+    name: "Real Madrid",
+    logo: "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/86.png&h=40&w=40",
+    id: 1,
+  },
+  {
+    name: "Barcelona",
+    logo: "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/83.png&h=40&w=40",
+    id: 2,
+  },
+
+  {
+    name: "Arsenal",
+    logo: "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/359.png&h=40&w=40",
+    id: 21,
+  },
+  {
+    name: "Atletico Madrid",
+    logo: "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/1068.png&h=40&w=40",
+    id: 5,
+  },
+  {
+    name: "Bayern Munich",
+    logo: "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/132.png&h=40&w=40",
+    id: 47,
+  },
+  {
+    name: "Manchester United",
+    logo: "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/360.png&h=40&w=40",
+    id: 25,
+  },
+  {
+    name: "Manchester City",
+    logo: "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/382.png&h=40&w=40",
+    id: 22,
+  },
+  {
+    name: "Chelsea",
+    logo: "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/363.png&h=40&w=40",
+    id: 28,
+  },
+  {
+    name: "Tottenham",
+    logo: "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/367.png&h=40&w=40",
+    id: 24,
+  },
+  {
+    name: "Liverpool",
+    logo: "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/364.png&h=40&w=40",
+    id: 26,
+  },
+  {
+    name: "Juventus",
+    logo: "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/111.png&h=40&w=40",
+    id: 63,
+  },
+  {
+    name: "Borussia Dortmund",
+    logo: "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/124.png&h=40&w=40",
+    id: 59,
+  },
+  {
+    name: "Paris Saint Germain",
+    logo: "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/160.png&h=40&w=40",
+    id: 62,
+  },
+
+  {
+    name: "Newcastle",
+    logo: "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/361.png&h=40&w=40",
+    id: 23,
+  },
+  {
+    name: "Napoli",
+    logo: "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/114.png&h=40&w=40",
+    id: 41,
+  },
+  {
+    name: "Brighton",
+    logo: "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/331.png&h=40&w=40",
+    id: 27,
+  },
+
+  {
+    name: "Inter",
+    logo: "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/110.png&h=40&w=40",
+    id: 48,
+  },
+
+  {
+    name: "AC Milan",
+    logo: "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/103.png&h=40&w=40",
+    id: 53,
+  },
+
+  {
+    name: "Guadalajara",
+    logo: "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/219.png&h=40&w=40",
+    id: 68,
+  },
+  {
+    name: "America",
+    logo: "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/227.png&h=40&w=40",
+    id: 69,
+  },
 ];
+
 export const teamsLogo = {
-  "Real Madrid": "https://media-5.api-sports.io/football/teams/541.png",
-  Barcelona: "https://media-5.api-sports.io/football/teams/529.png",
-  "Real Sociedad": "https://media-4.api-sports.io/football/teams/548.png",
-  "Athletic Club": "https://media-5.api-sports.io/football/teams/531.png",
-  Sevilla: "https://media-4.api-sports.io/football/teams/536.png",
-  Arsenal: "https://media-5.api-sports.io/football/teams/42.png",
-  "Atletico Madrid": "https://media-4.api-sports.io/football/teams/530.png",
-  "Bayern Munich": "https://media-5.api-sports.io/football/teams/157.png",
-  "Manchester United": "https://media-5.api-sports.io/football/teams/33.png",
-  "Manchester City": "https://media-4.api-sports.io/football/teams/50.png",
-  Chelsea: "https://media-6.api-sports.io/football/teams/49.png",
-  Tottenham: "https://media-6.api-sports.io/football/teams/47.png",
-  Liverpool: "https://media-4.api-sports.io/football/teams/40.png",
-  Juventus: "https://media-6.api-sports.io/football/teams/496.png",
-  "Borussia Dortmund": "https://media-4.api-sports.io/football/teams/165.png",
-  "Paris Saint Germain": "https://media-5.api-sports.io/football/teams/85.png",
-  "Real Betis": "https://media-5.api-sports.io/football/teams/543.png",
-  Osasuna: "https://media-4.api-sports.io/football/teams/727.png",
-  "Rayo Vallecano": "https://media-5.api-sports.io/football/teams/728.png",
-  Villarreal: "https://media-6.api-sports.io/football/teams/533.png",
-  Valencia: "https://media-5.api-sports.io/football/teams/532.png",
-  Mallorca: "https://media-5.api-sports.io/football/teams/798.png",
-  Valladolid: "https://media-6.api-sports.io/football/teams/720.png",
-  Girona: "https://media-5.api-sports.io/football/teams/547.png",
-  Almeria: "https://media-4.api-sports.io/football/teams/723.png",
-  Getafe: "https://media-4.api-sports.io/football/teams/546.png",
-  Espanyol: "https://media-5.api-sports.io/football/teams/540.png",
-  "Celta Vigo": "https://media-4.api-sports.io/football/teams/538.png",
-  Cadiz: "https://media-4.api-sports.io/football/teams/724.png",
-  Elche: "https://media-5.api-sports.io/football/teams/797.png",
-  Newcastle: "https://media-4.api-sports.io/football/teams/34.png",
-  Napoli: "https://media-5.api-sports.io/football/teams/492.png",
-  Brighton: "https://media-6.api-sports.io/football/teams/51.png",
-  Fulham: "https://media-4.api-sports.io/football/teams/36.png",
-  Brentford: "https://media-5.api-sports.io/football/teams/55.png",
-  "Crystal Palace": "https://media-4.api-sports.io/football/teams/52.png",
-  "Aston Villa": "https://media-6.api-sports.io/football/teams/66.png",
-  Leicester: "https://media-4.api-sports.io/football/teams/46.png",
-  Bournemouth: "https://media-5.api-sports.io/football/teams/35.png",
-  Leeds: "https://media-6.api-sports.io/football/teams/63.png",
-  "West Ham": "https://media-6.api-sports.io/football/teams/48.png",
-  Everton: "https://media-5.api-sports.io/football/teams/45.png",
-  "Nottingham Forest": "https://media-6.api-sports.io/football/teams/65.png",
-  Southampton: "https://media-4.api-sports.io/football/teams/41.png",
-  Wolves: "https://media-4.api-sports.io/football/teams/39.png",
-  Ajax: "https://media-5.api-sports.io/football/teams/194.png",
-  Rangers: "https://media-6.api-sports.io/football/teams/257.png",
-  "FC Porto": "https://media-5.api-sports.io/football/teams/212.png",
-  "Club Brugge KV": "https://media-4.api-sports.io/football/teams/569.png",
-  "Bayer Leverkusen": "https://media-4.api-sports.io/football/teams/168.png",
-  Inter: "https://media-5.api-sports.io/football/teams/505.png",
-  Plzen: "https://media-5.api-sports.io/football/teams/567.png",
-  "Eintracht Frankfurt": "https://media-6.api-sports.io/football/teams/169.png",
-  "Sporting CP": "https://media-5.api-sports.io/football/teams/228.png",
-  Marseille: "https://media-4.api-sports.io/football/teams/81.png",
-  "AC Milan": "https://media-5.api-sports.io/football/teams/489.png",
-  "Red Bull Salzburg": "https://media-4.api-sports.io/football/teams/571.png",
-  "Dinamo Zagreb": "https://media-6.api-sports.io/football/teams/620.png",
-  "RB Leipzig": "https://media-5.api-sports.io/football/teams/173.png",
-  "Shakhtar Donetsk": "https://media-5.api-sports.io/football/teams/550.png",
-  Celtic: "https://media-5.api-sports.io/football/teams/247.png",
-  "FC Copenhagen": "https://media-5.api-sports.io/football/teams/400.png",
-  Benfica: "https://media-6.api-sports.io/football/teams/211.png",
-  "Maccabi Haifa": "https://media-6.api-sports.io/football/teams/4195.png",
+  "Real Madrid":
+    "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/86.png&h=40&w=40",
+  Barcelona:
+    "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/83.png&h=40&w=40",
+  Arsenal:
+    "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/359.png&h=40&w=40",
+  "Atletico Madrid":
+    "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/1068.png&h=40&w=40",
+  "Bayern Munich":
+    "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/132.png&h=40&w=40",
+  "Manchester United":
+    "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/360.png&h=40&w=40",
+  "Manchester City":
+    "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/382.png&h=40&w=40",
+  Chelsea:
+    "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/363.png&h=40&w=40",
+  Tottenham:
+    "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/367.png&h=40&w=40",
+  Liverpool:
+    "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/364.png&h=40&w=40",
+  Juventus:
+    "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/111.png&h=40&w=40",
+  "Borussia Dortmund":
+    "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/124.png&h=40&w=40",
+  "Paris Saint Germain":
+    "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/160.png&h=40&w=40",
+  Newcastle:
+    "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/361.png&h=40&w=40",
+  Napoli:
+    "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/114.png&h=40&w=40",
+  Brighton:
+    "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/331.png&h=40&w=40",
+  Inter:
+    "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/110.png&h=40&w=40",
+  "AC Milan":
+    "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/103.png&h=40&w=40",
+  Guadalajara:
+    "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/219.png&h=40&w=40",
+  America:
+    "https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/227.png&h=40&w=40",
 };
