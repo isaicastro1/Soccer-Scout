@@ -1,9 +1,13 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useContext } from "react";
 
 import MatchPreview from "../../Components/match-preview/match-preview.component";
 import Spinner from "../spinner/spinner.component";
 import { getDate, leagueDates } from "../../utils/date";
 import { allLeagues } from "../../utils/all-leagues";
+
+import { UserContext } from "../../contexts/user.context";
+
+import { getFavoritesFromFirebase } from "../../utils/firebase/firebase";
 
 import Shield from "../../Assets/shield.png";
 
@@ -16,6 +20,25 @@ const NextMatchesTable = () => {
   const [leagueCalled, setLeagueCalled] = useState(false);
   const [nameOfLeague, setNameOfLeague] = useState("laliga");
   const [logoPlaceholder, setLogoPlaceholder] = useState(Shield);
+  const [userFavorites, setUserFavorites] = useState([]);
+  const [isFavoritesChecked, setIsFavoritesChecked] = useState(true);
+
+  const { currentUser } = useContext(UserContext);
+  useEffect(() => {
+    const getUserFavorites = async () => {
+      if (!currentUser || !currentUser.email) return;
+      const favorites = await getFavoritesFromFirebase(currentUser.email);
+      const xhr = new XMLHttpRequest();
+      xhr.responseType = "text";
+      xhr.onload = () => {
+        let favoritesArray = xhr.response.split(",");
+        setUserFavorites(favoritesArray);
+      };
+      xhr.open("GET", favorites);
+      xhr.send();
+    };
+    getUserFavorites();
+  }, [currentUser]);
 
   const upcomingMatchesDate = leagueDates[`${nameOfLeague}`] || "2023-02-28";
 
@@ -71,8 +94,7 @@ const NextMatchesTable = () => {
 
     // add matches with same dates to obj
     arrayOfMatches.forEach((match) => {
-      let date = match.fixture.date;
-      date = date.slice(0, 10);
+      let date = match.fixture.date.slice(0, 10);
       if (fixtureDates[date]) {
         fixtureDates[date].push(match);
       } else {
@@ -81,6 +103,26 @@ const NextMatchesTable = () => {
     });
 
     return Object.entries(fixtureDates).sort();
+  };
+
+  const getMatchesFromFavorites = (favorites, matches) => {
+    const favoritesSet = new Set(favorites);
+    return matches
+      .filter(([, fixtures]) => {
+        return fixtures.some(({ teams }) => {
+          return (
+            favoritesSet.has(teams.away.name) ||
+            favoritesSet.has(teams.home.name)
+          );
+        });
+      })
+      .flatMap(([, fixtures]) =>
+        fixtures.filter(
+          ({ teams }) =>
+            favoritesSet.has(teams.away.name) ||
+            favoritesSet.has(teams.home.name)
+        )
+      );
   };
 
   const newMatches = separateMatchesByDate(nextMatches);
@@ -94,6 +136,32 @@ const NextMatchesTable = () => {
     });
   });
 
+  const handleChange = () => {
+    setIsFavoritesChecked(!isFavoritesChecked);
+  };
+
+  const favoriteMatches = getMatchesFromFavorites(userFavorites, newMatches);
+
+  const newFavoriteMatches = separateMatchesByDate(favoriteMatches);
+
+  const renderMatches = (matches) => {
+    return matches.map((match) => {
+      let date = new Date(match[1][0].fixture.date).toString().slice(0, 11);
+      return (
+        <div key={match[0]} className="same-day-match">
+          <div className="match-date-title">
+            <h2>{date}</h2>
+          </div>
+          <div className="match">
+            {match[1].map((game) => {
+              return <MatchPreview game={game} key={game.fixture.id} />;
+            })}
+          </div>
+        </div>
+      );
+    });
+  };
+
   return (
     <>
       {isLoading ? (
@@ -106,24 +174,19 @@ const NextMatchesTable = () => {
             alt="logo"
             onLoad={() => setLogoPlaceholder(nextMatches[0].league.logo)}
           />
-          {newMatches &&
-            newMatches.map((match) => {
-              let date = new Date(match[1][0].fixture.date)
-                .toString()
-                .slice(0, 11);
-              return (
-                <div key={match[0]} className="same-day-match">
-                  <div className="match-date-title">
-                    <h2>{date}</h2>
-                  </div>
-                  <div className="match">
-                    {match[1].map((game) => {
-                      return <MatchPreview game={game} key={game.fixture.id} />;
-                    })}
-                  </div>
-                </div>
-              );
-            })}
+          <div className="switch-button">
+            <input
+              onChange={handleChange}
+              className="switch-button-checkbox"
+              type="checkbox"
+            ></input>
+            <label className="switch-button-label" htmlFor="">
+              <span className="switch-button-label-span">SHOW ALL</span>
+            </label>
+          </div>
+          {isFavoritesChecked
+            ? renderMatches(newMatches)
+            : renderMatches(newFavoriteMatches)}
         </div>
       ) : (
         <div className="upcoming-matches-container">
@@ -249,3 +312,51 @@ const NextMatchesTable = () => {
 };
 
 export default NextMatchesTable;
+
+// const matches = [
+//   [
+//     "2023-02-08",
+//     [
+//       {
+//         fixture: "",
+//         teams: {
+//           away: { name: "Chelsea", id: 1 },
+//           home: { name: "Real Madrid", id: 2 },
+//         },
+//       },
+//       {
+//         fixture: "",
+//         teams: {
+//           away: { name: "Liverpool", id: 3 },
+//           home: { name: "Barcelona", id: 4 },
+//         },
+//       },
+//       {
+//         fixture: "",
+//         teams: {
+//           away: { name: "Chivas", id: 5 },
+//           home: { name: "America", id: 6 },
+//         },
+//       },
+//     ],
+//   ],
+//   [
+//     "2023-02-11",
+//     [
+//       {
+//         fixture: "",
+//         teams: {
+//           away: { name: "Manchester United", id: 7 },
+//           home: { name: "PSG", id: 8 },
+//         },
+//       },
+//       {
+//         fixture: "",
+//         teams: {
+//           away: { name: "West Ham", id: 9 },
+//           home: { name: "Manchester City", id: 10 },
+//         },
+//       },
+//     ],
+//   ],
+// ];

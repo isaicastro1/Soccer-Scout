@@ -22,6 +22,7 @@ const Profile = () => {
     setOpenFavorites,
     openFavorites,
     userFavorites,
+    setUserFavorites,
   } = useContext(UserContext);
 
   useEffect(() => {
@@ -43,6 +44,7 @@ const Profile = () => {
       xhr.onload = () => {
         let favoritesArray = xhr.response.split(",");
         setAllUserFavorites(favoritesArray);
+        setUserFavorites(favoritesArray);
       };
       xhr.open("GET", favorites);
       xhr.send();

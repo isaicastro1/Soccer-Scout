@@ -15,11 +15,11 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   // <React.StrictMode>
   <BrowserRouter>
-    <TeamDataProvider>
-      <UserProvider>
+    <UserProvider>
+      <TeamDataProvider>
         <App />
-      </UserProvider>
-    </TeamDataProvider>
+      </TeamDataProvider>
+    </UserProvider>
   </BrowserRouter>
   //* </React.StrictMode> */
 );
