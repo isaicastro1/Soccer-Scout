@@ -140,9 +140,9 @@ const NextMatchesTable = () => {
     setIsFavoritesChecked(!isFavoritesChecked);
   };
 
-  const favoriteMatches = getMatchesFromFavorites(userFavorites, newMatches);
-
-  const newFavoriteMatches = separateMatchesByDate(favoriteMatches);
+  const newFavoriteMatches = separateMatchesByDate(
+    getMatchesFromFavorites(userFavorites, newMatches)
+  );
 
   const renderMatches = (matches) => {
     return matches.map((match) => {
@@ -184,9 +184,23 @@ const NextMatchesTable = () => {
               <span className="switch-button-label-span">SHOW ALL</span>
             </label>
           </div>
-          {isFavoritesChecked
-            ? renderMatches(newMatches)
-            : renderMatches(newFavoriteMatches)}
+          {isFavoritesChecked ? (
+            renderMatches(newMatches)
+          ) : newFavoriteMatches.length ? (
+            renderMatches(newFavoriteMatches)
+          ) : (
+            <div
+              style={{
+                width: "100vw",
+                height: "40vh",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <h3>Please Sign In to Add Favorites</h3>
+            </div>
+          )}
         </div>
       ) : (
         <div className="upcoming-matches-container">
