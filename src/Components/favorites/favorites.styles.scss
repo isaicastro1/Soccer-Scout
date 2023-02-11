@@ -1,40 +1,49 @@
-.favorites-container {
+.favorites-wrapper {
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
-  max-width: 600px;
-  background-color: white;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
   position: absolute;
-  top: 13%;
-  z-index: 1;
+  top: 0;
+  left: 0;
 
-  .chosen {
-    background-color: rgb(72, 72, 216);
-    color: white;
-  }
-
-  .team {
+  .favorites-container {
     display: flex;
-    flex-direction: column;
     justify-content: center;
-    align-items: center;
-    width: 120px;
-    padding: 4px;
-    cursor: pointer;
-    border: 1px solid rgb(183, 183, 183);
+    flex-wrap: wrap;
+    max-width: 600px;
+    background-color: white;
+    outline: 3px solid black;
 
-    h3 {
-      text-align: center;
-      word-break: break-all;
+    .chosen {
+      background-color: rgb(72, 72, 216);
+      color: white;
+    }
+
+    .team {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 120px;
+      padding: 4px;
+      cursor: pointer;
+      border: 1px solid rgb(183, 183, 183);
+
+      h3 {
+        text-align: center;
+        word-break: break-all;
+      }
     }
   }
-}
 
-.submit-button {
-  .check-button {
-    width: 100px;
-    border: 3px solid green;
-    background-color: green;
-    color: white;
+  .submit-button {
+    .check-button {
+      width: 100px;
+      border: 3px solid green;
+      background-color: green;
+      color: white;
+    }
   }
 }

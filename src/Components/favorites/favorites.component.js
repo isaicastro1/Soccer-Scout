@@ -13,12 +13,11 @@ const handleClick = (event) => {
   event.currentTarget.classList.toggle("chosen");
 };
 
-const Favorites = ({ currentUser }) => {
+const Favorites = ({ currentUser, setAllUserFavorites }) => {
   const [selected, setSelected] = useState(false);
   const [favorites, setFavorites] = useState([]);
 
-  const { setOpenFavorites, openFavorites, setUserFavorites } =
-    useContext(UserContext);
+  const { setOpenFavorites, openFavorites } = useContext(UserContext);
 
   const element = document.querySelectorAll(".chosen");
 
@@ -32,8 +31,8 @@ const Favorites = ({ currentUser }) => {
 
     const allFavorites = getFavorites();
     setFavorites(allFavorites);
-    setUserFavorites(allFavorites);
-  }, [selected, setUserFavorites]);
+    setAllUserFavorites(allFavorites);
+  }, [selected, setAllUserFavorites]);
 
   useEffect(() => {
     const uploadFavorites = () => {
@@ -59,14 +58,15 @@ const Favorites = ({ currentUser }) => {
 
   const handleSubmit = () => {
     setSelected(!selected);
+    setTimeout(() => {
+      setOpenFavorites(!openFavorites);
+    }, 0);
   };
 
   return (
     <>
-      {!openFavorites ? (
-        <></>
-      ) : (
-        <>
+      {!openFavorites ? null : (
+        <div className="favorites-wrapper">
           <div className="favorites-container" ref={myRef}>
             {teamsInfo.map((team) => {
               return (
@@ -99,7 +99,7 @@ const Favorites = ({ currentUser }) => {
               </ToggleButton>
             </div>
           </div>
-        </>
+        </div>
       )}
     </>
   );
