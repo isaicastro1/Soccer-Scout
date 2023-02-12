@@ -1,10 +1,16 @@
 import { Link } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 
-import { signOutUser } from "../../utils/firebase/firebase";
+// import { signOutUser } from "../../utils/firebase/firebase";
 import "./menu.styles.scss";
 
-const Menu = ({ userData, userImage, profileImage, currentUser }) => {
+const Menu = ({
+  userData,
+  userImage,
+  profileImage,
+  currentUser,
+  onSignOutHandler,
+}) => {
   return (
     <div className="menu-container">
       <div className="menu-nav-links">
@@ -16,7 +22,11 @@ const Menu = ({ userData, userImage, profileImage, currentUser }) => {
         </Link>
         {currentUser ? (
           <>
-            <Link className="table-nav" to="/sign-in" onClick={signOutUser}>
+            <Link
+              className="table-nav"
+              to="/sign-in"
+              onClick={onSignOutHandler}
+            >
               SIGN OUT
             </Link>
             <Link className="profile-link" to="profile">

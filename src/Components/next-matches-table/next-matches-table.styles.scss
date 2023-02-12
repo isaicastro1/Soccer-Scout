@@ -49,6 +49,7 @@
       height: 100%;
       opacity: 0;
       z-index: 2;
+      overflow: hidden;
 
       &:checked + .switch-button-label:before {
         transform: translateX(90px);

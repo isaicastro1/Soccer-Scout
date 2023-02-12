@@ -4,6 +4,7 @@ import { Outlet, Link, useNavigate } from "react-router-dom";
 import Menu from "../menu/menu.component";
 
 import { UserContext } from "../../contexts/user.context";
+import { TeamDataContext } from "../../contexts/teamData.context";
 
 import {
   getUserDataFromFirebase,
@@ -17,17 +18,17 @@ import "./NavBar.scss";
 
 const NavBar = () => {
   const { currentUser, userImage, setUserImage } = useContext(UserContext);
+  const { isMenuOpen, setIsMenuOpen } = useContext(TeamDataContext);
   const [profileImage, setProfileImage] = useState(
     localStorage.getItem("profile-image")
   );
   const [userData, setUserData] = useState(null);
-  const [menuIsOpen, setMenuIsOpen] = useState(false);
 
   const toggleMenu = () => {
-    setMenuIsOpen(!menuIsOpen);
+    setIsMenuOpen(!isMenuOpen);
   };
 
-  const menuClass = menuIsOpen ? "open" : "";
+  const menuClass = isMenuOpen ? "open" : "";
 
   useEffect(() => {
     const getUserData = async () => {
@@ -42,6 +43,7 @@ const NavBar = () => {
   const navigate = useNavigate();
 
   const onSignOutHandler = () => {
+    setIsMenuOpen(!isMenuOpen);
     setProfileImage("");
     setUserImage("");
     localStorage.removeItem("profile-image");

@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 
 import { UserContext } from "../../contexts/user.context";
+import { TeamDataContext } from "../../contexts/teamData.context";
 
 import {
   getUserDataFromFirebase,
@@ -18,6 +19,12 @@ const Profile = () => {
 
   const { currentUser, userImage, setOpenFavorites, openFavorites } =
     useContext(UserContext);
+
+  const { isMenuOpen, setIsMenuOpen } = useContext(TeamDataContext);
+
+  useEffect(() => {
+    setIsMenuOpen(!isMenuOpen);
+  }, [setIsMenuOpen]);
 
   useEffect(() => {
     const getUserData = async () => {
