@@ -1,5 +1,4 @@
 import { useEffect, useState, useRef, useContext } from "react";
-import Tappable from "react-tappable/lib/Tappable";
 
 import CheckIcon from "@mui/icons-material/Check";
 import ToggleButton from "@mui/material/ToggleButton";
@@ -71,13 +70,10 @@ const Favorites = ({ currentUser, setAllUserFavorites }) => {
           <div className="favorites-container" ref={myRef}>
             {teamsInfo.map((team) => {
               return (
-                <Tappable
+                <div
                   className="team"
                   name={team["name"]}
                   value={team["name"]}
-                  onTap={(e) => {
-                    handleClick(e);
-                  }}
                   onClick={(e) => {
                     handleClick(e);
                   }}
@@ -89,7 +85,7 @@ const Favorites = ({ currentUser, setAllUserFavorites }) => {
                     src={team["logo"]}
                     alt="logo"
                   />
-                </Tappable>
+                </div>
               );
             })}
             <div className="submit-button">
