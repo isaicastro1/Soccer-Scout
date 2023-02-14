@@ -70,15 +70,16 @@ const Favorites = ({ currentUser, setAllUserFavorites }) => {
         <div className="favorites-wrapper">
           <div className="favorites-container" ref={myRef}>
             {teamsInfo.map((team) => {
-              console.log(team["name"]);
               return (
                 <Tappable
                   className="team"
                   name={team["name"]}
                   value={team["name"]}
+                  onTap={(e) => {
+                    handleClick(e);
+                  }}
                   onClick={(e) => {
                     handleClick(e);
-                    console.log(e);
                   }}
                   key={team["id"]}
                 >
