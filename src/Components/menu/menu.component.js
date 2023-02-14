@@ -1,16 +1,9 @@
 import { Link } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 
-// import { signOutUser } from "../../utils/firebase/firebase";
 import "./menu.styles.scss";
 
-const Menu = ({
-  userData,
-  userImage,
-  profileImage,
-  currentUser,
-  onSignOutHandler,
-}) => {
+const Menu = ({ userData, userImage, currentUser, onSignOutHandler }) => {
   return (
     <div className="menu-container">
       <div className="menu-nav-links">
@@ -41,7 +34,7 @@ const Menu = ({
                 </>
               ) : (
                 <Avatar
-                  src={userImage || profileImage}
+                  src={userImage}
                   className="nav-profile-image"
                   alt="Guest"
                 />

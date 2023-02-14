@@ -23,7 +23,9 @@ const Profile = () => {
   const { isMenuOpen, setIsMenuOpen } = useContext(TeamDataContext);
 
   useEffect(() => {
-    setIsMenuOpen(!isMenuOpen);
+    if (isMenuOpen) {
+      setIsMenuOpen(!isMenuOpen);
+    }
   }, [setIsMenuOpen]);
 
   useEffect(() => {

@@ -28,14 +28,14 @@ const NextMatchesTable = () => {
     const getUserFavorites = async () => {
       if (!currentUser || !currentUser.email) return;
       const favorites = await getFavoritesFromFirebase(currentUser.email);
-      const xhr = new XMLHttpRequest();
-      xhr.responseType = "text";
-      xhr.onload = () => {
-        let favoritesArray = xhr.response.split(",");
+      try {
+        const favoriteTeams = await fetch(favorites);
+        const data = await favoriteTeams.text();
+        let favoritesArray = data.split(",");
         setUserFavorites(favoritesArray);
-      };
-      xhr.open("GET", favorites);
-      xhr.send();
+      } catch (error) {
+        console.log(error);
+      }
     };
     getUserFavorites();
   }, [currentUser]);

@@ -19,9 +19,6 @@ import "./NavBar.scss";
 const NavBar = () => {
   const { currentUser, userImage, setUserImage } = useContext(UserContext);
   const { isMenuOpen, setIsMenuOpen } = useContext(TeamDataContext);
-  const [profileImage, setProfileImage] = useState(
-    localStorage.getItem("profile-image")
-  );
   const [userData, setUserData] = useState(null);
 
   const toggleMenu = () => {
@@ -44,9 +41,7 @@ const NavBar = () => {
 
   const onSignOutHandler = () => {
     setIsMenuOpen(!isMenuOpen);
-    setProfileImage("");
     setUserImage("");
-    localStorage.removeItem("profile-image");
     signOutUser();
     navigate("/sign-in");
   };
@@ -85,7 +80,7 @@ const NavBar = () => {
                       />
                     ) : (
                       <Avatar
-                        src={userImage || profileImage}
+                        src={userImage}
                         className="nav-profile-image"
                         alt="Guest"
                       />
@@ -105,7 +100,6 @@ const NavBar = () => {
             onSignOutHandler={onSignOutHandler}
             userData={userData}
             userImage={userImage}
-            profileImage={profileImage}
             currentUser={currentUser}
           />
         ) : (

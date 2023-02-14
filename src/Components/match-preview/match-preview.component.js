@@ -78,6 +78,10 @@ const MatchPreview = ({ game }) => {
             <span className="match-time">{time}</span>
           ) : live === "Match Finished" ? (
             <span className="match-time">FT</span>
+          ) : live === "Halftime" ? (
+            <div className="match-time">
+              <span className="live-dot">HT</span>
+            </div>
           ) : (
             <div className="match-time">
               <span className="live-dot">{minutes}'</span>
