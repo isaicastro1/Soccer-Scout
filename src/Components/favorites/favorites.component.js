@@ -9,39 +9,27 @@ import { UserContext } from "../../contexts/user.context";
 
 import "./favorites.styles.scss";
 
-const handleClick = (event) => {
-  event.currentTarget.classList.toggle("chosen");
-};
-
 const Favorites = ({ currentUser, setAllUserFavorites }) => {
-  const [selected, setSelected] = useState(false);
-  const [favorites, setFavorites] = useState([]);
+  const [newFavorites, setNewFavorites] = useState([]);
+  const [favoritesDone, setFavoritesDone] = useState(false);
 
   const { setOpenFavorites, openFavorites } = useContext(UserContext);
 
-  const element = document.querySelectorAll(".chosen");
-
-  useEffect(() => {
-    const getFavorites = () => {
-      if (!element) return;
-      return Array.from(element).map((item) => {
-        return item.innerText;
-      });
-    };
-
-    const allFavorites = getFavorites();
-    setFavorites(allFavorites);
-    setAllUserFavorites(allFavorites);
-  }, [selected, setAllUserFavorites]);
-
   useEffect(() => {
     const uploadFavorites = () => {
-      if (!currentUser || !currentUser.email || !favorites.length) return;
-      uploadFavoritesToFirebase(currentUser.email, favorites);
+      if (!currentUser || !currentUser.email || !newFavorites.length) return;
+      uploadFavoritesToFirebase(currentUser.email, newFavorites);
     };
 
     uploadFavorites();
-  }, [favorites, currentUser]);
+  }, [favoritesDone, currentUser]);
+
+  const handleClick = (teamName) => {
+    if (newFavorites.includes(teamName)) {
+      return setNewFavorites(newFavorites.filter((team) => team !== teamName));
+    }
+    setNewFavorites([...newFavorites, teamName]);
+  };
 
   const myRef = useRef();
 
@@ -57,7 +45,8 @@ const Favorites = ({ currentUser, setAllUserFavorites }) => {
   });
 
   const handleSubmit = () => {
-    setSelected(!selected);
+    setFavoritesDone(true);
+    setAllUserFavorites(newFavorites);
     setTimeout(() => {
       setOpenFavorites(!openFavorites);
     }, 0);
@@ -71,11 +60,13 @@ const Favorites = ({ currentUser, setAllUserFavorites }) => {
             {teamsInfo.map((team) => {
               return (
                 <div
-                  className="team"
+                  className={`team ${
+                    newFavorites.includes(team["name"]) ? "chosen" : ""
+                  }`}
                   name={team["name"]}
                   value={team["name"]}
-                  onClick={(e) => {
-                    handleClick(e);
+                  onClick={() => {
+                    handleClick(team["name"]);
                   }}
                   key={team["id"]}
                 >
@@ -91,7 +82,6 @@ const Favorites = ({ currentUser, setAllUserFavorites }) => {
             <div className="submit-button">
               <ToggleButton
                 value="check"
-                selected={selected}
                 className="check-button"
                 onClick={handleSubmit}
               >
