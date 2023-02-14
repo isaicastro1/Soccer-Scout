@@ -40,7 +40,9 @@ const NavBar = () => {
   const navigate = useNavigate();
 
   const onSignOutHandler = () => {
-    setIsMenuOpen(!isMenuOpen);
+    if (isMenuOpen) {
+      setIsMenuOpen(!isMenuOpen);
+    }
     setUserImage("");
     signOutUser();
     navigate("/sign-in");
