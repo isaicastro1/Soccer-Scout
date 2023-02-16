@@ -22,6 +22,7 @@ const NextMatchesTable = () => {
   const [logoPlaceholder, setLogoPlaceholder] = useState(Shield);
   const [userFavorites, setUserFavorites] = useState([]);
   const [isFavoritesChecked, setIsFavoritesChecked] = useState(true);
+  const [newAPIMatches, setNewAPIMatches] = useState();
 
   const { currentUser } = useContext(UserContext);
   useEffect(() => {
@@ -87,23 +88,23 @@ const NextMatchesTable = () => {
     setNameOfLeague(event.target.getAttribute("value"));
   };
 
-  const separateMatchesByDate = (arrayOfMatches) => {
-    if (!arrayOfMatches) return;
+  // const separateMatchesByDate = (arrayOfMatches) => {
+  //   if (!arrayOfMatches) return;
 
-    let fixtureDates = {};
+  //   let fixtureDates = {};
 
-    // add matches with same dates to obj
-    arrayOfMatches.forEach((match) => {
-      let date = match.fixture.date.slice(0, 10);
-      if (fixtureDates[date]) {
-        fixtureDates[date].push(match);
-      } else {
-        fixtureDates[date] = [match];
-      }
-    });
+  //   // add matches with same dates to obj
+  //   arrayOfMatches.forEach((match) => {
+  //     let date = match.fixture.date.slice(0, 10);
+  //     if (fixtureDates[date]) {
+  //       fixtureDates[date].push(match);
+  //     } else {
+  //       fixtureDates[date] = [match];
+  //     }
+  //   });
 
-    return Object.entries(fixtureDates).sort();
-  };
+  //   return Object.entries(fixtureDates).sort();
+  // };
 
   const getMatchesFromFavorites = (favorites, matches) => {
     const favoritesSet = new Set(favorites);
@@ -125,39 +126,127 @@ const NextMatchesTable = () => {
       );
   };
 
-  const newMatches = separateMatchesByDate(nextMatches);
+  // const newMatches = separateMatchesByDate(nextMatches);
 
   //sorts matches by date
-  newMatches.map((match) => {
-    return match[1].sort((a, b) => {
-      let hourA = new Date(a.fixture.date).getUTCHours();
-      let hourB = new Date(b.fixture.date).getUTCHours();
-      return hourA - hourB;
-    });
-  });
+  // newMatches.map((match) => {
+  //   return match[1].sort((a, b) => {
+  //     let hourA = new Date(a.fixture.date).getUTCHours();
+  //     let hourB = new Date(b.fixture.date).getUTCHours();
+  //     return hourA - hourB;
+  //   });
+  // });
 
   const handleChange = () => {
     setIsFavoritesChecked(!isFavoritesChecked);
   };
 
-  const newFavoriteMatches = separateMatchesByDate(
-    getMatchesFromFavorites(userFavorites, newMatches)
-  );
+  // const newFavoriteMatches = separateMatchesByDate(
+  //   getMatchesFromFavorites(userFavorites, newMatches)
+  // );
+
+  // const renderMatches = (matches) => {
+  //   return matches.map((match) => {
+  //     let date = new Date(match[1][0].fixture.date).toString().slice(0, 11);
+  //     return (
+  //       <div key={match[0]} className="same-day-match">
+  //         <div className="match-date-title">
+  //           <h2>{date}</h2>
+  //         </div>
+  //         <div className="match">
+  //           {match[1].map((game) => {
+  //             return <MatchPreview game={game} key={game.fixture.id} />;
+  //           })}
+  //         </div>
+  //       </div>
+  //     );
+  //   });
+  // };
+
+  const leagues = {
+    "Champions League": "Champions League",
+    LaLiga: "La Liga",
+    "Premier League": "Premier League",
+  };
+
+  useEffect(() => {
+    fetch(
+      `https://onefootball.com/proxy-web-experience/en/matches?date=2023-02-15`
+    )
+      .then((data) => data.json())
+      .then((res) => {
+        let matches = [];
+        res.containers
+          .filter((item) => {
+            return (
+              item.fullWidth &&
+              item.fullWidth.component &&
+              item.fullWidth.component.matchCardsList
+            );
+          })
+          .map((item) => {
+            if (
+              leagues[
+                item.fullWidth.component.matchCardsList.sectionHeader.title
+              ]
+            ) {
+              matches.push(item.fullWidth.component.matchCardsList);
+            }
+          });
+        // if (item.fullWidth.component.matchCardsList) {
+        //   matches.push(item.fullWidth.component.matchCardsList);
+        // }
+        setNewAPIMatches(matches);
+        // console.log("matches", matches);
+      });
+  }, []);
+
+  const separateMatches = (matchesArray) => {
+    if (!matchesArray) return;
+
+    let fixtureLeague = {};
+
+    matchesArray.map((match) => {
+      // console.log("match", match);
+      const league = match.sectionHeader.title;
+      // let date = new Date(match.matchCards[0].kickoff).toLocaleTimeString([], {
+      //   hour: "2-digit",
+      //   minute: "2-digit",
+      //   hour12: true,
+      // });
+      // // console.log("match", match);
+      // if (date.split("")[0] == 0) {
+      //   date = date.slice(1);
+      // }
+      if (fixtureLeague[league]) {
+        fixtureLeague[league].push(match);
+      } else {
+        fixtureLeague[league] = [match];
+      }
+    });
+    return Object.entries(fixtureLeague).sort();
+  };
+
+  const matches = separateMatches(newAPIMatches);
 
   const renderMatches = (matches) => {
-    return matches.map((match) => {
-      let date = new Date(match[1][0].fixture.date).toString().slice(0, 11);
+    return matches.map((match, i) => {
+      console.log("match", match);
+      // let date = new Date(match[1][0].fixture.date).toString().slice(0, 11);
       return (
-        <div key={match[0]} className="same-day-match">
-          <div className="match-date-title">
-            <h2>{date}</h2>
-          </div>
-          <div className="match">
-            {match[1].map((game) => {
-              return <MatchPreview game={game} key={game.fixture.id} />;
-            })}
-          </div>
+        <div className="match" key={i}>
+          <h3>{match[0]}</h3>
+          {match[1].map((game) => {
+            return (
+              <MatchPreview game={game} key={game.matchCards[0].matchId} />
+            );
+          })}
         </div>
+        // <div key={match[0]} className="same-day-match">
+        /* <div className="match-date-title">
+            <h2>{date}</h2>
+          </div> */
+        // </div>
       );
     });
   };
@@ -185,7 +274,7 @@ const NextMatchesTable = () => {
             </label>
           </div>
           {isFavoritesChecked ? (
-            renderMatches(newMatches)
+            renderMatches(matches)
           ) : newFavoriteMatches.length ? (
             renderMatches(newFavoriteMatches)
           ) : (

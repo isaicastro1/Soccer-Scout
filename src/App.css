@@ -11,6 +11,13 @@ body {
   background-color: black;
 }
 
+h1,
+h2 {
+  font-family: "Courier New", Courier, monospace !important;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
 .no-select {
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */

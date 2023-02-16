@@ -29,13 +29,21 @@ const News = () => {
     }
   }, []);
 
+  useEffect(() => {
+    fetch(
+      "https://onefootball.com/proxy-web-experience/en/matches?date=2023-02-14"
+    )
+      .then((data) => data.json())
+      .then((res) => console.log(res));
+  }, []);
+
   return (
     <>
       {isLoading ? (
         <Spinner />
       ) : (
         <div className="news-container">
-          <h2>Top Headlines</h2>
+          <h2>TOP HEADLINES</h2>
           <div className="news-wrapper">
             {newsData ? (
               newsData.map((item) => {
