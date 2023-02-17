@@ -167,35 +167,37 @@ const NextMatchesTable = () => {
     "Champions League": "Champions League",
     LaLiga: "La Liga",
     "Premier League": "Premier League",
+    "Europa League": "Europa League",
   };
 
   useEffect(() => {
     fetch(
-      `https://onefootball.com/proxy-web-experience/en/matches?date=2023-02-15`
+      `https://onefootball.com/proxy-web-experience/en/matches?date=2023-02-18`
     )
       .then((data) => data.json())
       .then((res) => {
+        // console.log(res);
         let matches = [];
-        res.containers
-          .filter((item) => {
-            return (
-              item.fullWidth &&
-              item.fullWidth.component &&
-              item.fullWidth.component.matchCardsList
-            );
-          })
-          .map((item) => {
-            if (
-              leagues[
-                item.fullWidth.component.matchCardsList.sectionHeader.title
-              ]
-            ) {
-              matches.push(item.fullWidth.component.matchCardsList);
-            }
-          });
+        const fixtures = res.containers.filter((item) => {
+          return (
+            item.fullWidth &&
+            item.fullWidth.component &&
+            item.fullWidth.component.matchCardsList
+          );
+        });
+        // console.log(fixtures);
+        fixtures.map((item) => {
+          // console.log(item);
+          if (
+            leagues[item.fullWidth.component.matchCardsList.sectionHeader.title]
+          ) {
+            matches.push(item.fullWidth.component.matchCardsList);
+          }
+        });
         // if (item.fullWidth.component.matchCardsList) {
         //   matches.push(item.fullWidth.component.matchCardsList);
         // }
+        // console.log(matches);
         setNewAPIMatches(matches);
         // console.log("matches", matches);
       });
@@ -226,20 +228,24 @@ const NextMatchesTable = () => {
     });
     return Object.entries(fixtureLeague).sort();
   };
-
   const matches = separateMatches(newAPIMatches);
+  // console.log(matches);
 
   const renderMatches = (matches) => {
-    return matches.map((match, i) => {
-      console.log("match", match);
+    return matches.map((match) => {
+      const subtitle = match[1][0].sectionHeader.subtitle;
+      const logo = match[1][0].sectionHeader.entityLogo.path;
+      const date = new Date(match[1][0].matchCards[0].kickoff).toDateString();
+      // console.log("match", match);
       // let date = new Date(match[1][0].fixture.date).toString().slice(0, 11);
       return (
-        <div className="match" key={i}>
-          <h3>{match[0]}</h3>
-          {match[1].map((game) => {
-            return (
-              <MatchPreview game={game} key={game.matchCards[0].matchId} />
-            );
+        <div className="match" key={match[0]}>
+          <h3>{leagues[match[0]]}</h3>
+          <img src={logo} />
+          <p>{subtitle}</p>
+          <p>{date}</p>
+          {match[1][0].matchCards.map((game) => {
+            return <MatchPreview game={game} />;
           })}
         </div>
         // <div key={match[0]} className="same-day-match">
@@ -257,12 +263,12 @@ const NextMatchesTable = () => {
         <Spinner />
       ) : leagueCalled ? (
         <div className="matches-container">
-          <img
+          {/* <img
             src={logoPlaceholder}
             style={{ width: "100px" }}
             alt="logo"
             onLoad={() => setLogoPlaceholder(nextMatches[0].league.logo)}
-          />
+          /> */}
           <div className="switch-button">
             <input
               onChange={handleChange}

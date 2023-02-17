@@ -11,13 +11,22 @@ const MatchPreview = ({ game }) => {
   const [homeTeamLogo, setHomeTeamLogo] = useState(Shield);
   const [awayTeamLogo, setAwayTeamLogo] = useState(Shield);
 
-  // console.log(game);
+  console.log("game", game);
 
   const {
     awayTeam: { image: awayLogo, name: awayName, score: awayScore },
     homeTeam: { image: homeLogo, name: homeName, score: homeScore },
+    kickoff,
+    kickoffTimeFormatted,
     timePeriod,
-  } = game.matchCards[0];
+  } = game;
+
+  const time = new Date(kickoff).toLocaleTimeString([], {
+    hour: "numeric",
+    minute: "2-digit",
+  });
+
+  const date = new Date(kickoff).toLocaleDateString();
 
   // const {
   //   fixture: {
@@ -58,16 +67,11 @@ const MatchPreview = ({ game }) => {
   //   determineWinner(homeGoals, awayGoals);
   // }, [homeGoals, awayGoals, live]);
 
-  // const {
-  //   awayTeam: { image: awayLogo, name: awayName, score: awayScore },
-  //   homeTeam: { image: homeLogo, name: homeName, score: homeScore },
-  //   timePeriod,
-  // } = game.matchCards[0];
-
   return (
-    <div className="match-preview-container">
-      {timePeriod}
+    <div className="match-preview-container" key={game.iuKey}>
+      {timePeriod || time}
       <div style={{ display: "flex" }}>
+        {date}
         <img style={{ width: "20px" }} src={awayLogo} />
         <p>{awayName}</p>
         <p>{awayScore}</p>
@@ -148,7 +152,7 @@ const MatchPreview = ({ game }) => {
       </div>
       <div className="see-more" id="see-more">
         see more
-      </div> */}
+            </div> */}
     </div>
   );
 };
