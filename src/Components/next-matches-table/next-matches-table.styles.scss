@@ -10,6 +10,25 @@
   z-index: 0;
   background-color: #f1f3f8;
 
+  .container {
+    .standings-link {
+      display: flex;
+      justify-content: center;
+      text-align: center;
+      margin-top: 10px;
+
+      p {
+        width: max-content;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+
+        &:hover {
+          color: #a4a0b5;
+        }
+      }
+    }
+  }
+
   .switch-button {
     background: rgba(255, 255, 255, 0.56);
     border-radius: 30px;
@@ -114,9 +133,9 @@
   .league-section {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    margin-top: 20px;
-    gap: 20px;
+    align-items: center;
+    margin: 30px 0 10px 0;
+    gap: 10px;
 
     .section-logo {
       display: flex;

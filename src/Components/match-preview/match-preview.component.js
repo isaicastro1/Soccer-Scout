@@ -5,22 +5,20 @@ import Shield from "../../Assets/shield.png";
 
 import "./match-preview.styles.scss";
 
-const MatchPreview = ({ game }) => {
+const MatchPreview = ({ game, subtitle }) => {
   const [teamWon, setTeamWon] = useState("tie");
   const [matchEnded, setMatchEnded] = useState(false);
   const [homePreviewLogo, setHomePreviewLogo] = useState(Shield);
   const [awayPreviewLogo, setAwayPreviewLogo] = useState(Shield);
 
-  console.log("game", game);
-
   const {
     awayTeam: { image: awayLogo, name: awayName, score: awayScore },
     homeTeam: { image: homeLogo, name: homeName, score: homeScore },
     kickoff,
-    kickoffTimeFormatted,
-    timePeriod,
     period,
   } = game;
+
+  console.log(game);
 
   const time = new Date(kickoff).toLocaleTimeString([], {
     hour: "numeric",
@@ -82,6 +80,7 @@ const MatchPreview = ({ game }) => {
         <p>{homeName}</p>
         <p>{homeScore}</p>
       </div> */}
+      <span className="matchday">{subtitle}</span>
       <div className="team-logos">
         <div className="team-logo-container">
           <div className="team-name">
@@ -118,22 +117,34 @@ const MatchPreview = ({ game }) => {
               <span className="live-dot">{minutes}'</span>
             </div>
           )} */}
-          <span className="match-time">{time}</span>
+          {period === "FULL_TIME" ? (
+            <>
+              <span className="match-time">FT</span>
+              <div className="match-result">
+                <div className="home-goals">{homeScore}</div>
+                <span>-</span>
+                <div className="away-goals">{awayScore}</div>
+              </div>
+            </>
+          ) : period === "PRE_MATCH" ? (
+            <span className="match-time">{time}</span>
+          ) : (
+            <p>No</p>
+          )}
+          {/* <span className="match-time">{time}</span>
           <div className="match-result">
-            {
-              // homeScore !== null ||
-              // awayScore !== null ||
-              period !== "PRE_MATCH" ? (
-                <>
-                  <div className="home-goals">{homeScore}</div>
-                  <span>-</span>
-                  <div className="away-goals">{awayScore}</div>
-                </>
-              ) : (
-                <></>
-              )
-            }
-          </div>
+            {period === "FULL_TIME" ? (
+              <>
+                <div className="home-goals">{homeScore}</div>
+                <span>-</span>
+                <div className="away-goals">{awayScore}</div>
+              </>
+            ) : period === "PRE_MATCH" ? (
+              <p>Yes</p>
+            ) : (
+              <p>No</p>
+            )} */}
+          {/* </div> */}
         </div>
         <div className="team-logo-container">
           <img

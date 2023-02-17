@@ -1,7 +1,7 @@
 .match-preview-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
   width: 480px;
   max-width: 480px;
@@ -12,13 +12,19 @@
   padding: 5px;
   border-radius: 10px;
   cursor: pointer;
-  transition: 0.1s ease-in-out;
+  outline: 5px solid transparent;
+  transition: all 0.3s ease-in-out;
   box-shadow: 6px 4px 14px -5px rgba(33, 32, 32, 0.79);
   -webkit-box-shadow: 6px 4px 14px -5px rgba(33, 32, 32, 0.79);
   -moz-box-shadow: 6px 4px 14px -5px rgba(33, 32, 32, 0.79);
 
   &:hover {
-    background-color: rgb(228, 226, 226);
+    outline: 5px solid gray;
+    transform: translateY(-10px);
+  }
+
+  .matchday {
+    font-size: 13px;
   }
 
   .match-game {
@@ -73,8 +79,9 @@
     .time {
       display: flex;
       flex-direction: column;
-      justify-content: space-evenly;
+      justify-content: space-between;
       align-items: center;
+      margin-bottom: 5px;
       padding: 5px;
       min-width: 60px;
 
@@ -140,7 +147,7 @@
     cursor: pointer;
 
     &:hover {
-      background-color: rgb(88, 88, 246);
+      background-color: rgb(106, 106, 255);
       color: white;
     }
   }

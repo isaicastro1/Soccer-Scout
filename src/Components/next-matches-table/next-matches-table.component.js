@@ -19,10 +19,10 @@ const NextMatchesTable = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [leagueCalled, setLeagueCalled] = useState(false);
   const [nameOfLeague, setNameOfLeague] = useState("laliga");
-  const [logoPlaceholder, setLogoPlaceholder] = useState(Shield);
   const [userFavorites, setUserFavorites] = useState([]);
   const [isFavoritesChecked, setIsFavoritesChecked] = useState(true);
   const [newAPIMatches, setNewAPIMatches] = useState();
+  const [date, setDate] = useState();
 
   const { currentUser } = useContext(UserContext);
   useEffect(() => {
@@ -43,45 +43,45 @@ const NextMatchesTable = () => {
 
   const upcomingMatchesDate = leagueDates[`${nameOfLeague}`] || "2023-02-28";
 
-  const getNextMatches = useCallback(async () => {
-    if (!league) return;
+  // const getNextMatches = useCallback(async () => {
+  //   if (!league) return;
 
-    setIsLoading(true);
-    setLeagueCalled(true);
+  //   setIsLoading(true);
+  //   setLeagueCalled(true);
 
-    const date = getDate();
+  //   const date = getDate();
 
-    try {
-      const response = await fetch("https://soccer-api.herokuapp.com/matches", {
-        method: "post",
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          league,
-          date,
-          upcomingMatchesDate,
-        }),
-      });
+  //   try {
+  //     const response = await fetch("https://soccer-api.herokuapp.com/matches", {
+  //       method: "post",
+  //       headers: {
+  //         "Access-Control-Allow-Origin": "*",
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         league,
+  //         date,
+  //         upcomingMatchesDate,
+  //       }),
+  //     });
 
-      const data = await response.json();
+  //     const data = await response.json();
 
-      if (!data.response.length) {
-        alert("Sorry, Could not fetch data from API");
-        throw new Error("Could not fetch data");
-      }
-      setNextMatches(data.response);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setIsLoading(false);
-    }
-  }, [league, upcomingMatchesDate]);
+  //     if (!data.response.length) {
+  //       alert("Sorry, Could not fetch data from API");
+  //       throw new Error("Could not fetch data");
+  //     }
+  //     setNextMatches(data.response);
+  //   } catch (error) {
+  //     console.log(error);
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // }, [league, upcomingMatchesDate]);
 
-  useEffect(() => {
-    getNextMatches();
-  }, [getNextMatches, setNextMatches, setIsLoading]);
+  // useEffect(() => {
+  //   getNextMatches();
+  // }, [getNextMatches, setNextMatches, setIsLoading]);
 
   const handleLeagueChange = (event) => {
     setLeague(allLeagues[event.target.getAttribute("value")]);
@@ -168,39 +168,46 @@ const NextMatchesTable = () => {
     LaLiga: "La Liga",
     "Premier League": "Premier League",
     "Europa League": "Europa League",
+    Bundesliga: "Bundesliga",
+    "Serie A": "Serie A",
+    "Ligue 1 Uber Eats": "Ligue 1 Uber Eats",
   };
 
   useEffect(() => {
-    fetch(
-      `https://onefootball.com/proxy-web-experience/en/matches?date=2023-02-16`
-    )
-      .then((data) => data.json())
-      .then((res) => {
-        // console.log(res);
+    const fetchData = async () => {
+      setIsLoading(true);
+      setLeagueCalled(true);
+
+      try {
+        const response = await fetch(
+          `https://onefootball.com/proxy-web-experience/en/matches?date=2023-02-17`
+        );
+        const data = await response.json();
+
         let matches = [];
-        const fixtures = res.containers.filter((item) => {
+
+        const fixtures = data.containers.filter((item) => {
           return (
             item.fullWidth &&
             item.fullWidth.component &&
             item.fullWidth.component.matchCardsList
           );
         });
-        // console.log(fixtures);
+
         fixtures.map((item) => {
-          // console.log(item);
           if (
             leagues[item.fullWidth.component.matchCardsList.sectionHeader.title]
           ) {
             matches.push(item.fullWidth.component.matchCardsList);
           }
         });
-        // if (item.fullWidth.component.matchCardsList) {
-        //   matches.push(item.fullWidth.component.matchCardsList);
-        // }
-        // console.log(matches);
         setNewAPIMatches(matches);
-        // console.log("matches", matches);
-      });
+        setIsLoading(false);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
   }, []);
 
   const separateMatches = (matchesArray) => {
@@ -209,17 +216,7 @@ const NextMatchesTable = () => {
     let fixtureLeague = {};
 
     matchesArray.map((match) => {
-      // console.log("match", match);
       const league = match.sectionHeader.title;
-      // let date = new Date(match.matchCards[0].kickoff).toLocaleTimeString([], {
-      //   hour: "2-digit",
-      //   minute: "2-digit",
-      //   hour12: true,
-      // });
-      // // console.log("match", match);
-      // if (date.split("")[0] == 0) {
-      //   date = date.slice(1);
-      // }
       if (fixtureLeague[league]) {
         fixtureLeague[league].push(match);
       } else {
@@ -228,38 +225,61 @@ const NextMatchesTable = () => {
     });
     return Object.entries(fixtureLeague).sort();
   };
+
   const matches = separateMatches(newAPIMatches);
-  // console.log(matches);
+
+  // sort by favorite league
+  matches &&
+    matches.sort((a, b) => {
+      const leagueOrder = [
+        "LaLiga",
+        "Premier League",
+        "Bundesliga",
+        "Ligue 1 Uber Eats",
+        "Serie A",
+      ];
+      return leagueOrder.indexOf(a[0]) - leagueOrder.indexOf(b[0]);
+    });
+
+  useEffect(() => {
+    if (matches && matches.length) {
+      setDate(new Date(matches[0][1][0].matchCards[0].kickoff).toDateString());
+    }
+  }, [matches]);
 
   const renderMatches = (matches) => {
     return matches.map((match) => {
       const subtitle = match[1][0].sectionHeader.subtitle;
       const logo = match[1][0].sectionHeader.entityLogo.path;
       return (
-        <>
+        <div
+          className="container"
+          key={match[1][0].sectionHeader.entityLogo.path}
+        >
           <div className="league-section">
             <div className="section-logo">
               <h5>{leagues[match[0]]}</h5>
               <img style={{ width: "50px" }} src={logo} />
             </div>
-            <p className="subtitle">{subtitle}</p>
           </div>
           <div className="match" key={match[0]}>
             {match[1][0].matchCards.map((game) => {
-              return <MatchPreview game={game} />;
+              return (
+                <MatchPreview
+                  game={game}
+                  subtitle={subtitle}
+                  key={game.uiKey}
+                />
+              );
             })}
           </div>
-        </>
-        // <div key={match[0]} className="same-day-match">
-        /* <div className="match-date-title">
-            <h2>{date}</h2>
-          </div> */
-        // </div>
+          <div className="standings-link">
+            <p>See standings &#8827;</p>
+          </div>
+        </div>
       );
     });
   };
-
-  const date = new Date(matches[0][1][0].matchCards[0].kickoff).toDateString();
 
   return (
     <>
@@ -267,7 +287,6 @@ const NextMatchesTable = () => {
         <Spinner />
       ) : leagueCalled ? (
         <div className="matches-container">
-          <h3 style={{ marginTop: "20px" }}>{date}</h3>
           <div className="switch-button">
             <input
               onChange={handleChange}
