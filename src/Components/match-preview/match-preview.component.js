@@ -8,8 +8,8 @@ import "./match-preview.styles.scss";
 const MatchPreview = ({ game }) => {
   const [teamWon, setTeamWon] = useState("tie");
   const [matchEnded, setMatchEnded] = useState(false);
-  const [homeTeamLogo, setHomeTeamLogo] = useState(Shield);
-  const [awayTeamLogo, setAwayTeamLogo] = useState(Shield);
+  const [homePreviewLogo, setHomePreviewLogo] = useState(Shield);
+  const [awayPreviewLogo, setAwayPreviewLogo] = useState(Shield);
 
   console.log("game", game);
 
@@ -19,6 +19,7 @@ const MatchPreview = ({ game }) => {
     kickoff,
     kickoffTimeFormatted,
     timePeriod,
+    period,
   } = game;
 
   const time = new Date(kickoff).toLocaleTimeString([], {
@@ -69,8 +70,8 @@ const MatchPreview = ({ game }) => {
 
   return (
     <div className="match-preview-container" key={game.iuKey}>
-      {timePeriod || time}
-      <div style={{ display: "flex" }}>
+      {/* {timePeriod || time} */}
+      {/* <div style={{ display: "flex" }}>
         {date}
         <img style={{ width: "20px" }} src={awayLogo} />
         <p>{awayName}</p>
@@ -80,30 +81,29 @@ const MatchPreview = ({ game }) => {
         <img style={{ width: "20px" }} src={homeLogo} />
         <p>{homeName}</p>
         <p>{homeScore}</p>
-      </div>
-      {/* <h3 className="match-game">{round}</h3>
+      </div> */}
       <div className="team-logos">
         <div className="team-logo-container">
           <div className="team-name">
-            {teamWon === "home" && matchEnded ? (
+            {/* {teamWon === "home" && matchEnded ? (
               <div className="winner">
                 <img src={Trophy} style={{ height: "30px" }} alt="trophy" />
               </div>
             ) : (
               <></>
-            )}
-            <h5 className="team-one-name">{teamOneName}</h5>
+            )} */}
+            <h5 className="team-one-name">{homeName}</h5>
           </div>
           <img
             className="team-logo"
-            src={homeTeamLogo}
+            src={homePreviewLogo}
             alt="logo"
             style={{ height: "40px", width: "40px" }}
-            onLoad={() => setHomeTeamLogo(teamOneLogo)}
+            onLoad={() => setHomePreviewLogo(homeLogo)}
           />
         </div>
         <div className="time">
-          {live === "Not Started" || live === "Time to be defined" ? (
+          {/* {live === "Not Started" || live === "Time to be defined" ? (
             <span className="match-time">{time}</span>
           ) : live === "Match Finished" ? (
             <span className="match-time">FT</span>
@@ -117,42 +117,47 @@ const MatchPreview = ({ game }) => {
             <div className="match-time">
               <span className="live-dot">{minutes}'</span>
             </div>
-          )}
+          )} */}
+          <span className="match-time">{time}</span>
           <div className="match-result">
-            {homeGoals !== null || awayGoals !== null ? (
-              <>
-                <div className="home-goals">{homeGoals}</div>
-                <span>-</span>
-                <div className="away-goals">{awayGoals}</div>
-              </>
-            ) : (
-              <></>
-            )}
+            {
+              // homeScore !== null ||
+              // awayScore !== null ||
+              period !== "PRE_MATCH" ? (
+                <>
+                  <div className="home-goals">{homeScore}</div>
+                  <span>-</span>
+                  <div className="away-goals">{awayScore}</div>
+                </>
+              ) : (
+                <></>
+              )
+            }
           </div>
         </div>
         <div className="team-logo-container">
           <img
             className="team-logo"
-            src={awayTeamLogo}
+            src={awayPreviewLogo}
             alt="logo"
             style={{ height: "40px", width: "40px" }}
-            onLoad={() => setAwayTeamLogo(teamTwoLogo)}
+            onLoad={() => setAwayPreviewLogo(awayLogo)}
           />
           <div className="team-name">
-            {teamWon === "away" && matchEnded ? (
+            {/* {teamWon === "away" && matchEnded ? (
               <div className="winner">
                 <img src={Trophy} style={{ height: "30px" }} alt="trophy" />
               </div>
             ) : (
               <></>
-            )}
-            <h5 className="team-two-name">{teamTwoName}</h5>
+            )} */}
+            <h5 className="team-two-name">{awayName}</h5>
           </div>
         </div>
       </div>
       <div className="see-more" id="see-more">
         see more
-            </div> */}
+      </div>
     </div>
   );
 };

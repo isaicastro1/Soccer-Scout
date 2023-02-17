@@ -172,7 +172,7 @@ const NextMatchesTable = () => {
 
   useEffect(() => {
     fetch(
-      `https://onefootball.com/proxy-web-experience/en/matches?date=2023-02-18`
+      `https://onefootball.com/proxy-web-experience/en/matches?date=2023-02-16`
     )
       .then((data) => data.json())
       .then((res) => {
@@ -235,19 +235,21 @@ const NextMatchesTable = () => {
     return matches.map((match) => {
       const subtitle = match[1][0].sectionHeader.subtitle;
       const logo = match[1][0].sectionHeader.entityLogo.path;
-      const date = new Date(match[1][0].matchCards[0].kickoff).toDateString();
-      // console.log("match", match);
-      // let date = new Date(match[1][0].fixture.date).toString().slice(0, 11);
       return (
-        <div className="match" key={match[0]}>
-          <h3>{leagues[match[0]]}</h3>
-          <img src={logo} />
-          <p>{subtitle}</p>
-          <p>{date}</p>
-          {match[1][0].matchCards.map((game) => {
-            return <MatchPreview game={game} />;
-          })}
-        </div>
+        <>
+          <div className="league-section">
+            <div className="section-logo">
+              <h5>{leagues[match[0]]}</h5>
+              <img style={{ width: "50px" }} src={logo} />
+            </div>
+            <p className="subtitle">{subtitle}</p>
+          </div>
+          <div className="match" key={match[0]}>
+            {match[1][0].matchCards.map((game) => {
+              return <MatchPreview game={game} />;
+            })}
+          </div>
+        </>
         // <div key={match[0]} className="same-day-match">
         /* <div className="match-date-title">
             <h2>{date}</h2>
@@ -257,18 +259,15 @@ const NextMatchesTable = () => {
     });
   };
 
+  const date = new Date(matches[0][1][0].matchCards[0].kickoff).toDateString();
+
   return (
     <>
       {isLoading ? (
         <Spinner />
       ) : leagueCalled ? (
         <div className="matches-container">
-          {/* <img
-            src={logoPlaceholder}
-            style={{ width: "100px" }}
-            alt="logo"
-            onLoad={() => setLogoPlaceholder(nextMatches[0].league.logo)}
-          /> */}
+          <h3 style={{ marginTop: "20px" }}>{date}</h3>
           <div className="switch-button">
             <input
               onChange={handleChange}
