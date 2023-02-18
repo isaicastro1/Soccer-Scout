@@ -29,14 +29,6 @@ const News = () => {
     }
   }, []);
 
-  useEffect(() => {
-    fetch(
-      "https://onefootball.com/proxy-web-experience/en/matches?date=2023-02-14"
-    )
-      .then((data) => data.json())
-      .then((res) => console.log(res));
-  }, []);
-
   return (
     <>
       {isLoading ? (

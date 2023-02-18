@@ -12,14 +12,14 @@
   padding: 5px;
   border-radius: 10px;
   cursor: pointer;
-  outline: 5px solid transparent;
+  outline: 4px solid transparent;
   transition: all 0.3s ease-in-out;
   box-shadow: 6px 4px 14px -5px rgba(33, 32, 32, 0.79);
   -webkit-box-shadow: 6px 4px 14px -5px rgba(33, 32, 32, 0.79);
   -moz-box-shadow: 6px 4px 14px -5px rgba(33, 32, 32, 0.79);
 
   &:hover {
-    outline: 5px solid gray;
+    outline: 4px solid gray;
     transform: translateY(-10px);
   }
 
@@ -103,7 +103,7 @@
             width: 5px;
             height: 5px;
             top: 8px;
-            left: 0;
+            left: 7px;
             border-radius: 50%;
             background-color: red;
             animation: grow infinite 2s;
@@ -136,18 +136,17 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    text-transform: uppercase;
-    width: 20%;
+    width: 18%;
     height: 20px;
     border-radius: 15px;
     font-size: 12px;
-    font-weight: bolder;
-    color: rgb(88, 88, 246);
-    transition: 0.3s;
+    font-weight: 500;
+    color: rgb(114, 114, 114);
+    transition: 0.25s;
     cursor: pointer;
 
     &:hover {
-      background-color: rgb(106, 106, 255);
+      background-color: rgb(145, 145, 145);
       color: white;
     }
   }

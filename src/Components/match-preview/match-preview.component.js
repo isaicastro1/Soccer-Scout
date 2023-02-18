@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+import { MatchResult } from "../match-result/match-result.component";
+
 import Trophy from "../../Assets/trophy.png";
 import Shield from "../../Assets/shield.png";
 
@@ -16,6 +18,7 @@ const MatchPreview = ({ game, subtitle }) => {
     homeTeam: { image: homeLogo, name: homeName, score: homeScore },
     kickoff,
     period,
+    timePeriod,
   } = game;
 
   console.log(game);
@@ -27,70 +30,37 @@ const MatchPreview = ({ game, subtitle }) => {
 
   const date = new Date(kickoff).toLocaleDateString();
 
-  // const {
-  //   fixture: {
-  //     id,
-  //     date,
-  //     status: { elapsed: minutes, long: live },
-  //   },
-  //   league: { round },
-  //   teams: {
-  //     home: { name: teamOneName, logo: teamOneLogo },
-  //     away: { name: teamTwoName, logo: teamTwoLogo },
-  //   },
-  //   goals: { home: homeGoals, away: awayGoals },
-  // } = game;
+  useEffect(() => {
+    const determineWinner = (homeGoals, awayGoals) => {
+      if (period === "FULL_TIME") {
+        setMatchEnded(true);
+      }
 
-  // let time = new Date(date)
-  //   .toLocaleString()
-  //   .split("")
-  //   .splice(10, 12)
-  //   .join("")
-  //   .replace(":00", "");
+      if (homeGoals > awayGoals) {
+        setTeamWon("home");
+      } else if (homeGoals < awayGoals) {
+        setTeamWon("away");
+      } else {
+        return "tie";
+      }
+    };
 
-  // useEffect(() => {
-  //   const determineWinner = (homeGoals, awayGoals) => {
-  //     if (live === "Match Finished") {
-  //       setMatchEnded(true);
-  //     }
-
-  //     if (homeGoals > awayGoals) {
-  //       setTeamWon("home");
-  //     } else if (homeGoals < awayGoals) {
-  //       setTeamWon("away");
-  //     } else {
-  //       return "tie";
-  //     }
-  //   };
-
-  //   determineWinner(homeGoals, awayGoals);
-  // }, [homeGoals, awayGoals, live]);
+    determineWinner(homeScore, awayScore);
+  }, [homeScore, awayScore, period]);
 
   return (
     <div className="match-preview-container" key={game.iuKey}>
-      {/* {timePeriod || time} */}
-      {/* <div style={{ display: "flex" }}>
-        {date}
-        <img style={{ width: "20px" }} src={awayLogo} />
-        <p>{awayName}</p>
-        <p>{awayScore}</p>
-      </div>
-      <div style={{ display: "flex" }}>
-        <img style={{ width: "20px" }} src={homeLogo} />
-        <p>{homeName}</p>
-        <p>{homeScore}</p>
-      </div> */}
       <span className="matchday">{subtitle}</span>
       <div className="team-logos">
         <div className="team-logo-container">
           <div className="team-name">
-            {/* {teamWon === "home" && matchEnded ? (
+            {teamWon === "home" && matchEnded ? (
               <div className="winner">
                 <img src={Trophy} style={{ height: "30px" }} alt="trophy" />
               </div>
             ) : (
               <></>
-            )} */}
+            )}
             <h5 className="team-one-name">{homeName}</h5>
           </div>
           <img
@@ -102,49 +72,28 @@ const MatchPreview = ({ game, subtitle }) => {
           />
         </div>
         <div className="time">
-          {/* {live === "Not Started" || live === "Time to be defined" ? (
-            <span className="match-time">{time}</span>
-          ) : live === "Match Finished" ? (
-            <span className="match-time">FT</span>
-          ) : live === "Halftime" ? (
-            <div className="match-time">
-              <span className="live-dot">HT</span>
-            </div>
-          ) : live === "Match Postponed" ? (
-            <span className="match-time">Postponed</span>
-          ) : (
-            <div className="match-time">
-              <span className="live-dot">{minutes}'</span>
-            </div>
-          )} */}
-          {period === "FULL_TIME" ? (
+          {timePeriod === "Full time" ? (
             <>
               <span className="match-time">FT</span>
-              <div className="match-result">
-                <div className="home-goals">{homeScore}</div>
-                <span>-</span>
-                <div className="away-goals">{awayScore}</div>
-              </div>
+              <MatchResult homeScore={homeScore} awayScore={awayScore} />
             </>
           ) : period === "PRE_MATCH" ? (
             <span className="match-time">{time}</span>
+          ) : period === "FIRST_HALF" || period === "SECOND_HALF" ? (
+            <>
+              <div className="match-time">
+                <span className="live-dot">{timePeriod}</span>
+              </div>
+              <MatchResult homeScore={homeScore} awayScore={awayScore} />
+            </>
+          ) : period === "HALF_TIME" ? (
+            <>
+              <span className="match-time">HT</span>
+              <MatchResult homeScore={homeScore} awayScore={awayScore} />
+            </>
           ) : (
-            <p>No</p>
+            <>No</>
           )}
-          {/* <span className="match-time">{time}</span>
-          <div className="match-result">
-            {period === "FULL_TIME" ? (
-              <>
-                <div className="home-goals">{homeScore}</div>
-                <span>-</span>
-                <div className="away-goals">{awayScore}</div>
-              </>
-            ) : period === "PRE_MATCH" ? (
-              <p>Yes</p>
-            ) : (
-              <p>No</p>
-            )} */}
-          {/* </div> */}
         </div>
         <div className="team-logo-container">
           <img
@@ -155,253 +104,22 @@ const MatchPreview = ({ game, subtitle }) => {
             onLoad={() => setAwayPreviewLogo(awayLogo)}
           />
           <div className="team-name">
-            {/* {teamWon === "away" && matchEnded ? (
+            {teamWon === "away" && matchEnded ? (
               <div className="winner">
                 <img src={Trophy} style={{ height: "30px" }} alt="trophy" />
               </div>
             ) : (
               <></>
-            )} */}
+            )}
             <h5 className="team-two-name">{awayName}</h5>
           </div>
         </div>
       </div>
       <div className="see-more" id="see-more">
-        see more
+        SEE MORE
       </div>
     </div>
   );
 };
 
 export default MatchPreview;
-
-// {
-//   "containers": [
-//     {
-//       "uiKey": "582d241",
-//       "fullWidth": {
-//         "component": {
-//           "uiKey": "23d7fbe",
-//           "googleAdsPlaceholder": {
-//             "divId": "div-gpt-ad-1669807366587-0",
-//             "adUnitPath": "/38577695/Web_Matches_Feed/Web_Matches_Stream_1_Code/Desktop_MS_1_Code",
-//             "generalSizes": {
-//               "desktop": [
-//                 {
-//                   "minWidth": 728,
-//                   "minHeight": 90
-//                 }
-//               ]
-//             },
-//             "targetingKeywords": [
-//               {
-//                 "key": "env",
-//                 "value": [
-//                   "production"
-//                 ]
-//               },
-//               {
-//                 "key": "fvc",
-//                 "value": [
-//                   "1200"
-//                 ]
-//               },
-//               {
-//                 "key": "flt",
-//                 "value": [
-//                   "21",
-//                   "5",
-//                   "18",
-//                   "61"
-//                 ]
-//               }
-//             ],
-//             "hasBackground": true
-//           }
-//         }
-//       }
-//     },
-//     {
-//       "uiKey": "6cd4025",
-//       "fullWidth": {
-//         "component": {
-//           "uiKey": "2a4acc6",
-//           "datePicker": {
-//             "currentDate": "2023-02-16",
-//             "queryParam": "date",
-//             "label": "Select a date:",
-//             "sinceDate": "2021-02-14",
-//             "untilDate": "2025-02-14",
-//             "trackingEvents": [
-//               {
-//                 "type": "EVENT_CLICK",
-//                 "name": "DateChange",
-//                 "serverParameters": {
-//                   "date_current": "+1",
-//                   "stream_name": "MatchesAll",
-//                   "url": "https://onefootball.com/en/matches?date=2023-02-16"
-//                 },
-//                 "trackers": [
-//                   {
-//                     "type": "TRACKER_LOCALYTICS"
-//                   }
-//                 ]
-//               }
-//             ]
-//           }
-//         }
-//       }
-//     },
-//     {
-//       "uiKey": "63dfdde",
-//       "fullWidth": {
-//         "component": {
-//           "uiKey": "37a61a0",
-//           "sectionHeader": {
-//             "title": "Matches",
-//             "subtitle": "Thursday, 16 February 2023"
-//           }
-//         }
-//       }
-//     },
-//     {
-//       "uiKey": "cd9d4f1",
-//       "fullWidth": {
-//         "component": {
-//           "uiKey": "eedfc75",
-//           "matchCardsList": {
-//             "matchCards": [
-//               {
-//                 "uiKey": "9a5dfe9",
-//                 "link": "/en/match/2347885",
-//                 "kickoff": "2023-02-16T17:45:00Z",
-//                 "period": "PRE_MATCH",
-//                 "homeTeam": {
-//                   "image": "https://images.onefootball.com/icons/teams/164/5.png",
-//                   "name": "Barcelona",
-//                   "isNational": "false",
-//                   "imageObject": {
-//                     "path": "https://images.onefootball.com/icons/teams/164/5.png",
-//                     "alt": "Icon: Barcelona"
-//                   }
-//                 },
-//                 "awayTeam": {
-//                   "image": "https://images.onefootball.com/icons/teams/164/21.png",
-//                   "name": "Manchester United",
-//                   "isNational": "false",
-//                   "imageObject": {
-//                     "path": "https://images.onefootball.com/icons/teams/164/21.png",
-//                     "alt": "Icon: Manchester United"
-//                   }
-//                 },
-//                 "trackingEvents": [
-//                   {
-//                     "type": "EVENT_CLICK",
-//                     "name": "MatchItemClicked",
-//                     "serverParameters": {
-//                       "away_team_id": "21",
-//                       "away_team_name": "Manchester United",
-//                       "competition_id": "7",
-//                       "competition_name": "Europa League",
-//                       "home_team_id": "5",
-//                       "home_team_name": "Barcelona",
-//                       "match_id": "2347885",
-//                       "match_name": "Barcelona - Manchester United",
-//                       "match_position": "1",
-//                       "match_state": "PreMatch",
-//                       "matchcard_type": "Regular",
-//                       "minute_of_the_match": "0",
-//                       "stream_name": "MatchesAll",
-//                       "url": "https://onefootball.com/en/matches?date=2023-02-16"
-//                     },
-//                     "trackers": [
-//                       {
-//                         "type": "TRACKER_LOCALYTICS"
-//                       }
-//                     ]
-//                   }
-//                 ],
-//                 "matchId": "2347885",
-//                 "kickoffFormatted": "16/02/2023",
-//                 "kickoffTimeFormatted": "10:45",
-//                 "refreshId": "915ecfd"
-//               },
-//               {
-//                 "uiKey": "3cfec77",
-//                 "link": "/en/match/2347889",
-//                 "kickoff": "2023-02-16T17:45:00Z",
-//                 "period": "PRE_MATCH",
-//                 "homeTeam": {
-//                   "image": "https://images.onefootball.com/icons/teams/164/341.png",
-//                   "name": "Ajax",
-//                   "isNational": "false",
-//                   "imageObject": {
-//                     "path": "https://images.onefootball.com/icons/teams/164/341.png",
-//                     "alt": "Icon: Ajax"
-//                   }
-//                 },
-//                 "awayTeam": {
-//                   "image": "https://images.onefootball.com/icons/teams/164/174.png",
-//                   "name": "1. FC Union Berlin",
-//                   "isNational": "false",
-//                   "imageObject": {
-//                     "path": "https://images.onefootball.com/icons/teams/164/174.png",
-//                     "alt": "Icon: 1. FC Union Berlin"
-//                   }
-//                 },
-//                 "trackingEvents": [
-//                   {
-//                     "type": "EVENT_CLICK",
-//                     "name": "MatchItemClicked",
-//                     "serverParameters": {
-//                       "away_team_id": "174",
-//                       "away_team_name": "1. FC Union Berlin",
-//                       "competition_id": "7",
-//                       "competition_name": "Europa League",
-//                       "home_team_id": "341",
-//                       "home_team_name": "Ajax",
-//                       "match_id": "2347889",
-//                       "match_name": "Ajax - 1. FC Union Berlin",
-//                       "match_position": "2",
-//                       "match_state": "PreMatch",
-//                       "matchcard_type": "Regular",
-//                       "minute_of_the_match": "0",
-//                       "stream_name": "MatchesAll",
-//                       "url": "https://onefootball.com/en/matches?date=2023-02-16"
-//                     },
-//                     "trackers": [
-//                       {
-//                         "type": "TRACKER_LOCALYTICS"
-//                       }
-//                     ]
-//                   }
-//                 ],
-//                 "matchId": "2347889",
-//                 "kickoffFormatted": "16/02/2023",
-//                 "kickoffTimeFormatted": "10:45",
-//                 "refreshId": "d2bb22b"
-//               },
-//             ],
-//             "link": {
-//               "name": "Go to standings",
-//               "urlPath": "/en/competition/europa-league-7/table"
-//             },
-//             "sectionHeader": {
-//               "title": "Europa League",
-//               "subtitle": "Playoff 1st leg",
-//               "entityLink": {
-//                 "name": "Europa League",
-//                 "urlPath": "/en/competition/europa-league-7"
-//               },
-//               "entityLogo": {
-//                 "path": "https://images.onefootball.com/icons/leagueColoredCompetition/128/7.png",
-//                 "alt": "Logo: Europa League"
-//               }
-//             }
-//           }
-//         }
-//       }
-//     }
-//   ],
-//   "pageTitle": "Today’s Football Matches | OneFootball"
-// }
