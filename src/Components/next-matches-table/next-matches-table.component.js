@@ -207,9 +207,10 @@ const NextMatchesTable = () => {
           </div>
           {isFavoritesChecked ? (
             renderMatches(matches)
-          ) : newFavoriteMatches.length ? (
-            renderMatches(newFavoriteMatches)
           ) : (
+            // newFavoriteMatches.length ? (
+            //   renderMatches(newFavoriteMatches)
+            // ) :
             <div
               style={{
                 width: "100vw",
