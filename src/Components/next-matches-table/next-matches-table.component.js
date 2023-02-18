@@ -43,10 +43,6 @@ const NextMatchesTable = () => {
     setIsFavoritesChecked(!isFavoritesChecked);
   };
 
-  // const newFavoriteMatches = separateMatchesByDate(
-  //   getMatchesFromFavorites(userFavorites, newMatches)
-  // );
-
   const date = getDate();
 
   useEffect(() => {
