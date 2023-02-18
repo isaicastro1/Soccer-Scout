@@ -4,13 +4,18 @@
   align-items: center;
   flex-direction: column;
   width: 100vw;
-  height: max-content;
+  // height: max-content;
   top: 83px;
   position: relative;
   z-index: 0;
   background-color: #f1f3f8;
 
   .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
     .standings-link {
       display: flex;
       justify-content: center;

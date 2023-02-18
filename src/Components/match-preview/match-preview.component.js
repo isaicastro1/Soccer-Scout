@@ -21,7 +21,7 @@ const MatchPreview = ({ game, subtitle }) => {
     timePeriod,
   } = game;
 
-  console.log(game);
+  // console.log(game);
 
   const time = new Date(kickoff).toLocaleTimeString([], {
     hour: "numeric",

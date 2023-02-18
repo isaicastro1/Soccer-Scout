@@ -2,6 +2,8 @@ import { useEffect, useState, useCallback, useContext } from "react";
 
 import MatchPreview from "../../Components/match-preview/match-preview.component";
 import Spinner from "../spinner/spinner.component";
+import Table from "../table/table";
+
 import { getDate, leagueDates } from "../../utils/date";
 import { allLeagues, leagueUrl, leagues } from "../../utils/all-leagues";
 
@@ -19,7 +21,8 @@ const NextMatchesTable = () => {
   const [userFavorites, setUserFavorites] = useState([]);
   const [isFavoritesChecked, setIsFavoritesChecked] = useState(true);
   const [newAPIMatches, setNewAPIMatches] = useState();
-  const [tableData, setTableData] = useState();
+  const [tableData, setTableData] = useState(null);
+  const [leagueData, setLeagueData] = useState();
 
   const { currentUser } = useContext(UserContext);
   useEffect(() => {
@@ -37,26 +40,6 @@ const NextMatchesTable = () => {
     };
     getUserFavorites();
   }, [currentUser]);
-
-  // const getMatchesFromFavorites = (favorites, matches) => {
-  //   const favoritesSet = new Set(favorites);
-  //   return matches
-  //     .filter(([, fixtures]) => {
-  //       return fixtures.some(({ teams }) => {
-  //         return (
-  //           favoritesSet.has(teams.away.name) ||
-  //           favoritesSet.has(teams.home.name)
-  //         );
-  //       });
-  //     })
-  //     .flatMap(([, fixtures]) =>
-  //       fixtures.filter(
-  //         ({ teams }) =>
-  //           favoritesSet.has(teams.away.name) ||
-  //           favoritesSet.has(teams.home.name)
-  //       )
-  //     );
-  // };
 
   const handleChange = () => {
     setIsFavoritesChecked(!isFavoritesChecked);
@@ -141,22 +124,29 @@ const NextMatchesTable = () => {
   }, [matches]);
 
   const handleSeeMoreClick = (league) => {
-    fetch(leagueUrl[league])
-      .then((data) => data.json())
-      .then((res) => {
-        res.containers.filter((item) => {
-          return (
-            item.fullWidth &&
-            item.fullWidth.component &&
-            item.fullWidth.component.standings.rows
-          );
-        });
-      });
+    return new Promise((resolve, reject) => {
+      fetch(leagueUrl[league])
+        .then((response) => response.json())
+        .then((data) => {
+          const arrayOfStandings = data.containers.filter((item) => {
+            return (
+              item.fullWidth &&
+              item.fullWidth.component &&
+              item.fullWidth.component.standings
+            );
+          });
+          const gameDetails = data.containers.filter((item) => {
+            return (
+              item.fullWidth &&
+              item.fullWidth.component &&
+              item.fullWidth.component.entityTitle
+            );
+          });
+          resolve({ arrayOfStandings, gameDetails });
+        })
+        .catch((error) => reject(error));
+    });
   };
-
-  useEffect(() => {
-    console.log("tableData", tableData);
-  }, [tableData]);
 
   const renderMatches = (matches) => {
     return matches.map((match) => {
@@ -185,7 +175,19 @@ const NextMatchesTable = () => {
             })}
           </div>
           <div className="standings-link">
-            <p onClick={() => handleSeeMoreClick(leagues[match[0]])}>
+            <p
+              onClick={() => {
+                handleSeeMoreClick(leagues[match[0]]).then((data) => {
+                  console.log(data);
+                  setTableData(
+                    data.arrayOfStandings[0].fullWidth.component.standings.rows
+                  );
+                  setLeagueData(
+                    data.gameDetails[0].fullWidth.component.entityTitle
+                  );
+                });
+              }}
+            >
               See standings &#8827;
             </p>
           </div>
@@ -198,7 +200,7 @@ const NextMatchesTable = () => {
     <>
       {isLoading ? (
         <Spinner />
-      ) : (
+      ) : !tableData ? (
         <div className="matches-container">
           <div className="switch-button">
             <input
@@ -228,6 +230,12 @@ const NextMatchesTable = () => {
             </div>
           )}
         </div>
+      ) : (
+        <Table
+          leagueLogo={leagueData.imageObject.path}
+          leagueName={leagues[leagueData.title]}
+          tableData={tableData}
+        />
       )}
     </>
   );
