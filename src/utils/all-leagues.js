@@ -25,11 +25,13 @@ export const leagues = {
   Bundesliga: "Bundesliga",
   "Serie A": "Serie A",
   "Ligue 1 Uber Eats": "Ligue 1",
+  "LIGA BBVA MX CLAUSURA": "LIGA BBVA MX CLAUSURA",
+  "SAUDI PROFESSIONAL LEAGUE": "SAUDI PROFESSIONAL LEAGUE",
 };
 
 export const leagueUrl = {
   "Champions League":
-    "https://onefootball.com/en/competition/champions-league-5/table",
+    "https://onefootball.com/proxy-web-experience/en/competition/champions-league-5/table",
   "La Liga":
     "https://onefootball.com/proxy-web-experience/en/competition/laliga-10/table",
   "Premier League":
@@ -42,4 +44,8 @@ export const leagueUrl = {
     "https://onefootball.com/proxy-web-experience/en/competition/serie-a-13/table",
   "Ligue 1":
     "https://onefootball.com/proxy-web-experience/en/competition/ligue-1-uber-eats-23/table",
+  "Pro League":
+    "https://onefootball.com/proxy-web-experience/en/competition/saudi-professional-league-111/table",
+  MLS: "https://onefootball.com/proxy-web-experience/en/competition/major-league-soccer-15/table",
+  BBVA: "https://onefootball.com/proxy-web-experience/en/competition/liga-bbva-mx-clausura-80/table",
 };

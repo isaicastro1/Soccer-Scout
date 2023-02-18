@@ -1,22 +1,19 @@
-import { useEffect, useState, useCallback, useContext } from "react";
+import { useEffect, useState, useContext } from "react";
 
 import MatchPreview from "../../Components/match-preview/match-preview.component";
 import Spinner from "../spinner/spinner.component";
 import Table from "../table/table";
 
-import { getDate, leagueDates } from "../../utils/date";
-import { allLeagues, leagueUrl, leagues } from "../../utils/all-leagues";
+import { getDate } from "../../utils/date";
+import { leagueUrl, leagues } from "../../utils/all-leagues";
 
 import { UserContext } from "../../contexts/user.context";
 
 import { getFavoritesFromFirebase } from "../../utils/firebase/firebase";
 
-import Shield from "../../Assets/shield.png";
-
 import "./next-matches-table.styles.scss";
 
 const NextMatchesTable = () => {
-  const [nextMatches, setNextMatches] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [userFavorites, setUserFavorites] = useState([]);
   const [isFavoritesChecked, setIsFavoritesChecked] = useState(true);
@@ -25,6 +22,7 @@ const NextMatchesTable = () => {
   const [leagueData, setLeagueData] = useState();
 
   const { currentUser } = useContext(UserContext);
+
   useEffect(() => {
     const getUserFavorites = async () => {
       if (!currentUser || !currentUser.email) return;
@@ -123,7 +121,7 @@ const NextMatchesTable = () => {
     }
   }, [matches]);
 
-  const handleSeeMoreClick = (league) => {
+  const handleSeeStandingsClick = (league) => {
     return new Promise((resolve, reject) => {
       fetch(leagueUrl[league])
         .then((response) => response.json())
@@ -177,8 +175,7 @@ const NextMatchesTable = () => {
           <div className="standings-link">
             <p
               onClick={() => {
-                handleSeeMoreClick(leagues[match[0]]).then((data) => {
-                  console.log(data);
+                handleSeeStandingsClick(leagues[match[0]]).then((data) => {
                   setTableData(
                     data.arrayOfStandings[0].fullWidth.component.standings.rows
                   );

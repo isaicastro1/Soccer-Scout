@@ -5,9 +5,9 @@ const Table = ({ leagueLogo, leagueName, tableData }) => {
     <div className={`league ${"league-" + leagueName}`}>
       <header className={`${leagueName}-container`}>
         <img src={leagueLogo} style={{ width: "70px" }} alt="team-logo" />
-        <h3 className="standings-league-name">{leagueName}</h3>
+        <h3 className="standings-league-name">{leagueName && leagueName}</h3>
       </header>
-      <div className={leagueName}>
+      <div className={leagueName && leagueName}>
         <div className={`${leagueName}-table`}>
           <table className="standings">
             <thead>
@@ -38,7 +38,6 @@ const Table = ({ leagueLogo, leagueName, tableData }) => {
             <tbody>
               {tableData &&
                 tableData.map((item) => {
-                  console.log(item);
                   return (
                     <tr className="team-row" key={item.uiKey}>
                       <td className="team-name">
@@ -47,14 +46,14 @@ const Table = ({ leagueLogo, leagueName, tableData }) => {
                           {item.teamName}
                         </a>
                       </td>
-                      <td className="right">{item.playedMatchesCount}</td>
-                      <td className="right">{item.wonMatchesCount}</td>
-                      <td className="right">{item.drawnMatchesCount}</td>
-                      <td className="right">{item.lostMatchesCount}</td>
+                      <td className="right">{item.playedMatchesCount || 0}</td>
+                      <td className="right">{item.wonMatchesCount || 0}</td>
+                      <td className="right">{item.drawnMatchesCount || 0}</td>
+                      <td className="right">{item.lostMatchesCount || 0}</td>
                       <td className="right">
                         {item.goalsDiff ? item.goalsDiff : 0}
                       </td>
-                      <td className="right">{item.points}</td>
+                      <td className="right">{item.points || 0}</td>
                     </tr>
                   );
                 })}

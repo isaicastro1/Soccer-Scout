@@ -1,7 +1,6 @@
-import { useState, useContext, useEffect, useCallback } from "react";
+import { useState } from "react";
 
-import { TeamDataContext } from "../../contexts/teamData.context";
-import { allLeagues } from "../../utils/all-leagues";
+import { leagueUrl, leagues } from "../../utils/all-leagues";
 
 import Table from "../../Components/table/table";
 import Spinner from "../../Components/spinner/spinner.component";
@@ -9,198 +8,327 @@ import Spinner from "../../Components/spinner/spinner.component";
 import "./find-league.styles.scss";
 
 const FindLeague = () => {
-  const [league, setLeague] = useState();
   const [isLoading, setIsLoading] = useState(false);
-  const [year, setYear] = useState(2022);
+  const [standings, setStandings] = useState([]);
   const [leagueCalled, setLeagueCalled] = useState(false);
   const [leagueLogo, setLeagueLogo] = useState("");
+  const [leagueName, setLeagueName] = useState("");
 
-  const { setAllTeamData, setLeagueName, leagueName } =
-    useContext(TeamDataContext);
-
-  const fetchTeamData = useCallback(async () => {
-    if (!league) return;
-
-    setIsLoading(true);
-    setLeagueCalled(true);
-    try {
-      const response = await fetch("https://soccer-api.herokuapp.com/tables", {
-        method: "post",
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          year: year,
-          league: league,
-        }),
-      });
-
-      const data = await response.json();
-      const teamData = await data.response[0].league.standings;
-      setLeagueLogo(data.response[0].league.logo);
-      setAllTeamData(teamData);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setIsLoading(false);
-    }
-  }, [league, year, setAllTeamData]);
-
-  useEffect(() => {
-    fetchTeamData();
-  }, [fetchTeamData, setAllTeamData, setLeagueLogo]);
-
-  const handleLeagueChange = (event) => {
-    setLeagueName(event.target.getAttribute("value"));
-    setLeague(allLeagues[event.target.getAttribute("value")]);
-  };
-
-  const handleYearChange = (event) => {
-    setYear(event.target.value);
+  const fetchTeamData = (event) => {
+    return new Promise((resolve, reject) => {
+      fetch(leagueUrl[event.target.getAttribute("value")])
+        .then((response) => response.json())
+        .then((data) => {
+          const arrayOfStandings = data.containers.filter((item) => {
+            return (
+              item.fullWidth &&
+              item.fullWidth.component &&
+              item.fullWidth.component.standings
+            );
+          });
+          const gameDetails = data.containers.filter((item) => {
+            return (
+              item.fullWidth &&
+              item.fullWidth.component &&
+              item.fullWidth.component.entityTitle
+            );
+          });
+          resolve({ arrayOfStandings, gameDetails });
+        })
+        .catch((error) => reject(error));
+      setLeagueCalled(true);
+    });
   };
 
   return (
     <>
       {isLoading ? (
         <Spinner />
-      ) : leagueCalled ? (
-        <Table leagueName={leagueName} leagueLogo={leagueLogo} />
-      ) : (
+      ) : !leagueCalled ? (
         <div className="find-league-wrapper">
           <h2>LEAGUE TABLE</h2>
           <div className="find-league-container">
             <div className="options">
               <div
                 className="image-container"
-                value="laLiga"
-                onClick={handleLeagueChange}
+                value="La Liga"
+                onClick={(e) => {
+                  fetchTeamData(e).then((data) => {
+                    setLeagueName(
+                      leagues[
+                        data.gameDetails[0].fullWidth.component.entityTitle
+                          .title
+                      ]
+                    );
+                    setLeagueLogo(
+                      data.gameDetails[0].fullWidth.component.entityTitle
+                        .imageObject.path
+                    );
+                    setStandings(
+                      data.arrayOfStandings[0].fullWidth.component.standings
+                        .rows
+                    );
+                  });
+                }}
               >
                 <img
                   alt="logo"
-                  value="laLiga"
+                  value="La Liga"
                   src="https://media-3.api-sports.io/football/leagues/140.png"
                 />
               </div>
               <div
                 className="image-container"
-                value="premier"
-                onClick={handleLeagueChange}
+                value="Premier League"
+                onClick={(e) => {
+                  fetchTeamData(e).then((data) => {
+                    setLeagueName(
+                      leagues[
+                        data.gameDetails[0].fullWidth.component.entityTitle
+                          .title
+                      ]
+                    );
+                    setLeagueLogo(
+                      data.gameDetails[0].fullWidth.component.entityTitle
+                        .imageObject.path
+                    );
+                    setStandings(
+                      data.arrayOfStandings[0].fullWidth.component.standings
+                        .rows
+                    );
+                  });
+                }}
               >
                 <img
                   alt="logo"
-                  value="premier"
+                  value="Premier League"
                   src="https://media-3.api-sports.io/football/leagues/39.png"
                 />
               </div>
               <div
                 className="image-container"
-                value="champions"
-                onClick={handleLeagueChange}
+                value="Champions League"
+                onClick={(e) => {
+                  fetchTeamData(e).then((data) => {
+                    setLeagueName(
+                      leagues[
+                        data.gameDetails[0].fullWidth.component.entityTitle
+                          .title
+                      ]
+                    );
+                    setLeagueLogo(
+                      data.gameDetails[0].fullWidth.component.entityTitle
+                        .imageObject.path
+                    );
+                    setStandings(
+                      data.arrayOfStandings[0].fullWidth.component.standings
+                        .rows
+                    );
+                  });
+                }}
               >
                 <img
                   alt="logo"
-                  value="champions"
+                  value="Champions League"
                   src="https://media-3.api-sports.io/football/leagues/2.png"
                 />
               </div>
               <div
                 className="image-container"
-                value="ligue1"
-                onClick={handleLeagueChange}
+                value="Ligue 1"
+                onClick={(e) => {
+                  fetchTeamData(e).then((data) => {
+                    setLeagueName(
+                      leagues[
+                        data.gameDetails[0].fullWidth.component.entityTitle
+                          .title
+                      ]
+                    );
+                    setLeagueLogo(
+                      data.gameDetails[0].fullWidth.component.entityTitle
+                        .imageObject.path
+                    );
+                    setStandings(
+                      data.arrayOfStandings[0].fullWidth.component.standings
+                        .rows
+                    );
+                  });
+                }}
               >
                 <img
                   alt="logo"
-                  value="ligue1"
+                  value="Ligue 1"
                   src="https://media.api-sports.io/football/leagues/61.png"
                 />
               </div>
               <div
                 className="image-container"
-                value="bundesliga"
-                onClick={handleLeagueChange}
+                value="Bundesliga"
+                onClick={(e) => {
+                  fetchTeamData(e).then((data) => {
+                    setLeagueName(
+                      leagues[
+                        data.gameDetails[0].fullWidth.component.entityTitle
+                          .title
+                      ]
+                    );
+                    setLeagueLogo(
+                      data.gameDetails[0].fullWidth.component.entityTitle
+                        .imageObject.path
+                    );
+                    setStandings(
+                      data.arrayOfStandings[0].fullWidth.component.standings
+                        .rows
+                    );
+                  });
+                }}
               >
                 <img
                   alt="logo"
-                  value="bundesliga"
+                  value="Bundesliga"
                   src="https://media-3.api-sports.io/football/leagues/78.png"
                 />
               </div>
               <div
                 className="image-container"
-                value="serieA"
-                onClick={handleLeagueChange}
+                value="Serie A"
+                onClick={(e) => {
+                  fetchTeamData(e).then((data) => {
+                    setLeagueName(
+                      leagues[
+                        data.gameDetails[0].fullWidth.component.entityTitle
+                          .title
+                      ]
+                    );
+                    setLeagueLogo(
+                      data.gameDetails[0].fullWidth.component.entityTitle
+                        .imageObject.path
+                    );
+                    setStandings(
+                      data.arrayOfStandings[0].fullWidth.component.standings
+                        .rows
+                    );
+                  });
+                }}
               >
                 <img
                   alt="logo"
-                  value="serieA"
+                  value="Serie A"
                   src="https://media.api-sports.io/football/leagues/135.png"
                 />
               </div>
               <div
                 className="image-container"
-                value="ligaMx"
-                onClick={handleLeagueChange}
+                value="BBVA"
+                onClick={(e) => {
+                  fetchTeamData(e).then((data) => {
+                    setLeagueName(
+                      data.gameDetails[0].fullWidth.component.entityTitle.title
+                    );
+                    setLeagueLogo(
+                      data.gameDetails[0].fullWidth.component.entityTitle
+                        .imageObject.path
+                    );
+                    setStandings(
+                      data.arrayOfStandings[0].fullWidth.component.standings
+                        .rows
+                    );
+                  });
+                }}
               >
                 <img
                   alt="logo"
-                  value="ligaMx"
+                  value="BBVA"
                   src="https://media.api-sports.io/football/leagues/262.png"
                 />
               </div>
               <div
                 className="image-container"
-                value="mls"
-                onClick={handleLeagueChange}
+                value="MLS"
+                onClick={(e) => {
+                  fetchTeamData(e).then((data) => {
+                    setLeagueName(
+                      data.gameDetails[0].fullWidth.component.entityTitle.title
+                    );
+                    setLeagueLogo(
+                      data.gameDetails[0].fullWidth.component.entityTitle
+                        .imageObject.path
+                    );
+                    setStandings(
+                      data.arrayOfStandings[0].fullWidth.component.standings
+                        .rows
+                    );
+                  });
+                }}
               >
                 <img
                   alt="logo"
-                  value="mls"
+                  value="MLS"
                   src="https://media-3.api-sports.io/football/leagues/253.png"
                 />
               </div>
               <div
                 className="image-container"
-                value="europaLeague"
-                onClick={handleLeagueChange}
+                value="Europa League"
+                onClick={(e) => {
+                  fetchTeamData(e).then((data) => {
+                    setLeagueName(
+                      leagues[
+                        data.gameDetails[0].fullWidth.component.entityTitle
+                          .title
+                      ]
+                    );
+                    setLeagueLogo(
+                      data.gameDetails[0].fullWidth.component.entityTitle
+                        .imageObject.path
+                    );
+                    setStandings(
+                      data.arrayOfStandings[0].fullWidth.component.standings
+                        .rows
+                    );
+                  });
+                }}
               >
                 <img
                   alt="logo"
-                  value="europaLeague"
+                  value="Europa League"
                   src="https://media-3.api-sports.io/football/leagues/3.png"
                 />
               </div>
               <div
                 className="image-container"
-                value="proLeague"
-                onClick={handleLeagueChange}
+                value="Pro League"
+                onClick={(e) => {
+                  fetchTeamData(e).then((data) => {
+                    setLeagueLogo(
+                      data.gameDetails[0].fullWidth.component.entityTitle
+                        .imageObject.path
+                    );
+                    setStandings(
+                      data.arrayOfStandings[0].fullWidth.component.standings
+                        .rows
+                    );
+                    setLeagueName(
+                      data.gameDetails[0].fullWidth.component.entityTitle.title
+                    );
+                  });
+                }}
               >
                 <img
                   alt="logo"
-                  value="proLeague"
+                  value="Pro League"
                   src="https://media-3.api-sports.io/football/leagues/307.png"
                 />
               </div>
             </div>
-            <div className="choose-league">
-              <select name="year" id="year" onChange={handleYearChange}>
-                <option value="2022">2022</option>
-                <option value="2021">2021</option>
-                <option value="2020">2020</option>
-                <option value="2019">2019</option>
-                <option value="2018">2018</option>
-                <option value="2017">2017</option>
-                <option value="2016">2016</option>
-                <option value="2015">2015</option>
-                <option value="2014">2014</option>
-                <option value="2013">2013</option>
-                <option value="2012">2012</option>
-                <option value="2011">2011</option>
-                <option value="2010">2010</option>
-              </select>
-            </div>
           </div>
         </div>
+      ) : (
+        <Table
+          leagueName={leagueName}
+          leagueLogo={leagueLogo}
+          tableData={standings}
+        />
       )}
     </>
   );
