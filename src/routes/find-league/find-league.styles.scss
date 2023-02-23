@@ -24,8 +24,9 @@ h2 {
 
   .options {
     display: grid;
+    place-content: center;
     grid-template-columns: repeat(2, 1fr);
-    flex-wrap: wrap;
+    // flex-wrap: wrap;
     gap: 10px;
     font-size: 1.2rem;
     font-weight: 500;
@@ -44,6 +45,7 @@ h2 {
       justify-content: center;
       cursor: pointer;
       padding: 5px;
+      height: 250px;
       border-radius: 5px;
       opacity: 1;
       outline: 5px solid transparent;
