@@ -4,6 +4,7 @@ import { Outlet, Link, useNavigate } from "react-router-dom";
 import Menu from "../menu/menu.component";
 
 import { UserContext } from "../../contexts/user.context";
+import { TeamDataContext } from "../../contexts/teamData.context";
 
 import {
   getUserDataFromFirebase,
@@ -17,17 +18,14 @@ import "./NavBar.scss";
 
 const NavBar = () => {
   const { currentUser, userImage, setUserImage } = useContext(UserContext);
-  const [profileImage, setProfileImage] = useState(
-    localStorage.getItem("profile-image")
-  );
+  const { isMenuOpen, setIsMenuOpen } = useContext(TeamDataContext);
   const [userData, setUserData] = useState(null);
-  const [menuIsOpen, setMenuIsOpen] = useState(false);
 
   const toggleMenu = () => {
-    setMenuIsOpen(!menuIsOpen);
+    setIsMenuOpen(!isMenuOpen);
   };
 
-  const menuClass = menuIsOpen ? "open" : "";
+  const menuClass = isMenuOpen ? "open" : "";
 
   useEffect(() => {
     const getUserData = async () => {
@@ -42,9 +40,10 @@ const NavBar = () => {
   const navigate = useNavigate();
 
   const onSignOutHandler = () => {
-    setProfileImage("");
+    if (isMenuOpen) {
+      setIsMenuOpen(!isMenuOpen);
+    }
     setUserImage("");
-    localStorage.removeItem("profile-image");
     signOutUser();
     navigate("/sign-in");
   };
@@ -83,7 +82,7 @@ const NavBar = () => {
                       />
                     ) : (
                       <Avatar
-                        src={userImage || profileImage}
+                        src={userImage}
                         className="nav-profile-image"
                         alt="Guest"
                       />
@@ -103,7 +102,6 @@ const NavBar = () => {
             onSignOutHandler={onSignOutHandler}
             userData={userData}
             userImage={userImage}
-            profileImage={profileImage}
             currentUser={currentUser}
           />
         ) : (

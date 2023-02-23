@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 
 import { UserContext } from "../../contexts/user.context";
+import { TeamDataContext } from "../../contexts/teamData.context";
 
 import {
   getUserDataFromFirebase,
@@ -16,14 +17,16 @@ const Profile = () => {
   const [userData, setUserData] = useState(null);
   const [allUserFavorites, setAllUserFavorites] = useState(null);
 
-  const {
-    currentUser,
-    userImage,
-    setOpenFavorites,
-    openFavorites,
-    userFavorites,
-    setUserFavorites,
-  } = useContext(UserContext);
+  const { currentUser, userImage, setOpenFavorites, openFavorites } =
+    useContext(UserContext);
+
+  const { isMenuOpen, setIsMenuOpen } = useContext(TeamDataContext);
+
+  useEffect(() => {
+    if (isMenuOpen) {
+      setIsMenuOpen(!isMenuOpen);
+    }
+  }, [setIsMenuOpen]);
 
   useEffect(() => {
     const getUserData = async () => {
@@ -33,24 +36,25 @@ const Profile = () => {
     };
 
     getUserData();
-  }, [currentUser, userFavorites]);
+  }, [currentUser]);
 
   useEffect(() => {
     const getUserFavorites = async () => {
       if (!currentUser || !currentUser.email) return;
       const favorites = await getFavoritesFromFirebase(currentUser.email);
-      const xhr = new XMLHttpRequest();
-      xhr.responseType = "text";
-      xhr.onload = () => {
-        let favoritesArray = xhr.response.split(",");
+
+      try {
+        const favoriteTeams = await fetch(favorites);
+        const data = await favoriteTeams.text();
+        let favoritesArray = data.split(",");
         setAllUserFavorites(favoritesArray);
-        setUserFavorites(favoritesArray);
-      };
-      xhr.open("GET", favorites);
-      xhr.send();
+      } catch (error) {
+        console.log(error);
+      }
     };
+
     getUserFavorites();
-  }, [currentUser, userFavorites]);
+  }, [currentUser]);
 
   return (
     <>
@@ -152,7 +156,14 @@ const Profile = () => {
       ) : (
         <Spinner />
       )}
-      {openFavorites ? <Favorites currentUser={currentUser} /> : <></>}
+      {openFavorites ? (
+        <Favorites
+          currentUser={currentUser}
+          setAllUserFavorites={setAllUserFavorites}
+        />
+      ) : (
+        <></>
+      )}
     </>
   );
 };

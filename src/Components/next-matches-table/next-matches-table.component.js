@@ -28,14 +28,14 @@ const NextMatchesTable = () => {
     const getUserFavorites = async () => {
       if (!currentUser || !currentUser.email) return;
       const favorites = await getFavoritesFromFirebase(currentUser.email);
-      const xhr = new XMLHttpRequest();
-      xhr.responseType = "text";
-      xhr.onload = () => {
-        let favoritesArray = xhr.response.split(",");
+      try {
+        const favoriteTeams = await fetch(favorites);
+        const data = await favoriteTeams.text();
+        let favoritesArray = data.split(",");
         setUserFavorites(favoritesArray);
-      };
-      xhr.open("GET", favorites);
-      xhr.send();
+      } catch (error) {
+        console.log(error);
+      }
     };
     getUserFavorites();
   }, [currentUser]);
@@ -140,9 +140,9 @@ const NextMatchesTable = () => {
     setIsFavoritesChecked(!isFavoritesChecked);
   };
 
-  const favoriteMatches = getMatchesFromFavorites(userFavorites, newMatches);
-
-  const newFavoriteMatches = separateMatchesByDate(favoriteMatches);
+  const newFavoriteMatches = separateMatchesByDate(
+    getMatchesFromFavorites(userFavorites, newMatches)
+  );
 
   const renderMatches = (matches) => {
     return matches.map((match) => {
@@ -184,9 +184,23 @@ const NextMatchesTable = () => {
               <span className="switch-button-label-span">SHOW ALL</span>
             </label>
           </div>
-          {isFavoritesChecked
-            ? renderMatches(newMatches)
-            : renderMatches(newFavoriteMatches)}
+          {isFavoritesChecked ? (
+            renderMatches(newMatches)
+          ) : newFavoriteMatches.length ? (
+            renderMatches(newFavoriteMatches)
+          ) : (
+            <div
+              style={{
+                width: "100vw",
+                height: "40vh",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <h3>Please Sign In to Add Favorites</h3>
+            </div>
+          )}
         </div>
       ) : (
         <div className="upcoming-matches-container">
@@ -312,51 +326,3 @@ const NextMatchesTable = () => {
 };
 
 export default NextMatchesTable;
-
-// const matches = [
-//   [
-//     "2023-02-08",
-//     [
-//       {
-//         fixture: "",
-//         teams: {
-//           away: { name: "Chelsea", id: 1 },
-//           home: { name: "Real Madrid", id: 2 },
-//         },
-//       },
-//       {
-//         fixture: "",
-//         teams: {
-//           away: { name: "Liverpool", id: 3 },
-//           home: { name: "Barcelona", id: 4 },
-//         },
-//       },
-//       {
-//         fixture: "",
-//         teams: {
-//           away: { name: "Chivas", id: 5 },
-//           home: { name: "America", id: 6 },
-//         },
-//       },
-//     ],
-//   ],
-//   [
-//     "2023-02-11",
-//     [
-//       {
-//         fixture: "",
-//         teams: {
-//           away: { name: "Manchester United", id: 7 },
-//           home: { name: "PSG", id: 8 },
-//         },
-//       },
-//       {
-//         fixture: "",
-//         teams: {
-//           away: { name: "West Ham", id: 9 },
-//           home: { name: "Manchester City", id: 10 },
-//         },
-//       },
-//     ],
-//   ],
-// ];

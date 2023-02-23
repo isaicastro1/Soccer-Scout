@@ -13,6 +13,8 @@ export const TeamDataContext = createContext({
   setDate: () => {},
   nextMatches: "",
   setNextMatches: () => {},
+  isMenuOpen: "",
+  setIsMenuOpen: () => null,
 });
 
 export const TeamDataProvider = ({ children }) => {
@@ -21,6 +23,7 @@ export const TeamDataProvider = ({ children }) => {
   const [teamId, setTeamId] = useState(teamsId);
   const [date, setDate] = useState("");
   const [nextMatches, setNextMatches] = useState("");
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const value = {
     allTeamData,
@@ -33,6 +36,8 @@ export const TeamDataProvider = ({ children }) => {
     setDate,
     nextMatches,
     setNextMatches,
+    isMenuOpen,
+    setIsMenuOpen,
   };
 
   return (

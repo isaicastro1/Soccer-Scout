@@ -48,11 +48,11 @@
       }
 
       .team-name {
-        width: max-content;
+        max-width: max-content;
 
         .team-one-name,
         .team-two-name {
-          width: 100px;
+          max-width: 100px;
           margin: 0;
           text-align: center;
           font-size: 17px;
@@ -157,15 +157,16 @@
   .match-preview-container .team-logos .team-logo-container .team-name {
     max-width: max-content;
 
+    .team-one-name,
     .team-two-name {
       max-width: max-content;
-      font-size: 15px;
+      font-size: 14px;
     }
   }
 
   .match {
     .match-preview-container {
-      width: 80vw;
+      width: 90vw;
       padding: 5px;
 
       .team-logo-container {
