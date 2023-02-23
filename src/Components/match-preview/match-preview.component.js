@@ -78,6 +78,8 @@ const MatchPreview = ({ game }) => {
             <span className="match-time">{time}</span>
           ) : live === "Match Finished" ? (
             <span className="match-time">FT</span>
+          ) : live === "Match Postponed" ? (
+            <span className="match-time">{live}</span>
           ) : (
             <div className="match-time">
               <span className="live-dot">{minutes}'</span>
@@ -116,7 +118,7 @@ const MatchPreview = ({ game }) => {
         </div>
       </div>
       <div className="see-more" id="see-more">
-        see more
+        SEE MORE
       </div>
     </div>
   );
