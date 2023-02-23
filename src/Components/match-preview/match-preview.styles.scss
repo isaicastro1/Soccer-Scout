@@ -12,13 +12,15 @@
   padding: 5px;
   border-radius: 10px;
   cursor: pointer;
-  transition: 0.1s ease-in-out;
+  outline: 4px solid transparent;
+  transition: all 0.3s ease-in-out;
   box-shadow: 6px 4px 14px -5px rgba(33, 32, 32, 0.79);
   -webkit-box-shadow: 6px 4px 14px -5px rgba(33, 32, 32, 0.79);
   -moz-box-shadow: 6px 4px 14px -5px rgba(33, 32, 32, 0.79);
 
   &:hover {
-    background-color: rgb(228, 226, 226);
+    outline: 4px solid gray;
+    transform: translateY(-10px);
   }
 
   .match-game {
@@ -123,27 +125,6 @@
       }
     }
   }
-
-  .see-more {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    text-transform: uppercase;
-    width: 20%;
-    height: 20px;
-    border-radius: 15px;
-    font-size: 12px;
-    font-weight: bolder;
-    color: rgb(88, 88, 246);
-    transition: 0.3s;
-    cursor: pointer;
-
-    &:hover {
-      background-color: rgb(88, 88, 246);
-      color: white;
-    }
-  }
 }
 
 @keyframes grow {
@@ -189,12 +170,6 @@
 
       .team-logo-container {
         max-width: 40%;
-      }
-
-      #see-more {
-        font-size: 9px;
-        width: 55px;
-        margin-top: 5px;
       }
     }
   }

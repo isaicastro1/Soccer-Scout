@@ -12,6 +12,7 @@ h2 {
   position: relative;
   top: 80px;
   width: 100vw;
+  height: 100vh;
   height: max-content;
   padding-bottom: 60px;
 }
@@ -22,10 +23,19 @@ h2 {
   align-items: center;
   flex-wrap: wrap;
   max-height: max-content;
-  min-height: 300px;
+  min-height: 70vh;
   gap: 25px;
 }
 
 ::-webkit-scrollbar {
   display: none;
+}
+
+@media screen and (min-width: 1400px) {
+  .news-wrapper {
+    display: grid;
+    place-content: center;
+    grid-template-columns: repeat(3, 1fr);
+    row-gap: 98px;
+  }
 }
