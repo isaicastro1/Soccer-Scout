@@ -49,3 +49,20 @@ export const leagueUrl = {
   MLS: "https://onefootball.com/proxy-web-experience/en/competition/major-league-soccer-15/table",
   BBVA: "https://onefootball.com/proxy-web-experience/en/competition/liga-bbva-mx-clausura-80/table",
 };
+
+export const leagueLogos = {
+  Bundesliga:
+    "https://images.onefootball.com/icons/leagueColoredCompetition/128/1.png",
+  "Premier League":
+    "https://images.onefootball.com/icons/leagueColoredCompetition/128/9.png",
+  "La Liga":
+    "https://images.onefootball.com/icons/leagueColoredCompetition/128/10.png",
+  "Ligue 1":
+    "https://images.onefootball.com/icons/leagueColoredCompetition/128/23.png",
+  "Champions League":
+    "https://images.onefootball.com/icons/leagueColoredCompetition/128/5.png",
+  "Europa League":
+    "https://images.onefootball.com/icons/leagueColoredCompetition/128/7.png",
+  "Serie A":
+    "https://images.onefootball.com/icons/leagueColoredCompetition/128/13.png",
+};

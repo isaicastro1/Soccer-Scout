@@ -5,7 +5,7 @@ import Spinner from "../spinner/spinner.component";
 import Table from "../table/table";
 
 import { getDate } from "../../utils/date";
-import { leagueUrl, leagues } from "../../utils/all-leagues";
+import { leagueUrl, leagues, leagueLogos } from "../../utils/all-leagues";
 
 import { UserContext } from "../../contexts/user.context";
 
@@ -43,6 +43,10 @@ const NextMatchesTable = () => {
     setIsFavoritesChecked(!isFavoritesChecked);
   };
 
+  // const newFavoriteMatches = separateMatchesByDate(
+  //   getMatchesFromFavorites(userFavorites, newMatches)
+  // );
+
   const date = getDate();
 
   useEffect(() => {
@@ -50,26 +54,23 @@ const NextMatchesTable = () => {
       setIsLoading(true);
 
       try {
-        const response = await fetch(
-          `https://onefootball.com/proxy-web-experience/en/matches?date=${date}`
-        );
+        const response = await fetch(`http://localhost:3001/`, {
+          method: "post",
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+          },
+          body: JSON.stringify({
+            date: date,
+          }),
+        });
         const data = await response.json();
 
         let matches = [];
 
-        const fixtures = data.containers.filter((item) => {
-          return (
-            item.fullWidth &&
-            item.fullWidth.component &&
-            item.fullWidth.component.matchCardsList
-          );
-        });
-
-        fixtures.map((item) => {
-          if (
-            leagues[item.fullWidth.component.matchCardsList.sectionHeader.title]
-          ) {
-            matches.push(item.fullWidth.component.matchCardsList);
+        data.map((item) => {
+          if (leagues[item.league]) {
+            matches.push(item);
           }
         });
         setNewAPIMatches(matches);
@@ -86,7 +87,7 @@ const NextMatchesTable = () => {
     let fixtureLeague = {};
 
     matchesArray.map((match) => {
-      const league = match.sectionHeader.title;
+      const league = match.league;
       if (fixtureLeague[league]) {
         fixtureLeague[league].push(match);
       } else {
@@ -117,76 +118,69 @@ const NextMatchesTable = () => {
     }
   }, [matches]);
 
-  const handleSeeStandingsClick = (league) => {
-    return new Promise((resolve, reject) => {
-      fetch(leagueUrl[league])
-        .then((response) => response.json())
-        .then((data) => {
-          const arrayOfStandings = data.containers.filter((item) => {
-            return (
-              item.fullWidth &&
-              item.fullWidth.component &&
-              item.fullWidth.component.standings
-            );
-          });
-          const gameDetails = data.containers.filter((item) => {
-            return (
-              item.fullWidth &&
-              item.fullWidth.component &&
-              item.fullWidth.component.entityTitle
-            );
-          });
-          resolve({ arrayOfStandings, gameDetails });
-        })
-        .catch((error) => reject(error));
-    });
-  };
+  // const handleSeeStandingsClick = (league) => {
+  //   return new Promise((resolve, reject) => {
+  //     fetch(leagueUrl[league])
+  //       .then((response) => response.json())
+  //       .then((data) => {
+  //         const arrayOfStandings = data.containers.filter((item) => {
+  //           return (
+  //             item.fullWidth &&
+  //             item.fullWidth.component &&
+  //             item.fullWidth.component.standings
+  //           );
+  //         });
+  //         const gameDetails = data.containers.filter((item) => {
+  //           return (
+  //             item.fullWidth &&
+  //             item.fullWidth.component &&
+  //             item.fullWidth.component.entityTitle
+  //           );
+  //         });
+  //         resolve({ arrayOfStandings, gameDetails });
+  //       })
+  //       .catch((error) => reject(error));
+  //   });
+  // };
 
   const renderMatches = (matches) => {
-    return matches.map((match) => {
-      const subtitle = match[1][0].sectionHeader.subtitle;
-      const logo = match[1][0].sectionHeader.entityLogo.path;
-      return (
-        <div
-          className="container"
-          key={match[1][0].sectionHeader.entityLogo.path}
-        >
-          <div className="league-section">
-            <div className="section-logo">
-              <h5>{leagues[match[0]]}</h5>
-              <img style={{ width: "50px" }} src={logo} />
-            </div>
-          </div>
-          <div className="match" key={match[0]}>
-            {match[1][0].matchCards.map((game) => {
-              return (
-                <MatchPreview
-                  game={game}
-                  subtitle={subtitle}
-                  key={game.uiKey}
-                />
-              );
-            })}
-          </div>
-          <div className="standings-link">
-            <p
-              onClick={() => {
-                handleSeeStandingsClick(leagues[match[0]]).then((data) => {
-                  setTableData(
-                    data.arrayOfStandings[0].fullWidth.component.standings.rows
-                  );
-                  setLeagueData(
-                    data.gameDetails[0].fullWidth.component.entityTitle
-                  );
-                });
-              }}
-            >
-              See standings &#8827;
-            </p>
+    const league = matches[0][1][0].league;
+
+    return (
+      <div className="container">
+        <div className="league-section">
+          <div className="section-logo">
+            <h5>{league}</h5>
+            <img style={{ width: "50px" }} src={leagueLogos[league]} />
           </div>
         </div>
-      );
-    });
+        {matches[0][1].map((match) => {
+          return (
+            <div key={match.id}>
+              <div className="match" key={match.id}>
+                <MatchPreview game={match} />
+              </div>
+              <div className="standings-link">
+                <p
+                // onClick={() => {
+                //   handleSeeStandingsClick(leagues[match[0]]).then((data) => {
+                //     setTableData(
+                //       data.arrayOfStandings[0].fullWidth.component.standings.rows
+                //     );
+                //     setLeagueData(
+                //       data.gameDetails[0].fullWidth.component.entityTitle
+                //     );
+                //   });
+                // }}
+                >
+                  See standings &#8827;
+                </p>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    );
   };
 
   return (

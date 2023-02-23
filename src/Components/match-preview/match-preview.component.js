@@ -14,12 +14,18 @@ const MatchPreview = ({ game, subtitle }) => {
   const [awayPreviewLogo, setAwayPreviewLogo] = useState(Shield);
 
   const {
-    awayTeam: { image: awayLogo, name: awayName, score: awayScore },
-    homeTeam: { image: homeLogo, name: homeName, score: homeScore },
+    away_team_logo,
+    away_team,
+    away_score,
+    home_team_logo,
+    home_team,
+    home_score,
     kickoff,
     period,
-    timePeriod,
+    time_period,
   } = game;
+
+  console.log(game);
 
   const time = new Date(kickoff).toLocaleTimeString([], {
     hour: "numeric",
@@ -43,8 +49,8 @@ const MatchPreview = ({ game, subtitle }) => {
       }
     };
 
-    determineWinner(homeScore, awayScore);
-  }, [homeScore, awayScore, period]);
+    determineWinner(home_score, away_score);
+  }, [away_score, home_score, period]);
 
   return (
     <div className="match-preview-container" key={game.iuKey}>
@@ -59,35 +65,35 @@ const MatchPreview = ({ game, subtitle }) => {
             ) : (
               <></>
             )}
-            <h5 className="team-one-name">{homeName}</h5>
+            <h5 className="team-one-name">{home_team}</h5>
           </div>
           <img
             className="team-logo"
             src={homePreviewLogo}
             alt="logo"
             style={{ height: "40px", width: "40px" }}
-            onLoad={() => setHomePreviewLogo(homeLogo)}
+            onLoad={() => setHomePreviewLogo(home_team_logo)}
           />
         </div>
         <div className="time">
-          {timePeriod === "Full time" ? (
+          {time_period === "Full time" ? (
             <>
               <span className="match-time">FT</span>
-              <MatchResult homeScore={homeScore} awayScore={awayScore} />
+              <MatchResult homeScore={home_score} awayScore={away_score} />
             </>
           ) : period === "PRE_MATCH" ? (
             <span className="match-time">{time}</span>
           ) : period === "FIRST_HALF" || period === "SECOND_HALF" ? (
             <>
               <div className="match-time">
-                <span className="live-dot">{timePeriod}</span>
+                <span className="live-dot">{time_period}</span>
               </div>
-              <MatchResult homeScore={homeScore} awayScore={awayScore} />
+              <MatchResult homeScore={home_score} awayScore={away_score} />
             </>
           ) : period === "HALF_TIME" ? (
             <>
               <span className="match-time">HT</span>
-              <MatchResult homeScore={homeScore} awayScore={awayScore} />
+              <MatchResult homeScore={home_score} awayScore={away_score} />
             </>
           ) : (
             <>No</>
@@ -99,7 +105,7 @@ const MatchPreview = ({ game, subtitle }) => {
             src={awayPreviewLogo}
             alt="logo"
             style={{ height: "40px", width: "40px" }}
-            onLoad={() => setAwayPreviewLogo(awayLogo)}
+            onLoad={() => setAwayPreviewLogo(away_team_logo)}
           />
           <div className="team-name">
             {teamWon === "away" && matchEnded ? (
@@ -109,7 +115,7 @@ const MatchPreview = ({ game, subtitle }) => {
             ) : (
               <></>
             )}
-            <h5 className="team-two-name">{awayName}</h5>
+            <h5 className="team-two-name">{away_team}</h5>
           </div>
         </div>
       </div>
