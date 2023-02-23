@@ -35,7 +35,7 @@ const News = () => {
         <Spinner />
       ) : (
         <div className="news-container">
-          <h2>Top Headlines</h2>
+          <h3>Top Headlines</h3>
           <div className="news-wrapper">
             {newsData ? (
               newsData.map((item) => {

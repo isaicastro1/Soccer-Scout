@@ -117,9 +117,6 @@ const MatchPreview = ({ game }) => {
           </div>
         </div>
       </div>
-      <div className="see-more" id="see-more">
-        SEE MORE
-      </div>
     </div>
   );
 };

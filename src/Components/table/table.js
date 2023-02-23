@@ -80,7 +80,6 @@ const Table = ({ leagueLogo, leagueName }) => {
                               <td className="right">{draws}</td>
                               <td className="right">{losses}</td>
                               <td className="right">
-                                {/* {goalsDiff.toString().includes("-") */}
                                 {goalsDiff ? goalsDiff : `+${goalsDiff}`}
                               </td>
                               <td className="right">{points}</td>
