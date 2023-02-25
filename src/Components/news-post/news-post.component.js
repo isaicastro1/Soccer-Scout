@@ -9,9 +9,8 @@ const NewsPost = ({ newsData }) => {
         <h3 className="post-title">{title}</h3>
         <p className="post-p">{description}</p>
         <span className="details">
-          Source: {source}
           <a href={details} className="details-btn">
-            See More
+            Source: {source}
           </a>
         </span>
       </div>
