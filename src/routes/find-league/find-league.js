@@ -56,10 +56,6 @@ const FindLeague = () => {
     setLeague(allLeagues[event.target.getAttribute("value")]);
   };
 
-  const handleYearChange = (event) => {
-    setYear(event.target.value);
-  };
-
   return (
     <>
       {isLoading ? (
@@ -68,7 +64,7 @@ const FindLeague = () => {
         <Table leagueName={leagueName} leagueLogo={leagueLogo} />
       ) : (
         <div className="find-league-wrapper">
-          <h2>LEAGUE TABLE</h2>
+          <h2>League Table</h2>
           <div className="find-league-container">
             <div className="options">
               <div
