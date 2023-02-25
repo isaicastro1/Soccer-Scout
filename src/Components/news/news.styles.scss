@@ -6,7 +6,7 @@
   position: relative;
   top: 80px;
   width: 100vw;
-  min-height: 100vh;
+  // height: 40vh;
   padding-bottom: 60px;
 
   h3 {
@@ -33,8 +33,11 @@
 @media screen and (min-width: 1430px) {
   .news-wrapper {
     display: grid;
-    place-content: center;
+    // place-content: center;
     grid-template-columns: repeat(3, 1fr);
-    row-gap: 98px;
+    position: relative;
+    top: 20px;
+    row-gap: 40px;
+    column-gap: 40px;
   }
 }

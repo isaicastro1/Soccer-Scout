@@ -22,6 +22,9 @@ const NextMatchesTable = () => {
   const [logoPlaceholder, setLogoPlaceholder] = useState(Shield);
   const [userFavorites, setUserFavorites] = useState([]);
   const [isFavoritesChecked, setIsFavoritesChecked] = useState(true);
+  const [matchParams, setMatchParams] = useState(null);
+  const [matchStats, setMatchStats] = useState(null);
+  const [statsClicked, setStatsClicked] = useState(false);
 
   const { currentUser } = useContext(UserContext);
   useEffect(() => {
@@ -40,7 +43,7 @@ const NextMatchesTable = () => {
     getUserFavorites();
   }, [currentUser]);
 
-  const upcomingMatchesDate = leagueDates[`${nameOfLeague}`] || "2023-02-28";
+  const upcomingMatchesDate = leagueDates[`${nameOfLeague}`] || "2023-03-10";
 
   const getNextMatches = useCallback(async () => {
     if (!league) return;
@@ -51,7 +54,8 @@ const NextMatchesTable = () => {
     const date = getDate();
 
     try {
-      const response = await fetch("https://soccer-api.herokuapp.com/matches", {
+      // const response = await fetch("https://soccer-api.herokuapp.com/matches", {
+      const response = await fetch("http://localhost:3001/matches", {
         method: "post",
         headers: {
           "Access-Control-Allow-Origin": "*",
@@ -127,6 +131,36 @@ const NextMatchesTable = () => {
 
   const newMatches = separateMatchesByDate(nextMatches);
 
+  useEffect(() => {
+    if (!matchParams) return;
+
+    const { id, homeId, awayId } = matchParams;
+
+    const getMatchStats = async (homeTeamId, awayTeamId, fixtureId) => {
+      const response = await fetch("http://localhost:3001/stats", {
+        method: "post",
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          homeTeamId,
+          awayTeamId,
+          fixtureId,
+        }),
+      });
+
+      const data = await response.json();
+
+      setMatchStats(data);
+    };
+    getMatchStats(homeId, awayId, id);
+  }, [matchParams]);
+
+  useEffect(() => {
+    console.log("matchStats", matchStats);
+  }, [matchStats]);
+
   //sorts matches by date
   newMatches.map((match) => {
     return match[1].sort((a, b) => {
@@ -154,7 +188,15 @@ const NextMatchesTable = () => {
           </div>
           <div className="match">
             {match[1].map((game) => {
-              return <MatchPreview game={game} key={game.fixture.id} />;
+              return (
+                <MatchPreview
+                  game={game}
+                  key={game.fixture.id}
+                  // getMatchStats={getMatchStats}
+                  setMatchParams={setMatchParams}
+                  setStatsClicked={setStatsClicked}
+                />
+              );
             })}
           </div>
         </div>
@@ -204,7 +246,7 @@ const NextMatchesTable = () => {
         </div>
       ) : (
         <div className="upcoming-matches-container">
-          <h2>UPCOMING MATCHES</h2>
+          <h2>Upcoming Matches</h2>
           <div className="find-league-container">
             <div className="options">
               <div

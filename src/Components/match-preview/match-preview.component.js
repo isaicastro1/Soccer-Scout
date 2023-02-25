@@ -5,7 +5,7 @@ import Shield from "../../Assets/shield.png";
 
 import "./match-preview.styles.scss";
 
-const MatchPreview = ({ game }) => {
+const MatchPreview = ({ game, setMatchParams, setStatsClicked }) => {
   const [teamWon, setTeamWon] = useState("tie");
   const [matchEnded, setMatchEnded] = useState(false);
   const [homeTeamLogo, setHomeTeamLogo] = useState(Shield);
@@ -19,11 +19,17 @@ const MatchPreview = ({ game }) => {
     },
     league: { round },
     teams: {
-      home: { name: teamOneName, logo: teamOneLogo },
-      away: { name: teamTwoName, logo: teamTwoLogo },
+      home: { id: homeId, name: teamOneName, logo: teamOneLogo },
+      away: { id: awayId, name: teamTwoName, logo: teamTwoLogo },
     },
     goals: { home: homeGoals, away: awayGoals },
   } = game;
+
+  const handleMatchClick = () => {
+    setStatsClicked(true);
+    setMatchParams({ id, homeId, awayId });
+    console.log(game);
+  };
 
   let time = new Date(date)
     .toLocaleString()
@@ -51,7 +57,11 @@ const MatchPreview = ({ game }) => {
   }, [homeGoals, awayGoals, live]);
 
   return (
-    <div className="match-preview-container" key={id}>
+    <div
+      className="match-preview-container"
+      key={id}
+      onClick={handleMatchClick}
+    >
       <h3 className="match-game">{round}</h3>
       <div className="team-logos">
         <div className="team-logo-container">
