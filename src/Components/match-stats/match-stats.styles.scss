@@ -1,0 +1,159 @@
+$progress-color: black;
+
+:root {
+  --progress-color: #{$progress-color};
+}
+
+.match-stats-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  gap: 100px;
+
+  .teams-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100px;
+    background-color: #000;
+    color: rgb(237, 237, 237);
+
+    .team-one-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 30px;
+      margin-right: 50px;
+
+      .team-one-logo {
+        width: 50px;
+      }
+
+      .team-one-name {
+        font-weight: bolder;
+      }
+    }
+
+    .scores-data {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+
+      .aggregate {
+        font-size: 13px;
+        font-weight: bold;
+      }
+
+      .fixture-score {
+        font-weight: bolder;
+        font-size: 20px;
+      }
+
+      .fixture-time {
+        font-size: 13px;
+      }
+    }
+
+    .team-two-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 30px;
+      margin-left: 50px;
+
+      .team-two-logo {
+        width: 50px;
+      }
+
+      .team-two-name {
+        font-weight: bolder;
+      }
+    }
+  }
+
+  .statistics-container {
+    background-color: #d9d9d9;
+    color: black;
+    width: 75vw;
+    border-radius: 10px;
+    padding: 10px 5px 10px 5px;
+
+    .statistics-title {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .stats {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      gap: 10px;
+
+      .stats-text {
+        display: flex;
+        justify-content: space-between;
+        width: 75%;
+
+        h5 {
+          font-size: 13px;
+          font-weight: 600;
+          text-align: center;
+          margin: 0;
+        }
+      }
+
+      progress[value]::-webkit-progress-bar {
+        background-color: #000;
+        background: white;
+        border-radius: 5px;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        height: 10px;
+        width: 30vw;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+      }
+
+      progress::-webkit-progress-value {
+        background-color: gray;
+        border-radius: 5px;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+
+      progress:not(:first-of-type)::-webkit-progress-value {
+        background-color: var(--progress-color);
+        border-radius: 5px;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+
+      .progress-bars {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+
+        .home-team-possession,
+        .home-team-total-shots,
+        .home-team-shots-target,
+        .home-team-duels {
+          transform: scaleX(-1);
+          border-top-right-radius: 0.25rem;
+        }
+
+        .away-team-possession,
+        .away-team-total-shots,
+        .away-team-shots-target,
+        .away-team-duels {
+          border-top-right-radius: 1rem;
+        }
+      }
+    }
+  }
+}
