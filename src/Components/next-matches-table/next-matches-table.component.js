@@ -27,6 +27,7 @@ const NextMatchesTable = () => {
   const [matchParams, setMatchParams] = useState(null);
   const [matchStats, setMatchStats] = useState(null);
   const [statsClicked, setStatsClicked] = useState(false);
+  const [matchClicked, setMatchClicked] = useState(null);
 
   const { currentUser } = useContext(UserContext);
   useEffect(() => {
@@ -56,8 +57,8 @@ const NextMatchesTable = () => {
     const date = getDate();
 
     try {
-      const response = await fetch("https://soccer-api.herokuapp.com/matches", {
-        // const response = await fetch("http://localhost:3001/matches", {
+      // const response = await fetch("https://soccer-api.herokuapp.com/matches", {
+      const response = await fetch("http://localhost:3001/matches", {
         method: "post",
         headers: {
           "Access-Control-Allow-Origin": "*",
@@ -159,10 +160,6 @@ const NextMatchesTable = () => {
     getMatchStats(homeId, awayId, id);
   }, [matchParams]);
 
-  useEffect(() => {
-    console.log("matchStats", matchStats);
-  }, [matchStats]);
-
   //sorts matches by date
   newMatches.map((match) => {
     return match[1].sort((a, b) => {
@@ -196,6 +193,7 @@ const NextMatchesTable = () => {
                   key={game.fixture.id}
                   setMatchParams={setMatchParams}
                   setStatsClicked={setStatsClicked}
+                  setMatchClicked={setMatchClicked}
                 />
               );
             })}
@@ -210,7 +208,11 @@ const NextMatchesTable = () => {
       {isLoading ? (
         <Spinner />
       ) : leagueCalled && statsClicked ? (
-        <MatchStats matchStats={matchStats} />
+        <MatchStats
+          matchStats={matchStats}
+          Spinner={Spinner}
+          matchClicked={matchClicked}
+        />
       ) : leagueCalled ? (
         <div className="matches-container">
           <img

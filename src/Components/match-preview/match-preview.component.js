@@ -5,7 +5,12 @@ import Shield from "../../Assets/shield.png";
 
 import "./match-preview.styles.scss";
 
-const MatchPreview = ({ game, setMatchParams, setStatsClicked }) => {
+const MatchPreview = ({
+  game,
+  setMatchParams,
+  setStatsClicked,
+  setMatchClicked,
+}) => {
   const [teamWon, setTeamWon] = useState("tie");
   const [matchEnded, setMatchEnded] = useState(false);
   const [homeTeamLogo, setHomeTeamLogo] = useState(Shield);
@@ -28,7 +33,7 @@ const MatchPreview = ({ game, setMatchParams, setStatsClicked }) => {
   const handleMatchClick = () => {
     setStatsClicked(true);
     setMatchParams({ id, homeId, awayId });
-    console.log(game);
+    setMatchClicked(game);
   };
 
   let time = new Date(date)
