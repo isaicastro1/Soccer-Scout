@@ -2,6 +2,8 @@ import { useEffect, useState, useCallback, useContext } from "react";
 
 import MatchPreview from "../../Components/match-preview/match-preview.component";
 import Spinner from "../spinner/spinner.component";
+import MatchStats from "../match-stats/match-stats.component";
+
 import { getDate, leagueDates } from "../../utils/date";
 import { allLeagues } from "../../utils/all-leagues";
 
@@ -54,8 +56,8 @@ const NextMatchesTable = () => {
     const date = getDate();
 
     try {
-      // const response = await fetch("https://soccer-api.herokuapp.com/matches", {
-      const response = await fetch("http://localhost:3001/matches", {
+      const response = await fetch("https://soccer-api.herokuapp.com/matches", {
+        // const response = await fetch("http://localhost:3001/matches", {
         method: "post",
         headers: {
           "Access-Control-Allow-Origin": "*",
@@ -192,7 +194,6 @@ const NextMatchesTable = () => {
                 <MatchPreview
                   game={game}
                   key={game.fixture.id}
-                  // getMatchStats={getMatchStats}
                   setMatchParams={setMatchParams}
                   setStatsClicked={setStatsClicked}
                 />
@@ -208,6 +209,8 @@ const NextMatchesTable = () => {
     <>
       {isLoading ? (
         <Spinner />
+      ) : leagueCalled && statsClicked ? (
+        <MatchStats matchStats={matchStats} />
       ) : leagueCalled ? (
         <div className="matches-container">
           <img
