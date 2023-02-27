@@ -550,7 +550,7 @@ const MatchStats = ({ matchStats, Spinner, matchClicked }) => {
               value={homeStats["Goalkeeper Saves"] || 0}
               style={{
                 "--progress-color":
-                  homeStats["Ball Possession"] > awayStats["Ball Possession"]
+                  homeStats["Goalkeeper Saves"] > awayStats["Goalkeeper Saves"]
                     ? "black"
                     : "gray",
               }}
@@ -564,7 +564,7 @@ const MatchStats = ({ matchStats, Spinner, matchClicked }) => {
               value={awayStats["Goalkeeper Saves"] || 0}
               style={{
                 "--progress-color":
-                  awayStats["Ball Possession"] > homeStats["Ball Possession"]
+                  awayStats["Goalkeeper Saves"] > homeStats["Goalkeeper Saves"]
                     ? "black"
                     : "gray",
               }}
