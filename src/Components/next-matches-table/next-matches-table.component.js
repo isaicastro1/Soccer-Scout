@@ -156,6 +156,11 @@ const NextMatchesTable = () => {
 
       const data = await response.json();
 
+      if (!data.home.response.length || !data.away.response.length) {
+        alert("Sorry there is no data for this fixture");
+        return;
+      }
+
       setMatchStats(data);
     };
     getMatchStats(homeId, awayId, id);
