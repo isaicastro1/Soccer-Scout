@@ -140,7 +140,8 @@ const NextMatchesTable = () => {
     const { id, homeId, awayId } = matchParams;
 
     const getMatchStats = async (homeTeamId, awayTeamId, fixtureId) => {
-      const response = await fetch("http://localhost:3001/stats", {
+      const response = await fetch("https://soccer-api.herokuapp.com/stats", {
+        // const response = await fetch("http://localhost:3001/stats", {
         method: "post",
         headers: {
           "Access-Control-Allow-Origin": "*",
