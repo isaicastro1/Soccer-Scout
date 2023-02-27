@@ -10,7 +10,8 @@ $progress-color: black;
   justify-content: center;
   align-items: center;
   width: 100vw;
-  gap: 100px;
+  min-height: 170vh;
+  gap: 50px;
 
   .teams-wrapper {
     display: flex;
@@ -20,15 +21,13 @@ $progress-color: black;
     height: 100px;
     background-color: #192e82;
     color: white;
-    position: relative;
-    top: 150px;
 
     .team-one-wrapper {
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
-      gap: 30px;
       margin-right: 50px;
+      min-width: 160px;
 
       .team-one-logo {
         width: 50px;
@@ -66,10 +65,10 @@ $progress-color: black;
 
     .team-two-wrapper {
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
-      gap: 30px;
       margin-left: 50px;
+      min-width: 160px;
 
       .team-two-logo {
         width: 50px;
@@ -90,8 +89,6 @@ $progress-color: black;
     color: black;
     width: 75vw;
     max-width: 700px;
-    position: relative;
-    top: 100px;
     border-radius: 10px;
     padding: 10px 5px 10px 5px;
 
@@ -195,6 +192,32 @@ $progress-color: black;
           border-top-right-radius: 1rem;
         }
       }
+    }
+  }
+}
+
+@media screen and (max-width: 530px) {
+  .team-one-wrapper {
+    margin: 0 !important;
+    gap: 5px !important;
+    font-size: 13px !important;
+    justify-content: center !important;
+    min-width: none !important;
+  }
+
+  .team-two-wrapper {
+    margin: 0 !important;
+    gap: 5px !important;
+    font-size: 13px !important;
+    justify-content: center !important;
+    min-width: none !important;
+  }
+
+  .scores-data {
+    margin: 10px !important;
+
+    .fixture-time {
+      font-size: 10px !important;
     }
   }
 }
