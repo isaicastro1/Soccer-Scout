@@ -35,6 +35,9 @@ const MatchStats = ({ matchStats, Spinner, matchClicked }) => {
     return obj;
   }, {});
 
+  console.log("homeStats", homeStats);
+  console.log("awayStats", awayStats);
+
   return (
     <div className="match-stats-container">
       <div className="teams-wrapper">
@@ -61,11 +64,11 @@ const MatchStats = ({ matchStats, Spinner, matchClicked }) => {
         <div className="possession-stats stats">
           <div className="stats-text">
             <span className="home-possession-percentage">
-              {homeStats["Ball Possession"]}
+              {homeStats["Ball Possession"] || 0}
             </span>
             <h5>POSSESSION</h5>
             <span className="away-possession-percentage">
-              {awayStats["Ball Possession"]}
+              {awayStats["Ball Possession"] || 0}
             </span>
           </div>
           <div className="progress-bars">
@@ -96,11 +99,11 @@ const MatchStats = ({ matchStats, Spinner, matchClicked }) => {
         <div className="total-shots-stats stats">
           <div className="stats-text">
             <span className="home-shots-percentage">
-              {homeStats["Total Shots"]}
+              {homeStats["Total Shots"] || 0}
             </span>
             <h5>TOTAL SHOTS</h5>
             <span className="away-shots-percentage">
-              {awayStats["Total Shots"]}
+              {awayStats["Total Shots"] || 0}
             </span>
           </div>
           <div className="progress-bars">
@@ -137,11 +140,11 @@ const MatchStats = ({ matchStats, Spinner, matchClicked }) => {
         <div className="shots-target-stats stats">
           <div className="stats-text">
             <span className="home-shots-target-percentage">
-              {homeStats["Shots on Goal"]}
+              {homeStats["Shots on Goal"] || 0}
             </span>
             <h5>SHOTS ON TARGET</h5>
             <span className="away-shots-target-percentage">
-              {awayStats["Shots on Goal"]}
+              {awayStats["Shots on Goal"] || 0}
             </span>
           </div>
           <div className="progress-bars">
@@ -178,11 +181,11 @@ const MatchStats = ({ matchStats, Spinner, matchClicked }) => {
         <div className="shots-off-target-stats stats">
           <div className="stats-text">
             <span className="home-off-target-percentage">
-              {homeStats["Shots off Goal"]}
+              {homeStats["Shots off Goal"] || 0}
             </span>
             <h5>SHOTS OFF TARGET</h5>
             <span className="away-off-target-percentage">
-              {awayStats["Shots off Goal"]}
+              {awayStats["Shots off Goal"] || 0}
             </span>
           </div>
           <div className="progress-bars">
@@ -219,11 +222,11 @@ const MatchStats = ({ matchStats, Spinner, matchClicked }) => {
         <div className="blocked-shots-stats stats">
           <div className="stats-text">
             <span className="home-blocked-percentage">
-              {homeStats["Blocked Shots"]}
+              {homeStats["Blocked Shots"] || 0}
             </span>
             <h5>BLOCKED SHOTS</h5>
             <span className="away-blocked-percentage">
-              {awayStats["Blocked Shots"]}
+              {awayStats["Blocked Shots"] || 0}
             </span>
           </div>
           <div className="progress-bars">
@@ -301,11 +304,11 @@ const MatchStats = ({ matchStats, Spinner, matchClicked }) => {
         <div className="shots-outside-stats stats">
           <div className="stats-text">
             <span className="home-shots-outside-percentage">
-              {homeStats["Shots outsidebox"]}
+              {homeStats["Shots outsidebox"] || 0}
             </span>
             <h5>SHOTS OUTSIDE</h5>
             <span className="away-shots-outside-percentage">
-              {awayStats["Shots outsidebox"]}
+              {awayStats["Shots outsidebox"] || 0}
             </span>
           </div>
           <div className="progress-bars">
@@ -369,11 +372,11 @@ const MatchStats = ({ matchStats, Spinner, matchClicked }) => {
         <div className="corners-stats stats">
           <div className="stats-text">
             <span className="home-corners-percentage">
-              {homeStats["Corner Kicks"]}
+              {homeStats["Corner Kicks"] || 0}
             </span>
             <h5>CORNER KICKS</h5>
             <span className="away-corners-percentage">
-              {awayStats["Corner Kicks"]}
+              {awayStats["Corner Kicks"] || 0}
             </span>
           </div>
           <div className="progress-bars">
@@ -451,11 +454,11 @@ const MatchStats = ({ matchStats, Spinner, matchClicked }) => {
         <div className="yellow-stats stats">
           <div className="stats-text">
             <span className="home-yellows-percentage">
-              {homeStats["Yellow Cards"]}
+              {homeStats["Yellow Cards"] || 0}
             </span>
             <h5>YELLOW CARDS</h5>
             <span className="away-yellows-percentage">
-              {awayStats["Yellow Cards"]}
+              {awayStats["Yellow Cards"] || 0}
             </span>
           </div>
           <div className="progress-bars">
@@ -533,11 +536,11 @@ const MatchStats = ({ matchStats, Spinner, matchClicked }) => {
         <div className="gk-saves-stats stats">
           <div className="stats-text">
             <span className="home-gk-percentage">
-              {homeStats["Goalkeeper Saves"]}
+              {homeStats["Goalkeeper Saves"] || 0}
             </span>
             <h5>GOALKEEPER SAVES</h5>
             <span className="away-gk-percentage">
-              {awayStats["Goalkeeper Saves"]}
+              {awayStats["Goalkeeper Saves"] || 0}
             </span>
           </div>
           <div className="progress-bars">
@@ -574,11 +577,11 @@ const MatchStats = ({ matchStats, Spinner, matchClicked }) => {
         <div className="passes-stats stats">
           <div className="stats-text">
             <span className="home-passes-percentage">
-              {homeStats["Total passes"]}
+              {homeStats["Total passes"] || 0}
             </span>
             <h5>TOTAL PASSES</h5>
             <span className="away-duels-percentage">
-              {awayStats["Total passes"]}
+              {awayStats["Total passes"] || 0}
             </span>
           </div>
           <div className="progress-bars">
@@ -615,11 +618,11 @@ const MatchStats = ({ matchStats, Spinner, matchClicked }) => {
         <div className="accuracy-stats stats">
           <div className="stats-text">
             <span className="home-accuracy-percentage">
-              {homeStats["Passes accurate"]}
+              {homeStats["Passes accurate"] || 0}
             </span>
             <h5>ACCURATE PASSES</h5>
             <span className="away-accuracy-percentage">
-              {awayStats["Passes accurate"]}
+              {awayStats["Passes accurate"] || 0}
             </span>
           </div>
           <div className="progress-bars">
@@ -653,47 +656,51 @@ const MatchStats = ({ matchStats, Spinner, matchClicked }) => {
             />
           </div>
         </div>
-        <div className="expected-stats stats">
-          <div className="stats-text">
-            <span className="home-expected-percentage">
-              {homeStats["expected_goals"]}
-            </span>
-            <h5>EXPECTED GOALS</h5>
-            <span className="away-expected-percentage">
-              {awayStats["expected_goals"]}
-            </span>
+        {homeStats["expected_goals"] && awayStats["expected_goals"] ? (
+          <div className="expected-stats stats">
+            <div className="stats-text">
+              <span className="home-expected-percentage">
+                {homeStats["expected_goals"] || 0}
+              </span>
+              <h5>EXPECTED GOALS</h5>
+              <span className="away-expected-percentage">
+                {awayStats["expected_goals"] || 0}
+              </span>
+            </div>
+            <div className="progress-bars">
+              <progress
+                className="home-team-expexted-goals"
+                max={Math.max(
+                  homeStats["expected_goals"],
+                  awayStats["expected_goals"]
+                )}
+                value={homeStats["expected_goals"] || 0}
+                style={{
+                  "--progress-color":
+                    homeStats["expected_goals"] > awayStats["expected_goals"]
+                      ? "black"
+                      : "gray",
+                }}
+              />
+              <progress
+                className="away-team-expexted-goals"
+                max={Math.max(
+                  homeStats["expected_goals"],
+                  awayStats["expected_goals"]
+                )}
+                value={awayStats["expected_goals"] || 0}
+                style={{
+                  "--progress-color":
+                    awayStats["expected_goals"] > homeStats["expected_goals"]
+                      ? "black"
+                      : "gray",
+                }}
+              />
+            </div>
           </div>
-          <div className="progress-bars">
-            <progress
-              className="home-team-expexted-goals"
-              max={Math.max(
-                homeStats["expected_goals"],
-                awayStats["expected_goals"]
-              )}
-              value={homeStats["expected_goals"] || 0}
-              style={{
-                "--progress-color":
-                  homeStats["expected_goals"] > awayStats["expected_goals"]
-                    ? "black"
-                    : "gray",
-              }}
-            />
-            <progress
-              className="away-team-expexted-goals"
-              max={Math.max(
-                homeStats["expected_goals"],
-                awayStats["expected_goals"]
-              )}
-              value={awayStats["expected_goals"] || 0}
-              style={{
-                "--progress-color":
-                  awayStats["expected_goals"] > homeStats["expected_goals"]
-                    ? "black"
-                    : "gray",
-              }}
-            />
-          </div>
-        </div>
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   );

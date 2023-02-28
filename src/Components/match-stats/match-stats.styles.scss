@@ -7,7 +7,8 @@ $progress-color: black;
 .match-stats-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  position: relative;
+  top: 120px;
   align-items: center;
   width: 100vw;
   min-height: 170vh;
