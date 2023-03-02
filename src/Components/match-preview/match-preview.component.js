@@ -16,6 +16,8 @@ const MatchPreview = ({
   const [homeTeamLogo, setHomeTeamLogo] = useState(Shield);
   const [awayTeamLogo, setAwayTeamLogo] = useState(Shield);
 
+  console.log("game", game);
+
   const {
     fixture: {
       id,
