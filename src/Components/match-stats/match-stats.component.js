@@ -49,7 +49,9 @@ const MatchStats = ({ matchStats, Spinner, matchClicked }) => {
         </div>
         <div className="scores-data">
           {/* <div className="aggregate">Agg : 4 - 3</div> */}
-          <div className="fixture-score">{`${fulltime.home} : ${fulltime.away}`}</div>
+          <div className="fixture-score">{`${fulltime.home || 0} : ${
+            fulltime.away || 0
+          }`}</div>
           <div className="fixture-time">{long}</div>
         </div>
         <div className="team-two-wrapper">
