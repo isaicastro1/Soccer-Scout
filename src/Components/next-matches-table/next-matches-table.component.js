@@ -3,6 +3,7 @@ import { useEffect, useState, useCallback, useContext } from "react";
 import MatchPreview from "../../Components/match-preview/match-preview.component";
 import Spinner from "../spinner/spinner.component";
 import MatchStats from "../match-stats/match-stats.component";
+import MatchDetails from "../match-details/match-details.component";
 
 import { getDate, leagueDates } from "../../utils/date";
 import { allLeagues } from "../../utils/all-leagues";
@@ -214,7 +215,7 @@ const NextMatchesTable = () => {
       {isLoading ? (
         <Spinner />
       ) : leagueCalled && statsClicked ? (
-        <MatchStats
+        <MatchDetails
           matchStats={matchStats}
           Spinner={Spinner}
           matchClicked={matchClicked}
