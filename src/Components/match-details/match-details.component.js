@@ -1,6 +1,8 @@
 import MatchInfo from "../match-info/match-info.component";
 import MatchStats from "../match-stats/match-stats.component";
 
+import "./match-details.styles.scss";
+
 const MatchDetails = ({ matchStats, Spinner, matchClicked }) => {
   if (!matchStats) {
     return <Spinner />;
@@ -8,14 +10,17 @@ const MatchDetails = ({ matchStats, Spinner, matchClicked }) => {
 
   const {
     fixture: {
-      status: { long },
+      status: { long, elapsed },
       date,
       referee,
       venue: { name: stadium },
     },
     league: { name: leagueName, round },
     score: { fulltime, extratime },
+    goals: { home: homeGoals, away: awayGoals },
   } = matchClicked;
+
+  console.log("match", matchClicked);
 
   const {
     away: { response: awayResponse },
@@ -50,9 +55,8 @@ const MatchDetails = ({ matchStats, Spinner, matchClicked }) => {
           </div>
         </div>
         <div className="scores-data">
-          <div className="fixture-score">
-            {`${fulltime.home || 0} : ${fulltime.away || 0}`}
-          </div>
+          <span className="live-dot">{elapsed}'</span>
+          <div className="fixture-score">{`${homeGoals} : ${awayGoals}`}</div>
           <div className="fixture-time">{long}</div>
         </div>
         <div className="team-two-wrapper">
