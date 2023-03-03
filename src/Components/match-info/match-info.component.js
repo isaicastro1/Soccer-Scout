@@ -28,13 +28,17 @@ const MatchInfo = ({ date, referee, stadium, leagueName, round }) => {
           {stadium}
         </div>
       </div>
-      <div className="match-info-item">
-        <span className="item-circle"></span>
-        <div className="item-data">
-          <h5>Referee:</h5>
-          {referee}
+      {referee ? (
+        <div className="match-info-item">
+          <span className="item-circle"></span>
+          <div className="item-data">
+            <h5>Referee:</h5>
+            {referee}
+          </div>
         </div>
-      </div>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };

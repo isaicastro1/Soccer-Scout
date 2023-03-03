@@ -296,6 +296,17 @@ const NextMatchesTable = () => {
               </div>
               <div
                 className="image-container"
+                value="faCup"
+                onClick={handleLeagueChange}
+              >
+                <img
+                  alt="logo"
+                  value="faCup"
+                  src="https://media.api-sports.io/football/leagues/45.png"
+                />
+              </div>
+              <div
+                className="image-container"
                 value="ligue1"
                 onClick={handleLeagueChange}
               >
@@ -303,6 +314,17 @@ const NextMatchesTable = () => {
                   alt="logo"
                   value="ligue1"
                   src="https://media.api-sports.io/football/leagues/61.png"
+                />
+              </div>
+              <div
+                className="image-container"
+                value="copaDelRey"
+                onClick={handleLeagueChange}
+              >
+                <img
+                  alt="logo"
+                  value="copaDelRey"
+                  src="https://media.api-sports.io/football/leagues/143.png"
                 />
               </div>
               <div

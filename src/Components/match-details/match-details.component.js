@@ -20,7 +20,7 @@ const MatchDetails = ({ matchStats, Spinner, matchClicked }) => {
     goals: { home: homeGoals, away: awayGoals },
   } = matchClicked;
 
-  console.log("match", matchClicked);
+  // console.log("match", matchClicked);
 
   const {
     away: { response: awayResponse },
@@ -55,7 +55,11 @@ const MatchDetails = ({ matchStats, Spinner, matchClicked }) => {
           </div>
         </div>
         <div className="scores-data">
-          <span className="live-dot">{elapsed}'</span>
+          {long !== "Match Finished" ? (
+            <span className="live-dot">{elapsed}'</span>
+          ) : (
+            <></>
+          )}
           <div className="fixture-score">{`${homeGoals} : ${awayGoals}`}</div>
           <div className="fixture-time">{long}</div>
         </div>
