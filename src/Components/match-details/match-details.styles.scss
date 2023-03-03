@@ -1,0 +1,18 @@
+.live-dot {
+  display: flex;
+  justify-content: center;
+  width: 50px;
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    top: 10px;
+    left: 0;
+    border-radius: 50%;
+    background-color: red;
+    animation: grow infinite 2s;
+  }
+}

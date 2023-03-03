@@ -32,6 +32,8 @@ h2 {
   .options {
     display: grid;
     place-content: center;
+    position: relative;
+    top: 70px;
     grid-template-columns: repeat(2, 1fr);
     height: 100%;
     gap: 10px;
@@ -66,6 +68,8 @@ h2 {
 
       img {
         height: 100px;
+        width: auto;
+        max-width: 150px;
       }
     }
   }
@@ -88,9 +92,10 @@ h2 {
 @media screen and (min-width: 900px) {
   .find-league-container .options {
     height: 60vh;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(6, 1fr);
     column-gap: 40px;
-    row-gap: 20px;
+    row-gap: 40px;
+    top: -40px;
 
     .image-container {
       align-items: center;
@@ -99,5 +104,12 @@ h2 {
 
   .find-league-container .choose-league {
     height: 60vh;
+  }
+}
+
+@media screen and (max-width: 900px) and (min-width: 600px) {
+  .find-league-container .options {
+    grid-template-columns: repeat(3, 1fr);
+    top: -40px;
   }
 }
