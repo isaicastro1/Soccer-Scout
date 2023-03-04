@@ -28,14 +28,13 @@ $progress-color: black;
       justify-content: space-between;
       align-items: center;
       margin-right: 50px;
-      min-width: 200px;
       gap: 5px;
 
       .team-one-logo {
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 70px;
+        min-width: 70px;
         height: 70px;
         border-radius: 50%;
         outline: 2px solid gray;
@@ -47,6 +46,9 @@ $progress-color: black;
 
       .team-one-name {
         font-weight: bolder;
+        max-width: 140px;
+        min-width: 140px;
+        text-align: center;
       }
     }
 
@@ -63,6 +65,7 @@ $progress-color: black;
 
       .fixture-time {
         font-size: 13px;
+        text-align: center;
       }
     }
 
@@ -71,14 +74,13 @@ $progress-color: black;
       justify-content: space-between;
       align-items: center;
       margin-left: 50px;
-      min-width: 200px;
       gap: 5px;
 
       .team-two-logo {
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 70px;
+        min-width: 70px;
         height: 70px;
         border-radius: 50%;
         outline: 2px solid gray;
@@ -90,6 +92,9 @@ $progress-color: black;
 
       .team-two-name {
         font-weight: bolder;
+        max-width: 140px;
+        min-width: 140px;
+        text-align: center;
       }
     }
   }
@@ -206,28 +211,54 @@ $progress-color: black;
   }
 }
 
+p {
+  text-align: center;
+}
+
 @media screen and (max-width: 530px) {
   .team-one-wrapper {
     margin: 0 !important;
-    gap: 5px !important;
+    gap: 15px !important;
     font-size: 13px !important;
     justify-content: center !important;
     min-width: none !important;
+
+    .team-one-name {
+      word-break: keep-all !important;
+      max-width: 100px !important;
+      min-width: 50px !important;
+    }
   }
 
   .team-two-wrapper {
     margin: 0 !important;
-    gap: 5px !important;
+    gap: 15px !important;
     font-size: 13px !important;
     justify-content: center !important;
     min-width: none !important;
+
+    .team-two-name {
+      word-break: keep-all !important;
+      max-width: 100px !important;
+      min-width: 50px !important;
+    }
+
+    .team-two-logo {
+      img {
+        width: 30px;
+      }
+    }
   }
 
   .scores-data {
-    margin: 10px !important;
+    margin: 5px !important;
 
     .fixture-time {
-      font-size: 10px !important;
+      font-size: 9px !important;
+    }
+
+    .not-started {
+      font-size: 12px;
     }
   }
 }

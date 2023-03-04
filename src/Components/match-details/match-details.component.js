@@ -59,8 +59,10 @@ const MatchDetails = ({ matchStats, Spinner, matchClicked }) => {
               <span className="live-dot">HT</span>
               <div className="fixture-score">{`${homeGoals} : ${awayGoals}`}</div>
             </>
+          ) : long === "Match Finished" ? (
+            <div className="fixture-score">{`${homeGoals} : ${awayGoals}`}</div>
           ) : long === "Not Started" ? (
-            <span>{new Date(date).toLocaleDateString()}</span>
+            <></>
           ) : (
             <>
               <span className="live-dot">{elapsed}'</span>
@@ -68,7 +70,7 @@ const MatchDetails = ({ matchStats, Spinner, matchClicked }) => {
             </>
           )}
           <div className="fixture-time">
-            {long === "Not Started" ? newDate : { long }}
+            {long === "Not Started" ? newDate : long}
           </div>
         </div>
         <div className="team-two-wrapper">
@@ -92,7 +94,10 @@ const MatchDetails = ({ matchStats, Spinner, matchClicked }) => {
           matchClicked={matchClicked}
         />
       ) : (
-        <></>
+        <div className="statistics-container">
+          <h5 className="statistics-title">STATISTICS</h5>
+          <p>Sorry, there are currently no match statistics</p>
+        </div>
       )}
     </div>
   );
