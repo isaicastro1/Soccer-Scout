@@ -2,7 +2,6 @@ import { useEffect, useState, useCallback, useContext } from "react";
 
 import MatchPreview from "../../Components/match-preview/match-preview.component";
 import Spinner from "../spinner/spinner.component";
-import MatchStats from "../match-stats/match-stats.component";
 import MatchDetails from "../match-details/match-details.component";
 
 import { getDate, leagueDates } from "../../utils/date";
@@ -47,7 +46,7 @@ const NextMatchesTable = () => {
     getUserFavorites();
   }, [currentUser]);
 
-  const upcomingMatchesDate = leagueDates[`${nameOfLeague}`] || "2023-03-10";
+  const upcomingMatchesDate = leagueDates[`${nameOfLeague}`] || "2023-03-30";
 
   const getNextMatches = useCallback(async () => {
     if (!league) return;
@@ -75,7 +74,7 @@ const NextMatchesTable = () => {
       const data = await response.json();
 
       if (!data.response.length) {
-        alert("Sorry, Could not fetch data from API");
+        console.log("Sorry, Could not fetch data from API");
         throw new Error("Could not fetch data");
       }
       setNextMatches(data.response);

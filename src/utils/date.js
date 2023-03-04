@@ -20,6 +20,7 @@ export const modifyTime = (time) => {
 
 export const leagueDates = {
   champions: "2023-04-30",
-  laliga: "2023-03-10",
-  premier: "2023-03-10",
+  laliga: "2023-03-20",
+  premier: "2023-03-20",
+  copaDelRey: "2023-04-30",
 };
