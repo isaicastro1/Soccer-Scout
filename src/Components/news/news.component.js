@@ -13,13 +13,16 @@ const News = () => {
     try {
       setIsLoading(true);
       const getNewsData = async () => {
-        const response = await fetch("https://soccer-api.herokuapp.com/news", {
+        const data = await fetch("https://soccer-api.herokuapp.com/news", {
           method: "get",
           headers: {
             "Access-Control-Allow-Origin": "*",
             "Content-Type": "application/json",
           },
-        }).then((data) => data.json());
+        });
+
+        const response = await data.json();
+
         setNewsData(response);
         setIsLoading(false);
       };
@@ -35,7 +38,7 @@ const News = () => {
         <Spinner />
       ) : (
         <div className="news-container">
-          <h3>Top Headlines</h3>
+          <h6>TOP HEADLINES</h6>
           <div className="news-wrapper">
             {newsData ? (
               newsData.map((item) => {

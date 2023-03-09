@@ -96,7 +96,7 @@ const MatchDetails = ({ matchStats, Spinner, matchClicked }) => {
       ) : (
         <div className="statistics-container">
           <h5 className="statistics-title">STATISTICS</h5>
-          <p>Sorry, there are currently no match statistics</p>
+          <Spinner />
         </div>
       )}
     </div>
