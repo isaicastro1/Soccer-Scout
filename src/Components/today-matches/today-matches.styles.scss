@@ -1,0 +1,62 @@
+.today-matches-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 140px;
+  width: 100vw;
+  text-align: center;
+  margin: 10px 0 10px 0;
+
+  h6 {
+    margin: 0;
+  }
+
+  .today-matches-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+
+    .today-match-item {
+      border: 1px solid gray;
+      width: 110px;
+      padding: 5px;
+      border-radius: 5px;
+      cursor: pointer;
+      outline: 2px solid transparent;
+      transition: all 0.3s ease-in-out;
+      box-shadow: 6px 4px 14px -5px rgba(33, 32, 32, 0.79);
+      -webkit-box-shadow: 6px 4px 14px -5px rgba(33, 32, 32, 0.79);
+      -moz-box-shadow: 6px 4px 14px -5px rgba(33, 32, 32, 0.79);
+
+      &:hover {
+        outline: 2px solid gray;
+        transform: translateY(-5px);
+      }
+
+      .fixture-score {
+        font-size: 15px;
+        font-weight: bolder;
+      }
+
+      img {
+        max-width: 40px;
+      }
+
+      .today-match-team-logos {
+        display: flex;
+        justify-content: space-around;
+      }
+
+      .today-match-time {
+        padding: 5px;
+
+        h6 {
+          font-size: 13px;
+          margin: 0;
+        }
+      }
+    }
+  }
+}

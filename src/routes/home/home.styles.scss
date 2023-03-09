@@ -1,5 +1,8 @@
 .home-container {
   display: flex;
+  flex-direction: column;
+  position: relative;
+  top: 80px;
   min-width: 100vw;
   height: min-content;
   color: white;
