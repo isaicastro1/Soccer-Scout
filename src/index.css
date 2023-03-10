@@ -9,6 +9,10 @@ body {
   background-color: #f1f3f8;
 }
 
+body::-webkit-scrollbar {
+  display: none;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
@@ -26,10 +30,6 @@ h4 {
 * {
   box-sizing: border-box;
   text-decoration: none;
-}
-
-::-webkit-scrollbar {
-  display: none;
 }
 
 .container {

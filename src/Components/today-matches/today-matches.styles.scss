@@ -3,20 +3,37 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  height: 140px;
+  height: 180px;
   width: 100vw;
   text-align: center;
   margin: 10px 0 10px 0;
 
   h6 {
-    margin: 0;
+    margin: 10px 0;
+  }
+
+  .today-matches-wrapper::-webkit-scrollbar {
+    height: 10px;
+  }
+
+  .today-matches-wrapper::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 10px;
+
+    &:hover {
+      background-color: rgb(159, 159, 159);
+    }
   }
 
   .today-matches-wrapper {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
+    overflow-x: scroll;
+    max-width: 100vw;
+    height: 150px;
     gap: 20px;
+    padding: 0 15px;
 
     .today-match-item {
       border: 1px solid gray;
@@ -33,6 +50,11 @@
       &:hover {
         outline: 2px solid gray;
         transform: translateY(-5px);
+      }
+
+      .match-time {
+        font-size: 14px;
+        font-weight: bolder;
       }
 
       .fixture-score {
@@ -53,7 +75,8 @@
         padding: 5px;
 
         h6 {
-          font-size: 13px;
+          font-size: 12px;
+          font-weight: bolder;
           margin: 0;
         }
       }
