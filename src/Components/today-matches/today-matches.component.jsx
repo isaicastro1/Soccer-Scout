@@ -14,7 +14,7 @@ const TodayMatches = () => {
     try {
       setIsLoading(true);
       const getAllMatches = async () => {
-        // let date = "2023-03-10";
+        // let date = "2023-03-11";
         let date = getDate();
         const response = await fetch(
           "https://soccer-api.herokuapp.com/all-matches",
@@ -51,6 +51,44 @@ const TodayMatches = () => {
     }
   }, []);
 
+  const sortByLeague = (fixtures) => {
+    if (!fixtures) return;
+
+    const preferredLeagues = [
+      "Premier League",
+      "La Liga",
+      "UEFA Champions League",
+      "Bundesliga",
+      "Ligue 1",
+      "UEFA Europa League",
+      "Serie A",
+      "Pro League",
+    ];
+
+    // Filter the fixtures by the preferred leagues order
+    const filteredFixtures = fixtures
+      .filter((fixture) => preferredLeagues.includes(fixture.league.name))
+      .sort((a, b) => {
+        const leagueA = a.league.name;
+        const leagueB = b.league.name;
+
+        if (
+          preferredLeagues.indexOf(leagueA) < preferredLeagues.indexOf(leagueB)
+        ) {
+          return -1;
+        } else if (
+          preferredLeagues.indexOf(leagueA) > preferredLeagues.indexOf(leagueB)
+        ) {
+          return 1;
+        } else {
+          return 0;
+        }
+      });
+    return filteredFixtures;
+  };
+
+  const orderedFixtures = sortByLeague(todayMatches);
+
   return (
     <>
       {isLoading ? (
@@ -59,8 +97,9 @@ const TodayMatches = () => {
         <div className="today-matches-container">
           <h6>FIXTURES</h6>
           <div className="today-matches-wrapper">
-            {todayMatches ? (
-              todayMatches.map((item) => {
+            {orderedFixtures ? (
+              orderedFixtures.map((item) => {
+                // console.log(item);
                 return (
                   <div className="today-match-item" key={item.fixture.id}>
                     <div className="today-match-team-logos">
