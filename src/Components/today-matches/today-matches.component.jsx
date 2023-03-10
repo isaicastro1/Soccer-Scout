@@ -14,6 +14,7 @@ const TodayMatches = () => {
     try {
       setIsLoading(true);
       const getAllMatches = async () => {
+        // let date = "2023-03-10";
         let date = getDate();
         const response = await fetch(
           "https://soccer-api.herokuapp.com/all-matches",
@@ -67,19 +68,32 @@ const TodayMatches = () => {
                       <img alt="logo" src={item.teams.away.logo} />
                     </div>
                     <div className="today-match-time">
-                      <h6>
-                        {new Date(item.fixture.date).toLocaleDateString()}
-                      </h6>
-
                       {item.fixture.status.long === "Halftime" ? (
                         <>
                           <span className="live-dot">HT</span>
                           <div className="fixture-score">{`${item.goals.home} - ${item.goals.away}`}</div>
                         </>
                       ) : item.fixture.status.long === "Match Finished" ? (
-                        <div className="fixture-score">{`${item.goals.home} - ${item.goals.away}`}</div>
+                        <>
+                          <span className="match-time">FT</span>
+                          <div className="fixture-score">{`${item.goals.home} - ${item.goals.away}`}</div>
+                        </>
                       ) : item.fixture.status.long === "Not Started" ? (
-                        <></>
+                        <>
+                          <h6>
+                            {new Date(item.fixture.date).toLocaleDateString()}
+                          </h6>
+                          <span className="match-time">
+                            {new Date(item.fixture.date).toLocaleString(
+                              "en-US",
+                              {
+                                hour: "numeric",
+                                minute: "numeric",
+                                hour12: true,
+                              }
+                            )}
+                          </span>
+                        </>
                       ) : (
                         <>
                           <span className="live-dot">
