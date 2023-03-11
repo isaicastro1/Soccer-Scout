@@ -89,6 +89,41 @@ const TodayMatches = () => {
 
   const orderedFixtures = sortByLeague(todayMatches);
 
+  // Gets the next 4 days
+  const getNextDays = () => {
+    const dates = [];
+
+    // Get today's date
+    const today = new Date();
+    dates.push("TODAY");
+
+    // Get tomorrow's date
+    const tomorrow = new Date(today);
+    tomorrow.setDate(today.getDate() + 1);
+    dates.push("TOMORROW");
+
+    // Get the remaining days as day names
+    const daysOfWeek = [
+      "SUNDAY",
+      "MONDAY",
+      "TUESDAY",
+      "WEDNESDAY",
+      "THURSDAY",
+      "FRIDAY",
+      "SATURDAY",
+    ];
+
+    for (let i = 2; i <= 4; i++) {
+      const date = new Date(today);
+      date.setDate(today.getDate() + i);
+      dates.push(daysOfWeek[date.getDay()]);
+    }
+
+    console.log(dates);
+  };
+
+  getNextDays();
+
   return (
     <>
       {isLoading ? (
@@ -103,8 +138,8 @@ const TodayMatches = () => {
                 return (
                   <div className="today-match-item" key={item.fixture.id}>
                     <div className="today-match-team-logos">
-                      <img alt="logo" src={item.teams.home.logo} />
-                      <img alt="logo" src={item.teams.away.logo} />
+                      <img src={item.teams.home.logo} alt="logo" />
+                      <img src={item.teams.away.logo} alt="logo" />
                     </div>
                     <div className="today-match-time">
                       {item.fixture.status.long === "Halftime" ? (
@@ -135,7 +170,10 @@ const TodayMatches = () => {
                         </>
                       ) : (
                         <>
-                          <span className="live-dot">
+                          <span
+                            className="live-dot"
+                            style={{ textAlign: "center" }}
+                          >
                             {item.fixture.status.elapsed}'
                           </span>
                           <div className="fixture-score">{`${item.goals.home} - ${item.goals.away}`}</div>
