@@ -16,3 +16,17 @@ export const allLeagues = {
   goldCup: 22,
   proLeague: 307,
 };
+
+export const FavTeams = {
+  Barcelona: "Barcelona",
+  RealMadrid: "Real Madrid",
+  ManchesterUnited: "Manchester United",
+  Liverpool: "Liverpool",
+  Chelsea: "Chelsea",
+  PSG: "PSG",
+  ManchesterCity: "Manchester City",
+  Arsenal: "Arsenal",
+  Tottenham: "Tottenham",
+  América: "América",
+  Chivas: "Chivas",
+};
