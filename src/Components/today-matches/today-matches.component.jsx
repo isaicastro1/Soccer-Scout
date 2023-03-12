@@ -13,6 +13,7 @@ const TodayMatches = ({ setNavigateToMatches }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [dayClicked, setDayClicked] = useState(false);
   const [matches, setMatches] = useState();
+  const [matchDate, setMatchDate] = useState();
   const [matchParams, setMatchParams] = useState(null);
   const [statsClicked, setStatsClicked] = useState(false);
   const [matchClicked, setMatchClicked] = useState(null);
@@ -69,6 +70,7 @@ const TodayMatches = ({ setNavigateToMatches }) => {
       "Ligue 1",
       "UEFA Europa League",
       "Serie A",
+      "Copa Del Rey",
     ];
 
     // Filter the fixtures by the preferred leagues order
@@ -125,7 +127,6 @@ const TodayMatches = ({ setNavigateToMatches }) => {
       dates.push({ dayOfWeek: daysOfWeek[date.getDay()], date: getDate(date) });
     }
 
-    // console.log(dates);
     return dates;
   };
 
@@ -134,6 +135,8 @@ const TodayMatches = ({ setNavigateToMatches }) => {
     setNavigateToMatches(true);
 
     let date = event.target.getAttribute("value");
+
+    setMatchDate(date);
 
     const response = await fetch(
       "https://soccer-api.herokuapp.com/all-matches",
@@ -161,43 +164,78 @@ const TodayMatches = ({ setNavigateToMatches }) => {
       return;
     }
 
-    setMatches(matches);
+    const favoriteLeagues = [
+      "Premier League",
+      "La Liga",
+      "UEFA Champions League",
+      "Bundesliga",
+      "Ligue 1",
+      "UEFA Europa League",
+      "Serie A",
+      "Copa Del Rey",
+    ];
+
+    const matchesByLeague = matches.reduce((acc, match) => {
+      if (!acc[match.league.name]) {
+        acc[match.league.name] = [];
+      }
+      acc[match.league.name].push(match);
+      return acc;
+    }, {});
+
+    const sortedMatchesByLeague = Object.keys(matchesByLeague)
+      .sort((a, b) => {
+        const indexA = favoriteLeagues.indexOf(a);
+        const indexB = favoriteLeagues.indexOf(b);
+        if (indexA === -1 && indexB === -1) {
+          return a.localeCompare(b);
+        } else if (indexA === -1) {
+          return 1;
+        } else if (indexB === -1) {
+          return -1;
+        } else {
+          return indexA - indexB;
+        }
+      })
+      .reduce((acc, league) => {
+        acc[league] = matchesByLeague[league];
+        return acc;
+      }, {});
+
+    setMatches(sortedMatchesByLeague);
     setIsLoading(false);
   };
-
-  console.log("matches", matches);
 
   return (
     <>
       {isLoading ? (
         <Spinner />
       ) : dayClicked ? (
-        <div
-          style={{
-            height: "100vw",
-          }}
-          className="same-league-match"
-        >
-          <h3>Today's Matches</h3>
-          {matches &&
-            matches.map((match, index) => {
-              // renders league one title with league name
-              const shouldRenderLeague =
-                index === 0 ||
-                match.league.name !== matches[index - 1].league.name;
-              return (
-                <div className="fixture-league" key={match.fixture.id}>
-                  {shouldRenderLeague && <h3>{match.league.name}</h3>}
-                  <MatchPreview
-                    game={match}
-                    setMatchParams={setMatchParams}
-                    setStatsClicked={setStatsClicked}
-                    setMatchClicked={setMatchClicked}
-                  />
+        <>
+          <h4>{new Date(matchDate).toDateString()}</h4>
+          <div className="fixture-league">
+            {Object.entries(matches).map(([leagueName, leagueMatches]) => (
+              <div className="league-fixture-matches" key={leagueName}>
+                <img
+                  className="league-logo"
+                  src={leagueMatches[0].league.logo}
+                  alt="logo"
+                />
+                <div className="same-league-match" key={leagueName}>
+                  {leagueMatches?.map((match) => (
+                    <MatchPreview
+                      game={match}
+                      key={match.fixture.id}
+                      setMatchParams={setMatchParams}
+                      setStatsClicked={setStatsClicked}
+                      setMatchClicked={setMatchClicked}
+                    />
+                  ))}
                 </div>
-              );
-            })}
-        </div>
+              </div>
+            ))}
+          </div>
+        </>
       ) : (
         <div className="today-matches-container">
           <h6>FIXTURES</h6>
@@ -205,7 +243,6 @@ const TodayMatches = ({ setNavigateToMatches }) => {
             <button>{`<`}</button>
             <ul className="date-picker">
               {getNextDays().map((day) => {
-                // console.log(day);
                 return (
                   <li
                     onClick={(e) => {

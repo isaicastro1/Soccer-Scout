@@ -20,7 +20,7 @@ const MatchDetails = ({ matchStats, Spinner, matchClicked }) => {
     },
   } = matchClicked;
 
-  console.log("match", matchClicked);
+  // console.log("match", matchClicked);
 
   const awayResponse = matchStats?.away?.response;
   const homeResponse = matchStats?.home?.response;
