@@ -1,9 +1,9 @@
-export const getDate = () => {
-  let today = new Date();
-  let dd = String(today.getDate()).padStart(2, "0");
-  let mm = String(today.getMonth() + 1).padStart(2, "0");
-  let year = today.getFullYear();
-  return (today = year + "-" + mm + "-" + dd);
+export const getDate = (date) => {
+  let newDate = new Date(date);
+  let dd = String(newDate.getDate()).padStart(2, "0");
+  let mm = String(newDate.getMonth() + 1).padStart(2, "0");
+  let year = newDate.getFullYear();
+  return (newDate = year + "-" + mm + "-" + dd);
 };
 
 export const modifyDate = (date) => {

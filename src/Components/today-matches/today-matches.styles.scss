@@ -3,13 +3,49 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  height: 180px;
+  height: 250px;
   width: 100vw;
   text-align: center;
   margin: 10px 0 10px 0;
 
   h6 {
     margin: 10px 0;
+  }
+
+  .date-scroller {
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+
+    ul {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      max-width: 90vw;
+      gap: 15px;
+      list-style: none;
+      padding: 0 20px;
+      margin: 0;
+
+      li {
+        outline: 3px solid rgb(186, 186, 186);
+        padding: 4px;
+        font-size: 14px;
+        font-weight: 600;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+
+        &:hover {
+          transform: translateY(-3px);
+          outline: 3px solid rgb(29, 18, 179);
+        }
+      }
+    }
+
+    .date-picker {
+      display: flex;
+    }
   }
 
   .today-matches-wrapper::-webkit-scrollbar {
