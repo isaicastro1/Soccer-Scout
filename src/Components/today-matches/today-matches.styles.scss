@@ -31,7 +31,7 @@ h4 {
     align-items: center;
     flex-wrap: wrap;
     justify-content: center;
-
+    max-width: 1000px;
     gap: 15px;
   }
 }
@@ -157,13 +157,3 @@ h4 {
     }
   }
 }
-
-// @media screen and (min-width: 850px) {
-//   .fixture-league {
-//     .same-league-match {
-//       display: grid;
-//       grid-template-columns: repeat(2, 1fr);
-//       place-items: center;
-//     }
-//   }
-// }
