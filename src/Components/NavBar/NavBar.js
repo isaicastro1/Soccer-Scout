@@ -52,7 +52,7 @@ const NavBar = () => {
     <>
       <div className="nav-container">
         <div className="nav">
-          <Link className="link" to="/">
+          <Link reloadDocument className="link" to="/">
             <img className="soccer-logo" src={SoccerLogo} alt="soccer-logo" />
           </Link>
           <div className="right-nav-container">
