@@ -84,6 +84,15 @@ h4 {
     .date-picker {
       display: flex;
     }
+
+    input[type="date"]::-webkit-calendar-picker-indicator {
+      //   background: url(calendar.png) no-repeat;
+      background-size: contain;
+      width: 20px;
+      height: 20px;
+      opacity: 1;
+      cursor: pointer;
+    }
   }
 
   .today-matches-wrapper::-webkit-scrollbar {

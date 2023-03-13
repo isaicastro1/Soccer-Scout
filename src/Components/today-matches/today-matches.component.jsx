@@ -130,11 +130,17 @@ const TodayMatches = ({ setNavigateToMatches }) => {
     return dates;
   };
 
-  const fetchMatchesFromDate = async (event) => {
+  const fetchMatchesFromDate = async (event, day) => {
     setIsLoading(true);
     setNavigateToMatches(true);
 
-    let date = event.target.getAttribute("value");
+    let date;
+
+    if (event.target) {
+      date = event.target.getAttribute("value");
+    } else {
+      date = day;
+    }
 
     setMatchDate(date);
 
@@ -206,13 +212,28 @@ const TodayMatches = ({ setNavigateToMatches }) => {
     setIsLoading(false);
   };
 
+  const handleDateChange = (event) => {
+    const date = new Date(event.target.value);
+    const nextDate = new Date();
+    nextDate.setDate(date.getDate() + 1);
+    const timezoneOffset = nextDate.getTimezoneOffset() * 60000; // convert to milliseconds
+    const adjustedDate = new Date(nextDate.getTime() - timezoneOffset);
+    const year = adjustedDate.getFullYear();
+    const month = String(adjustedDate.getMonth() + 1).padStart(2, "0");
+    const day = String(adjustedDate.getDate()).padStart(2, "0");
+    const formattedDate = `${year}-${month}-${day}`;
+
+    fetchMatchesFromDate({}, formattedDate);
+    setDayClicked(true);
+  };
+
   return (
     <>
       {isLoading ? (
         <Spinner />
       ) : dayClicked ? (
         <>
-          <h4>{new Date(matchDate).toDateString()}</h4>
+          <h4>{new Date(matchDate).toUTCString().slice(0, 16)}</h4>
           <div className="fixture-league">
             {Object.entries(matches).map(([leagueName, leagueMatches]) => (
               <div className="league-fixture-matches" key={leagueName}>
@@ -240,7 +261,7 @@ const TodayMatches = ({ setNavigateToMatches }) => {
         <div className="today-matches-container">
           <h6>FIXTURES</h6>
           <div className="date-scroller">
-            <button>{`<`}</button>
+            {/* <button>{`<`}</button> */}
             <ul className="date-picker">
               {getNextDays().map((day) => {
                 return (
@@ -258,7 +279,7 @@ const TodayMatches = ({ setNavigateToMatches }) => {
                 );
               })}
             </ul>
-            <button>{`>`}</button>
+            <input type="date" onChange={(e) => handleDateChange(e)} />
           </div>
           <div className="today-matches-wrapper">
             {orderedFixtures ? (
