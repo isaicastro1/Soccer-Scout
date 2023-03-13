@@ -46,7 +46,7 @@ const TodayMatches = ({ setNavigateToMatches }) => {
         );
 
         if (!data.response.length) {
-          console.log("Sorry there is no fixtures today");
+          console.log("Sorry there are no fixtures today");
           return;
         }
 
@@ -121,13 +121,28 @@ const TodayMatches = ({ setNavigateToMatches }) => {
       "SATURDAY",
     ];
 
+    // Check if the width of the browser is less than 800px
+    const isMobile = window.innerWidth < 800;
+
+    let updatedDates = dates.slice(); // make a copy of the original dates array
+
     for (let i = 2; i <= 6; i++) {
       const date = new Date(today);
       date.setDate(today.getDate() + i);
-      dates.push({ dayOfWeek: daysOfWeek[date.getDay()], date: getDate(date) });
+
+      // If it's a mobile device, only show today's date
+      if (isMobile && i === 2) {
+        updatedDates = [{ dayOfWeek: "TODAY", date: getDate(today) }];
+        break;
+      }
+
+      updatedDates.push({
+        dayOfWeek: daysOfWeek[date.getDay()],
+        date: getDate(date),
+      });
     }
 
-    return dates;
+    return updatedDates;
   };
 
   const fetchMatchesFromDate = async (event, day) => {
@@ -166,7 +181,7 @@ const TodayMatches = ({ setNavigateToMatches }) => {
     );
 
     if (!data.response.length) {
-      console.log("Sorry there is no fixtures today");
+      console.log("Sorry there are no fixtures today");
       return;
     }
 
@@ -176,6 +191,7 @@ const TodayMatches = ({ setNavigateToMatches }) => {
       "UEFA Champions League",
       "Bundesliga",
       "Ligue 1",
+      "FA Cup",
       "UEFA Europa League",
       "Serie A",
       "Copa Del Rey",
@@ -261,7 +277,6 @@ const TodayMatches = ({ setNavigateToMatches }) => {
         <div className="today-matches-container">
           <h6>FIXTURES</h6>
           <div className="date-scroller">
-            {/* <button>{`<`}</button> */}
             <ul className="date-picker">
               {getNextDays().map((day) => {
                 return (
@@ -279,7 +294,11 @@ const TodayMatches = ({ setNavigateToMatches }) => {
                 );
               })}
             </ul>
-            <input type="date" onChange={(e) => handleDateChange(e)} />
+            <input
+              type="date"
+              id="date"
+              onChange={(e) => handleDateChange(e)}
+            />
           </div>
           <div className="today-matches-wrapper">
             {orderedFixtures ? (
