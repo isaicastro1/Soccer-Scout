@@ -26,8 +26,8 @@ const TodayMatches = ({ setNavigateToMatches }) => {
         let date = getDate(new Date());
         const response = await fetch(
           "https://soccer-api.herokuapp.com/all-matches",
+          //   "http://localhost:3001/all-matches",
           {
-            // const response = await fetch("http://localhost:3001/all-matches", {
             method: "post",
             headers: {
               "Access-Control-Allow-Origin": "*",
@@ -161,8 +161,8 @@ const TodayMatches = ({ setNavigateToMatches }) => {
 
     const response = await fetch(
       "https://soccer-api.herokuapp.com/all-matches",
+      //   "http://localhost:3001/all-matches",
       {
-        // const response = await fetch("http://localhost:3001/all-matches", {
         method: "post",
         headers: {
           "Access-Control-Allow-Origin": "*",
@@ -186,15 +186,15 @@ const TodayMatches = ({ setNavigateToMatches }) => {
     }
 
     const favoriteLeagues = [
+      "UEFA Champions League",
       "Premier League",
       "La Liga",
-      "UEFA Champions League",
+      "Copa Del Rey",
       "Bundesliga",
       "Ligue 1",
       "FA Cup",
       "UEFA Europa League",
       "Serie A",
-      "Copa Del Rey",
     ];
 
     const matchesByLeague = matches.reduce((acc, match) => {
