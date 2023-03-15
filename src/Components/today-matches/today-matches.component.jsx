@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 import Spinner from "../spinner/spinner.component";
 import MatchPreview from "../match-preview/match-preview.component";
+import MatchDetails from "../match-details/match-details.component";
 
 import { getDate } from "../../utils/date";
 import { allLeagues } from "../../utils/all-leagues";
@@ -16,6 +17,7 @@ const TodayMatches = ({ setNavigateToMatches }) => {
   const [dayClicked, setDayClicked] = useState(false);
   const [matches, setMatches] = useState();
   const [matchDate, setMatchDate] = useState();
+  const [matchStats, setMatchStats] = useState(null);
   const [matchParams, setMatchParams] = useState(null);
   const [statsClicked, setStatsClicked] = useState(false);
   const [matchClicked, setMatchClicked] = useState(null);
@@ -147,6 +149,38 @@ const TodayMatches = ({ setNavigateToMatches }) => {
     return updatedDates;
   };
 
+  useEffect(() => {
+    if (!matchParams) return;
+
+    const { id, homeId, awayId } = matchParams;
+
+    const getMatchStats = async (homeTeamId, awayTeamId, fixtureId) => {
+      const response = await fetch("https://soccer-api.herokuapp.com/stats", {
+        // const response = await fetch("http://localhost:3001/stats", {
+        method: "post",
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          homeTeamId,
+          awayTeamId,
+          fixtureId,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!data.home.response.length || !data.away.response.length) {
+        console.log("Sorry there is no data for this fixture");
+        return;
+      }
+
+      setMatchStats(data);
+    };
+    getMatchStats(homeId, awayId, id);
+  }, [matchParams]);
+
   const fetchMatchesFromDate = async (event, day) => {
     setIsLoading(true);
     setNavigateToMatches(true);
@@ -245,6 +279,20 @@ const TodayMatches = ({ setNavigateToMatches }) => {
     setDayClicked(true);
   };
 
+  const handleMatchClick = (match) => {
+    const {
+      fixture: { id },
+      teams: {
+        home: { id: homeId },
+        away: { id: awayId },
+      },
+    } = match;
+    setStatsClicked(true);
+    setNavigateToMatches(true);
+    setMatchParams({ id, homeId, awayId });
+    setMatchClicked(match);
+  };
+
   return (
     <>
       {isLoading ? (
@@ -275,6 +323,12 @@ const TodayMatches = ({ setNavigateToMatches }) => {
             ))}
           </div>
         </>
+      ) : statsClicked ? (
+        <MatchDetails
+          matchStats={matchStats}
+          Spinner={Spinner}
+          matchClicked={matchClicked}
+        />
       ) : (
         <div className="today-matches-container">
           <h6>FIXTURES</h6>
@@ -307,7 +361,11 @@ const TodayMatches = ({ setNavigateToMatches }) => {
             {orderedFixtures ? (
               orderedFixtures.map((item) => {
                 return (
-                  <div className="today-match-item" key={item.fixture.id}>
+                  <div
+                    className="today-match-item"
+                    key={item.fixture.id}
+                    onClick={() => handleMatchClick(item)}
+                  >
                     <div className="today-match-team-logos">
                       <img src={item.teams.home.logo} alt="logo" />
                       <img src={item.teams.away.logo} alt="logo" />
