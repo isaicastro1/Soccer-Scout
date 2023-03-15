@@ -5,7 +5,9 @@ import MatchPreview from "../match-preview/match-preview.component";
 
 import { getDate } from "../../utils/date";
 import { allLeagues } from "../../utils/all-leagues";
+import DatePicker from "react-datepicker";
 
+import "react-datepicker/dist/react-datepicker.css";
 import "./today-matches.styles.scss";
 
 const TodayMatches = ({ setNavigateToMatches }) => {
@@ -229,9 +231,9 @@ const TodayMatches = ({ setNavigateToMatches }) => {
   };
 
   const handleDateChange = (event) => {
-    const date = new Date(event.target.value);
+    const date = new Date(event);
     const nextDate = new Date();
-    nextDate.setDate(date.getDate() + 1);
+    nextDate.setDate(date.getDate());
     const timezoneOffset = nextDate.getTimezoneOffset() * 60000; // convert to milliseconds
     const adjustedDate = new Date(nextDate.getTime() - timezoneOffset);
     const year = adjustedDate.getFullYear();
@@ -294,10 +296,11 @@ const TodayMatches = ({ setNavigateToMatches }) => {
                 );
               })}
             </ul>
-            <input
-              type="date"
+            <DatePicker
               id="date"
               onChange={(e) => handleDateChange(e)}
+              dateFormat="dd/mm/yyyy"
+              placeholderText="2023-03-14"
             />
           </div>
           <div className="today-matches-wrapper">
