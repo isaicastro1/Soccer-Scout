@@ -55,6 +55,7 @@ h4 {
     flex-direction: column;
     gap: 20px;
     justify-content: center;
+    align-items: center;
     width: 100vw;
     margin-top: 20px;
 
@@ -147,7 +148,7 @@ h4 {
       }
 
       img {
-        max-width: 40px;
+        width: 40px;
       }
 
       .today-match-team-logos {
