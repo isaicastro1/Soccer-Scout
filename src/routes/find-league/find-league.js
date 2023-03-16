@@ -59,7 +59,7 @@ const FindLeague = () => {
   return (
     <>
       {isLoading ? (
-        <Spinner />
+        <Spinner style={{ width: "100vw", height: "100vh" }} />
       ) : leagueCalled ? (
         <Table leagueName={leagueName} leagueLogo={leagueLogo} />
       ) : (

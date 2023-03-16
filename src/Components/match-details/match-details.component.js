@@ -1,9 +1,10 @@
+import { removeSecondsFromTime } from "../../utils/date";
 import MatchInfo from "../match-info/match-info.component";
 import MatchStats from "../match-stats/match-stats.component";
 
 import "./match-details.styles.scss";
 
-const MatchDetails = ({ matchStats, Spinner, matchClicked }) => {
+const MatchDetails = ({ matchStats, MiniSpinner, matchClicked }) => {
   const {
     fixture: {
       status: { long, elapsed },
@@ -41,8 +42,7 @@ const MatchDetails = ({ matchStats, Spinner, matchClicked }) => {
     {}
   );
 
-  let dateSlice = new Date(date).toLocaleTimeString().split("");
-  let newDate = `${dateSlice[0]}${dateSlice[1]}${dateSlice[2]}${dateSlice[3]}${dateSlice[7]}${dateSlice[8]}${dateSlice[9]}`;
+  let newDate = removeSecondsFromTime(new Date(date).toLocaleTimeString());
 
   return (
     <div className="match-stats-container">
@@ -90,13 +90,13 @@ const MatchDetails = ({ matchStats, Spinner, matchClicked }) => {
       {matchStats ? (
         <MatchStats
           matchStats={matchStats}
-          Spinner={Spinner}
+          MiniSpinner={MiniSpinner}
           matchClicked={matchClicked}
         />
       ) : (
         <div className="statistics-container">
           <h5 className="statistics-title">STATISTICS</h5>
-          <Spinner />
+          <MiniSpinner />
         </div>
       )}
     </div>

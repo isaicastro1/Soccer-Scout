@@ -18,6 +18,11 @@ export const modifyTime = (time) => {
   return time.split("").slice(11, -9).join("");
 };
 
+export const removeSecondsFromTime = (time) => {
+  if (!time) return;
+  return time.replace(":00", "");
+};
+
 export const leagueDates = {
   champions: "2023-04-30",
   laliga: "2023-03-20",

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import Spinner from "../spinner/spinner.component";
+import MiniSpinner from "../mini-spinner/mini-spinner.component";
 import MatchPreview from "../match-preview/match-preview.component";
 import MatchDetails from "../match-details/match-details.component";
 
@@ -172,7 +173,7 @@ const TodayMatches = ({ setNavigateToMatches }) => {
       const data = await response.json();
 
       if (!data.home.response.length || !data.away.response.length) {
-        console.log("Sorry there is no data for this fixture");
+        console.log("Sorry there are no stats for this fixture");
         return;
       }
 
@@ -297,6 +298,12 @@ const TodayMatches = ({ setNavigateToMatches }) => {
     <>
       {isLoading ? (
         <Spinner />
+      ) : dayClicked && matchClicked ? (
+        <MatchDetails
+          matchStats={matchStats}
+          MiniSpinner={MiniSpinner}
+          matchClicked={matchClicked}
+        />
       ) : dayClicked ? (
         <>
           <h4>{new Date(matchDate).toUTCString().slice(0, 16)}</h4>
@@ -326,7 +333,7 @@ const TodayMatches = ({ setNavigateToMatches }) => {
       ) : statsClicked ? (
         <MatchDetails
           matchStats={matchStats}
-          Spinner={Spinner}
+          MiniSpinner={MiniSpinner}
           matchClicked={matchClicked}
         />
       ) : (
@@ -386,7 +393,12 @@ const TodayMatches = ({ setNavigateToMatches }) => {
                       ) : item.fixture.status.long === "Not Started" ? (
                         <>
                           <h6>
-                            {new Date(item.fixture.date).toLocaleDateString()}
+                            {item.fixture.date ===
+                            new Date().toLocaleDateString()
+                              ? "Today"
+                              : new Date(
+                                  item.fixture.date
+                                ).toLocaleDateString()}
                           </h6>
                           <span className="match-time">
                             {new Date(item.fixture.date).toLocaleString(

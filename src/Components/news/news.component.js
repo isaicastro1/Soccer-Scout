@@ -35,7 +35,7 @@ const News = () => {
   return (
     <>
       {isLoading ? (
-        <Spinner />
+        <Spinner style={{ width: "100vw", height: "100vh" }} />
       ) : (
         <div className="news-container">
           <h6>TOP HEADLINES</h6>

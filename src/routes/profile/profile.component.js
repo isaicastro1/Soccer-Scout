@@ -154,7 +154,7 @@ const Profile = () => {
           </div>
         </section>
       ) : (
-        <Spinner />
+        <Spinner style={{ width: "100vw", height: "100vh" }} />
       )}
       {openFavorites ? (
         <Favorites
