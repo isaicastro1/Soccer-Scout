@@ -24,8 +24,8 @@ const NextMatchesTable = () => {
   const [logoPlaceholder, setLogoPlaceholder] = useState(Shield);
   const [userFavorites, setUserFavorites] = useState([]);
   const [isFavoritesChecked, setIsFavoritesChecked] = useState(true);
-  const [matchParams, setMatchParams] = useState(null);
   const [matchStats, setMatchStats] = useState(null);
+  const [matchParams, setMatchParams] = useState(null);
   const [statsClicked, setStatsClicked] = useState(false);
   const [matchClicked, setMatchClicked] = useState(null);
 
@@ -212,7 +212,7 @@ const NextMatchesTable = () => {
   return (
     <>
       {isLoading ? (
-        <Spinner />
+        <Spinner style={{ width: "100vw", height: "100vh" }} />
       ) : leagueCalled && statsClicked ? (
         <MatchDetails
           matchStats={matchStats}

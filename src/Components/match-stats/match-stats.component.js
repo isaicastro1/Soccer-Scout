@@ -2,7 +2,7 @@ import "./match-stats.styles.scss";
 
 const MatchStats = ({ matchStats, Spinner, matchClicked }) => {
   if (!matchStats) {
-    return <Spinner />;
+    return <Spinner style={{ width: "100%", height: "100%" }} />;
   }
 
   const {

@@ -11,7 +11,7 @@ $progress-color: black;
   top: 120px;
   align-items: center;
   width: 100vw;
-  min-height: 170vh;
+  min-height: 120vh;
   gap: 50px;
 
   .teams-wrapper {
@@ -106,6 +106,7 @@ $progress-color: black;
     max-width: 700px;
     border-radius: 10px;
     padding: 10px 5px 10px 5px;
+    min-height: 150px;
 
     .statistics-title {
       text-align: center;
