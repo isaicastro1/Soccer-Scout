@@ -393,8 +393,8 @@ const TodayMatches = ({ setNavigateToMatches }) => {
                       ) : item.fixture.status.long === "Not Started" ? (
                         <>
                           <h6>
-                            {item.fixture.date ===
-                            new Date().toLocaleDateString()
+                            {new Date(item.fixture.date).toDateString() ===
+                            new Date().toDateString()
                               ? "Today"
                               : new Date(
                                   item.fixture.date
