@@ -53,14 +53,16 @@ const MatchDetails = ({ matchStats, MiniSpinner, matchClicked }) => {
     <div className="match-stats-container">
       <div className="teams-wrapper">
         <div className="team-one-wrapper">
-          {homeWinner ? (
-            <div className="winner">
-              <img src={Trophy} style={{ height: "30px" }} alt="trophy" />
-            </div>
-          ) : (
-            <></>
-          )}
-          <div className="team-one-name">{homeName}</div>
+          <div className="team-one-name">
+            {homeWinner ? (
+              <div className="winner">
+                <img src={Trophy} style={{ height: "30px" }} alt="trophy" />
+              </div>
+            ) : (
+              <></>
+            )}
+            {homeName}
+          </div>
           <div className="team-one-logo">
             <img src={homeLogo} alt="logo" />
           </div>
@@ -97,14 +99,16 @@ const MatchDetails = ({ matchStats, MiniSpinner, matchClicked }) => {
           <div className="team-two-logo">
             <img src={awayLogo} alt="logo" />
           </div>
-          <div className="team-two-name">{awayName}</div>
-          {awayWinner ? (
-            <div className="winner">
-              <img src={Trophy} style={{ height: "30px" }} alt="trophy" />
-            </div>
-          ) : (
-            <></>
-          )}
+          <div className="team-two-name">
+            {awayWinner ? (
+              <div className="winner">
+                <img src={Trophy} style={{ height: "30px" }} alt="trophy" />
+              </div>
+            ) : (
+              <></>
+            )}
+            {awayName}
+          </div>
         </div>
       </div>
       <MatchInfo
