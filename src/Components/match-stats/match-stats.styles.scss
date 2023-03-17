@@ -45,6 +45,10 @@ $progress-color: black;
       }
 
       .team-one-name {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
         font-weight: bolder;
         max-width: 140px;
         min-width: 140px;
@@ -95,6 +99,10 @@ $progress-color: black;
       }
 
       .team-two-name {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
         font-weight: bolder;
         max-width: 140px;
         min-width: 140px;
