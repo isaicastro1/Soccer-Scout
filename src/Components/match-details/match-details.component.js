@@ -1,6 +1,7 @@
 import { removeSecondsFromTime } from "../../utils/date";
 import MatchInfo from "../match-info/match-info.component";
 import MatchStats from "../match-stats/match-stats.component";
+import Trophy from "../../Assets/trophy.png";
 
 import "./match-details.styles.scss";
 
@@ -13,11 +14,15 @@ const MatchDetails = ({ matchStats, MiniSpinner, matchClicked }) => {
       venue: { name: stadium },
     },
     league: { name: leagueName, round },
-    score: { fulltime, extratime },
+    score: {
+      fulltime,
+      extratime,
+      penalty: { home: homePenalties, away: awayPenalties },
+    },
     goals: { home: homeGoals, away: awayGoals },
     teams: {
-      away: { name: awayName, logo: awayLogo },
-      home: { name: homeName, logo: homeLogo },
+      away: { name: awayName, logo: awayLogo, winner: awayWinner },
+      home: { name: homeName, logo: homeLogo, winner: homeWinner },
     },
   } = matchClicked;
 
@@ -48,6 +53,13 @@ const MatchDetails = ({ matchStats, MiniSpinner, matchClicked }) => {
     <div className="match-stats-container">
       <div className="teams-wrapper">
         <div className="team-one-wrapper">
+          {homeWinner ? (
+            <div className="winner">
+              <img src={Trophy} style={{ height: "30px" }} alt="trophy" />
+            </div>
+          ) : (
+            <></>
+          )}
           <div className="team-one-name">{homeName}</div>
           <div className="team-one-logo">
             <img src={homeLogo} alt="logo" />
@@ -72,12 +84,27 @@ const MatchDetails = ({ matchStats, MiniSpinner, matchClicked }) => {
           <div className="fixture-time">
             {long === "Not Started" ? newDate : long}
           </div>
+          {homePenalties !== null || awayPenalties !== null ? (
+            <div className="penalties">
+              <h6>PENS:</h6>
+              <span className="penalties-score">{`(${homePenalties}) - (${awayPenalties})`}</span>
+            </div>
+          ) : (
+            <></>
+          )}
         </div>
         <div className="team-two-wrapper">
           <div className="team-two-logo">
             <img src={awayLogo} alt="logo" />
           </div>
           <div className="team-two-name">{awayName}</div>
+          {awayWinner ? (
+            <div className="winner">
+              <img src={Trophy} style={{ height: "30px" }} alt="trophy" />
+            </div>
+          ) : (
+            <></>
+          )}
         </div>
       </div>
       <MatchInfo

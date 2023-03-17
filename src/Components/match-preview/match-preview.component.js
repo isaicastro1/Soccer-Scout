@@ -11,7 +11,6 @@ const MatchPreview = ({
   setStatsClicked,
   setMatchClicked,
 }) => {
-  const [teamWon, setTeamWon] = useState("tie");
   const [matchEnded, setMatchEnded] = useState(false);
   const [homeTeamLogo, setHomeTeamLogo] = useState(Shield);
   const [awayTeamLogo, setAwayTeamLogo] = useState(Shield);
@@ -24,10 +23,23 @@ const MatchPreview = ({
     },
     league: { round },
     teams: {
-      home: { id: homeId, name: teamOneName, logo: teamOneLogo },
-      away: { id: awayId, name: teamTwoName, logo: teamTwoLogo },
+      home: {
+        id: homeId,
+        name: teamOneName,
+        logo: teamOneLogo,
+        winner: homeWinner,
+      },
+      away: {
+        id: awayId,
+        name: teamTwoName,
+        logo: teamTwoLogo,
+        winner: awayWinner,
+      },
     },
     goals: { home: homeGoals, away: awayGoals },
+    score: {
+      penalty: { home: homePenalties, away: awayPenalties },
+    },
   } = game;
 
   const handleMatchClick = () => {
@@ -44,22 +56,10 @@ const MatchPreview = ({
     .replace(":00", "");
 
   useEffect(() => {
-    const determineWinner = (homeGoals, awayGoals) => {
-      if (live === "Match Finished") {
-        setMatchEnded(true);
-      }
-
-      if (homeGoals > awayGoals) {
-        setTeamWon("home");
-      } else if (homeGoals < awayGoals) {
-        setTeamWon("away");
-      } else {
-        return "tie";
-      }
-    };
-
-    determineWinner(homeGoals, awayGoals);
-  }, [homeGoals, awayGoals, live]);
+    if (live === "Match Finished") {
+      setMatchEnded(true);
+    }
+  }, [live]);
 
   return (
     <div
@@ -71,7 +71,7 @@ const MatchPreview = ({
       <div className="team-logos">
         <div className="team-logo-container">
           <div className="team-name">
-            {teamWon === "home" && matchEnded ? (
+            {homeWinner && matchEnded ? (
               <div className="winner">
                 <img src={Trophy} style={{ height: "30px" }} alt="trophy" />
               </div>
@@ -115,6 +115,14 @@ const MatchPreview = ({
               <></>
             )}
           </div>
+          {homePenalties !== null || awayPenalties !== null ? (
+            <div className="penalties">
+              <h6>PENS:</h6>
+              <span className="penalties-score">{`(${homePenalties}) - (${awayPenalties})`}</span>
+            </div>
+          ) : (
+            <></>
+          )}
         </div>
         <div className="team-logo-container">
           <img
@@ -125,7 +133,7 @@ const MatchPreview = ({
             onLoad={() => setAwayTeamLogo(teamTwoLogo)}
           />
           <div className="team-name">
-            {teamWon === "away" && matchEnded ? (
+            {awayWinner && matchEnded ? (
               <div className="winner">
                 <img src={Trophy} style={{ height: "30px" }} alt="trophy" />
               </div>
