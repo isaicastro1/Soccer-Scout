@@ -361,7 +361,7 @@ const TodayMatches = ({ setNavigateToMatches }) => {
               id="date"
               onChange={(e) => handleDateChange(e)}
               dateFormat="dd/mm/yyyy"
-              placeholderText="2023-03-14"
+              placeholderText={new Date().toDateString()}
             />
           </div>
           <div className="today-matches-wrapper">
@@ -386,10 +386,11 @@ const TodayMatches = ({ setNavigateToMatches }) => {
                           <div className="fixture-score">{`${item.goals.home} - ${item.goals.away}`}</div>
                         </>
                       ) : item.fixture.status.long === "Match Finished" ? (
-                        <>
+                        <div className="fixture-date">
+                          <span className="match-time">Today</span>
                           <span className="match-time">FT</span>
                           <div className="fixture-score">{`${item.goals.home} - ${item.goals.away}`}</div>
-                        </>
+                        </div>
                       ) : item.fixture.status.long === "Not Started" ? (
                         <>
                           <h6>
