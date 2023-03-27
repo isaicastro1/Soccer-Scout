@@ -54,7 +54,7 @@ const NextMatchesTable = () => {
     setIsLoading(true);
     setLeagueCalled(true);
 
-    const date = getDate();
+    const date = getDate(new Date());
 
     try {
       const response = await fetch("https://soccer-api.herokuapp.com/matches", {
