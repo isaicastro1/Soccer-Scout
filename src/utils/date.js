@@ -24,8 +24,8 @@ export const removeSecondsFromTime = (time) => {
 };
 
 export const leagueDates = {
-  champions: "2023-04-30",
-  laliga: "2023-03-20",
-  premier: "2023-03-20",
+  champions: "2023-05-30",
+  laliga: "2023-04-20",
+  premier: "2023-04-20",
   copaDelRey: "2023-04-30",
 };
