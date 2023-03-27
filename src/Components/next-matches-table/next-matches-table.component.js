@@ -46,7 +46,7 @@ const NextMatchesTable = () => {
     getUserFavorites();
   }, [currentUser]);
 
-  const upcomingMatchesDate = leagueDates[`${nameOfLeague}`] || "2023-03-30";
+  const upcomingMatchesDate = leagueDates[`${nameOfLeague}`] || "2023-04-30";
 
   const getNextMatches = useCallback(async () => {
     if (!league) return;
